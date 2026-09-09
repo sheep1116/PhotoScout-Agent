@@ -1,0 +1,14 @@
+{
+  "name": "photoscout-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3800",
+    "build": "next build",
+    "start": "next start --hostname 127.0.0.1 --port 3800",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test"
+  },
+  "dependencies": {"next": "^16.2.0", "react": "^19.2.0", "react-dom": "^19.2.0", "maplibre-gl": "^5.20.0", "lucide-react": "^0.577.0"},
+  "devDependencies": {"typescript": "^5.9.3", "@types/react": "^19.2.0", "@types/react-dom": "^19.2.0", "@types/node": "^24.0.0", "@playwright/test": "^1.58.0"}
+}

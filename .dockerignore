@@ -1,0 +1,16 @@
+.env
+.env.*
+!.env.example
+.git
+.venv
+.run
+*.db
+*.db-*
+**/node_modules
+**/.next
+**/__pycache__
+**/test-results
+**/playwright-report
+.pytest_cache
+.ruff_cache
+*.egg-info

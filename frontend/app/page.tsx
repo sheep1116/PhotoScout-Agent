@@ -1,0 +1,138 @@
+'use client';
+import {useEffect, useRef, useState} from 'react';
+import {Aperture, ArrowDownToLine, ArrowRight, ArrowUpRight, BookOpen, Camera, Check, ChevronDown, Clock3, CloudSun, Compass, ExternalLink, Footprints, History, Info, LoaderCircle, MapPin, Menu, Moon, Plus, RotateCcw, ShieldCheck, SlidersHorizontal, Sparkles, Sun, Users, X} from 'lucide-react';
+import ScoutMap from '@/components/ScoutMap';
+import {api, Brief, Evidence, localTime, Plan, Proposal, Task} from '@/lib/types';
+
+const initial: Brief = {text:'南京紫金山，想拍一组自然、电影感的人像，不想走太远。',destination:'南京紫金山',travel_date:'2026-10-03',start_local:'14:00',end_local:'19:00',timezone:'Asia/Shanghai',genre:'portrait',profile:'enthusiast',lenses:[{name:'35mm F1.8',min_mm:35,max_mm:35,max_aperture:1.8},{name:'85mm F1.8',min_mm:85,max_mm:85,max_aperture:1.8}],sensor:'full_frame',tripod:false,max_walk_km:3,accept_tickets:false,crowd_tolerance:'low',mode:'mock'};
+const profiles = [{id:'phone',label:'手机打卡',icon:Camera},{id:'enthusiast',label:'摄影爱好者',icon:Aperture},{id:'creator',label:'内容创作',icon:Sparkles},{id:'family',label:'轻量旅行',icon:Users}];
+const labels:Record<string,string> = {FIXTURE:'演示数据',UNKNOWN:'未知',REPORTED:'来源报告',INFERRED:'规则推断',CALCULATED:'工具计算',VERIFIED:'已核验',STALE:'已过期',CONFLICT:'来源冲突',USER_CONFIRMED:'用户记录'};
+const kinds:Record<string,string> = {official:'官方',community:'社区',media:'媒体',search:'搜索线索',fixture:'离线示例',tool:'确定性工具',user:'用户记录'};
+
+export default function Home() {
+  const [brief,setBrief] = useState<Brief>(initial), [plan,setPlan] = useState<Plan|null>(null);
+  const [busy,setBusy] = useState(false), [events,setEvents] = useState<{stage:string;message:string}[]>([]);
+  const [error,setError] = useState(''), [tab,setTab] = useState('plan'), [selected,setSelected] = useState('');
+  const [confirm,setConfirm] = useState(false), [assumptions,setAssumptions] = useState<string[]>([]);
+  const [drawer,setDrawer] = useState<Evidence[]|null>(null), [proposal,setProposal] = useState<Proposal|null>(null);
+  const [history,setHistory] = useState<{id:string;destination:string;date:string;genre:string;version:number}[]>([]);
+  const [showHistory,setShowHistory] = useState(false), [working,setWorking] = useState(false), [mobileNav,setMobileNav] = useState(false);
+  const [health,setHealth] = useState<{dashscope_configured:boolean;amap_configured:boolean}|null>(null);
+  const [positionEdit,setPositionEdit] = useState<{spot_id:string;name:string;lat:number;lon:number;role:string}|null>(null);
+  const [notice,setNotice] = useState('');
+  const stream = useRef<EventSource|null>(null);
+  const resultRef = useRef<HTMLElement>(null);
+  useEffect(()=>{api<typeof health>('/health').then(setHealth).catch(()=>{});return ()=>stream.current?.close();},[]);
+  const patch = (value: Partial<Brief>)=>setBrief(b=>({...b,...value}));
+  const chooseProfile = (profile:string)=>patch({profile,...(profile==='phone'?{sensor:'phone',lenses:[],tripod:false}:profile==='family'?{max_walk_km:1.5,tripod:false}:{})});
+  const seed = (genre:'portrait'|'cityscape')=>{setError('');setBrief({...initial,genre,
+    ...(genre==='cityscape'?{text:'南京拍城市夜景，想拍古城与现代天际线同框。',destination:'南京',start_local:'16:30',end_local:'21:00',tripod:true,
+      lenses:[{name:'16–35mm F2.8',min_mm:16,max_mm:35,max_aperture:2.8},{name:'70–200mm F4',min_mm:70,max_mm:200,max_aperture:4}]}:{})});};
+  const review = async()=>{setError('');setWorking(true);try{const book=await api<{brief:Brief;questions:string[];assumptions:string[]}>('/notebook',{...brief,travel_date:brief.travel_date||null,start_local:brief.start_local||null,end_local:brief.end_local||null});if(book.questions.length){setError(book.questions.join(' '));return;}setBrief(book.brief);setAssumptions(book.assumptions);setConfirm(true);}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
+  const generate = async()=>{setConfirm(false);setError('');setBusy(true);setEvents([]);setProposal(null);
+    try{const job=await api<{research_id:string;status:string}>('/photo-research',brief,{'Idempotency-Key':crypto.randomUUID()});
+      if(!job.research_id)throw new Error('需求还不完整，请重新确认。');
+      const es=new EventSource(`/v1/photo-research/${job.research_id}/events`);stream.current=es;
+      es.onmessage=e=>{setEvents(v=>[...v,JSON.parse(e.data)]);};
+      es.addEventListener('done',async e=>{es.close();try{const status=JSON.parse((e as MessageEvent).data);if(status.status==='failed')throw new Error(status.error);const p=await api<Plan>(`/plans/${job.research_id}`);setPlan(p);setSelected(p.tasks[0]?.spot_id||'');setTab('plan');setTimeout(()=>resultRef.current?.scrollIntoView({behavior:'smooth',block:'start'}),80);}catch(err){setError((err as Error).message);}finally{setBusy(false);}});
+      es.onerror=()=>{es.close();setBusy(false);setError('进度连接中断。任务可能仍在运行，可稍后从「我的计划」打开。');};
+    }catch(e){setBusy(false);setError((e as Error).message);}
+  };
+  const cite = (ids:string[])=>{if(plan)setDrawer(plan.evidence.filter(e=>ids.includes(e.id)));};
+  const change = async(task:Task,reason:string)=>{if(!plan)return;setWorking(true);setError('');try{setProposal(await api<Proposal>(`/plans/${plan.id}/proposals`,{task_id:task.id,reason,version:plan.version}));}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
+  const decide = async(approve:boolean)=>{if(!proposal)return;setWorking(true);try{setPlan(await api<Plan>(`/proposals/${proposal.id}/decision`,{approve,version:proposal.base_version}));setProposal(null);}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
+  const undo = async()=>{if(!plan)return;setWorking(true);try{setPlan(await api<Plan>(`/plans/${plan.id}/undo`,{version:plan.version}));setProposal(null);}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
+  const refresh = async()=>{if(!plan)return;setWorking(true);setNotice('');try{const result=await api<{proposal:Proposal|null;message:string}>(`/plans/${plan.id}/refresh`,{version:plan.version});setProposal(result.proposal);setNotice(result.message);}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
+  const confirmPosition = async()=>{if(!plan||!positionEdit)return;setWorking(true);try{setProposal(await api<Proposal>(`/plans/${plan.id}/spots/${positionEdit.spot_id}/confirm`,{lat:positionEdit.lat,lon:positionEdit.lon,role:positionEdit.role,version:plan.version}));setPositionEdit(null);}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
+  const loadHistory = async()=>{setShowHistory(true);try{setHistory(await api<typeof history>('/plans'));}catch(e){setError((e as Error).message);}};
+  const exportPlan = ()=>{if(!plan)return;const url=URL.createObjectURL(new Blob([JSON.stringify(plan,null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download=`PhotoScout-${plan.brief.travel_date}-v${plan.version}.json`;a.click();URL.revokeObjectURL(url);};
+  const time = (v:string|null)=>localTime(v,plan?.brief.timezone);
+  const distance=plan?.routes.reduce((sum,r)=>sum+(r.distance_m||0),0)||0;
+  const active=plan?.tasks.filter(t=>t.status!=='CANCELLED')||[];
+
+  return <div className="shell">
+    <aside className={`sidebar ${mobileNav?'mobile-open':''}`}>
+      <a className="brand" href="/" aria-label="PhotoScout 首页"><span className="brand-icon"><Aperture size={23}/></span><span>PhotoScout<span className="brand-dot">.</span></span></a>
+      <div className="workspace-label">你的摄影工作台 <span>BETA</span></div>
+      <nav aria-label="主导航"><button className={!showHistory?'nav-item active':'nav-item'} onClick={()=>{setShowHistory(false);setMobileNav(false);}}><Compass size={19}/>发现与规划<span className="nav-indicator"/></button><button className={showHistory?'nav-item active':'nav-item'} onClick={loadHistory}><BookOpen size={19}/>我的计划</button><button className="nav-item" onClick={()=>{setTab('sources');resultRef.current?.scrollIntoView({behavior:'smooth'});}}><ShieldCheck size={19}/>证据与来源</button></nav>
+      <div className="sidebar-section">灵感，从这里开始 <span>↙</span></div>
+      <button className="seed-item" onClick={()=>seed('portrait')}><div className="seed-art portrait-art"><Sun size={18}/></div><span>紫金山的光与影<small>南京 · 旅行人像</small></span><ArrowUpRight size={14}/></button>
+      <button className="seed-item" onClick={()=>seed('cityscape')}><div className="seed-art night-art"><Moon size={18}/></div><span>蓝调时刻的南京<small>南京 · 城市夜景</small></span><ArrowUpRight size={14}/></button>
+      <div className="sidebar-bottom"><div className="trust-note"><ShieldCheck size={18}/><b>每一条建议，都有来处</b><p>真实来源、明确的不确定性，<br/>让灵感安心落地。</p></div><div className="local-status"><span className="status-dot"/><span>本地工作空间<small>密钥仅保存在服务端</small></span><span className="avatar">P</span></div></div>
+    </aside>
+
+    <main className="main">
+      <header className="topbar"><div><button className="mobile-menu icon-btn" aria-label="打开导航" onClick={()=>setMobileNav(!mobileNav)}><Menu size={20}/></button><span className="breadcrumb">工作台</span><span className="slash">/</span><b>发现与规划</b></div><div className="topbar-right"><span className="local-pill"><i/> LOCAL FIRST</span><button className="icon-btn" title="查看已保存计划" onClick={loadHistory}><History size={18}/></button></div></header>
+      <div className="page-content">
+        <section className="intro"><div><div className="eyebrow"><span/> YOUR NEXT FRAME STARTS HERE</div><h1>去光发生的地方<span>。</span></h1><p>把一个拍摄想法，变成一份有据可循的出行计划。</p></div><div className="intro-mark"><Aperture size={74} strokeWidth={.8}/><span>EXPLORE / FRAME / CREATE</span></div></section>
+
+        {error&&<div role="alert" className="error-banner"><Info size={18}/><span>{error}</span><button aria-label="关闭错误" onClick={()=>setError('')}><X size={17}/></button></div>}
+        {notice&&<div role="status" className="notice">{notice}</div>}
+
+        <div className="workbench">
+          <section className="brief-panel">
+            <div className="panel-title"><span><SlidersHorizontal size={17}/>这次，想拍什么？</span><span className="step-label">01 / BRIEF</span></div>
+            <label className="input-label" htmlFor="intent">说说你的拍摄想法</label>
+            <div className="intent-box"><textarea id="intent" value={brief.text} onChange={e=>patch({text:e.target.value})} placeholder="目的地、画面、想捕捉的故事……"/><Sparkles size={17}/></div>
+            <div className="field-row"><label>目的地<div className="icon-input"><MapPin size={15}/><input aria-label="目的地" value={brief.destination} onChange={e=>patch({destination:e.target.value})}/></div></label><label>拍摄日期<input aria-label="拍摄日期" type="date" value={brief.travel_date} onChange={e=>patch({travel_date:e.target.value})}/></label></div>
+            <div className="field-row"><label>开始时间<input type="time" aria-label="开始时间" value={brief.start_local} onChange={e=>patch({start_local:e.target.value})}/></label><label>结束时间<input type="time" aria-label="结束时间" value={brief.end_local} onChange={e=>patch({end_local:e.target.value})}/></label></div>
+            <div className="field-label">摄影题材</div><div className="segmented"><button className={brief.genre==='portrait'?'selected':''} onClick={()=>patch({genre:'portrait'})}><Users size={15}/>旅行人像</button><button className={brief.genre==='cityscape'?'selected':''} onClick={()=>patch({genre:'cityscape'})}><Moon size={15}/>城市夜景</button></div>
+            <div className="field-label">你的拍摄方式</div><div className="profile-grid">{profiles.map(({id,label,icon:Icon})=><button key={id} className={brief.profile===id?'selected':''} onClick={()=>chooseProfile(id)}><Icon size={14}/>{label}{brief.profile===id&&<Check size={12}/>}</button>)}</div>
+            <details className="gear-details"><summary><span><Camera size={16}/>器材与出行偏好</span><ChevronDown size={15}/></summary><div className="gear-content">
+              <label>画幅<select aria-label="画幅" value={brief.sensor} onChange={e=>patch({sensor:e.target.value})}><option value="full_frame">全画幅</option><option value="aps_c">APS-C（1.5×）</option><option value="m43">M4/3（2×）</option><option value="phone">手机（等效焦段）</option></select></label>
+              <div className="lens-header"><span>镜头 · 实际焦段 / 最大光圈</span><button title="添加镜头" onClick={()=>patch({lenses:[...brief.lenses,{name:'新镜头',min_mm:24,max_mm:70,max_aperture:4}].slice(0,8)})}><Plus size={15}/></button></div>
+              {brief.lenses.map((lens,i)=><div className="lens-row" key={i}><input aria-label={`镜头${i+1}名称`} value={lens.name} onChange={e=>patch({lenses:brief.lenses.map((l,j)=>j===i?{...l,name:e.target.value}:l)})}/>{(['min_mm','max_mm','max_aperture'] as const).map(k=><input key={k} type="number" step="0.1" min="0.7" aria-label={`镜头${i+1}${k}`} value={lens[k]} onChange={e=>patch({lenses:brief.lenses.map((l,j)=>j===i?{...l,[k]:Number(e.target.value)}:l)})}/>)}<button title="移除镜头" onClick={()=>patch({lenses:brief.lenses.filter((_,j)=>j!==i)})}><X size={13}/></button></div>)}
+              <label>换点步行上限 · {brief.max_walk_km} km<input aria-label="换点步行上限" type="range" min="0" max="10" step="0.5" value={brief.max_walk_km} onChange={e=>patch({max_walk_km:Number(e.target.value)})}/></label>
+              <div className="check-row"><label><input type="checkbox" checked={brief.tripod} onChange={e=>patch({tripod:e.target.checked})}/>携带三脚架</label><label><input type="checkbox" checked={brief.accept_tickets} onChange={e=>patch({accept_tickets:e.target.checked})}/>接受门票 / 预约</label></div>
+            </div></details>
+            <div className="brief-summary"><span>{brief.sensor==='phone'?'手机主摄':brief.lenses.map(l=>l.name).join(' · ')||'手机主摄'}</span><span><Footprints size={13}/>{brief.max_walk_km} km 以内</span></div>
+            <div className="mode-row"><label><select aria-label="数据模式" value={brief.mode} onChange={e=>patch({mode:e.target.value as Brief['mode']})}><option value="mock">离线演示</option><option value="live">Live · 联网发现</option></select></label><span>{brief.mode==='mock'?'无需网络与 API':'将调用已配置的 API'}</span></div>
+            <button className="primary generate" disabled={busy||working} onClick={review}>{busy?<LoaderCircle size={18} className="spin"/>:<Sparkles size={18}/>} {busy?'正在为你侦察…':'生成我的拍摄计划'}<ArrowRight size={17}/></button>
+            <p className="under-button">先确认需求，再开始寻找你的下一帧</p>
+          </section>
+
+          <div className="map-column"><ScoutMap plan={plan} selected={selected} onSelect={setSelected}/>
+            {plan&&selected&&<div className="map-edit-row"><span>选中：{plan.spots.find(s=>s.id===selected)?.name}</span><button onClick={()=>{const s=plan.spots.find(s=>s.id===selected);if(s)setPositionEdit({spot_id:s.id,name:s.name,lat:s.camera.lat,lon:s.camera.lon,role:'camera'});}}>记录站位 / 入口 ↗</button></div>}
+            <div className="insight-row"><div className="insight"><div className="insight-icon"><Sun size={20}/></div><div><span>黄金光线</span><strong>{plan?time(plan.solar.golden_start):'随日期计算'}<small>{plan?'当地时间 · Astral':'日落前的温柔时刻'}</small></strong></div>{plan&&<button className="tiny-link" onClick={()=>cite(plan.solar.evidence_ids)}>依据 ↗</button>}</div><div className="insight"><div className="insight-icon blue"><ShieldCheck size={20}/></div><div><span>清楚知道，哪些还未知</span><strong>{plan?`${plan.sources.length} 个来源记录`:'先证据，后建议'}<small>开放 · 天气 · 构图分开核验</small></strong></div></div></div>
+            <div className="field-note"><span>FIELD NOTE / 001</span><p>好的照片，始于按下快门之前。</p><Aperture size={30} strokeWidth={1}/></div>
+          </div>
+        </div>
+
+        {busy&&<section className="progress-card" aria-live="polite"><div><LoaderCircle className="spin" size={18}/><b>正在把灵感变成计划</b><small>只展示实际执行步骤</small></div><ol>{events.map((e,i)=><li key={i}><Check size={14}/>{e.message}</li>)}</ol></section>}
+
+        <section ref={resultRef} className="results">
+          <div className="result-heading"><div><span className="eyebrow muted">YOUR FIELD GUIDE</span><h2>{plan?'你的拍摄计划':'下一帧，正在等你'}</h2>{plan&&<p>{plan.brief.destination} · {plan.brief.travel_date} · {plan.brief.timezone} <span className="version">V{plan.version}</span></p>}</div>{plan&&<div className="result-actions"><button className="secondary" onClick={refresh} disabled={working}><CloudSun size={15}/>刷新天气</button><button className="secondary" onClick={undo} disabled={plan.version<=1||working}><RotateCcw size={15}/>撤销修改</button><button className="secondary" onClick={exportPlan}><ArrowDownToLine size={15}/>导出计划</button></div>}</div>
+          <div className="result-tabs"><div><button className={tab==='plan'?'active':''} onClick={()=>setTab('plan')}>拍摄安排 {plan&&<span>{active.length.toString().padStart(2,'0')}</span>}</button><button className={tab==='sources'?'active':''} onClick={()=>setTab('sources')}>证据与来源 {plan&&<span>{plan.sources.length}</span>}</button><button className={tab==='notes'?'active':''} onClick={()=>setTab('notes')}>出行备忘</button></div><span className="draft-pill"><i/>{plan?.brief.mode==='live'?'联网草案 · 待现场确认':'离线 Demo · 数据明确标注'}</span></div>
+          {!plan?<div className="empty-state"><div className="empty-icon"><Compass size={31} strokeWidth={1.2}/></div><h3>你负责想象，我们负责侦察。</h3><p>选择左侧的南京灵感场景，或写下自己的拍摄想法。<br/>确认后，机位、光线、器材和依据会在这里汇合。</p><button onClick={()=>seed('cityscape')}>试试「蓝调时刻的南京」<ArrowUpRight size={15}/></button></div>:
+          tab==='plan'?<><div className="plan-summary"><span><Clock3 size={15}/>{active.length?`${time(active[0].start)} — ${time(active[active.length-1].end)}`:'暂无可用任务'}</span><span><Footprints size={15}/>换点 {(distance/1000).toFixed(1)} km{plan.brief.mode==='mock'?' · 示例':''}</span><span><Moon size={15}/>蓝调 {time(plan.solar.blue_start)} — {time(plan.solar.blue_end)}</span></div><div className="task-list">{plan.tasks.map((task,i)=><TaskCard key={task.id} task={task} number={i+1} plan={plan} selected={selected===task.spot_id} onSelect={()=>setSelected(task.spot_id)} cite={cite} change={change} working={working}/>)}</div>{!plan.tasks.length&&<div className="notice">当前条件没有通过门控的户外拍摄任务，请查看出行备忘中的原因。</div>}</>:
+          tab==='sources'?<div className="sources-grid">{plan.sources.map(source=><article key={source.id} className="source-card"><span className={`tag ${source.kind==='official'?'green':''}`}>{kinds[source.kind]}</span><h3>{source.title}</h3><p>{source.note||'记录本次规划的数据来源与规则依据。'}</p><small>获取：{new Date(source.retrieved_at).toLocaleString('zh-CN')}<br/>发布：{source.published_at?new Date(source.published_at).toLocaleDateString('zh-CN'):'未提供 / 不适用'}</small><div><button onClick={()=>setDrawer(plan.evidence.filter(e=>e.source_id===source.id))}>查看关联证据 ↗</button>{source.url&&<a href={source.url} target="_blank" rel="noreferrer">原始来源 <ExternalLink size={12}/></a>}</div></article>)}</div>:
+          <div className="notes"><h3><Info size={18}/>出发前，再确认一次</h3>{plan.warnings.map((w,i)=><p key={i}>{w}</p>)}{plan.excluded.length>0&&<><h3>未纳入本次行程</h3>{plan.excluded.map((e,i)=><p key={i}><b>{e.spot}</b>：{e.reason}</p>)}</>}<h3>本次运行记录</h3><p>耗时 {String(plan.metrics.elapsed_ms)} ms · Provider 调用 {String(plan.metrics.provider_calls)} 次 · {String(plan.metrics.cost_note)}</p><p>Live 接口状态：百炼 {health?.dashscope_configured?'已配置':'未配置'} / 高德 {health?.amap_configured?'已配置':'未配置'}。配置存在不等于账户或接口已通过联网验证。</p></div>}
+        </section>
+        <footer><span><Aperture size={14}/> PhotoScout Agent</span><span>让每一次出发，都更接近你想要的画面。</span><span>MADE FOR THE WANDERING EYE</span></footer>
+      </div>
+    </main>
+
+    {confirm&&<div className="overlay" onClick={()=>setConfirm(false)}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="confirm-title" onClick={e=>e.stopPropagation()}><button className="close" aria-label="关闭确认" onClick={()=>setConfirm(false)}><X size={20}/></button><div className="modal-icon"><BookOpen size={24}/></div><div className="eyebrow muted">TRIP NOTEBOOK</div><h2 id="confirm-title">让我们对齐这次出发。</h2><p>你确认的需求，将作为整个计划的依据。</p><dl className="notebook"><div><dt>目的地 / 日期</dt><dd>{brief.destination} · {brief.travel_date}</dd></div><div><dt>时间 / 题材</dt><dd>{brief.start_local}–{brief.end_local} · {brief.genre==='portrait'?'旅行人像':'城市夜景'}</dd></div><div><dt>器材</dt><dd>{brief.lenses.map(l=>l.name).join('、')||'手机主摄'} · {brief.tripod?'有三脚架':'手持'}</dd></div><div><dt>数据</dt><dd>{brief.mode==='mock'?'Fixture 离线演示，不代表真实现状':'Live 联网；调用百炼与高德，可能按账户规则计费'}</dd></div></dl><div className="notice">{assumptions.map(a=><p key={a}>{a}</p>)}</div><button className="primary" onClick={generate}>确认需求，开始侦察 <ArrowRight size={17}/></button></section></div>}
+
+    {drawer&&plan&&<div className="overlay drawer-overlay" onClick={()=>setDrawer(null)}><aside className="evidence-drawer" role="dialog" aria-modal="true" aria-labelledby="evidence-title" onClick={e=>e.stopPropagation()}><button className="close" aria-label="关闭证据" onClick={()=>setDrawer(null)}><X size={20}/></button><div className="eyebrow muted">FOLLOW THE EVIDENCE</div><h2 id="evidence-title">这条建议，从何而来？</h2><p className="drawer-intro">把事实、推断和未知分开看。</p>{drawer.map(e=>{const source=plan.sources.find(s=>s.id===e.source_id);return <article className="evidence-item" key={e.id}><span className="tag">{labels[e.label]||e.label}</span><h3>{source?.title}</h3><p>{e.statement}</p>{Object.keys(e.values).length>0&&<pre>{JSON.stringify(e.values,null,2)}</pre>}<small>记录于 {new Date(e.observed_at).toLocaleString('zh-CN')}</small>{source?.url&&<a href={source.url} target="_blank" rel="noreferrer">查看原始来源 <ExternalLink size={13}/></a>}</article>;})}</aside></div>}
+
+    {proposal&&<div className="overlay"><section className="modal proposal-modal" role="dialog" aria-modal="true" aria-labelledby="proposal-title"><div className="eyebrow muted">REPLAN PROPOSAL</div><h2 id="proposal-title">环境变了，计划由你决定。</h2><p>{proposal.reason}</p><div className="notice">正式计划尚未修改。批准后保存新版本，其他任务保持不变。</div><div className="diff-list">{proposal.diff.filter(d=>d.path.startsWith('/tasks')||d.path.startsWith('/spots')).map((d,i)=><div key={i}><code>{d.path}</code><div className="diff-before">− {JSON.stringify(d.before)}</div><div className="diff-after">+ {JSON.stringify(d.after)}</div></div>)}</div><div className="modal-actions"><button className="secondary" disabled={working} onClick={()=>decide(false)}>拒绝，保留原计划</button><button className="primary" disabled={working} onClick={()=>decide(true)}><Check size={17}/>批准并保存</button></div></section></div>}
+
+    {positionEdit&&<div className="overlay"><section className="modal" role="dialog" aria-modal="true" aria-labelledby="position-title"><button className="close" aria-label="关闭坐标确认" onClick={()=>setPositionEdit(null)}><X size={20}/></button><div className="eyebrow muted">ON-SITE NOTE</div><h2 id="position-title">记录公开区域的位置</h2><p>{positionEdit.name} · 先在地图与现场核对，坐标记录不会解除开放或安全门控。</p><label>空间角色<select aria-label="空间角色" value={positionEdit.role} onChange={e=>setPositionEdit({...positionEdit,role:e.target.value})}><option value="camera">相机站位</option><option value="entrance">公开入口</option></select></label><div className="field-row"><label>纬度 · WGS84<input type="number" step="0.000001" aria-label="确认纬度" value={positionEdit.lat} onChange={e=>setPositionEdit({...positionEdit,lat:Number(e.target.value)})}/></label><label>经度 · WGS84<input type="number" step="0.000001" aria-label="确认经度" value={positionEdit.lon} onChange={e=>setPositionEdit({...positionEdit,lon:Number(e.target.value)})}/></label></div><div className="notice">预填坐标为近似区域中心，不代表精确拍摄位置。请填写你核对过的 WGS84 坐标；高德原始 GCJ-02 坐标不能直接粘贴。</div><button className="primary" disabled={working} onClick={confirmPosition}>生成位置修改提案 <ArrowRight size={16}/></button></section></div>}
+
+    {showHistory&&<div className="overlay" onClick={()=>setShowHistory(false)}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="history-title" onClick={e=>e.stopPropagation()}><button className="close" aria-label="关闭历史" onClick={()=>setShowHistory(false)}><X size={20}/></button><div className="eyebrow muted">YOUR COLLECTION</div><h2 id="history-title">我的计划</h2>{history.length?history.map(h=><button className="history-row" key={h.id} onClick={async()=>{try{const p=await api<Plan>(`/plans/${h.id}`);setPlan(p);setSelected(p.tasks[0]?.spot_id||'');setProposal(null);setShowHistory(false);}catch(e){setError((e as Error).message);}}}><MapPin size={18}/><span>{h.destination}<small>{h.date} · {h.genre==='portrait'?'人像':'夜景'} · V{h.version}</small></span><ArrowRight size={17}/></button>):<p>还没有已保存计划，先生成一次南京 Demo 吧。</p>}</section></div>}
+  </div>;
+}
+
+function TaskCard({task,number,plan,selected,onSelect,cite,change,working}: {task:Task;number:number;plan:Plan;selected:boolean;onSelect:()=>void;cite:(ids:string[])=>void;change:(task:Task,reason:string)=>void;working:boolean}) {
+  const spot=plan.spots.find(s=>s.id===task.spot_id)!;
+  const shutter=task.camera.shutter_seconds>=1?`${task.camera.shutter_seconds}s`:`1/${Math.round(1/task.camera.shutter_seconds)}s`;
+  return <article className={`task-card ${selected?'selected':''} ${task.status==='CANCELLED'?'cancelled':''}`}>
+    <div className="task-number">{String(number).padStart(2,'0')}<span/></div><div className="task-main"><div className="task-topline"><span className="task-time"><Clock3 size={13}/>{localTime(task.start,plan.brief.timezone)} — {localTime(task.end,plan.brief.timezone)}</span><span className={`tag ${task.status==='CANCELLED'?'red':'amber'}`}>{task.status==='CANCELLED'?'已取消':'暂定 · 待核验'}</span><button className="task-location" onClick={onSelect}><MapPin size={13}/>在图上查看</button></div><h3>{task.title}</h3><p className="composition">{task.composition}</p><div className="spatial"><span>站位：{spot.name} <b>{spot.camera.precision==='EXACT_VERIFIED'?'用户确认点':'区域待确认'}</b></span><span>主体：{spot.subjects.map(s=>s.name).join('、')}</span><span>方向：{task.target_bearing_deg===null?'待确认':`${task.target_bearing_deg}° · 区域示意`}</span></div>
+    <div className="camera-strip"><div><Camera size={15}/><b>{task.camera.lens}</b><small>{task.camera.equivalent_mm}mm 等效</small></div><div><span>光圈</span><b>f/{task.camera.aperture}</b></div><div><span>快门起点</span><b>{shutter}</b></div><div><span>ISO 起点</span><b>{task.camera.iso}</b></div><button onClick={()=>cite(task.camera.evidence_ids)}>规则依据 ↗</button></div>
+    <p className="adjustment">{task.camera.adjustment}</p><div className="task-signals"><button onClick={()=>cite(task.weather.evidence_ids)}><CloudSun size={15}/>{task.weather.temperature_c===null?'天气未知':`${task.weather.temperature_c}°C · 风 ${task.weather.wind_kmh ?? '未知'} km/h`}<span>{labels[task.weather.label]}</span></button><button onClick={()=>cite(task.crowd.evidence_ids)}><Users size={14}/>暂无实时客流</button><button onClick={()=>cite(task.score.evidence_ids)}>适配 {task.score.suitability} <span>置信度 {Math.round(task.score.confidence*100)}%</span></button></div>
+    <details className="task-details"><summary>风险、备选与来源<ChevronDown size={14}/></summary><div>{task.risks.map((r,i)=><p key={i}>• {r}</p>)}<p><b>备选：</b>{task.alternative}</p><button className="tiny-link" onClick={()=>cite(task.evidence_ids)}>查看机位与排程证据 ↗</button></div></details>
+    {task.status!=='CANCELLED'&&<div className="task-actions"><span><ShieldCheck size={13}/>条件改变后，先提议再保存</span><button disabled={working} onClick={()=>change(task,plan.brief.mode==='mock'?'模拟降雨：取消该段户外拍摄':'用户反馈天气恶化：申请取消该段')}>天气变差</button><button disabled={working} onClick={()=>change(task,plan.brief.mode==='mock'?'模拟开放变化：入口未确认，取消该段':'用户反馈入口或开放不确定：申请取消该段')}>开放有变化</button></div>}
+    </div>
+  </article>;
+}

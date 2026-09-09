@@ -1,0 +1,1696 @@
+{
+  "id": "demo-cityscape",
+  "version": 1,
+  "brief": {
+    "text": "",
+    "destination": "南京",
+    "travel_date": "2026-10-03",
+    "start_local": "14:00:00",
+    "end_local": "21:00:00",
+    "timezone": "Asia/Shanghai",
+    "genre": "cityscape",
+    "profile": "enthusiast",
+    "lenses": [
+      {
+        "name": "35mm F1.8",
+        "min_mm": 35.0,
+        "max_mm": 35.0,
+        "max_aperture": 1.8
+      }
+    ],
+    "sensor": "full_frame",
+    "tripod": true,
+    "max_walk_km": 3.0,
+    "accept_tickets": false,
+    "crowd_tolerance": "low",
+    "mode": "mock"
+  },
+  "created_at": "2026-09-09T00:49:14.991109Z",
+  "status": "DRAFT",
+  "spots": [
+    {
+      "id": "seed-cityscape-0",
+      "place": {
+        "id": "seed-cityscape-0",
+        "name": "解放门周边",
+        "aliases": [],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.0603,
+          "lon": 118.7968,
+          "precision": "AREA",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-seed-cityscape-0"
+          ]
+        }
+      },
+      "name": "解放门周边",
+      "camera": {
+        "lat": 32.0603,
+        "lon": 118.7968,
+        "precision": "AREA",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-seed-cityscape-0"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "紫峰大厦方向（示意）",
+          "position": {
+            "lat": 32.0621,
+            "lon": 118.778,
+            "precision": "AREA",
+            "crs": "WGS84",
+            "evidence_ids": [
+              "ev-seed-cityscape-0"
+            ]
+          }
+        }
+      ],
+      "genres": [
+        "cityscape"
+      ],
+      "composition": "在地面公开步行区域寻找城墙与远处城市的层次，避免边缘站位。",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-seed-cityscape-0"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。"
+      ],
+      "claim_ids": [
+        "claim-seed-cityscape-0"
+      ]
+    },
+    {
+      "id": "seed-cityscape-1",
+      "place": {
+        "id": "seed-cityscape-1",
+        "name": "玄武湖西南岸",
+        "aliases": [],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.062,
+          "lon": 118.796,
+          "precision": "AREA",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-seed-cityscape-1"
+          ]
+        }
+      },
+      "name": "玄武湖西南岸",
+      "camera": {
+        "lat": 32.062,
+        "lon": 118.796,
+        "precision": "AREA",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-seed-cityscape-1"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "紫峰大厦方向（示意）",
+          "position": {
+            "lat": 32.0621,
+            "lon": 118.778,
+            "precision": "AREA",
+            "crs": "WGS84",
+            "evidence_ids": [
+              "ev-seed-cityscape-1"
+            ]
+          }
+        }
+      ],
+      "genres": [
+        "cityscape"
+      ],
+      "composition": "用湖面作前景，等待蓝调光比，亮灯时间需要复核。",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-seed-cityscape-1"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。"
+      ],
+      "claim_ids": [
+        "claim-seed-cityscape-1"
+      ]
+    },
+    {
+      "id": "seed-cityscape-2",
+      "place": {
+        "id": "seed-cityscape-2",
+        "name": "玄武湖环湖步道",
+        "aliases": [],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.0643,
+          "lon": 118.7943,
+          "precision": "AREA",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-seed-cityscape-2"
+          ]
+        }
+      },
+      "name": "玄武湖环湖步道",
+      "camera": {
+        "lat": 32.0643,
+        "lon": 118.7943,
+        "precision": "AREA",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-seed-cityscape-2"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "紫峰大厦方向（示意）",
+          "position": {
+            "lat": 32.0621,
+            "lon": 118.778,
+            "precision": "AREA",
+            "crs": "WGS84",
+            "evidence_ids": [
+              "ev-seed-cityscape-2"
+            ]
+          }
+        }
+      ],
+      "genres": [
+        "cityscape"
+      ],
+      "composition": "广角保留水面；长焦压缩远处建筑，避开主通道架脚架。",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-seed-cityscape-2"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。"
+      ],
+      "claim_ids": [
+        "claim-seed-cityscape-2"
+      ]
+    },
+    {
+      "id": "seed-cityscape-3",
+      "place": {
+        "id": "seed-cityscape-3",
+        "name": "玄武门周边",
+        "aliases": [],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.0672,
+          "lon": 118.7909,
+          "precision": "AREA",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-seed-cityscape-3"
+          ]
+        }
+      },
+      "name": "玄武门周边",
+      "camera": {
+        "lat": 32.0672,
+        "lon": 118.7909,
+        "precision": "AREA",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-seed-cityscape-3"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "紫峰大厦方向（示意）",
+          "position": {
+            "lat": 32.0621,
+            "lon": 118.778,
+            "precision": "AREA",
+            "crs": "WGS84",
+            "evidence_ids": [
+              "ev-seed-cityscape-3"
+            ]
+          }
+        }
+      ],
+      "genres": [
+        "cityscape"
+      ],
+      "composition": "收取城门线条与街道细节，保护高光。",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-seed-cityscape-3"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。"
+      ],
+      "claim_ids": [
+        "claim-seed-cityscape-3"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "shot-1",
+      "spot_id": "seed-cityscape-0",
+      "title": "解放门周边 · 环境叙事",
+      "start": "2026-10-03T09:07:27.845897Z",
+      "end": "2026-10-03T09:32:27.845897Z",
+      "status": "TENTATIVE",
+      "composition": "在地面公开步行区域寻找城墙与远处城市的层次，避免边缘站位。",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8.0,
+        "shutter_seconds": 2.0,
+        "iso": 100,
+        "adjustment": "从 1–4 秒试拍；查看高光直方图，灯光溢出则缩短快门。RAW，-2/0/+2 EV 包围曝光。",
+        "evidence_ids": [
+          "ev-camera-0"
+        ]
+      },
+      "weather": {
+        "at": "2026-10-03T09:00:00Z",
+        "temperature_c": 24.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.0,
+        "cloud_pct": 35.0,
+        "visibility_m": 20000.0,
+        "weather_code": 2,
+        "aqi": 42.0,
+        "label": "FIXTURE",
+        "evidence_ids": [
+          "ev-weather-fixture"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "解放门周边",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-crowd-0"
+        ]
+      },
+      "score": {
+        "suitability": 79.4,
+        "confidence": 0.5,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1.0,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "evidence_ids": [
+          "ev-score-0"
+        ]
+      },
+      "solar_azimuth_deg": 260.4,
+      "target_bearing_deg": 276.5,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。",
+        "开放/预约/临时管制未经官方当日复核，暂定任务，确认后再出发。",
+        "仅定位到区域或 POI；请在公开步行区域确认站位。"
+      ],
+      "alternative": "若下雨或关闭：取消本段户外任务；在已确认安全的室内整理照片，不自动导航到未核验替代地点。",
+      "evidence_ids": [
+        "ev-seed-cityscape-0",
+        "ev-access-seed-cityscape-0",
+        "ev-schedule-0",
+        "ev-geometry-0"
+      ]
+    },
+    {
+      "id": "shot-2",
+      "spot_id": "seed-cityscape-1",
+      "title": "玄武湖西南岸 · 光影特写",
+      "start": "2026-10-03T09:49:27.845897Z",
+      "end": "2026-10-03T10:14:27.845897Z",
+      "status": "TENTATIVE",
+      "composition": "用湖面作前景，等待蓝调光比，亮灯时间需要复核。",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8.0,
+        "shutter_seconds": 2.0,
+        "iso": 100,
+        "adjustment": "从 1–4 秒试拍；查看高光直方图，灯光溢出则缩短快门。RAW，-2/0/+2 EV 包围曝光。",
+        "evidence_ids": [
+          "ev-camera-1"
+        ]
+      },
+      "weather": {
+        "at": "2026-10-03T10:00:00Z",
+        "temperature_c": 24.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.0,
+        "cloud_pct": 35.0,
+        "visibility_m": 20000.0,
+        "weather_code": 2,
+        "aqi": 42.0,
+        "label": "FIXTURE",
+        "evidence_ids": [
+          "ev-weather-fixture"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "玄武湖西南岸",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-crowd-1"
+        ]
+      },
+      "score": {
+        "suitability": 79.4,
+        "confidence": 0.5,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1.0,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "evidence_ids": [
+          "ev-score-1"
+        ]
+      },
+      "solar_azimuth_deg": 266.0,
+      "target_bearing_deg": 270.4,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。",
+        "开放/预约/临时管制未经官方当日复核，暂定任务，确认后再出发。",
+        "仅定位到区域或 POI；请在公开步行区域确认站位。"
+      ],
+      "alternative": "若下雨或关闭：取消本段户外任务；在已确认安全的室内整理照片，不自动导航到未核验替代地点。",
+      "evidence_ids": [
+        "ev-seed-cityscape-1",
+        "ev-access-seed-cityscape-1",
+        "ev-schedule-1",
+        "ev-geometry-1"
+      ]
+    },
+    {
+      "id": "shot-3",
+      "spot_id": "seed-cityscape-2",
+      "title": "玄武湖环湖步道 · 细节收集",
+      "start": "2026-10-03T10:31:27.845897Z",
+      "end": "2026-10-03T10:56:27.845897Z",
+      "status": "TENTATIVE",
+      "composition": "广角保留水面；长焦压缩远处建筑，避开主通道架脚架。",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8.0,
+        "shutter_seconds": 2.0,
+        "iso": 100,
+        "adjustment": "从 1–4 秒试拍；查看高光直方图，灯光溢出则缩短快门。RAW，-2/0/+2 EV 包围曝光。",
+        "evidence_ids": [
+          "ev-camera-2"
+        ]
+      },
+      "weather": {
+        "at": "2026-10-03T11:00:00Z",
+        "temperature_c": 24.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.0,
+        "cloud_pct": 35.0,
+        "visibility_m": 20000.0,
+        "weather_code": 2,
+        "aqi": 42.0,
+        "label": "FIXTURE",
+        "evidence_ids": [
+          "ev-weather-fixture"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "玄武湖环湖步道",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-crowd-2"
+        ]
+      },
+      "score": {
+        "suitability": 79.4,
+        "confidence": 0.5,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1.0,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "evidence_ids": [
+          "ev-score-2"
+        ]
+      },
+      "solar_azimuth_deg": 271.5,
+      "target_bearing_deg": 261.0,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。",
+        "开放/预约/临时管制未经官方当日复核，暂定任务，确认后再出发。",
+        "仅定位到区域或 POI；请在公开步行区域确认站位。"
+      ],
+      "alternative": "若下雨或关闭：取消本段户外任务；在已确认安全的室内整理照片，不自动导航到未核验替代地点。",
+      "evidence_ids": [
+        "ev-seed-cityscape-2",
+        "ev-access-seed-cityscape-2",
+        "ev-schedule-2",
+        "ev-geometry-2"
+      ]
+    },
+    {
+      "id": "shot-4",
+      "spot_id": "seed-cityscape-3",
+      "title": "玄武门周边 · 创意收尾",
+      "start": "2026-10-03T11:13:27.845897Z",
+      "end": "2026-10-03T11:38:27.845897Z",
+      "status": "TENTATIVE",
+      "composition": "收取城门线条与街道细节，保护高光。",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8.0,
+        "shutter_seconds": 2.0,
+        "iso": 100,
+        "adjustment": "从 1–4 秒试拍；查看高光直方图，灯光溢出则缩短快门。RAW，-2/0/+2 EV 包围曝光。",
+        "evidence_ids": [
+          "ev-camera-3"
+        ]
+      },
+      "weather": {
+        "at": "2026-10-03T11:00:00Z",
+        "temperature_c": 24.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.0,
+        "cloud_pct": 35.0,
+        "visibility_m": 20000.0,
+        "weather_code": 2,
+        "aqi": 42.0,
+        "label": "FIXTURE",
+        "evidence_ids": [
+          "ev-weather-fixture"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "玄武门周边",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-crowd-3"
+        ]
+      },
+      "score": {
+        "suitability": 79.4,
+        "confidence": 0.5,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1.0,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "evidence_ids": [
+          "ev-score-3"
+        ]
+      },
+      "solar_azimuth_deg": 277.3,
+      "target_bearing_deg": 245.0,
+      "risks": [
+        "请勿进入机动车道、翻越护栏或进入非公开区域。",
+        "开放/预约/临时管制未经官方当日复核，暂定任务，确认后再出发。",
+        "仅定位到区域或 POI；请在公开步行区域确认站位。"
+      ],
+      "alternative": "若下雨或关闭：取消本段户外任务；在已确认安全的室内整理照片，不自动导航到未核验替代地点。",
+      "evidence_ids": [
+        "ev-seed-cityscape-3",
+        "ev-access-seed-cityscape-3",
+        "ev-schedule-3",
+        "ev-geometry-3"
+      ]
+    }
+  ],
+  "routes": [
+    {
+      "from_id": "seed-cityscape-0",
+      "to_id": "seed-cityscape-1",
+      "distance_m": 420.0,
+      "duration_min": 7.0,
+      "geometry": [
+        [
+          118.7968,
+          32.0603
+        ],
+        [
+          118.796,
+          32.062
+        ]
+      ],
+      "label": "FIXTURE",
+      "evidence_ids": [
+        "ev-route-seed-cityscape-0-seed-cityscape-1"
+      ],
+      "note": "区域间演示连接线 · 非导航路线"
+    },
+    {
+      "from_id": "seed-cityscape-1",
+      "to_id": "seed-cityscape-2",
+      "distance_m": 420.0,
+      "duration_min": 7.0,
+      "geometry": [
+        [
+          118.796,
+          32.062
+        ],
+        [
+          118.7943,
+          32.0643
+        ]
+      ],
+      "label": "FIXTURE",
+      "evidence_ids": [
+        "ev-route-seed-cityscape-1-seed-cityscape-2"
+      ],
+      "note": "区域间演示连接线 · 非导航路线"
+    },
+    {
+      "from_id": "seed-cityscape-2",
+      "to_id": "seed-cityscape-3",
+      "distance_m": 420.0,
+      "duration_min": 7.0,
+      "geometry": [
+        [
+          118.7943,
+          32.0643
+        ],
+        [
+          118.7909,
+          32.0672
+        ]
+      ],
+      "label": "FIXTURE",
+      "evidence_ids": [
+        "ev-route-seed-cityscape-2-seed-cityscape-3"
+      ],
+      "note": "区域间演示连接线 · 非导航路线"
+    }
+  ],
+  "solar": {
+    "sunrise": "2026-10-03T22:00:37.164927Z",
+    "sunset": "2026-10-03T09:47:27.845897Z",
+    "golden_start": "2026-10-03T09:15:54.069562Z",
+    "blue_start": "2026-10-03T10:03:01.225011Z",
+    "blue_end": "2026-10-03T10:12:19.516912Z",
+    "evidence_ids": [
+      "ev-solar"
+    ]
+  },
+  "sources": [
+    {
+      "id": "src-seed-cityscape-0",
+      "url": null,
+      "title": "离线 Seed · 解放门周边",
+      "publisher": "离线 Seed · 解放门周边",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-community-seed-cityscape-0",
+      "url": null,
+      "title": "社区发现流程 · 合成样例",
+      "publisher": "社区发现流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-seed-cityscape-0",
+      "url": null,
+      "title": "官方复核流程 · 合成样例",
+      "publisher": "官方复核流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-seed-cityscape-1",
+      "url": null,
+      "title": "离线 Seed · 玄武湖西南岸",
+      "publisher": "离线 Seed · 玄武湖西南岸",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-community-seed-cityscape-1",
+      "url": null,
+      "title": "社区发现流程 · 合成样例",
+      "publisher": "社区发现流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-seed-cityscape-1",
+      "url": null,
+      "title": "官方复核流程 · 合成样例",
+      "publisher": "官方复核流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-seed-cityscape-2",
+      "url": null,
+      "title": "离线 Seed · 玄武湖环湖步道",
+      "publisher": "离线 Seed · 玄武湖环湖步道",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-community-seed-cityscape-2",
+      "url": null,
+      "title": "社区发现流程 · 合成样例",
+      "publisher": "社区发现流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-seed-cityscape-2",
+      "url": null,
+      "title": "官方复核流程 · 合成样例",
+      "publisher": "官方复核流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-seed-cityscape-3",
+      "url": null,
+      "title": "离线 Seed · 玄武门周边",
+      "publisher": "离线 Seed · 玄武门周边",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-community-seed-cityscape-3",
+      "url": null,
+      "title": "社区发现流程 · 合成样例",
+      "publisher": "社区发现流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-seed-cityscape-3",
+      "url": null,
+      "title": "官方复核流程 · 合成样例",
+      "publisher": "官方复核流程 · 合成样例",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.988605Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-fixture",
+      "url": null,
+      "title": "离线天气 Fixture",
+      "publisher": "离线天气 Fixture",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.989606Z",
+      "note": ""
+    },
+    {
+      "id": "src-route-seed-cityscape-0-seed-cityscape-1",
+      "url": null,
+      "title": "离线路线 Fixture",
+      "publisher": "离线路线 Fixture",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.989606Z",
+      "note": ""
+    },
+    {
+      "id": "src-route-seed-cityscape-0-seed-cityscape-2",
+      "url": null,
+      "title": "离线路线 Fixture",
+      "publisher": "离线路线 Fixture",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.989606Z",
+      "note": ""
+    },
+    {
+      "id": "src-route-seed-cityscape-0-seed-cityscape-3",
+      "url": null,
+      "title": "离线路线 Fixture",
+      "publisher": "离线路线 Fixture",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.989606Z",
+      "note": ""
+    },
+    {
+      "id": "src-route-seed-cityscape-1-seed-cityscape-2",
+      "url": null,
+      "title": "离线路线 Fixture",
+      "publisher": "离线路线 Fixture",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.989606Z",
+      "note": ""
+    },
+    {
+      "id": "src-route-seed-cityscape-1-seed-cityscape-3",
+      "url": null,
+      "title": "离线路线 Fixture",
+      "publisher": "离线路线 Fixture",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.989606Z",
+      "note": ""
+    },
+    {
+      "id": "src-route-seed-cityscape-2-seed-cityscape-3",
+      "url": null,
+      "title": "离线路线 Fixture",
+      "publisher": "离线路线 Fixture",
+      "kind": "fixture",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.989606Z",
+      "note": ""
+    },
+    {
+      "id": "src-solar",
+      "url": "https://astral.readthedocs.io/en/latest/",
+      "title": "Astral 3.2 · 太阳几何",
+      "publisher": "Astral 3.2 · 太阳几何",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-crowd-0",
+      "url": null,
+      "title": "客流能力边界",
+      "publisher": "客流能力边界",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-geometry-0",
+      "url": null,
+      "title": "太阳与目标方向",
+      "publisher": "太阳与目标方向",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-schedule-0",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-0",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-0",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-crowd-1",
+      "url": null,
+      "title": "客流能力边界",
+      "publisher": "客流能力边界",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-geometry-1",
+      "url": null,
+      "title": "太阳与目标方向",
+      "publisher": "太阳与目标方向",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-schedule-1",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-1",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-1",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-crowd-2",
+      "url": null,
+      "title": "客流能力边界",
+      "publisher": "客流能力边界",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-geometry-2",
+      "url": null,
+      "title": "太阳与目标方向",
+      "publisher": "太阳与目标方向",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-schedule-2",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.990605Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-2",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.991109Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-2",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.991109Z",
+      "note": ""
+    },
+    {
+      "id": "src-crowd-3",
+      "url": null,
+      "title": "客流能力边界",
+      "publisher": "客流能力边界",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.991109Z",
+      "note": ""
+    },
+    {
+      "id": "src-geometry-3",
+      "url": null,
+      "title": "太阳与目标方向",
+      "publisher": "太阳与目标方向",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.991109Z",
+      "note": ""
+    },
+    {
+      "id": "src-schedule-3",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.991109Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-3",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.991109Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-3",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T00:49:14.991109Z",
+      "note": ""
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-seed-cityscape-0",
+      "source_id": "src-community-seed-cityscape-0",
+      "subject_id": "seed-cityscape-0",
+      "kind": "composition",
+      "statement": "在地面公开步行区域寻找城墙与远处城市的层次，避免边缘站位。",
+      "label": "FIXTURE",
+      "evidence_ids": [
+        "ev-community-seed-cityscape-0"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-seed-cityscape-1",
+      "source_id": "src-community-seed-cityscape-1",
+      "subject_id": "seed-cityscape-1",
+      "kind": "composition",
+      "statement": "用湖面作前景，等待蓝调光比，亮灯时间需要复核。",
+      "label": "FIXTURE",
+      "evidence_ids": [
+        "ev-community-seed-cityscape-1"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-seed-cityscape-2",
+      "source_id": "src-community-seed-cityscape-2",
+      "subject_id": "seed-cityscape-2",
+      "kind": "composition",
+      "statement": "广角保留水面；长焦压缩远处建筑，避开主通道架脚架。",
+      "label": "FIXTURE",
+      "evidence_ids": [
+        "ev-community-seed-cityscape-2"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-seed-cityscape-3",
+      "source_id": "src-community-seed-cityscape-3",
+      "subject_id": "seed-cityscape-3",
+      "kind": "composition",
+      "statement": "收取城门线条与街道细节，保护高光。",
+      "label": "FIXTURE",
+      "evidence_ids": [
+        "ev-community-seed-cityscape-3"
+      ],
+      "valid_until": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-seed-cityscape-0",
+      "source_id": "src-seed-cityscape-0",
+      "label": "FIXTURE",
+      "statement": "人工编写的南京示例地点和近似区域，未现场核验；非实时来源。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.0603,
+        "lon": 118.7968,
+        "subject_lat": 32.0621,
+        "subject_lon": 118.778
+      }
+    },
+    {
+      "id": "ev-community-seed-cityscape-0",
+      "source_id": "src-community-seed-cityscape-0",
+      "label": "FIXTURE",
+      "statement": "在地面公开步行区域寻找城墙与远处城市的层次，避免边缘站位。 这是合成的构图 Claim，不对应真实帖子。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-access-seed-cityscape-0",
+      "source_id": "src-access-seed-cityscape-0",
+      "label": "FIXTURE",
+      "statement": "当日开放、预约、夜游、脚架政策未知，不作已开放承诺。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-seed-cityscape-1",
+      "source_id": "src-seed-cityscape-1",
+      "label": "FIXTURE",
+      "statement": "人工编写的南京示例地点和近似区域，未现场核验；非实时来源。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.062,
+        "lon": 118.796,
+        "subject_lat": 32.0621,
+        "subject_lon": 118.778
+      }
+    },
+    {
+      "id": "ev-community-seed-cityscape-1",
+      "source_id": "src-community-seed-cityscape-1",
+      "label": "FIXTURE",
+      "statement": "用湖面作前景，等待蓝调光比，亮灯时间需要复核。 这是合成的构图 Claim，不对应真实帖子。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-access-seed-cityscape-1",
+      "source_id": "src-access-seed-cityscape-1",
+      "label": "FIXTURE",
+      "statement": "当日开放、预约、夜游、脚架政策未知，不作已开放承诺。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-seed-cityscape-2",
+      "source_id": "src-seed-cityscape-2",
+      "label": "FIXTURE",
+      "statement": "人工编写的南京示例地点和近似区域，未现场核验；非实时来源。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.0643,
+        "lon": 118.7943,
+        "subject_lat": 32.0621,
+        "subject_lon": 118.778
+      }
+    },
+    {
+      "id": "ev-community-seed-cityscape-2",
+      "source_id": "src-community-seed-cityscape-2",
+      "label": "FIXTURE",
+      "statement": "广角保留水面；长焦压缩远处建筑，避开主通道架脚架。 这是合成的构图 Claim，不对应真实帖子。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-access-seed-cityscape-2",
+      "source_id": "src-access-seed-cityscape-2",
+      "label": "FIXTURE",
+      "statement": "当日开放、预约、夜游、脚架政策未知，不作已开放承诺。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-seed-cityscape-3",
+      "source_id": "src-seed-cityscape-3",
+      "label": "FIXTURE",
+      "statement": "人工编写的南京示例地点和近似区域，未现场核验；非实时来源。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.0672,
+        "lon": 118.7909,
+        "subject_lat": 32.0621,
+        "subject_lon": 118.778
+      }
+    },
+    {
+      "id": "ev-community-seed-cityscape-3",
+      "source_id": "src-community-seed-cityscape-3",
+      "label": "FIXTURE",
+      "statement": "收取城门线条与街道细节，保护高光。 这是合成的构图 Claim，不对应真实帖子。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-access-seed-cityscape-3",
+      "source_id": "src-access-seed-cityscape-3",
+      "label": "FIXTURE",
+      "statement": "当日开放、预约、夜游、脚架政策未知，不作已开放承诺。",
+      "observed_at": "2026-09-09T00:49:14.988605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-weather-fixture",
+      "source_id": "src-weather-fixture",
+      "label": "FIXTURE",
+      "statement": "固定晴间多云天气，仅用于演示，不是预报。",
+      "observed_at": "2026-09-09T00:49:14.989606Z",
+      "valid_until": null,
+      "values": {
+        "temperature_c": 24,
+        "precipitation_mm": 0,
+        "wind_kmh": 8,
+        "cloud_pct": 35,
+        "visibility_m": 20000,
+        "weather_code": 2,
+        "aqi": 42
+      }
+    },
+    {
+      "id": "ev-route-seed-cityscape-0-seed-cityscape-1",
+      "source_id": "src-route-seed-cityscape-0-seed-cityscape-1",
+      "label": "FIXTURE",
+      "statement": "演示路线时长与距离；虚线仅连接区域，不可用于导航。",
+      "observed_at": "2026-09-09T00:49:14.989606Z",
+      "valid_until": null,
+      "values": {
+        "distance_m": 420,
+        "duration_min": 7
+      }
+    },
+    {
+      "id": "ev-route-seed-cityscape-0-seed-cityscape-2",
+      "source_id": "src-route-seed-cityscape-0-seed-cityscape-2",
+      "label": "FIXTURE",
+      "statement": "演示路线时长与距离；虚线仅连接区域，不可用于导航。",
+      "observed_at": "2026-09-09T00:49:14.989606Z",
+      "valid_until": null,
+      "values": {
+        "distance_m": 840,
+        "duration_min": 14
+      }
+    },
+    {
+      "id": "ev-route-seed-cityscape-0-seed-cityscape-3",
+      "source_id": "src-route-seed-cityscape-0-seed-cityscape-3",
+      "label": "FIXTURE",
+      "statement": "演示路线时长与距离；虚线仅连接区域，不可用于导航。",
+      "observed_at": "2026-09-09T00:49:14.989606Z",
+      "valid_until": null,
+      "values": {
+        "distance_m": 1260,
+        "duration_min": 21
+      }
+    },
+    {
+      "id": "ev-route-seed-cityscape-1-seed-cityscape-2",
+      "source_id": "src-route-seed-cityscape-1-seed-cityscape-2",
+      "label": "FIXTURE",
+      "statement": "演示路线时长与距离；虚线仅连接区域，不可用于导航。",
+      "observed_at": "2026-09-09T00:49:14.989606Z",
+      "valid_until": null,
+      "values": {
+        "distance_m": 420,
+        "duration_min": 7
+      }
+    },
+    {
+      "id": "ev-route-seed-cityscape-1-seed-cityscape-3",
+      "source_id": "src-route-seed-cityscape-1-seed-cityscape-3",
+      "label": "FIXTURE",
+      "statement": "演示路线时长与距离；虚线仅连接区域，不可用于导航。",
+      "observed_at": "2026-09-09T00:49:14.989606Z",
+      "valid_until": null,
+      "values": {
+        "distance_m": 840,
+        "duration_min": 14
+      }
+    },
+    {
+      "id": "ev-route-seed-cityscape-2-seed-cityscape-3",
+      "source_id": "src-route-seed-cityscape-2-seed-cityscape-3",
+      "label": "FIXTURE",
+      "statement": "演示路线时长与距离；虚线仅连接区域，不可用于导航。",
+      "observed_at": "2026-09-09T00:49:14.989606Z",
+      "valid_until": null,
+      "values": {
+        "distance_m": 420,
+        "duration_min": 7
+      }
+    },
+    {
+      "id": "ev-solar",
+      "source_id": "src-solar",
+      "label": "CALCULATED",
+      "statement": "根据日期与目的地区域坐标计算；蓝调定义为太阳高度 -4° 至 -6°。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.0603,
+        "lon": 118.7968,
+        "sunrise": "2026-10-03T22:00:37.164927+00:00",
+        "sunset": "2026-10-03T09:47:27.845897+00:00",
+        "golden_start": "2026-10-03T09:15:54.069562+00:00",
+        "blue_start": "2026-10-03T10:03:01.225011+00:00",
+        "blue_end": "2026-10-03T10:12:19.516912+00:00"
+      }
+    },
+    {
+      "id": "ev-crowd-0",
+      "source_id": "src-crowd-0",
+      "label": "UNKNOWN",
+      "statement": "没有可用的游客客流源；道路交通和热力图不代表游客客流。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-geometry-0",
+      "source_id": "src-geometry-0",
+      "label": "CALCULATED",
+      "statement": "区域坐标计算的示意方向，不是实测构图射线。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "solar_azimuth_deg": 260.4,
+        "target_bearing_deg": 276.5
+      }
+    },
+    {
+      "id": "ev-schedule-0",
+      "source_id": "src-schedule-0",
+      "label": "INFERRED",
+      "statement": "25 分钟任务；换点加入路线时长和 10 分钟缓冲；首站到达交通另行安排。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-10-03T09:07:27.845897+00:00",
+        "end": "2026-10-03T09:32:27.845897+00:00",
+        "route_basis": "首站，无换点路线"
+      }
+    },
+    {
+      "id": "ev-camera-0",
+      "source_id": "src-camera-0",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8,
+        "shutter_seconds": 2,
+        "iso": 100
+      }
+    },
+    {
+      "id": "ev-score-0",
+      "source_id": "src-score-0",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 79.4,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "confidence": 0.5
+      }
+    },
+    {
+      "id": "ev-crowd-1",
+      "source_id": "src-crowd-1",
+      "label": "UNKNOWN",
+      "statement": "没有可用的游客客流源；道路交通和热力图不代表游客客流。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-geometry-1",
+      "source_id": "src-geometry-1",
+      "label": "CALCULATED",
+      "statement": "区域坐标计算的示意方向，不是实测构图射线。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "solar_azimuth_deg": 266.0,
+        "target_bearing_deg": 270.4
+      }
+    },
+    {
+      "id": "ev-schedule-1",
+      "source_id": "src-schedule-1",
+      "label": "INFERRED",
+      "statement": "25 分钟任务；换点加入路线时长和 10 分钟缓冲；首站到达交通另行安排。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-10-03T09:49:27.845897+00:00",
+        "end": "2026-10-03T10:14:27.845897+00:00",
+        "route_basis": [
+          "ev-route-seed-cityscape-0-seed-cityscape-1"
+        ]
+      }
+    },
+    {
+      "id": "ev-camera-1",
+      "source_id": "src-camera-1",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8,
+        "shutter_seconds": 2,
+        "iso": 100
+      }
+    },
+    {
+      "id": "ev-score-1",
+      "source_id": "src-score-1",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 79.4,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "confidence": 0.5
+      }
+    },
+    {
+      "id": "ev-crowd-2",
+      "source_id": "src-crowd-2",
+      "label": "UNKNOWN",
+      "statement": "没有可用的游客客流源；道路交通和热力图不代表游客客流。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-geometry-2",
+      "source_id": "src-geometry-2",
+      "label": "CALCULATED",
+      "statement": "区域坐标计算的示意方向，不是实测构图射线。",
+      "observed_at": "2026-09-09T00:49:14.990605Z",
+      "valid_until": null,
+      "values": {
+        "solar_azimuth_deg": 271.5,
+        "target_bearing_deg": 261.0
+      }
+    },
+    {
+      "id": "ev-schedule-2",
+      "source_id": "src-schedule-2",
+      "label": "INFERRED",
+      "statement": "25 分钟任务；换点加入路线时长和 10 分钟缓冲；首站到达交通另行安排。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-10-03T10:31:27.845897+00:00",
+        "end": "2026-10-03T10:56:27.845897+00:00",
+        "route_basis": [
+          "ev-route-seed-cityscape-1-seed-cityscape-2"
+        ]
+      }
+    },
+    {
+      "id": "ev-camera-2",
+      "source_id": "src-camera-2",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8,
+        "shutter_seconds": 2,
+        "iso": 100
+      }
+    },
+    {
+      "id": "ev-score-2",
+      "source_id": "src-score-2",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 79.4,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "confidence": 0.5
+      }
+    },
+    {
+      "id": "ev-crowd-3",
+      "source_id": "src-crowd-3",
+      "label": "UNKNOWN",
+      "statement": "没有可用的游客客流源；道路交通和热力图不代表游客客流。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-geometry-3",
+      "source_id": "src-geometry-3",
+      "label": "CALCULATED",
+      "statement": "区域坐标计算的示意方向，不是实测构图射线。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {
+        "solar_azimuth_deg": 277.3,
+        "target_bearing_deg": 245.0
+      }
+    },
+    {
+      "id": "ev-schedule-3",
+      "source_id": "src-schedule-3",
+      "label": "INFERRED",
+      "statement": "25 分钟任务；换点加入路线时长和 10 分钟缓冲；首站到达交通另行安排。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-10-03T11:13:27.845897+00:00",
+        "end": "2026-10-03T11:38:27.845897+00:00",
+        "route_basis": [
+          "ev-route-seed-cityscape-2-seed-cityscape-3"
+        ]
+      }
+    },
+    {
+      "id": "ev-camera-3",
+      "source_id": "src-camera-3",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 8,
+        "shutter_seconds": 2,
+        "iso": 100
+      }
+    },
+    {
+      "id": "ev-score-3",
+      "source_id": "src-score-3",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-09T00:49:14.991109Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 79.4,
+        "components": {
+          "蓝调": 0.65,
+          "能见度": 1,
+          "稳定性": 0.84,
+          "空气": 0.79,
+          "构图": 0.75
+        },
+        "weights": {
+          "蓝调": 0.3,
+          "能见度": 0.25,
+          "稳定性": 0.2,
+          "空气": 0.1,
+          "构图": 0.15
+        },
+        "confidence": 0.5
+      }
+    }
+  ],
+  "warnings": [
+    "离线演示：天气、路线与来源示例均为 Fixture，不代表目的地真实现状。",
+    "首站到达与末站返程未计入步行预算；请另行安排交通。"
+  ],
+  "excluded": [],
+  "metrics": {
+    "elapsed_ms": 203,
+    "provider_calls": 0,
+    "reported_tokens": 0,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.0"
+  }
+}

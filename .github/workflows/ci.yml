@@ -1,0 +1,35 @@
+name: PhotoScout checks
+on: [push, pull_request]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    env:
+      DASHSCOPE_API_KEY: ""
+      AMAP_WEB_SERVICE_KEY: ""
+      NEXT_TELEMETRY_DISABLED: "1"
+      LANGSMITH_TRACING: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12", cache: pip}
+      - uses: actions/setup-node@v4
+        with: {node-version: "24", cache: npm, cache-dependency-path: frontend/package-lock.json}
+      - run: pip install -r requirements.lock && pip install --no-deps -e .
+      - run: ruff check backend tests evals
+      - run: pytest -q && python -m evals.run
+      - run: python scripts/check_secrets.py
+      - run: npm ci && npm run build && npx playwright install --with-deps chromium
+        working-directory: frontend
+      - run: |
+          python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 > /tmp/backend.log 2>&1 &
+          cd frontend
+          npm run start > /tmp/frontend.log 2>&1 &
+          for i in $(seq 1 30); do curl --fail http://127.0.0.1:3800 >/dev/null 2>&1 && break; sleep 1; done
+          npm test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: |
+            evals/reports/
+            frontend/test-results/
