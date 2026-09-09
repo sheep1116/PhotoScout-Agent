@@ -9,7 +9,7 @@ from backend.app.models import Lens, TripBrief
 @pytest.fixture
 def settings(tmp_path):
     return Settings(_env_file=None, dashscope_api_key="", amap_web_service_key="",
-                    database_url=f"sqlite:///{tmp_path / 'test.db'}", provider_timeout=.1)
+                    database_url=f"sqlite:///{tmp_path / 'test.db'}", provider_timeout=.1, amap_min_interval=0)
 
 
 @pytest.fixture

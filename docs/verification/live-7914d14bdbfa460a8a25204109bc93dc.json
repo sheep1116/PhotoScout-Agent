@@ -1,0 +1,89 @@
+{
+  "checked_at": "2026-09-09T13:57:38.305507+00:00",
+  "plan_id": "7914d14bdbfa460a8a25204109bc93dc",
+  "version": 3,
+  "destination": "南京",
+  "travel_date": "2026-09-10",
+  "checks": {
+    "live_mode": true,
+    "nonempty_tasks": true,
+    "no_fixture": true,
+    "real_search_claims": true,
+    "location_relevant_claim_sources": true,
+    "map_positions": true,
+    "forecast_present": true,
+    "aqi_present": true,
+    "no_false_permission": true,
+    "solar_calculated": true,
+    "no_unverified_routes": true,
+    "schema_and_evidence_integrity": true,
+    "job_complete": true,
+    "health_without_secrets": true,
+    "rejection_preserves_plan": true,
+    "approval_increments_version": true,
+    "only_target_task_changed": true,
+    "target_cancelled": true,
+    "undo_restores_content_new_version": true,
+    "fresh_weather_no_unnecessary_proposal": true,
+    "reread_persisted": true,
+    "history_has_current_version": true
+  },
+  "passed": true,
+  "metrics": {
+    "elapsed_ms": 17561,
+    "provider_calls": 11,
+    "search_calls": 2,
+    "search_cache_hits": 0,
+    "reported_tokens": 9050,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.0"
+  },
+  "spot_names": [
+    "国创园",
+    "夫子庙秦淮风光带"
+  ],
+  "task_count": 3,
+  "web_source_count": 16,
+  "claim_count": 3,
+  "evidence_count": 71,
+  "weather": [
+    {
+      "at": "2026-09-10T09:00:00+00:00",
+      "temperature_c": 23.7,
+      "wind_kmh": 13.8,
+      "aqi": 73.0
+    },
+    {
+      "at": "2026-09-10T09:00:00+00:00",
+      "temperature_c": 23.7,
+      "wind_kmh": 13.8,
+      "aqi": 73.0
+    },
+    {
+      "at": "2026-09-10T09:00:00+00:00",
+      "temperature_c": 23.7,
+      "wind_kmh": 13.8,
+      "aqi": 73.0
+    }
+  ],
+  "warnings": [
+    "明孝陵石象路：地图存在歧义或无法定位，未生成精确站位。",
+    "颐和路片区：地图存在歧义或无法定位，未生成精确站位。",
+    "小西湖片区：地图存在歧义或无法定位，未生成精确站位。",
+    "南京中国科举博物馆：地图存在歧义或无法定位，未生成精确站位。",
+    "缺少已核验入口路线：采用单区域拍摄序列，不安排未经验证的跨区域移动。",
+    "首站到达与末站返程未计入步行预算；请另行安排交通。"
+  ],
+  "stages": [
+    "parse",
+    "discover",
+    "evidence",
+    "verify",
+    "conditions",
+    "schedule",
+    "validate",
+    "complete"
+  ],
+  "scope": "Live pipeline acceptance; does not certify source claims, entrances or on-site safety."
+}

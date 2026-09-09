@@ -1,0 +1,2561 @@
+{
+  "id": "396748936f60449b930e6cdbe208aef4",
+  "version": 3,
+  "brief": {
+    "text": "南京，2026-09-10 下午拍旅行人像，使用35mm和85mm镜头，优先公开步行区域。",
+    "destination": "南京",
+    "travel_date": "2026-09-10",
+    "start_local": "14:00:00",
+    "end_local": "19:00:00",
+    "timezone": "Asia/Shanghai",
+    "genre": "portrait",
+    "profile": "enthusiast",
+    "lenses": [
+      {
+        "name": "35mm F1.8",
+        "min_mm": 35.0,
+        "max_mm": 35.0,
+        "max_aperture": 1.8
+      },
+      {
+        "name": "85mm F1.8",
+        "min_mm": 85.0,
+        "max_mm": 85.0,
+        "max_aperture": 1.8
+      }
+    ],
+    "sensor": "full_frame",
+    "tripod": false,
+    "max_walk_km": 3.0,
+    "accept_tickets": false,
+    "crowd_tolerance": "low",
+    "mode": "live"
+  },
+  "created_at": "2026-09-09T13:53:02.853294Z",
+  "status": "DRAFT",
+  "spots": [
+    {
+      "id": "B001905YQ1",
+      "place": {
+        "id": "B001905YQ1",
+        "name": "先锋书店(五台山总店)",
+        "aliases": [
+          "先锋书店（五台山店）"
+        ],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.052762,
+          "lon": 118.768277,
+          "precision": "MAP_POINT",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-B001905YQ1"
+          ]
+        }
+      },
+      "name": "先锋书店（五台山店）",
+      "camera": {
+        "lat": 32.052762,
+        "lon": 118.768277,
+        "precision": "MAP_POINT",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-B001905YQ1"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "阅读者特写",
+          "position": null
+        }
+      ],
+      "genres": [
+        "portrait"
+      ],
+      "composition": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-B001905YQ1"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"
+      ],
+      "claim_ids": [
+        "claim-B001905YQ1-web-3c9539068155",
+        "claim-B001905YQ1-web-2815fea12859",
+        "claim-B001905YQ1-web-4cd30e508642"
+      ]
+    },
+    {
+      "id": "B00190BU4S",
+      "place": {
+        "id": "B00190BU4S",
+        "name": "老门东",
+        "aliases": [
+          "老门东街区"
+        ],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.01365,
+          "lon": 118.782444,
+          "precision": "MAP_POINT",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-B00190BU4S"
+          ]
+        }
+      },
+      "name": "老门东街区",
+      "camera": {
+        "lat": 32.01365,
+        "lon": 118.782444,
+        "precision": "MAP_POINT",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-B00190BU4S"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "传统手工艺人",
+          "position": null
+        }
+      ],
+      "genres": [
+        "portrait"
+      ],
+      "composition": "捕捉决定性瞬间，利用门框或窗棂作为自然画框，侧逆光勾勒轮廓 [7][1]",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-B00190BU4S"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"
+      ],
+      "claim_ids": [
+        "claim-B00190BU4S-web-2f0cdd606f19",
+        "claim-B00190BU4S-web-7c85a7b14118"
+      ]
+    },
+    {
+      "id": "B0FFGOF7OZ",
+      "place": {
+        "id": "B0FFGOF7OZ",
+        "name": "南京鱼嘴湿地公园",
+        "aliases": [
+          "鱼嘴湿地公园"
+        ],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 31.97639,
+          "lon": 118.660922,
+          "precision": "MAP_POINT",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-B0FFGOF7OZ"
+          ]
+        }
+      },
+      "name": "鱼嘴湿地公园",
+      "camera": {
+        "lat": 31.97639,
+        "lon": 118.660922,
+        "precision": "MAP_POINT",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-B0FFGOF7OZ"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "江边剪影人像",
+          "position": null
+        }
+      ],
+      "genres": [
+        "portrait"
+      ],
+      "composition": "逆光拍摄表现轮廓与空间层次，地平线置于下三分线，留白营造开阔感 [1][3][6]",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-B0FFGOF7OZ"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"
+      ],
+      "claim_ids": [
+        "claim-B0FFGOF7OZ-web-7c85a7b14118",
+        "claim-B0FFGOF7OZ-web-ee9001f45b1f",
+        "claim-B0FFGOF7OZ-web-4cd30e508642"
+      ]
+    },
+    {
+      "id": "B0FFHVEECG",
+      "place": {
+        "id": "B0FFHVEECG",
+        "name": "中山陵景区",
+        "aliases": [
+          "中山陵"
+        ],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.056676,
+          "lon": 118.849019,
+          "precision": "MAP_POINT",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-B0FFHVEECG"
+          ]
+        }
+      },
+      "name": "中山陵",
+      "camera": {
+        "lat": 32.056676,
+        "lon": 118.849019,
+        "precision": "MAP_POINT",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-B0FFHVEECG"
+        ]
+      },
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "人物与石阶建筑",
+          "position": null
+        }
+      ],
+      "genres": [
+        "portrait"
+      ],
+      "composition": "利用台阶线条引导视线，采用三分法构图将人物置于视觉焦点，背景保留建筑对称性以增强庄重感[3][5]",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-B0FFHVEECG"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": false,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"
+      ],
+      "claim_ids": [
+        "claim-B0FFHVEECG-web-ee9001f45b1f",
+        "claim-B0FFHVEECG-web-88cd5e7ca3d6"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": "shot-1",
+      "spot_id": "B001905YQ1",
+      "title": "先锋书店（五台山店） · 环境叙事",
+      "start": "2026-09-10T08:36:25.441602Z",
+      "end": "2026-09-10T09:01:25.441602Z",
+      "status": "TENTATIVE",
+      "composition": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 2.8,
+        "shutter_seconds": 0.004,
+        "iso": 200,
+        "adjustment": "人物虚则提高快门，再提高 ISO；多人合照缩小光圈。现场对脸测光，曝光只是起点。",
+        "evidence_ids": [
+          "ev-camera-0"
+        ]
+      },
+      "weather": {
+        "at": "2026-09-10T09:00:00Z",
+        "temperature_c": 23.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 13.8,
+        "cloud_pct": 15.0,
+        "visibility_m": 15680.0,
+        "weather_code": 0,
+        "aqi": 73.0,
+        "label": "REPORTED",
+        "evidence_ids": [
+          "ev-weather-33",
+          "ev-aqi-33"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "先锋书店（五台山店）",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-crowd-0"
+        ]
+      },
+      "score": {
+        "suitability": 72.5,
+        "confidence": 0.5,
+        "components": {
+          "光质": 0.65,
+          "舒适度": 0.932,
+          "稳定性": 0.724,
+          "构图": 0.75,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.3,
+          "舒适度": 0.25,
+          "稳定性": 0.15,
+          "构图": 0.2,
+          "客流": 0.1
+        },
+        "evidence_ids": [
+          "ev-score-0"
+        ]
+      },
+      "solar_azimuth_deg": 262.6,
+      "target_bearing_deg": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。",
+        "开放/预约/临时管制未经官方当日复核，暂定任务，确认后再出发。",
+        "仅定位到区域或 POI；请在公开步行区域确认站位。"
+      ],
+      "alternative": "若下雨或关闭：取消本段户外任务；在已确认安全的室内整理照片，不自动导航到未核验替代地点。",
+      "evidence_ids": [
+        "ev-B001905YQ1",
+        "ev-access-B001905YQ1",
+        "ev-schedule-0",
+        "ev-geometry-0"
+      ]
+    },
+    {
+      "id": "shot-2",
+      "spot_id": "B001905YQ1",
+      "title": "先锋书店（五台山店） · 光影特写",
+      "start": "2026-09-10T09:01:25.441602Z",
+      "end": "2026-09-10T09:26:25.441602Z",
+      "status": "TENTATIVE",
+      "composition": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]",
+      "camera": {
+        "lens": "85mm F1.8",
+        "focal_mm": 85.0,
+        "equivalent_mm": 85.0,
+        "aperture": 2.8,
+        "shutter_seconds": 0.004,
+        "iso": 200,
+        "adjustment": "人物虚则提高快门，再提高 ISO；多人合照缩小光圈。现场对脸测光，曝光只是起点。",
+        "evidence_ids": [
+          "ev-camera-1"
+        ]
+      },
+      "weather": {
+        "at": "2026-09-10T09:00:00Z",
+        "temperature_c": 23.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 13.8,
+        "cloud_pct": 15.0,
+        "visibility_m": 15680.0,
+        "weather_code": 0,
+        "aqi": 73.0,
+        "label": "REPORTED",
+        "evidence_ids": [
+          "ev-weather-33",
+          "ev-aqi-33"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "先锋书店（五台山店）",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-crowd-1"
+        ]
+      },
+      "score": {
+        "suitability": 72.5,
+        "confidence": 0.5,
+        "components": {
+          "光质": 0.65,
+          "舒适度": 0.932,
+          "稳定性": 0.724,
+          "构图": 0.75,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.3,
+          "舒适度": 0.25,
+          "稳定性": 0.15,
+          "构图": 0.2,
+          "客流": 0.1
+        },
+        "evidence_ids": [
+          "ev-score-1"
+        ]
+      },
+      "solar_azimuth_deg": 266.1,
+      "target_bearing_deg": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。",
+        "开放/预约/临时管制未经官方当日复核，暂定任务，确认后再出发。",
+        "仅定位到区域或 POI；请在公开步行区域确认站位。"
+      ],
+      "alternative": "若下雨或关闭：取消本段户外任务；在已确认安全的室内整理照片，不自动导航到未核验替代地点。",
+      "evidence_ids": [
+        "ev-B001905YQ1",
+        "ev-access-B001905YQ1",
+        "ev-schedule-1",
+        "ev-geometry-1"
+      ]
+    },
+    {
+      "id": "shot-3",
+      "spot_id": "B001905YQ1",
+      "title": "先锋书店（五台山店） · 细节收集",
+      "start": "2026-09-10T09:26:25.441602Z",
+      "end": "2026-09-10T09:51:25.441602Z",
+      "status": "TENTATIVE",
+      "composition": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 2.8,
+        "shutter_seconds": 0.004,
+        "iso": 200,
+        "adjustment": "人物虚则提高快门，再提高 ISO；多人合照缩小光圈。现场对脸测光，曝光只是起点。",
+        "evidence_ids": [
+          "ev-camera-2"
+        ]
+      },
+      "weather": {
+        "at": "2026-09-10T09:00:00Z",
+        "temperature_c": 23.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 13.8,
+        "cloud_pct": 15.0,
+        "visibility_m": 15680.0,
+        "weather_code": 0,
+        "aqi": 73.0,
+        "label": "REPORTED",
+        "evidence_ids": [
+          "ev-weather-33",
+          "ev-aqi-33"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "先锋书店（五台山店）",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-crowd-2"
+        ]
+      },
+      "score": {
+        "suitability": 72.5,
+        "confidence": 0.5,
+        "components": {
+          "光质": 0.65,
+          "舒适度": 0.932,
+          "稳定性": 0.724,
+          "构图": 0.75,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.3,
+          "舒适度": 0.25,
+          "稳定性": 0.15,
+          "构图": 0.2,
+          "客流": 0.1
+        },
+        "evidence_ids": [
+          "ev-score-2"
+        ]
+      },
+      "solar_azimuth_deg": 269.4,
+      "target_bearing_deg": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。",
+        "开放/预约/临时管制未经官方当日复核，暂定任务，确认后再出发。",
+        "仅定位到区域或 POI；请在公开步行区域确认站位。"
+      ],
+      "alternative": "若下雨或关闭：取消本段户外任务；在已确认安全的室内整理照片，不自动导航到未核验替代地点。",
+      "evidence_ids": [
+        "ev-B001905YQ1",
+        "ev-access-B001905YQ1",
+        "ev-schedule-2",
+        "ev-geometry-2"
+      ]
+    }
+  ],
+  "routes": [],
+  "solar": {
+    "sunrise": "2026-09-10T21:46:19.549266Z",
+    "sunset": "2026-09-10T10:17:52.255815Z",
+    "golden_start": "2026-09-10T09:46:25.441602Z",
+    "blue_start": "2026-09-10T10:33:31.572403Z",
+    "blue_end": "2026-09-10T10:42:56.451631Z",
+    "evidence_ids": [
+      "ev-solar"
+    ]
+  },
+  "sources": [
+    {
+      "id": "web-7c85a7b14118",
+      "url": "https://www.163.com/dy/article/L5PH4HI30536FE6V.html",
+      "title": "自然风光摄影指南",
+      "publisher": "www.163.com",
+      "kind": "search",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:47:48.660507Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-3c9539068155",
+      "url": "https://www.sohu.com/a/600914534_121106869",
+      "title": "快收藏!一看就会的9种构图法!!! ",
+      "publisher": "www.sohu.com",
+      "kind": "search",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:47:48.660507Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-ee9001f45b1f",
+      "url": "https://news.sohu.com/a/872175105_120626663",
+      "title": "10种基本摄影构图方法,重庆树莓摄影学校构图选景教程 ",
+      "publisher": "news.sohu.com",
+      "kind": "search",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:47:48.660507Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-2815fea12859",
+      "url": "https://news.sohu.com/a/881770596_120626663",
+      "title": "必须学会的这17个摄影构图法,重庆摄影学校摄影场景解析 ",
+      "publisher": "news.sohu.com",
+      "kind": "search",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:47:48.660507Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-88cd5e7ca3d6",
+      "url": "https://zhuanlan.zhihu.com/p/566839859",
+      "title": "第4课视频拍摄的取景与构图之拍摄视频的实用构图方法",
+      "publisher": "zhuanlan.zhihu.com",
+      "kind": "search",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:47:48.660507Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-4cd30e508642",
+      "url": "https://zhuanlan.zhihu.com/p/1921619115585561058",
+      "title": "摄影如何突出主体",
+      "publisher": "zhuanlan.zhihu.com",
+      "kind": "search",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:47:48.660507Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-2f0cdd606f19",
+      "url": "https://www.163.com/dy/article/KOJ7APRJ0556KK8Z.html",
+      "title": "侦探式扫街:4种观察方法,解码城市隐藏叙事",
+      "publisher": "www.163.com",
+      "kind": "search",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:47:48.660507Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "src-B001905YQ1",
+      "url": "https://developer.amap.com/api/webservice/guide/api/search",
+      "title": "高德 POI",
+      "publisher": "高德 POI",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:57.019414Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-B001905YQ1",
+      "url": null,
+      "title": "当日开放复核",
+      "publisher": "当日开放复核",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:57.019456Z",
+      "note": ""
+    },
+    {
+      "id": "src-B00190BU4S",
+      "url": "https://developer.amap.com/api/webservice/guide/api/search",
+      "title": "高德 POI",
+      "publisher": "高德 POI",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:57.628485Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-B00190BU4S",
+      "url": null,
+      "title": "当日开放复核",
+      "publisher": "当日开放复核",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:57.628517Z",
+      "note": ""
+    },
+    {
+      "id": "src-B0FFGOF7OZ",
+      "url": "https://developer.amap.com/api/webservice/guide/api/search",
+      "title": "高德 POI",
+      "publisher": "高德 POI",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:58.210879Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-B0FFGOF7OZ",
+      "url": null,
+      "title": "当日开放复核",
+      "publisher": "当日开放复核",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:58.210910Z",
+      "note": ""
+    },
+    {
+      "id": "src-B0FFHVEECG",
+      "url": "https://developer.amap.com/api/webservice/guide/api/search",
+      "title": "高德 POI",
+      "publisher": "高德 POI",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:58.860893Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-B0FFHVEECG",
+      "url": null,
+      "title": "当日开放复核",
+      "publisher": "当日开放复核",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:52:58.860926Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-16",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.849992Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-16",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850033Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-17",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850079Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-17",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850094Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-18",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850120Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-18",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850133Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-19",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850152Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-19",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850174Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-20",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850195Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-20",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850207Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-21",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850229Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-21",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850250Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-22",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850283Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-22",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850342Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-23",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850416Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-23",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850436Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-24",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850462Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-24",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850541Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-25",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850587Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-25",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850622Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-26",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850669Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-26",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850685Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-27",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850708Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-27",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850726Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-28",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850749Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-28",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850767Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-29",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850805Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-29",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850825Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-30",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850854Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-30",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850885Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-31",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850924Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-31",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850951Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-32",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850979Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-32",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.850996Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-33",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851020Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-33",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851036Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-34",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851057Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-34",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851072Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-35",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851105Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-35",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851123Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-36",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851145Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-36",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851165Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-37",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851186Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-37",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851198Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-38",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851229Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-38",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851248Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-39",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851283Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-39",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.851316Z",
+      "note": ""
+    },
+    {
+      "id": "src-solar",
+      "url": "https://astral.readthedocs.io/en/latest/",
+      "title": "Astral 3.2 · 太阳几何",
+      "publisher": "Astral 3.2 · 太阳几何",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852276Z",
+      "note": ""
+    },
+    {
+      "id": "src-crowd-0",
+      "url": null,
+      "title": "客流能力边界",
+      "publisher": "客流能力边界",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852366Z",
+      "note": ""
+    },
+    {
+      "id": "src-geometry-0",
+      "url": null,
+      "title": "太阳与目标方向",
+      "publisher": "太阳与目标方向",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852435Z",
+      "note": ""
+    },
+    {
+      "id": "src-schedule-0",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852475Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-0",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852520Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-0",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852583Z",
+      "note": ""
+    },
+    {
+      "id": "src-crowd-1",
+      "url": null,
+      "title": "客流能力边界",
+      "publisher": "客流能力边界",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852707Z",
+      "note": ""
+    },
+    {
+      "id": "src-geometry-1",
+      "url": null,
+      "title": "太阳与目标方向",
+      "publisher": "太阳与目标方向",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852779Z",
+      "note": ""
+    },
+    {
+      "id": "src-schedule-1",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852809Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-1",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852852Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-1",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852901Z",
+      "note": ""
+    },
+    {
+      "id": "src-crowd-2",
+      "url": null,
+      "title": "客流能力边界",
+      "publisher": "客流能力边界",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.852984Z",
+      "note": ""
+    },
+    {
+      "id": "src-geometry-2",
+      "url": null,
+      "title": "太阳与目标方向",
+      "publisher": "太阳与目标方向",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.853070Z",
+      "note": ""
+    },
+    {
+      "id": "src-schedule-2",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.853119Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-2",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.853169Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-2",
+      "url": null,
+      "title": "photo-rules/1.0",
+      "publisher": "photo-rules/1.0",
+      "kind": "tool",
+      "published_at": null,
+      "retrieved_at": "2026-09-09T13:53:02.853230Z",
+      "note": ""
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-B001905YQ1-web-3c9539068155",
+      "source_id": "web-3c9539068155",
+      "subject_id": "B001905YQ1",
+      "kind": "viewpoint",
+      "statement": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B001905YQ1-web-3c9539068155"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B001905YQ1-web-2815fea12859",
+      "source_id": "web-2815fea12859",
+      "subject_id": "B001905YQ1",
+      "kind": "viewpoint",
+      "statement": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B001905YQ1-web-2815fea12859"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B001905YQ1-web-4cd30e508642",
+      "source_id": "web-4cd30e508642",
+      "subject_id": "B001905YQ1",
+      "kind": "viewpoint",
+      "statement": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B001905YQ1-web-4cd30e508642"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B00190BU4S-web-2f0cdd606f19",
+      "source_id": "web-2f0cdd606f19",
+      "subject_id": "B00190BU4S",
+      "kind": "viewpoint",
+      "statement": "捕捉决定性瞬间，利用门框或窗棂作为自然画框，侧逆光勾勒轮廓 [7][1]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B00190BU4S-web-2f0cdd606f19"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B00190BU4S-web-7c85a7b14118",
+      "source_id": "web-7c85a7b14118",
+      "subject_id": "B00190BU4S",
+      "kind": "viewpoint",
+      "statement": "捕捉决定性瞬间，利用门框或窗棂作为自然画框，侧逆光勾勒轮廓 [7][1]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B00190BU4S-web-7c85a7b14118"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B0FFGOF7OZ-web-7c85a7b14118",
+      "source_id": "web-7c85a7b14118",
+      "subject_id": "B0FFGOF7OZ",
+      "kind": "viewpoint",
+      "statement": "逆光拍摄表现轮廓与空间层次，地平线置于下三分线，留白营造开阔感 [1][3][6]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B0FFGOF7OZ-web-7c85a7b14118"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B0FFGOF7OZ-web-ee9001f45b1f",
+      "source_id": "web-ee9001f45b1f",
+      "subject_id": "B0FFGOF7OZ",
+      "kind": "viewpoint",
+      "statement": "逆光拍摄表现轮廓与空间层次，地平线置于下三分线，留白营造开阔感 [1][3][6]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B0FFGOF7OZ-web-ee9001f45b1f"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B0FFGOF7OZ-web-4cd30e508642",
+      "source_id": "web-4cd30e508642",
+      "subject_id": "B0FFGOF7OZ",
+      "kind": "viewpoint",
+      "statement": "逆光拍摄表现轮廓与空间层次，地平线置于下三分线，留白营造开阔感 [1][3][6]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B0FFGOF7OZ-web-4cd30e508642"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B0FFHVEECG-web-ee9001f45b1f",
+      "source_id": "web-ee9001f45b1f",
+      "subject_id": "B0FFHVEECG",
+      "kind": "viewpoint",
+      "statement": "利用台阶线条引导视线，采用三分法构图将人物置于视觉焦点，背景保留建筑对称性以增强庄重感[3][5]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B0FFHVEECG-web-ee9001f45b1f"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B0FFHVEECG-web-88cd5e7ca3d6",
+      "source_id": "web-88cd5e7ca3d6",
+      "subject_id": "B0FFHVEECG",
+      "kind": "viewpoint",
+      "statement": "利用台阶线条引导视线，采用三分法构图将人物置于视觉焦点，背景保留建筑对称性以增强庄重感[3][5]",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B0FFHVEECG-web-88cd5e7ca3d6"
+      ],
+      "valid_until": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-B001905YQ1",
+      "source_id": "src-B001905YQ1",
+      "label": "REPORTED",
+      "statement": "地图 POI 中心，未经核实的站位区域；GCJ-02 近似转换 WGS84，不能作实测点。",
+      "observed_at": "2026-09-09T13:52:57.019439Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.052762,
+        "lon": 118.768277,
+        "provider_id": "B001905YQ1"
+      }
+    },
+    {
+      "id": "ev-access-B001905YQ1",
+      "source_id": "src-access-B001905YQ1",
+      "label": "UNKNOWN",
+      "statement": "搜索摘要不能证明当日开放；官方原文、预约和现场限制仍需人工复核。",
+      "observed_at": "2026-09-09T13:52:57.019463Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B001905YQ1-web-3c9539068155",
+      "source_id": "web-3c9539068155",
+      "label": "REPORTED",
+      "statement": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:57.019477Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B001905YQ1-web-2815fea12859",
+      "source_id": "web-2815fea12859",
+      "label": "REPORTED",
+      "statement": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:57.019496Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B001905YQ1-web-4cd30e508642",
+      "source_id": "web-4cd30e508642",
+      "label": "REPORTED",
+      "statement": "中心构图突出人物专注神态，利用书架形成框架式前景，虚化背景干扰 [2][4][6]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:57.019504Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-B00190BU4S",
+      "source_id": "src-B00190BU4S",
+      "label": "REPORTED",
+      "statement": "地图 POI 中心，未经核实的站位区域；GCJ-02 近似转换 WGS84，不能作实测点。",
+      "observed_at": "2026-09-09T13:52:57.628505Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.01365,
+        "lon": 118.782444,
+        "provider_id": "B00190BU4S"
+      }
+    },
+    {
+      "id": "ev-access-B00190BU4S",
+      "source_id": "src-access-B00190BU4S",
+      "label": "UNKNOWN",
+      "statement": "搜索摘要不能证明当日开放；官方原文、预约和现场限制仍需人工复核。",
+      "observed_at": "2026-09-09T13:52:57.628522Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B00190BU4S-web-2f0cdd606f19",
+      "source_id": "web-2f0cdd606f19",
+      "label": "REPORTED",
+      "statement": "捕捉决定性瞬间，利用门框或窗棂作为自然画框，侧逆光勾勒轮廓 [7][1]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:57.628533Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B00190BU4S-web-7c85a7b14118",
+      "source_id": "web-7c85a7b14118",
+      "label": "REPORTED",
+      "statement": "捕捉决定性瞬间，利用门框或窗棂作为自然画框，侧逆光勾勒轮廓 [7][1]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:57.628546Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-B0FFGOF7OZ",
+      "source_id": "src-B0FFGOF7OZ",
+      "label": "REPORTED",
+      "statement": "地图 POI 中心，未经核实的站位区域；GCJ-02 近似转换 WGS84，不能作实测点。",
+      "observed_at": "2026-09-09T13:52:58.210898Z",
+      "valid_until": null,
+      "values": {
+        "lat": 31.97639,
+        "lon": 118.660922,
+        "provider_id": "B0FFGOF7OZ"
+      }
+    },
+    {
+      "id": "ev-access-B0FFGOF7OZ",
+      "source_id": "src-access-B0FFGOF7OZ",
+      "label": "UNKNOWN",
+      "statement": "搜索摘要不能证明当日开放；官方原文、预约和现场限制仍需人工复核。",
+      "observed_at": "2026-09-09T13:52:58.210914Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B0FFGOF7OZ-web-7c85a7b14118",
+      "source_id": "web-7c85a7b14118",
+      "label": "REPORTED",
+      "statement": "逆光拍摄表现轮廓与空间层次，地平线置于下三分线，留白营造开阔感 [1][3][6]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:58.210925Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B0FFGOF7OZ-web-ee9001f45b1f",
+      "source_id": "web-ee9001f45b1f",
+      "label": "REPORTED",
+      "statement": "逆光拍摄表现轮廓与空间层次，地平线置于下三分线，留白营造开阔感 [1][3][6]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:58.210937Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B0FFGOF7OZ-web-4cd30e508642",
+      "source_id": "web-4cd30e508642",
+      "label": "REPORTED",
+      "statement": "逆光拍摄表现轮廓与空间层次，地平线置于下三分线，留白营造开阔感 [1][3][6]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:58.210943Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-B0FFHVEECG",
+      "source_id": "src-B0FFHVEECG",
+      "label": "REPORTED",
+      "statement": "地图 POI 中心，未经核实的站位区域；GCJ-02 近似转换 WGS84，不能作实测点。",
+      "observed_at": "2026-09-09T13:52:58.860913Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.056676,
+        "lon": 118.849019,
+        "provider_id": "B0FFHVEECG"
+      }
+    },
+    {
+      "id": "ev-access-B0FFHVEECG",
+      "source_id": "src-access-B0FFHVEECG",
+      "label": "UNKNOWN",
+      "statement": "搜索摘要不能证明当日开放；官方原文、预约和现场限制仍需人工复核。",
+      "observed_at": "2026-09-09T13:52:58.860931Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B0FFHVEECG-web-ee9001f45b1f",
+      "source_id": "web-ee9001f45b1f",
+      "label": "REPORTED",
+      "statement": "利用台阶线条引导视线，采用三分法构图将人物置于视觉焦点，背景保留建筑对称性以增强庄重感[3][5]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:58.860942Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B0FFHVEECG-web-88cd5e7ca3d6",
+      "source_id": "web-88cd5e7ca3d6",
+      "label": "REPORTED",
+      "statement": "利用台阶线条引导视线，采用三分法构图将人物置于视觉焦点，背景保留建筑对称性以增强庄重感[3][5]（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-09T13:52:58.860955Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-weather-16",
+      "source_id": "src-weather-16",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850015Z",
+      "valid_until": "2026-09-09T14:23:02.849932Z",
+      "values": {
+        "temperature_c": 19.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.5,
+        "cloud_pct": 0,
+        "visibility_m": 10900.0,
+        "weather_code": 0,
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-aqi-16",
+      "source_id": "src-aqi-16",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850040Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-weather-17",
+      "source_id": "src-weather-17",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850084Z",
+      "valid_until": "2026-09-09T14:23:02.850069Z",
+      "values": {
+        "temperature_c": 19.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.1,
+        "cloud_pct": 0,
+        "visibility_m": 10900.0,
+        "weather_code": 0,
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-aqi-17",
+      "source_id": "src-aqi-17",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850098Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-weather-18",
+      "source_id": "src-weather-18",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850125Z",
+      "valid_until": "2026-09-09T14:23:02.850113Z",
+      "values": {
+        "temperature_c": 19.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.4,
+        "cloud_pct": 4,
+        "visibility_m": 10900.0,
+        "weather_code": 0,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-18",
+      "source_id": "src-aqi-18",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850136Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-19",
+      "source_id": "src-weather-19",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850165Z",
+      "valid_until": "2026-09-09T14:23:02.850146Z",
+      "values": {
+        "temperature_c": 19.2,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 10.1,
+        "cloud_pct": 0,
+        "visibility_m": 12200.0,
+        "weather_code": 0,
+        "aqi": 72
+      }
+    },
+    {
+      "id": "ev-aqi-19",
+      "source_id": "src-aqi-19",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850178Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 72
+      }
+    },
+    {
+      "id": "ev-weather-20",
+      "source_id": "src-weather-20",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850199Z",
+      "valid_until": "2026-09-09T14:23:02.850187Z",
+      "values": {
+        "temperature_c": 18.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 9.4,
+        "cloud_pct": 26,
+        "visibility_m": 10900.0,
+        "weather_code": 1,
+        "aqi": 71
+      }
+    },
+    {
+      "id": "ev-aqi-20",
+      "source_id": "src-aqi-20",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850211Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 71
+      }
+    },
+    {
+      "id": "ev-weather-21",
+      "source_id": "src-weather-21",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850233Z",
+      "valid_until": "2026-09-09T14:23:02.850223Z",
+      "values": {
+        "temperature_c": 18.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 9.4,
+        "cloud_pct": 17,
+        "visibility_m": 10900.0,
+        "weather_code": 0,
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-aqi-21",
+      "source_id": "src-aqi-21",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850257Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-weather-22",
+      "source_id": "src-weather-22",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850292Z",
+      "valid_until": "2026-09-09T14:23:02.850271Z",
+      "values": {
+        "temperature_c": 18.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 10.5,
+        "cloud_pct": 1,
+        "visibility_m": 10900.0,
+        "weather_code": 0,
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-aqi-22",
+      "source_id": "src-aqi-22",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850366Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-weather-23",
+      "source_id": "src-weather-23",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850424Z",
+      "valid_until": "2026-09-09T14:23:02.850398Z",
+      "values": {
+        "temperature_c": 19.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 9.0,
+        "cloud_pct": 2,
+        "visibility_m": 10900.0,
+        "weather_code": 0,
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-aqi-23",
+      "source_id": "src-aqi-23",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850441Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-weather-24",
+      "source_id": "src-weather-24",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850512Z",
+      "valid_until": "2026-09-09T14:23:02.850454Z",
+      "values": {
+        "temperature_c": 20.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 10.9,
+        "cloud_pct": 2,
+        "visibility_m": 12200.0,
+        "weather_code": 0,
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-aqi-24",
+      "source_id": "src-aqi-24",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850551Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 70
+      }
+    },
+    {
+      "id": "ev-weather-25",
+      "source_id": "src-weather-25",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850603Z",
+      "valid_until": "2026-09-09T14:23:02.850569Z",
+      "values": {
+        "temperature_c": 21.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 10.8,
+        "cloud_pct": 29,
+        "visibility_m": 12200.0,
+        "weather_code": 1,
+        "aqi": 71
+      }
+    },
+    {
+      "id": "ev-aqi-25",
+      "source_id": "src-aqi-25",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850637Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 71
+      }
+    },
+    {
+      "id": "ev-weather-26",
+      "source_id": "src-weather-26",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850675Z",
+      "valid_until": "2026-09-09T14:23:02.850656Z",
+      "values": {
+        "temperature_c": 23.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 11.4,
+        "cloud_pct": 17,
+        "visibility_m": 12200.0,
+        "weather_code": 0,
+        "aqi": 71
+      }
+    },
+    {
+      "id": "ev-aqi-26",
+      "source_id": "src-aqi-26",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850690Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 71
+      }
+    },
+    {
+      "id": "ev-weather-27",
+      "source_id": "src-weather-27",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850716Z",
+      "valid_until": "2026-09-09T14:23:02.850700Z",
+      "values": {
+        "temperature_c": 24.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 12.2,
+        "cloud_pct": 72,
+        "visibility_m": 13480.0,
+        "weather_code": 2,
+        "aqi": 72
+      }
+    },
+    {
+      "id": "ev-aqi-27",
+      "source_id": "src-aqi-27",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850730Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 72
+      }
+    },
+    {
+      "id": "ev-weather-28",
+      "source_id": "src-weather-28",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850755Z",
+      "valid_until": "2026-09-09T14:23:02.850742Z",
+      "values": {
+        "temperature_c": 25.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 12.3,
+        "cloud_pct": 71,
+        "visibility_m": 13480.0,
+        "weather_code": 2,
+        "aqi": 72
+      }
+    },
+    {
+      "id": "ev-aqi-28",
+      "source_id": "src-aqi-28",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850778Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 72
+      }
+    },
+    {
+      "id": "ev-weather-29",
+      "source_id": "src-weather-29",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850812Z",
+      "valid_until": "2026-09-09T14:23:02.850794Z",
+      "values": {
+        "temperature_c": 25.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 12.7,
+        "cloud_pct": 55,
+        "visibility_m": 13480.0,
+        "weather_code": 2,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-29",
+      "source_id": "src-aqi-29",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850831Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-30",
+      "source_id": "src-weather-30",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850867Z",
+      "valid_until": "2026-09-09T14:23:02.850845Z",
+      "values": {
+        "temperature_c": 25.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 13.8,
+        "cloud_pct": 90,
+        "visibility_m": 15680.0,
+        "weather_code": 3,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-30",
+      "source_id": "src-aqi-30",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850892Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-31",
+      "source_id": "src-weather-31",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850937Z",
+      "valid_until": "2026-09-09T14:23:02.850908Z",
+      "values": {
+        "temperature_c": 25.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 14.2,
+        "cloud_pct": 41,
+        "visibility_m": 15680.0,
+        "weather_code": 1,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-31",
+      "source_id": "src-aqi-31",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.850961Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-32",
+      "source_id": "src-weather-32",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.850985Z",
+      "valid_until": "2026-09-09T14:23:02.850971Z",
+      "values": {
+        "temperature_c": 24.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 14.2,
+        "cloud_pct": 23,
+        "visibility_m": 15680.0,
+        "weather_code": 1,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-32",
+      "source_id": "src-aqi-32",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851001Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-33",
+      "source_id": "src-weather-33",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.851027Z",
+      "valid_until": "2026-09-09T14:23:02.851013Z",
+      "values": {
+        "temperature_c": 23.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 13.8,
+        "cloud_pct": 15,
+        "visibility_m": 15680.0,
+        "weather_code": 0,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-33",
+      "source_id": "src-aqi-33",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851040Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-34",
+      "source_id": "src-weather-34",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.851061Z",
+      "valid_until": "2026-09-09T14:23:02.851050Z",
+      "values": {
+        "temperature_c": 22.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 12.4,
+        "cloud_pct": 20,
+        "visibility_m": 13460.0,
+        "weather_code": 1,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-34",
+      "source_id": "src-aqi-34",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851081Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-35",
+      "source_id": "src-weather-35",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.851113Z",
+      "valid_until": "2026-09-09T14:23:02.851091Z",
+      "values": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 10.7,
+        "cloud_pct": 29,
+        "visibility_m": 12180.0,
+        "weather_code": 1,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-35",
+      "source_id": "src-aqi-35",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851128Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-36",
+      "source_id": "src-weather-36",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.851154Z",
+      "valid_until": "2026-09-09T14:23:02.851138Z",
+      "values": {
+        "temperature_c": 20.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.1,
+        "cloud_pct": 58,
+        "visibility_m": 12180.0,
+        "weather_code": 2,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-36",
+      "source_id": "src-aqi-36",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851170Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-37",
+      "source_id": "src-weather-37",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.851190Z",
+      "valid_until": "2026-09-09T14:23:02.851178Z",
+      "values": {
+        "temperature_c": 20.8,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.1,
+        "cloud_pct": 95,
+        "visibility_m": 12180.0,
+        "weather_code": 3,
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-aqi-37",
+      "source_id": "src-aqi-37",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851207Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 73
+      }
+    },
+    {
+      "id": "ev-weather-38",
+      "source_id": "src-weather-38",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.851234Z",
+      "valid_until": "2026-09-09T14:23:02.851222Z",
+      "values": {
+        "temperature_c": 20.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.5,
+        "cloud_pct": 77,
+        "visibility_m": 12180.0,
+        "weather_code": 2,
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-aqi-38",
+      "source_id": "src-aqi-38",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851255Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-weather-39",
+      "source_id": "src-weather-39",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-09T13:53:02.851298Z",
+      "valid_until": "2026-09-09T14:23:02.851269Z",
+      "values": {
+        "temperature_c": 20.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.3,
+        "cloud_pct": 38,
+        "visibility_m": 10880.0,
+        "weather_code": 1,
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-aqi-39",
+      "source_id": "src-aqi-39",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-09T13:53:02.851323Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 74
+      }
+    },
+    {
+      "id": "ev-solar",
+      "source_id": "src-solar",
+      "label": "CALCULATED",
+      "statement": "根据日期与目的地区域坐标计算；蓝调定义为太阳高度 -4° 至 -6°。",
+      "observed_at": "2026-09-09T13:53:02.852287Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.052762,
+        "lon": 118.768277,
+        "sunrise": "2026-09-10T21:46:19.549266+00:00",
+        "sunset": "2026-09-10T10:17:52.255815+00:00",
+        "golden_start": "2026-09-10T09:46:25.441602+00:00",
+        "blue_start": "2026-09-10T10:33:31.572403+00:00",
+        "blue_end": "2026-09-10T10:42:56.451631+00:00"
+      }
+    },
+    {
+      "id": "ev-crowd-0",
+      "source_id": "src-crowd-0",
+      "label": "UNKNOWN",
+      "statement": "没有可用的游客客流源；道路交通和热力图不代表游客客流。",
+      "observed_at": "2026-09-09T13:53:02.852374Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-geometry-0",
+      "source_id": "src-geometry-0",
+      "label": "CALCULATED",
+      "statement": "区域坐标计算的示意方向，不是实测构图射线。",
+      "observed_at": "2026-09-09T13:53:02.852454Z",
+      "valid_until": null,
+      "values": {
+        "solar_azimuth_deg": 262.6,
+        "target_bearing_deg": null
+      }
+    },
+    {
+      "id": "ev-schedule-0",
+      "source_id": "src-schedule-0",
+      "label": "INFERRED",
+      "statement": "25 分钟任务；换点加入路线时长和 10 分钟缓冲；首站到达交通另行安排。",
+      "observed_at": "2026-09-09T13:53:02.852483Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-09-10T08:36:25.441602+00:00",
+        "end": "2026-09-10T09:01:25.441602+00:00",
+        "route_basis": "首站，无换点路线"
+      }
+    },
+    {
+      "id": "ev-camera-0",
+      "source_id": "src-camera-0",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-09T13:53:02.852534Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 2.8,
+        "shutter_seconds": 0.004,
+        "iso": 200
+      }
+    },
+    {
+      "id": "ev-score-0",
+      "source_id": "src-score-0",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-09T13:53:02.852623Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 72.5,
+        "components": {
+          "光质": 0.65,
+          "舒适度": 0.932,
+          "稳定性": 0.724,
+          "构图": 0.75,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.3,
+          "舒适度": 0.25,
+          "稳定性": 0.15,
+          "构图": 0.2,
+          "客流": 0.1
+        },
+        "confidence": 0.5
+      }
+    },
+    {
+      "id": "ev-crowd-1",
+      "source_id": "src-crowd-1",
+      "label": "UNKNOWN",
+      "statement": "没有可用的游客客流源；道路交通和热力图不代表游客客流。",
+      "observed_at": "2026-09-09T13:53:02.852718Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-geometry-1",
+      "source_id": "src-geometry-1",
+      "label": "CALCULATED",
+      "statement": "区域坐标计算的示意方向，不是实测构图射线。",
+      "observed_at": "2026-09-09T13:53:02.852790Z",
+      "valid_until": null,
+      "values": {
+        "solar_azimuth_deg": 266.1,
+        "target_bearing_deg": null
+      }
+    },
+    {
+      "id": "ev-schedule-1",
+      "source_id": "src-schedule-1",
+      "label": "INFERRED",
+      "statement": "25 分钟任务；换点加入路线时长和 10 分钟缓冲；首站到达交通另行安排。",
+      "observed_at": "2026-09-09T13:53:02.852823Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-09-10T09:01:25.441602+00:00",
+        "end": "2026-09-10T09:26:25.441602+00:00",
+        "route_basis": "首站，无换点路线"
+      }
+    },
+    {
+      "id": "ev-camera-1",
+      "source_id": "src-camera-1",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-09T13:53:02.852864Z",
+      "valid_until": null,
+      "values": {
+        "lens": "85mm F1.8",
+        "focal_mm": 85.0,
+        "equivalent_mm": 85.0,
+        "aperture": 2.8,
+        "shutter_seconds": 0.004,
+        "iso": 200
+      }
+    },
+    {
+      "id": "ev-score-1",
+      "source_id": "src-score-1",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-09T13:53:02.852910Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 72.5,
+        "components": {
+          "光质": 0.65,
+          "舒适度": 0.932,
+          "稳定性": 0.724,
+          "构图": 0.75,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.3,
+          "舒适度": 0.25,
+          "稳定性": 0.15,
+          "构图": 0.2,
+          "客流": 0.1
+        },
+        "confidence": 0.5
+      }
+    },
+    {
+      "id": "ev-crowd-2",
+      "source_id": "src-crowd-2",
+      "label": "UNKNOWN",
+      "statement": "没有可用的游客客流源；道路交通和热力图不代表游客客流。",
+      "observed_at": "2026-09-09T13:53:02.853005Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-geometry-2",
+      "source_id": "src-geometry-2",
+      "label": "CALCULATED",
+      "statement": "区域坐标计算的示意方向，不是实测构图射线。",
+      "observed_at": "2026-09-09T13:53:02.853092Z",
+      "valid_until": null,
+      "values": {
+        "solar_azimuth_deg": 269.4,
+        "target_bearing_deg": null
+      }
+    },
+    {
+      "id": "ev-schedule-2",
+      "source_id": "src-schedule-2",
+      "label": "INFERRED",
+      "statement": "25 分钟任务；换点加入路线时长和 10 分钟缓冲；首站到达交通另行安排。",
+      "observed_at": "2026-09-09T13:53:02.853133Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-09-10T09:26:25.441602+00:00",
+        "end": "2026-09-10T09:51:25.441602+00:00",
+        "route_basis": "首站，无换点路线"
+      }
+    },
+    {
+      "id": "ev-camera-2",
+      "source_id": "src-camera-2",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-09T13:53:02.853188Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 2.8,
+        "shutter_seconds": 0.004,
+        "iso": 200
+      }
+    },
+    {
+      "id": "ev-score-2",
+      "source_id": "src-score-2",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-09T13:53:02.853242Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 72.5,
+        "components": {
+          "光质": 0.65,
+          "舒适度": 0.932,
+          "稳定性": 0.724,
+          "构图": 0.75,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.3,
+          "舒适度": 0.25,
+          "稳定性": 0.15,
+          "构图": 0.2,
+          "客流": 0.1
+        },
+        "confidence": 0.5
+      }
+    }
+  ],
+  "warnings": [
+    "颐和路公馆区：地图存在歧义或无法定位，未生成精确站位。",
+    "明孝陵石象路：地图存在歧义或无法定位，未生成精确站位。",
+    "玄武湖公园：地图存在歧义或无法定位，未生成精确站位。",
+    "南京城墙（台城段）：地图存在歧义或无法定位，未生成精确站位。",
+    "缺少已核验入口路线：采用单区域拍摄序列，不安排未经验证的跨区域移动。",
+    "首站到达与末站返程未计入步行预算；请另行安排交通。"
+  ],
+  "excluded": [],
+  "metrics": {
+    "elapsed_ms": 7286,
+    "provider_calls": 11,
+    "search_calls": 0,
+    "search_cache_hits": 2,
+    "reported_tokens": 0,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.0"
+  }
+}

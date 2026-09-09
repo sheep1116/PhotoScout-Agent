@@ -4,6 +4,8 @@
 
 离线案例是明确编写的合成 Fixture，不能作为真实开放、天气或人流依据，也不编造对应的社区帖子 URL。Live 来源仅来自 DashScope 返回的 `search_info.search_results`，没有引用的模型输出被拒绝。官方来源仅从政府域名规则识别；此规则不能覆盖所有景区官方企业域名，因此宁可漏识别，不泛化授信。
 
+2026-09-09 Live 验收补充：流式来源去重；候选引用标题须体现目标城市或地点，通用摄影教程不能支撑具体机位。未被实际证据引用的搜索结果不进入最终来源列表。此筛选属于保守元数据相关性检查，不宣称自动全文核验；失败样本和通过样本见 live-acceptance.md。
+
 `resolve_access` 只允许尚未过期、已核验的官方 Claim 影响 OPEN/CLOSED。冲突保留 CONFLICT 并阻断。当前自动搜索的开放线索不标 VERIFIED，所以计划仍为 TENTATIVE。用户记录坐标也不会解除开放/危险门控。
 
 数字的证据链包括太阳算法、UTC 排程规则、天气 API/Fixture、路线 API/Fixture、镜头参数规则、评分分项。最终 Pydantic 校验所有 `evidence_ids` 引用均存在，Evidence 来源均存在，任务时间不重叠。

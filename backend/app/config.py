@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from pydantic import SecretStr
+from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -17,6 +17,7 @@ class Settings(BaseSettings):
     database_url: str = f"sqlite:///{ROOT / 'photoscout.db'}"
     redis_url: str = ""
     provider_timeout: float = 20
+    amap_min_interval: float = Field(default=0.6, ge=0, le=10)
     frontend_origins: list[str] = ["http://127.0.0.1:3000", "http://localhost:3000",
                                   "http://127.0.0.1:3800", "http://localhost:3800"]
     # A live request is an explicit UI action. No paid calls at startup/tests.

@@ -6,7 +6,7 @@
 
 已经实现 **Next.js + FastAPI + 单 LangGraph 工作流**，不是静态页面。提供完全离线的 Seed Demo、DashScope/高德/Open-Meteo 服务端适配器、SQLite/PostgreSQL 持久化、可审查 Proposal/Diff、并发审批与 Undo。
 
-> 当前状态：本地 MVP 可用。实际验证：67 项后端测试、6 项浏览器 E2E 通过；62 条离线评测通过。容器版 PostgreSQL/PostGIS/Redis 集成及同一套 6 项 E2E 也已通过。Fixture 的 Schema/证据引用完整率 100%，已测试硬门控违反率 0%。这些数字**不代表真实网页准确率或现场安全保证**。见 [评测原始报告](evals/reports/latest.json) 与 [已知限制](docs/limitations.md)。Live 适配器已做模拟契约测试，尚未进行真实付费账户端到端验收。
+> 当前状态：本地 MVP 可用。2026-09-09 实际验证：79 项后端测试、6 项浏览器 E2E、62 条离线评测通过；容器版 PostgreSQL/PostGIS/Redis 集成通过。已使用现有账户完成南京人像 Live 真实搜索、地图、天气、生成、审批、撤销与重启读取，最终 24 项验收检查通过。详见 [Live 验收报告](docs/live-acceptance.md)。Fixture 的 Schema/证据引用完整率 100%，已测试硬门控违反率 0%；这些数字**不代表真实网页准确率或现场安全保证**。见 [评测原始报告](evals/reports/latest.json) 与 [已知限制](docs/limitations.md)。
 
 ## 30 秒 Demo（依赖已安装）
 
@@ -66,6 +66,7 @@ macOS/Linux 用 `python3.12 -m venv .venv` 与 `.venv/bin/python` 替换上面�
 | `AMAP_BASE_URL` | 默认 `https://restapi.amap.com` |
 | `DATABASE_URL` | 默认 SQLite；可切 PostgreSQL + psycopg |
 | `REDIS_URL` | 可选 Redis；未配置时用有界进程内缓存 |
+| `AMAP_MIN_INTERVAL` | 高德请求最小间隔秒数，默认 0.6；处理业务限流时有限重试 |
 
 确认账户端点、余额与可接受费用后，在表单切换“Live · 联网发现”。每次计划最多 2 次搜索、6 个入选地点，搜索输出最多 2000 tokens/次；读接口至多重试一次，收费搜索不自动重试。服务启动和离线测试**不调用付费 API**。费用以 Provider 账单为准，页面不捏造金额。
 
@@ -74,6 +75,8 @@ Live 仅支持高德覆盖的国内地点，时区为 `Asia/Shanghai`。有歧�
 天气日期在可用预报范围外，返回未知天气的天文草案。没有已核验入口间路线时，采用同一区域的拍摄序列；不把 POI 中心当入口。开放与临时管控需要官方原文/现场核验；当前不会自动宣布任意景区可进入。
 
 在线底图由用户点击后加载；离线图一直可用，且不伪装成导航地图。高德 GCJ-02 在后端近似转换为 WGS84；用户坐标确认输入为 WGS84。
+
+已完成一次预报范围内的南京人像真实端到端验收；可复用探针与结果检查脚本见 [验收报告](docs/live-acceptance.md)。搜索引用增加地点相关性筛选，仅保留实际采用的来源；相关标题仍不能代替全文和现场核验。
 
 ## 验证
 

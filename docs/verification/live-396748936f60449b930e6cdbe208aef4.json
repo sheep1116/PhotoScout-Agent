@@ -1,0 +1,76 @@
+{
+  "checked_at": "2026-09-09T13:56:22.824816+00:00",
+  "plan_id": "396748936f60449b930e6cdbe208aef4",
+  "version": 3,
+  "destination": "南京",
+  "travel_date": "2026-09-10",
+  "checks": {
+    "live_mode": true,
+    "nonempty_tasks": true,
+    "no_fixture": true,
+    "real_search_claims": true,
+    "location_relevant_claim_sources": false,
+    "map_positions": true,
+    "forecast_present": true,
+    "aqi_present": true,
+    "no_false_permission": true,
+    "solar_calculated": true,
+    "no_unverified_routes": true,
+    "schema_and_evidence_integrity": true,
+    "job_complete": true,
+    "health_without_secrets": true,
+    "reread_persisted": true,
+    "history_has_current_version": true
+  },
+  "passed": false,
+  "metrics": {
+    "elapsed_ms": 7286,
+    "provider_calls": 11,
+    "search_calls": 0,
+    "search_cache_hits": 2,
+    "reported_tokens": 0,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.0"
+  },
+  "spot_names": [
+    "先锋书店（五台山店）",
+    "老门东街区",
+    "鱼嘴湿地公园",
+    "中山陵"
+  ],
+  "task_count": 3,
+  "web_source_count": 7,
+  "claim_count": 10,
+  "evidence_count": 82,
+  "weather": [
+    {
+      "at": "2026-09-10T09:00:00+00:00",
+      "temperature_c": 23.7,
+      "wind_kmh": 13.8,
+      "aqi": 73.0
+    },
+    {
+      "at": "2026-09-10T09:00:00+00:00",
+      "temperature_c": 23.7,
+      "wind_kmh": 13.8,
+      "aqi": 73.0
+    },
+    {
+      "at": "2026-09-10T09:00:00+00:00",
+      "temperature_c": 23.7,
+      "wind_kmh": 13.8,
+      "aqi": 73.0
+    }
+  ],
+  "warnings": [
+    "颐和路公馆区：地图存在歧义或无法定位，未生成精确站位。",
+    "明孝陵石象路：地图存在歧义或无法定位，未生成精确站位。",
+    "玄武湖公园：地图存在歧义或无法定位，未生成精确站位。",
+    "南京城墙（台城段）：地图存在歧义或无法定位，未生成精确站位。",
+    "缺少已核验入口路线：采用单区域拍摄序列，不安排未经验证的跨区域移动。",
+    "首站到达与末站返程未计入步行预算；请另行安排交通。"
+  ],
+  "stages": [],
+  "scope": "Live pipeline acceptance; does not certify source claims, entrances or on-site safety."
+}
