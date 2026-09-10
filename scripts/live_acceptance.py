@@ -14,7 +14,7 @@ from backend.app.providers import source_mentions_location
 def validate(plan_id, exercise=False):
     settings = Settings()
     checks = {}
-    secrets = [s.get_secret_value() for s in (settings.dashscope_api_key, settings.amap_web_service_key)
+    secrets = [s.get_secret_value() for s in (settings.dashscope_api_key, settings.amap_web_service_key, settings.flickr_api_key)
                if s.get_secret_value()]
     with httpx.Client(base_url="http://127.0.0.1:3800/v1", timeout=60, trust_env=False) as client:
         def call(path, data=None):
@@ -33,7 +33,7 @@ def validate(plan_id, exercise=False):
         checks["location_relevant_claim_sources"] = bool(plan.claims) and all(any(
             s.id == c.source_id and source_mentions_location(s.title,
                 next(spot.name for spot in plan.spots if spot.id == c.subject_id), plan.brief.destination)
-            for s in plan.sources) for c in plan.claims)
+            for s in plan.sources) for c in plan.claims if c.kind != "photo")
         checks["no_unreferenced_web_sources"] = all(any(e.source_id == s.id for e in plan.evidence)
             for s in plan.sources if s.id.startswith("web-"))
         checks["map_positions"] = bool(plan.spots) and all(

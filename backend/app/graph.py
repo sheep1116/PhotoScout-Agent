@@ -23,6 +23,7 @@ class State(TypedDict, total=False):
 
 
 async def run_graph(plan_id, brief, settings, emit, provider=None):
+    brief = notebook(brief).brief
     started = time.monotonic()
     ledger = Ledger()
     providers = provider or Providers(settings)
@@ -84,7 +85,10 @@ async def run_graph(plan_id, brief, settings, emit, provider=None):
         plan.metrics = {"elapsed_ms": round((time.monotonic()-started)*1000), "provider_calls": providers.calls,
                         "search_calls": providers.search_calls, "search_cache_hits": providers.search_cache_hits,
                         "reported_tokens": providers.tokens, "cost_cny": None,
-                        "cost_note": "未取得计费账单；不估算虚假费用", "rule_version": "photo-rules/1.0"}
+                        "cost_note": "未取得计费账单；不估算虚假费用", "rule_version": "photo-rules/1.1",
+                        "photo_references": sum(len(s.photo_references) for s in plan.spots),
+                        "mapped_viewpoints": sum(s.viewpoint_status == "mapped_viewpoint" for s in plan.spots),
+                        "photo_providers": sorted({p.provider for s in plan.spots for p in s.photo_references})}
         await emit("validate", "Schema、证据引用和时间冲突校验通过")
         return {"plan": plan}
 

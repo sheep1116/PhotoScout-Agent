@@ -64,6 +64,40 @@ class Lens(Model):
         return self
 
 
+Category = Literal["portrait", "cityscape", "landscape", "humanities", "architecture", "nature"]
+
+
+class EquipmentIntent(Model):
+    lenses: list[Lens] = Field(default_factory=list, max_length=8)
+    sensor: Literal["full_frame", "aps_c", "m43", "phone"] = "full_frame"
+    tripod: bool = False
+
+
+class TravelConstraints(Model):
+    max_walk_km: float = Field(default=3, ge=0, le=20)
+    accept_tickets: bool = False
+    crowd_tolerance: Literal["low", "medium", "high"] = "low"
+    start_local: time | None = None
+    end_local: time | None = None
+
+
+class PhotographyIntent(Model):
+    categories: list[Category] = Field(default_factory=lambda: ["landscape"], min_length=1, max_length=6)
+    subjects: list[str] = Field(default_factory=list, max_length=8)
+    styles: list[str] = Field(default_factory=list, max_length=8)
+    light: Literal["any", "daylight", "sunrise", "golden_hour", "blue_hour", "night"] = "any"
+    equipment: EquipmentIntent | None = None
+    constraints: TravelConstraints | None = None
+    mobility: Literal["standard", "step_free"] = "standard"
+
+    @field_validator("subjects", "styles")
+    @classmethod
+    def bounded_tags(cls, values):
+        if any(not value.strip() or len(value) > 40 for value in values):
+            raise ValueError("意图标签应为 1–40 个字符")
+        return list(dict.fromkeys(v.strip() for v in values))
+
+
 class TripBrief(Model):
     text: str = Field(default="", max_length=1500)
     destination: str = Field(default="", max_length=100)
@@ -71,7 +105,8 @@ class TripBrief(Model):
     start_local: time | None = None
     end_local: time | None = None
     timezone: str = "Asia/Shanghai"
-    genre: Literal["portrait", "cityscape"] | None = None
+    genre: Category | None = None
+    intent: PhotographyIntent | None = None
     profile: UserProfile = UserProfile.ENTHUSIAST
     lenses: list[Lens] = Field(default_factory=list, max_length=8)
     sensor: Literal["full_frame", "aps_c", "m43", "phone"] = "full_frame"
@@ -80,6 +115,24 @@ class TripBrief(Model):
     accept_tickets: bool = False
     crowd_tolerance: Literal["low", "medium", "high"] = "low"
     mode: Literal["mock", "live"] = "mock"
+
+    @model_validator(mode="before")
+    @classmethod
+    def accept_structured_equipment_and_constraints(cls, value):
+        if not isinstance(value, dict):
+            return value
+        data = dict(value)
+        intent = data.get("intent")
+        if isinstance(intent, PhotographyIntent):
+            intent = intent.model_dump()
+        if isinstance(intent, dict):
+            for group in ("equipment", "constraints"):
+                nested = intent.get(group)
+                if isinstance(nested, dict):
+                    for key, item in nested.items():
+                        # Explicit legacy form fields take priority during migration.
+                        data.setdefault(key, item)
+        return data
 
     @field_validator("timezone")
     @classmethod
@@ -92,6 +145,8 @@ class TripBrief(Model):
 
     @model_validator(mode="after")
     def window(self):
+        if self.intent:
+            self.genre = self.intent.categories[0]
         if self.start_local and self.end_local and self.end_local <= self.start_local:
             raise ValueError("结束时间必须晚于开始时间；MVP 仅支持当地同日行程")
         return self
@@ -110,6 +165,7 @@ class WebSource(Model):
     title: str
     publisher: str
     kind: Literal["official", "community", "media", "search", "tool", "fixture", "user"]
+    platform: str | None = None
     published_at: datetime | None = None
     retrieved_at: datetime = Field(default_factory=now)
     note: str = ""
@@ -129,7 +185,7 @@ class SourceClaim(Model):
     id: str
     source_id: str
     subject_id: str
-    kind: Literal["viewpoint", "access", "composition", "safety"]
+    kind: Literal["viewpoint", "access", "composition", "safety", "photo"]
     statement: str
     label: TruthLabel = TruthLabel.REPORTED
     evidence_ids: list[str]
@@ -157,11 +213,33 @@ class Subject(Model):
     position: Position | None = None
 
 
+class PhotoReference(Model):
+    id: str
+    provider: Literal["amap", "wikimedia", "flickr"]
+    image_url: HttpUrl
+    source_url: HttpUrl
+    source_id: str
+    title: str = Field(max_length=300)
+    author: str = Field(default="未提供", max_length=300)
+    license: str = Field(default="版权归原作者；仅供参考，转载需另行授权", max_length=300)
+    retrieved_at: datetime = Field(default_factory=now)
+    captured_at: str | None = None
+    relation: Literal["poi", "nearby"] = "poi"
+    # API geotags are not verified camera positions.
+    latitude: float | None = Field(default=None, ge=-90, le=90)
+    longitude: float | None = Field(default=None, ge=-180, le=180)
+    exif: dict[str, str] = Field(default_factory=dict)
+    evidence_ids: list[str] = Field(min_length=1)
+
+
 class PhotoSpot(Model):
     id: str
     place: PlaceEntity
     name: str
     camera: Position
+    viewpoint_status: Literal["area_candidate", "mapped_viewpoint"] = "area_candidate"
+    camera_instruction: str = "精确站位待现场确认"
+    photo_references: list[PhotoReference] = Field(default_factory=list, max_length=12)
     entrance: Position | None = None
     subjects: list[Subject]
     genres: list[str]
@@ -174,6 +252,7 @@ class PhotoSpot(Model):
     unsafe: bool = False
     popularity: str = "UNVERIFIED"
     tripod_allowed: bool | None = None
+    step_free: bool | None = None
     risks: list[str]
     claim_ids: list[str]
 
@@ -285,6 +364,18 @@ class ShotPlan(Model):
             raise ValueError("重复证据 ID")
         if any(e.source_id not in source_ids for e in self.evidence):
             raise ValueError("证据来源缺失")
+
+        photos = {}
+        for spot in self.spots:
+            for photo in spot.photo_references:
+                if photo.source_id not in source_ids:
+                    raise ValueError("图片来源缺失")
+                if any(next(e for e in self.evidence if e.id == eid).source_id != photo.source_id
+                       for eid in photo.evidence_ids if eid in evidence_ids):
+                    raise ValueError("图片证据来源不一致")
+                if photo.id in photos and photos[photo.id] != str(photo.image_url):
+                    raise ValueError("图片 ID 冲突")
+                photos[photo.id] = str(photo.image_url)
 
         def walk(value):
             if isinstance(value, dict):

@@ -1,14 +1,16 @@
+export type PhotographyIntent = {categories:string[]; subjects:string[]; styles:string[]; light:'any'|'daylight'|'sunrise'|'golden_hour'|'blue_hour'|'night'; mobility:'standard'|'step_free'};
+export type PhotoReference = {id:string;provider:string;source_url:string;title:string;author:string;license:string;retrieved_at:string;captured_at:string|null;relation:'poi'|'nearby';latitude:number|null;longitude:number|null;exif:Record<string,string>;evidence_ids:string[]};
 export type Brief = {
   text: string; destination: string; travel_date: string; start_local: string; end_local: string;
-  timezone: string; genre: 'portrait' | 'cityscape'; profile: string;
+  timezone: string; genre: string; intent?:PhotographyIntent | null; profile: string;
   lenses: {name: string; min_mm: number; max_mm: number; max_aperture: number}[];
   sensor: string; tripod: boolean; max_walk_km: number; accept_tickets: boolean;
   crowd_tolerance: string; mode: 'mock' | 'live';
 };
 export type Position = {lat: number; lon: number; precision: string; evidence_ids: string[]};
-export type Spot = {id: string; name: string; camera: Position; entrance: Position | null; subjects: {name: string; position: Position | null}[]; access: string; composition: string; risks: string[]};
+export type Spot = {id: string; place: {id:string;name:string;position:Position}; camera_instruction:string;viewpoint_status:string;photo_references:PhotoReference[]; name: string; camera: Position; entrance: Position | null; subjects: {name: string; position: Position | null}[]; access: string; composition: string; risks: string[]};
 export type Evidence = {id: string; source_id: string; label: string; statement: string; values: Record<string, unknown>; observed_at: string; valid_until: string | null};
-export type Source = {id: string; title: string; url: string | null; kind: string; publisher: string; retrieved_at: string; published_at: string | null; note: string};
+export type Source = {id: string; title: string; url: string | null; kind: string; platform?:string|null; publisher: string; retrieved_at: string; published_at: string | null; note: string};
 export type Task = {
   id: string; spot_id: string; title: string; start: string; end: string; status: string; composition: string;
   camera: {lens: string; focal_mm: number; equivalent_mm: number; aperture: number; shutter_seconds: number; iso: number; adjustment: string; evidence_ids: string[]};

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T13:47:54.229720+00:00",
+  "generated_at": "2026-09-10T07:37:27.364132+00:00",
   "mode": "offline_fixture",
   "case_count": 62,
   "passed": 62,
@@ -7,7 +7,7 @@
   "evidence_binding_rate": 1.0,
   "hard_gate_violation_rate": 0.0,
   "minimal_change_rate": 1.0,
-  "seed_latency_median_ms": 307.71,
+  "seed_latency_median_ms": 191.61,
   "provider_calls": 0,
   "api_cost_cny": 0,
   "limits": "仅确定性/Fixture 回归；证据指标检查引用完整性，不衡量网页真实性。没有声称 Live 发现准确率。",

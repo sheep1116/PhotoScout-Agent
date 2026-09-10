@@ -1,0 +1,24 @@
+{
+  "checked_at": "2026-09-10T07:44:52.421611+00:00",
+  "version": "0.2.0",
+  "backend_tests": 119,
+  "backend_passed": 119,
+  "browser_tests": 8,
+  "browser_passed": 8,
+  "offline_evals": 62,
+  "offline_passed": 62,
+  "production_build": "passed",
+  "typescript": "passed",
+  "ruff": "passed",
+  "secret_scan": "passed",
+  "live_report": "product-upgrade-live.json",
+  "live_checks": 14,
+  "live_passed": 14,
+  "runtime": "local start.ps1 / SQLite / localhost:3800",
+  "not_verified": [
+    "Wikimedia live API: connection timeout",
+    "Flickr live API: key not configured",
+    "public multi-user deployment",
+    "Docker upgrade integration"
+  ]
+}

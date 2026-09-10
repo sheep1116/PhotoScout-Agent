@@ -24,10 +24,14 @@ from .models import (
     WebSource,
 )
 
-RULE_VERSION = "photo-rules/1.0"
+RULE_VERSION = "photo-rules/1.1"
 WEIGHTS = {
     "portrait": {"光质": .30, "舒适度": .25, "稳定性": .15, "构图": .20, "客流": .10},
     "cityscape": {"蓝调": .30, "能见度": .25, "稳定性": .20, "空气": .10, "构图": .15},
+    "landscape": {"光质": .30, "能见度": .25, "稳定性": .20, "构图": .20, "客流": .05},
+    "humanities": {"光质": .20, "舒适度": .20, "稳定性": .10, "构图": .25, "客流": .25},
+    "architecture": {"光质": .20, "能见度": .20, "稳定性": .20, "构图": .30, "空气": .10},
+    "nature": {"光质": .25, "舒适度": .15, "稳定性": .25, "构图": .20, "客流": .15},
 }
 
 
@@ -47,9 +51,16 @@ def notebook(brief: TripBrief) -> TripNotebook:
             data["travel_date"] = datetime.strptime(match[1], "%Y-%m-%d").date()
         except ValueError:
             pass
+    if data.get("genre") and not data.get("intent"):
+        data["intent"] = {"categories": [data["genre"]]}
+    if data.get("intent"):
+        # Legacy form fields remain the authoritative editing surface during migration.
+        data["intent"]["equipment"] = {k: data[k] for k in ("lenses", "sensor", "tripod")}
+        data["intent"]["constraints"] = {k: data[k] for k in
+            ("max_walk_km", "accept_tickets", "crowd_tolerance", "start_local", "end_local")}
     result = TripBrief.model_validate(data)
     fields = {"destination": "你准备在哪个城市、景区拍摄？", "travel_date": "请确认具体拍摄日期。",
-              "genre": "想拍旅行人像，还是城市夜景？", "start_local": "当天几点开始拍摄？",
+              "genre": "想拍风光、人像、人文、建筑，还是其他题材？", "start_local": "当天几点开始拍摄？",
               "end_local": "当天几点结束拍摄？"}
     missing = [f for f in fields if not getattr(result, f)]
     assumptions = ["开放、预约和精确站位需要出发前及现场复核。", "未提供的偏好使用表单中展示的默认值。"]
@@ -97,6 +108,8 @@ def solar_windows(brief, position, ledger):
 
 
 def gate(spot: PhotoSpot, weather: HourlyCondition, brief: TripBrief, start, end) -> str | None:
+    if brief.intent and brief.intent.mobility == "step_free" and spot.step_free is not True:
+        return "无台阶通行缺少可达证据，不纳入必须无台阶的行程"
     if spot.unsafe:
         return "危险或非公开站位，已排除"
     if spot.access == "CLOSED":
@@ -143,6 +156,9 @@ def camera_advice(brief, index, ledger):
     if brief.genre == "portrait":
         aperture, shutter, iso = max(lens.max_aperture, 2.8 if brief.profile != "family" else 5.6), 1 / max(250, 2 * eq), 200
         adjustment = "人物虚则提高快门，再提高 ISO；多人合照缩小光圈。现场对脸测光，曝光只是起点。"
+    elif brief.genre not in ("cityscape",) and (not brief.intent or brief.intent.light not in ("night", "blue_hour")):
+        aperture, shutter, iso = max(lens.max_aperture, 5.6), 1 / max(125, 2 * eq), 200
+        adjustment = "日间曝光起点：建筑与风光优先景深，人文活动提高快门；按现场测光调整 ISO。"
     elif brief.tripod:
         aperture, shutter, iso = max(8, lens.max_aperture), 2, 100
         adjustment = "从 1–4 秒试拍；查看高光直方图，灯光溢出则缩短快门。RAW，-2/0/+2 EV 包围曝光。"
@@ -172,14 +188,17 @@ def score(brief, weather, start, solar, ledger, index):
     light = .65
     if solar.golden_start and solar.sunset and solar.golden_start <= start <= solar.sunset:
         light = .95
-    if brief.genre == "portrait":
-        components = {"光质": light, "舒适度": max(.1, 1 - abs((weather.temperature_c or 24) - 22) / 25),
-                      "稳定性": stable, "构图": .75, "客流": .5}
-    else:
-        blue = .95 if solar.blue_start and solar.blue_end and solar.blue_start <= start <= solar.blue_end else .65
-        components = {"蓝调": blue, "能见度": min(1, (weather.visibility_m or 5000) / 20000),
-                      "稳定性": stable, "空气": max(.1, 1 - (weather.aqi or 75) / 200), "构图": .75}
-    weights = WEIGHTS[brief.genre]
+    blue = .95 if solar.blue_start and solar.blue_end and solar.blue_start <= start <= solar.blue_end else .65
+    features = {"光质": light, "舒适度": max(.1, 1 - abs((weather.temperature_c or 24) - 22) / 25),
+                "稳定性": stable, "构图": .75, "客流": .5, "蓝调": blue,
+                "能见度": min(1, (weather.visibility_m or 5000) / 20000),
+                "空气": max(.1, 1 - (weather.aqi or 75) / 200)}
+    categories = brief.intent.categories if brief.intent else [brief.genre]
+    weights = {}
+    for category in categories:
+        for feature, weight in WEIGHTS[category].items():
+            weights[feature] = weights.get(feature, 0) + weight / len(categories)
+    components = {feature: features[feature] for feature in weights}
     suitability = round(100 * math.exp(sum(weights[k] * math.log(v) for k, v in components.items())), 1)
     values = {"suitability": suitability, "components": components, "weights": weights,
               "confidence": round(.35 * known / 5 + .15, 2)}
@@ -196,7 +215,18 @@ def build_plan(plan_id, brief, spots, claims, conditions, routes, ledger, warnin
     preferred = solar.golden_start - timedelta(minutes=70) if brief.genre == "portrait" and solar.golden_start else begin
     if brief.genre == "cityscape" and solar.sunset:
         preferred = solar.sunset - timedelta(minutes=40)
+    if brief.intent:
+        preference = brief.intent.light
+        anchors = {"sunrise": solar.sunrise, "golden_hour": solar.golden_start,
+                   "blue_hour": solar.blue_start, "night": solar.blue_end, "daylight": begin}
+        preferred = anchors.get(preference) or preferred
+        if preference != "any" and not (begin <= preferred < finish):
+            warnings.append("所选光线窗口不在可用时段内；未自动扩展行程，请调整时间。")
+        if brief.intent.mobility == "step_free":
+            warnings.append("已要求无台阶通行；当前没有无障碍路线证据，不能保证轮椅或推车可达，需人工确认。")
     cursor = max(begin, min(preferred, finish - timedelta(minutes=120)))
+    if brief.intent and brief.intent.light != "any" and begin <= preferred < finish:
+        cursor = preferred
     tasks, excluded, used_routes = [], [], []
     total_walk = 0
     prior = None

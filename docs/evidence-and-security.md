@@ -2,7 +2,7 @@
 
 每个来源有类别、URL（如适用）、获取时间，发布日期未知时保留空。Claim 保留来源身份，不自动把搜索摘要升级成现场事实。Evidence 使用 VERIFIED、REPORTED、CALCULATED、INFERRED、UNKNOWN、STALE、CONFLICT、FIXTURE、USER_CONFIRMED 标签。
 
-离线案例是明确编写的合成 Fixture，不能作为真实开放、天气或人流依据，也不编造对应的社区帖子 URL。Live 来源仅来自 DashScope 返回的 `search_info.search_results`，没有引用的模型输出被拒绝。官方来源仅从政府域名规则识别；此规则不能覆盖所有景区官方企业域名，因此宁可漏识别，不泛化授信。
+离线案例是明确编写的合成 Fixture，不能作为真实开放、天气或人流依据，也不编造对应的社区帖子 URL。Live 文字发现来源来自 DashScope 返回的 `search_info.search_results`；图片来源来自高德、Wikimedia、Flickr 的真实 API。没有引用的模型输出被拒绝。官方来源仅从政府域名规则识别；此规则不能覆盖所有景区官方企业域名，因此宁可漏识别，不泛化授信。
 
 2026-09-09 Live 验收补充：流式来源去重；候选引用标题须体现目标城市或地点，通用摄影教程不能支撑具体机位。未被实际证据引用的搜索结果不进入最终来源列表。此筛选属于保守元数据相关性检查，不宣称自动全文核验；失败样本和通过样本见 live-acceptance.md。
 
@@ -19,3 +19,12 @@
 Prompt Injection 被限制在结构化发现输出；服务不执行网页指令，无任意 HTTP 转发、无 shell tool、无环境读取 tool、无模型驱动数据库 mutation。危险词门控只是额外保护，不能代替现场核验。
 
 客流没有数据时统一 UNKNOWN。`fresh_crowd` 会把过期信号标 STALE，并拒绝道路交通或单纯热力图渲染器冒充客流。
+
+
+## 0.2 图片边界
+
+图片 URL 不由 LLM 输出。PhotoReference 校验来源和 Evidence 绑定，支持 POI/附近两种关系，附近 GPS 不自动成为相机位置。社区平台包括小红书、抖音、Bilibili、微博；仅使用公开搜索索引，不声明已登录或抓取全文。来源发布日期未知时，仍不得称为近期状态。
+
+图片代理要求已保存 plan_id/photo_id，限定受信 CDN、HTTPS、公共 DNS、标准端口及无凭据地址；不跟随重定向。最多 5 MiB，校验 JPEG/PNG/WebP 签名与 MIME，禁止 SVG/HTML。最多四个并发请求，等待与传输有时间上限，浏览器仅短时私有缓存。未匹配 ID 返回 404；上游失败返回统一 502，UI 保留其余功能。详细白名单及运行限制见 product-upgrade.md。
+
+必须无台阶但缺少可达证据时，不推荐该地点。社区经验、照片、EXIF 与用户坐标均不自动解除开放、危险或天气门控。

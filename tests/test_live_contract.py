@@ -24,6 +24,7 @@ async def test_live_full_graph_source_bound_and_injection_is_data(settings, brie
     settings.dashscope_api_key = SecretStr("contract-secret-never-reveal")
     settings.amap_web_service_key = SecretStr("contract-map-secret")
     brief.mode = "live"
+    brief.destination = "南京"
     brief.travel_date = (datetime.now(UTC)+timedelta(days=40)).date()
     search = mock_search(respx_mock,settings)
     respx_mock.get(settings.amap_base_url+"/v3/geocode/geo").mock(return_value=httpx.Response(200,

@@ -6,7 +6,7 @@
 
 单个 LangGraph 有向无环图，递归上限 8；整个生成请求超时 180 秒，同时最多 3 个生成任务。搜索最大两次，模型只接收目的地、题材、日期与发现目的，不接收密钥或任意执行工具。搜索原文和模型输出没有 shell、环境变量、数据库写权限。
 
-`TripBrief` 与其余 Pydantic 模型在 `models.py`。模型之外的第三方 JSON 仅在 `providers.py` 消化。统一错误不输出 HTTP 请求对象、带 Key 的 URL 或原始异常。
+`TripBrief` 与其余 Pydantic 模型在 `models.py`。模型之外的第三方 JSON 在 `providers.py` 与 `discovery.py` 消化。统一错误不输出 HTTP 请求对象、带 Key 的 URL 或原始异常。
 
 ## 为什么没有引入更多服务
 
@@ -46,3 +46,12 @@
 | POST `/v1/plans/{id}/refresh` | 过期天气刷新与材料变化提案 |
 
 完整、可执行 Schema 由 FastAPI `/docs` 提供。
+
+
+## 0.2 真实图与多源发现
+
+`PhotographyIntent` 统一类别、主体、风格、光线、器材和限制；兼容原 `TripBrief` 字段。类别作为评分权重数据，不复制 LangGraph 流程。`CommunityDiscovery` 负责两次有界联网检索；`DiscoveryHub` 注册 `PhotoProvider` 接口的 Wikimedia/Flickr 适配器。高德 POI 原生图片优先。
+
+模型只提取有来源索引的展示名、地图地标名、所属地点、主体名和站位/构图线索。高德分别定位相机与主体；Place 和 PhotoSpot 不再要求同一 POI。若只能找到父级地点，标记 `area_candidate`；缺主体坐标则不产生方位角。限定景区的请求检查景区相关性，避免只因同城就加入其他景区。
+
+`PhotoReference` 通过 Evidence 与 WebSource 绑定，统一输出真实接口返回的图片元数据；图片 Claim 单独分类，不能改变开放状态。页面通过 `GET /v1/plans/{id}/photos/{photo_id}` 获取图像，代理从已保存计划解析源地址。没有任意 URL 代理入口。详见 [升级指南](product-upgrade.md)。

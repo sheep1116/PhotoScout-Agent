@@ -49,6 +49,7 @@ def create_app(settings=None, repository=None):
     settings = settings or Settings()
     repo = repository or Repository(settings.database_url)
     jobs, workers = {}, set()
+    media_slots = asyncio.Semaphore(4)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -57,7 +58,7 @@ def create_app(settings=None, repository=None):
             task.cancel()
         await asyncio.gather(*workers, return_exceptions=True)
 
-    app = FastAPI(title="PhotoScout Agent", version="0.1.0", lifespan=lifespan)
+    app = FastAPI(title="PhotoScout Agent", version="0.2.0", lifespan=lifespan)
     app.state.repo = repo
 
     @app.exception_handler(Conflict)
@@ -83,6 +84,24 @@ def create_app(settings=None, repository=None):
         response = await call_next(request)
         response.headers["X-Content-Type-Options"] = "nosniff"
         return response
+
+    @app.get("/v1/plans/{plan_id}/photos/{photo_id}")
+    async def photo(plan_id: str, photo_id: str):
+        from fastapi.responses import Response
+
+        from .media import fetch_image
+        current = repo.get(plan_id)
+        item = next((p for spot in current.spots for p in spot.photo_references if p.id == photo_id), None)
+        if item is None:
+            raise HTTPException(404, "参考图不存在")
+        try:
+            async with asyncio.timeout(15):
+                async with media_slots:
+                    raw, mime = await fetch_image(str(item.image_url))
+            return Response(raw, media_type=mime, headers={"Cache-Control": "private, max-age=300",
+                "Content-Security-Policy": "default-src 'none'; sandbox", "X-Content-Type-Options": "nosniff"})
+        except Exception:
+            raise HTTPException(502, "参考图暂时不可用，请查看原始来源") from None
 
     @app.get("/v1/health")
     def health():

@@ -16,6 +16,9 @@ class Settings(BaseSettings):
     amap_base_url: str = "https://restapi.amap.com"
     database_url: str = f"sqlite:///{ROOT / 'photoscout.db'}"
     redis_url: str = ""
+    flickr_api_key: SecretStr = SecretStr("")
+    enable_external_photos: bool = True
+    discovery_photo_timeout: float = Field(default=8, ge=1, le=20)
     provider_timeout: float = 20
     amap_min_interval: float = Field(default=0.6, ge=0, le=10)
     frontend_origins: list[str] = ["http://127.0.0.1:3000", "http://localhost:3000",
@@ -29,4 +32,6 @@ class Settings(BaseSettings):
             return bool(value) and not value.startswith("your_")
         return {"dashscope_configured": configured(self.dashscope_api_key),
                 "amap_configured": configured(self.amap_web_service_key),
+                "flickr_configured": configured(self.flickr_api_key),
+                "external_photos_enabled": self.enable_external_photos,
                 "model": self.qwen_model, "default_mode": "mock"}

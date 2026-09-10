@@ -71,3 +71,58 @@ test('mock generates with all third party requests blocked',async({page})=>{
   await page.goto('/'); await generate(page);
   await expect(page.locator('.task-card').first()).toContainText('演示数据');
 });
+
+test('composable intent persists all conditions and supports every candidate', async({page})=>{
+  await page.goto('/');
+  await page.getByRole('button',{name:'风光',exact:true}).click();
+  await page.getByRole('button',{name:'人像',exact:true}).click();
+  await page.getByRole('button',{name:'建筑',exact:true}).click();
+  await page.getByText('组合你的画面与出行条件',{exact:true}).click();
+  await page.getByLabel('拍摄主体',{exact:true}).fill('湖面，古建筑');
+  await page.getByLabel('画面风格',{exact:true}).fill('极简，倒影');
+  await page.getByLabel('偏好光线',{exact:true}).selectOption('daylight');
+  const response = page.waitForResponse(r=>r.url().endsWith('/v1/notebook'));
+  await generate(page);
+  const notebook = await (await response).json();
+  expect(notebook.brief.intent.categories).toEqual(['landscape','architecture']);
+  expect(notebook.brief.intent.styles).toEqual(['极简','倒影']);
+  expect(notebook.brief.intent.subjects).toEqual(['湖面','古建筑']);
+  expect(notebook.brief.intent.equipment.lenses).toHaveLength(2);
+  expect(notebook.brief.intent.constraints.max_walk_km).toBe(3);
+  await page.getByRole('button',{name:/候选机位/}).click();
+  await expect(page.locator('.spot-preview')).toHaveCount(4);
+  await expect(page.locator('.photo-empty').first()).toContainText('暂无真实参考图');
+});
+
+test('reference gallery attribution, switching and broken-image fallback', async({page})=>{
+  // Explicit UI-only fixtures; live images are verified separately by product_acceptance.py.
+  await page.route('**/v1/plans/*', async route=>{
+    if(route.request().method()!=='GET')return route.continue();
+    const response = await route.fetch();
+    const plan = await response.json();
+    if(!plan.spots)return route.fulfill({response});
+    plan.spots[0].photo_references = [1,2].map(i=>({id:`fixture-photo-${i}`,provider:'wikimedia',
+      source_url:'https://commons.wikimedia.org/wiki/Commons:Licensing',title:`测试夹具图片 ${i}（非现场）`,
+      author:'UI 测试夹具',license:'仅供自动化测试',retrieved_at:'2026-09-10T00:00:00Z',captured_at:null,
+      relation:'nearby',latitude:null,longitude:null,exif:{},evidence_ids:plan.spots[0].camera.evidence_ids}));
+    await route.fulfill({response,json:plan});
+  });
+  await page.route('**/photos/fixture-photo-*', async route=>{
+    if(route.request().url().endsWith('-2'))return route.fulfill({status:502,body:'unavailable'});
+    await route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64')});
+  });
+  await page.goto('/'); await generate(page);
+  const gallery=page.locator('.photo-gallery').first();
+  await expect(gallery.getByRole('img')).toBeVisible();
+  await expect(gallery).toContainText('附近参考 · 非精确站位样片');
+  await gallery.getByRole('button',{name:'展开完整图片',exact:true}).click();
+  await expect(gallery.locator('.photo-cover')).toHaveClass(/full/);
+  await gallery.getByText('作者、授权与拍摄信息',{exact:true}).click();
+  await expect(gallery).toContainText('UI 测试夹具');
+  await expect(gallery.getByRole('link',{name:'查看原始来源 ↗'})).toHaveAttribute('href',/commons.wikimedia.org/);
+  await gallery.getByRole('button',{name:'2 · wikimedia',exact:true}).click();
+  await expect(gallery).toContainText('图片暂时无法加载');
+  await expect(page.locator('.task-card')).toHaveCount(4);
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
+});

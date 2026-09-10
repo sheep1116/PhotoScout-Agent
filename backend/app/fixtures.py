@@ -31,7 +31,7 @@ SEEDS = {
 
 def seed_spots(brief, ledger):
     spots, claims = [], []
-    for index, (name, lat, lon, subject, composition) in enumerate(SEEDS[brief.genre]):
+    for index, (name, lat, lon, subject, composition) in enumerate(SEEDS["cityscape" if brief.genre == "cityscape" else "portrait"]):
         sid = f"seed-{brief.genre}-{index}"
         ids = ledger.add(sid, f"离线 Seed · {name}", TruthLabel.FIXTURE,
                          "人工编写的南京示例地点和近似区域，未现场核验；非实时来源。",

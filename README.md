@@ -1,12 +1,12 @@
 # PhotoScout Agent
 
-**去光发生的地方。** 一个带证据、地图与人工审批的本地摄影规划 MVP。
+**去光发生的地方。** 一个支持真实参考图、组合式摄影意图、机位关系与人工审批的摄影工作台。
 
-输入目的地、日期、题材、器材与出行偏好，得到相机站位区域、被摄主体、太阳窗口、参数起点、风险和备选。支持手机打卡、摄影爱好者、内容创作者、家庭轻量旅行四类偏好；南京人像与城市夜景是两个独立演示场景。
+输入目的地、日期、题材、器材与出行偏好，得到相机站位区域、被摄主体、太阳窗口、参数起点、风险和备选。支持手机打卡、摄影爱好者、内容创作者、家庭轻量旅行四类偏好；南京人像与城市夜景保留为快捷模板，所有摄影方向共用同一条工作流。
 
 已经实现 **Next.js + FastAPI + 单 LangGraph 工作流**，不是静态页面。提供完全离线的 Seed Demo、DashScope/高德/Open-Meteo 服务端适配器、SQLite/PostgreSQL 持久化、可审查 Proposal/Diff、并发审批与 Undo。
 
-> 当前状态：本地 MVP 可用。2026-09-09 实际验证：79 项后端测试、6 项浏览器 E2E、62 条离线评测通过；容器版 PostgreSQL/PostGIS/Redis 集成通过。已使用现有账户完成南京人像 Live 真实搜索、地图、天气、生成、审批、撤销与重启读取，最终 24 项验收检查通过。详见 [Live 验收报告](docs/live-acceptance.md)。Fixture 的 Schema/证据引用完整率 100%，已测试硬门控违反率 0%；这些数字**不代表真实网页准确率或现场安全保证**。见 [评测原始报告](evals/reports/latest.json) 与 [已知限制](docs/limitations.md)。
+> **2026-09-10 产品升级**：真实高德照片、多源发现适配层、风光/人像/人文/建筑等组合意图、Place/PhotoSpot/Subject 分离已接入。119 项后端测试、8 项浏览器 E2E、62 条离线评测通过；真实图像代理、搜索、天气、机位方向等 14 项 Live 检查通过。Wikimedia 当前网络超时，Flickr 未配置 Key，二者已验证模拟契约与降级。详见 [本次升级说明与阅读指南](docs/product-upgrade.md) 和 [验收原始报告](docs/verification/product-upgrade-live.json)。当前仍是单用户本地工作台，公网商业运营条件见 [已知限制](docs/limitations.md)。
 
 ## 30 秒 Demo（依赖已安装）
 
@@ -64,13 +64,16 @@ macOS/Linux 用 `python3.12 -m venv .venv` 与 `.venv/bin/python` 替换上面�
 | `QWEN_MODEL` | 默认 `qwen3.7-plus` |
 | `AMAP_WEB_SERVICE_KEY` | 高德 Web 服务密钥，仅后端使用 |
 | `AMAP_BASE_URL` | 默认 `https://restapi.amap.com` |
+| `FLICKR_API_KEY` | 可选 Flickr Key，未配置则跳过 |
+| `ENABLE_EXTERNAL_PHOTOS` | 默认 true，控制 Wikimedia/Flickr 图片发现 |
+| `DISCOVERY_PHOTO_TIMEOUT` | 每个外部图片 Provider 总预算，默认 8 秒 |
 | `DATABASE_URL` | 默认 SQLite；可切 PostgreSQL + psycopg |
 | `REDIS_URL` | 可选 Redis；未配置时用有界进程内缓存 |
 | `AMAP_MIN_INTERVAL` | 高德请求最小间隔秒数，默认 0.6；处理业务限流时有限重试 |
 
 确认账户端点、余额与可接受费用后，在表单切换“Live · 联网发现”。每次计划最多 2 次搜索、6 个入选地点，搜索输出最多 2000 tokens/次；读接口至多重试一次，收费搜索不自动重试。服务启动和离线测试**不调用付费 API**。费用以 Provider 账单为准，页面不捏造金额。
 
-Live 仅支持高德覆盖的国内地点，时区为 `Asia/Shanghai`。有歧义的目的地/POI 会要求补充或跳过，不直接取第一个结果。缺失搜索来源不生成无依据的候选。无法定位时显示明确失败，不偷偷用南京替换其他城市。
+Live 仅支持高德覆盖的国内地点，时区为 `Asia/Shanghai`。有歧义的目的地/POI 会要求补充或跳过，不直接取第一个结果。缺失搜索来源不生成无依据的候选。具体站位无法定位时，可以退回来源所述的所属地点，并标为区域候选；整个发现没有可靠候选才明确失败，不偷偷替换目的地。
 
 天气日期在可用预报范围外，返回未知天气的天文草案。没有已核验入口间路线时，采用同一区域的拍摄序列；不把 POI 中心当入口。开放与临时管控需要官方原文/现场核验；当前不会自动宣布任意景区可进入。
 
