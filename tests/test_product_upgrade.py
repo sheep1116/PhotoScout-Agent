@@ -26,14 +26,14 @@ async def test_every_category_uses_same_graph(category, brief, settings):
         stages.append(stage)
     plan = await run_graph("intent-" + category, brief, settings, emit)
     assert plan.tasks
-    assert plan.brief.genre == category
+    assert plan.brief.intent.categories == [category]
     assert plan.brief.intent.equipment.lenses == brief.lenses
-    assert plan.brief.intent.constraints.max_walk_km == brief.max_walk_km
+    assert plan.brief.intent.preferences.max_walk_km is None
     assert stages == ["parse", "discover", "evidence", "verify", "conditions", "schedule", "validate"]
 
 
 def test_daylight_architecture_does_not_use_night_iso(brief):
-    brief.genre = "architecture"
+    brief.intent.categories = ["architecture"]
     assert camera_advice(brief, 0, Ledger()).iso == 200
 
 
@@ -44,8 +44,8 @@ def test_step_free_does_not_recommend_unverified_access(brief):
     spots, claims = seed_spots(brief, ledger)
     plan = build_plan("access", brief, spots, claims, seed_conditions(brief, ledger),
                       seed_routes(spots, ledger), ledger, [])
-    assert not plan.tasks
-    assert any("无台阶" in s["reason"] for s in plan.excluded)
+    assert plan.tasks and not plan.excluded
+    assert any("无台阶" in a for t in plan.tasks for a in t.alerts)
 
 
 @pytest.mark.parametrize("url", [
@@ -207,9 +207,9 @@ def test_nested_intent_constraints_and_equipment_are_honored():
     from backend.app.models import TripBrief
     brief = TripBrief(destination="南京", intent={"categories": ["landscape", "architecture"],
         "equipment": {"sensor": "phone", "tripod": False},
-        "constraints": {"max_walk_km": 1, "crowd_tolerance": "high"}})
-    assert brief.max_walk_km == 1 and brief.sensor == "phone" and brief.crowd_tolerance == "high"
-    assert brief.genre == "landscape"
+        "preferences": {"max_walk_km": 1, "low_crowd": True}})
+    assert brief.intent.preferences.max_walk_km == 1 and brief.sensor == "phone" and brief.intent.preferences.low_crowd
+    assert brief.intent.categories == ["architecture", "landscape"]
 
 
 async def test_unique_amap_sublandmark_suffix(settings, respx_mock):
@@ -235,7 +235,6 @@ def test_combined_categories_affect_score(brief):
     ledger = Ledger()
     spots, _ = seed_spots(brief, ledger)
     brief.intent = PhotographyIntent(categories=["landscape", "architecture"])
-    brief.genre = "landscape"
     solar = solar_windows(brief, spots[0].camera, ledger)
     weather = seed_conditions(brief, ledger)[14]
     result = score(brief, weather, datetime(2026, 10, 3, 6, tzinfo=UTC), solar, ledger, 0)

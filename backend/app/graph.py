@@ -3,7 +3,7 @@ from typing import Any, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
-from .engine import Ledger, notebook
+from .engine import RULE_VERSION, Ledger, notebook
 from .fixtures import seed_conditions, seed_spots
 from .models import ShotPlan
 from .providers import ProviderError, Providers
@@ -87,7 +87,7 @@ async def run_graph(plan_id, brief, settings, emit, provider=None):
         plan.metrics = {"elapsed_ms": round((time.monotonic()-started)*1000), "provider_calls": providers.calls,
                         "search_calls": providers.search_calls, "search_cache_hits": providers.search_cache_hits,
                         "reported_tokens": providers.tokens, "cost_cny": None,
-                        "cost_note": "未取得计费账单；不估算虚假费用", "rule_version": "photo-rules/1.1",
+                        "cost_note": "未取得计费账单；不估算虚假费用", "rule_version": RULE_VERSION,
                         "photo_references": sum(len(s.photo_references) for s in plan.spots),
                         "mapped_viewpoints": sum(s.viewpoint_status == "mapped_viewpoint" for s in plan.spots),
                         "community": getattr(getattr(providers, "community", None), "status", {}),

@@ -58,7 +58,7 @@ def main(args):
         checks = {
             "schema_evidence_integrity": True,
             "live_no_fixtures": plan.brief.mode == "live" and all(e.label != "FIXTURE" for e in plan.evidence),
-            "structured_intent": bool(plan.brief.intent and plan.brief.intent.equipment and plan.brief.intent.constraints),
+            "structured_intent": bool(plan.brief.intent and plan.brief.intent.equipment and plan.brief.intent.preferences),
             "nonempty_tasks": bool(plan.tasks),
             "real_reference_metadata": bool(photos),
             "real_image_proxy": any(r["status"] == 200 and r["bytes"] > 100 for r in image_checks),

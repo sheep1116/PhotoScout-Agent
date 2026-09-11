@@ -24,8 +24,7 @@ def test_missing_date_questions(brief):
 
 def test_natural_language_does_not_guess_relative_date():
     book = notebook(TripBrief(text="周六去南京拍夜景"))
-    assert book.brief.genre == "cityscape"
-    assert book.brief.destination == "南京"
+    assert not book.brief.destination  # normalization does not reinterpret confirmed descriptions
     assert "travel_date" in book.missing_fields
 
 
@@ -34,20 +33,20 @@ def test_natural_language_does_not_guess_relative_date():
 def test_weather_gates(plan, field, value):
     task = plan.tasks[0]
     weather = task.weather.model_copy(update={field: value})
-    assert gate(plan.spots[0], weather, plan.brief, task.start, task.end)
+    assert gate(plan.spots[0], weather, plan.brief, task.start, task.end) is None
 
 
 @pytest.mark.parametrize("field,value", [("unsafe", True), ("access", "CLOSED"), ("ticket_required", True)])
 def test_access_gates(plan, field, value):
     task = plan.tasks[0]
     spot = plan.spots[0].model_copy(update={field: value})
-    assert gate(spot, task.weather, plan.brief, task.start, task.end)
+    assert bool(gate(spot, task.weather, plan.brief, task.start, task.end)) == (field == "access")
 
 
-def test_closing_before_task_end(plan):
+def test_partial_open_window_can_be_shortened(plan):
     task = plan.tasks[0]
     spot = plan.spots[0].model_copy(update={"open_until": task.end-timedelta(minutes=1)})
-    assert gate(spot, task.weather, plan.brief, task.start, task.end)
+    assert gate(spot, task.weather, plan.brief, task.start, task.end) is None
 
 
 def test_numeric_evidence_required(plan):
@@ -66,6 +65,7 @@ def test_missing_source_rejected(plan):
 
 def test_overlap_rejected(plan):
     broken = plan.model_dump()
+    broken["presentation"] = "itinerary"
     broken["tasks"][1]["start"] = broken["tasks"][0]["start"]
     with pytest.raises(ValidationError):
         ShotPlan.model_validate(broken)
@@ -83,7 +83,8 @@ def test_lens_and_crop(brief, sensor, crop):
 
 
 def test_handheld_telephoto_night(brief):
-    brief.genre = "cityscape"
+    brief.intent.categories = ["cityscape"]
+    brief.intent.light = "night"
     brief.lenses = [Lens(name="200mm F5.6", min_mm=200, max_mm=200, max_aperture=5.6)]
     result = camera_advice(brief, 0, Ledger())
     assert result.shutter_seconds <= 1/400
@@ -91,7 +92,8 @@ def test_handheld_telephoto_night(brief):
 
 
 def test_tripod_night(brief):
-    brief.genre, brief.tripod = "cityscape", True
+    brief.intent.categories, brief.tripod = ["cityscape"], True
+    brief.intent.light = "night"
     result = camera_advice(brief, 0, Ledger())
     assert result.iso == 100
     assert result.shutter_seconds == 2
@@ -163,7 +165,6 @@ def test_naive_weather_timestamp_rejected(plan):
 
 
 def test_negative_route_rejected(plan):
-    data = plan.routes[0].model_dump()
-    data["distance_m"] = -100
+    from backend.app.models import RouteLeg
     with pytest.raises(ValidationError):
-        type(plan.routes[0]).model_validate(data)
+        RouteLeg(from_id="a", to_id="b", distance_m=-100, duration_min=1, label="UNKNOWN", evidence_ids=["ev"], note="test")

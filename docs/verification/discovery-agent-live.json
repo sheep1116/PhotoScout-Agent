@@ -1,0 +1,75 @@
+{
+  "passed": true,
+  "plan_id": "fbaf1dc11eec4d64aeef15287a0d0102",
+  "checks": {
+    "model_parsing": true,
+    "description_destination_overrides_default": true,
+    "explicit_time_parsed": true,
+    "all_equal_categories": true,
+    "soft_preferences": true,
+    "ambiguity_choices": true,
+    "stable_selected_location": true,
+    "selected_record_confirmed": true,
+    "raw_description_preserved": true,
+    "candidate_result": true,
+    "no_profiles_or_primary_category": true,
+    "no_fixture_evidence": true,
+    "real_weather": true,
+    "schema_integrity": true
+  },
+  "parser": "model",
+  "recognized": [
+    "电影感",
+    "低步行量",
+    "优先免费"
+  ],
+  "chosen_location": {
+    "id": "geo-320106-江苏省南京市鼓楼区",
+    "poi_id": null,
+    "adcode": "320106",
+    "name": "江苏省南京市鼓楼区",
+    "city": "南京市",
+    "address": "",
+    "lat": 32.068857,
+    "lon": 118.76472,
+    "verification_token": "8724e9870d4d434c872efb651e608003"
+  },
+  "metrics": {
+    "elapsed_ms": 34813,
+    "provider_calls": 20,
+    "search_calls": 2,
+    "search_cache_hits": 0,
+    "reported_tokens": 13171,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.1",
+    "photo_references": 9,
+    "mapped_viewpoints": 0,
+    "community": {
+      "bilibili": "public_metadata_ok",
+      "xiaohongshu": "index_only",
+      "douyin": "index_only"
+    },
+    "photo_providers": [
+      "amap"
+    ]
+  },
+  "candidate_count": 3,
+  "warnings": [
+    "社区 bilibili：public_metadata_ok；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 xiaohongshu：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 douyin：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "西桥路口：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "南艺后街广场：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "映虹桥玻璃栈道：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "颐和路天竺路牯岭路交叉口：颐和路公馆区 未能独立定位，保留为待确认线索。",
+    "西桥路口：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "天竺路与牯岭路交叉口：颐和路公馆区 未能独立定位，保留为待确认线索。",
+    "鼓楼公园制高点：具体站位未独立定位，仅保留 鼓楼公园 区域线索。",
+    "鼓楼公园制高点：鼓楼 未能独立定位，保留为待确认线索。",
+    "南艺后街涂鸦墙：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "wikimedia：图片服务不可用或响应无效，已保留其他来源。",
+    "Flickr：未配置 API Key，本次跳过；可在服务端配置 FLICKR_API_KEY。",
+    "候选排名不代表出行顺序；推荐窗口可以重叠，由你决定去哪里、去几个、怎么去。"
+  ]
+}

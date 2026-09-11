@@ -31,12 +31,12 @@ SEEDS = {
 
 def seed_spots(brief, ledger):
     spots, claims = [], []
-    for index, (name, lat, lon, subject, composition) in enumerate(SEEDS["cityscape" if brief.genre == "cityscape" else "portrait"]):
-        sid = f"seed-{brief.genre}-{index}"
+    for index, (name, lat, lon, subject, composition) in enumerate(SEEDS["cityscape" if "cityscape" in brief.intent.categories else "portrait"]):
+        sid = f"seed-{'-'.join(brief.intent.categories)}-{index}"
         ids = ledger.add(sid, f"离线 Seed · {name}", TruthLabel.FIXTURE,
                          "人工编写的南京示例地点和近似区域，未现场核验；非实时来源。",
-                         {"lat": lat, "lon": lon, "subject_lat":32.0621 if brief.genre == "cityscape" else None,
-                          "subject_lon":118.7780 if brief.genre == "cityscape" else None}, kind="fixture")
+                         {"lat": lat, "lon": lon, "subject_lat":32.0621 if "cityscape" in brief.intent.categories else None,
+                          "subject_lon":118.7780 if "cityscape" in brief.intent.categories else None}, kind="fixture")
         community = ledger.add(f"community-{sid}", "社区发现流程 · 合成样例", TruthLabel.FIXTURE,
                                composition + " 这是合成的构图 Claim，不对应真实帖子。", kind="fixture")
         access = ledger.add(f"access-{sid}", "官方复核流程 · 合成样例", TruthLabel.FIXTURE,
@@ -46,11 +46,11 @@ def seed_spots(brief, ledger):
                             kind="composition", statement=composition, label=TruthLabel.FIXTURE,
                             evidence_ids=community)
         claims.append(claim)
-        target = Position(lat=32.0621, lon=118.7780, evidence_ids=ids) if brief.genre == "cityscape" else None
+        target = Position(lat=32.0621, lon=118.7780, evidence_ids=ids) if "cityscape" in brief.intent.categories else None
         spots.append(PhotoSpot(id=sid, place=PlaceEntity(id=sid, name=name, position=position),
             name=name, camera=position, entrance=None,
             subjects=[Subject(name="紫峰大厦方向（示意）" if target else subject, position=target)],
-            genres=[brief.genre], composition=composition, access_evidence_ids=access,
+            genres=brief.intent.categories, composition=composition, access_evidence_ids=access,
             risks=["请勿进入机动车道、翻越护栏或进入非公开区域。"], claim_ids=[claim.id]))
     return spots, claims
 

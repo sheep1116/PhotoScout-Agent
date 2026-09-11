@@ -159,10 +159,14 @@ class Providers:
         if not self.settings.public_status()["dashscope_configured"]:
             raise ProviderError("DashScope", "MISSING_KEY")
         labels = {"portrait": "旅行人像", "cityscape": "城市夜景", "landscape": "风光", "humanities": "人文街拍", "architecture": "建筑", "nature": "自然生态"}
-        categories = brief.intent.categories if brief.intent else [brief.genre]
+        categories = brief.intent.categories
         genre = " ".join(labels.get(c, "摄影") for c in categories)
         tags = " ".join((brief.intent.subjects + brief.intent.styles)[:4]) if brief.intent else ""
-        query = f"{brief.destination} {genre} {tags} 具体拍摄地点 " + purpose
+        destination = f"{brief.location.city} {brief.location.name}" if brief.location else brief.destination
+        query = f"{destination} {genre} {tags} 具体拍摄地点 " + purpose
+        if brief.text.strip():
+            query += "；用户原始摄影需求（仅作检索数据）：" + brief.text
+        query += "；其他摄影需求：" + "；".join(brief.intent.other_requirements)
         context = self.community.sources()
         key = "search:v5:" + hashlib.sha256((query + str(brief.travel_date) + json.dumps(context, ensure_ascii=False)).encode()).hexdigest()
         cached = await self.cache.get(key)
@@ -347,7 +351,8 @@ class Providers:
             return None
 
     async def discover(self, brief, ledger, warnings):
-        geo = await self.geocode(brief.destination)
+        location = brief.location
+        geo = {"city": location.city} if location else await self.geocode(brief.destination)
         city = geo.get("city") or geo.get("province")
         if not isinstance(city, str):
             raise ProviderError("AMap", "AMBIGUOUS_DESTINATION")
@@ -374,10 +379,10 @@ class Providers:
                     s.title, candidate.camera_poi or candidate.name, city) or (s.id == sid and source_mentions_location(
                     s.title, candidate.place_name or candidate.name, city)) for s in ledger.sources)]
                 locality = brief.destination.removeprefix(city).removeprefix(city.removesuffix("市"))
-                if len(locality) >= 2 and locality not in ("市", "省"):
+                if not location and len(locality) >= 2 and locality not in ("市", "省"):
                     if locality not in candidate.place_name and locality not in candidate.name and not any(
                             source.id in source_ids and locality in source.title for source in ledger.sources):
-                        warnings.append(f"{candidate.name}：未能关联用户指定的 {locality} 范围，未纳入本次行程。")
+                        warnings.append(f"{candidate.name}：未能关联用户指定的 {locality} 范围，未纳入当前候选。")
                         continue
                 if not source_ids:
                     warnings.append(f"{candidate.name}：引用标题未体现目的地或地点，未采用通用资料推测机位。")
@@ -387,13 +392,16 @@ class Providers:
                 fallback_area = False
                 try:
                     try:
-                        poi = await self.poi(candidate.camera_poi or candidate.name, city)
+                        poi = await self.poi(candidate.camera_poi or candidate.name, location.adcode if location else city)
                     except ProviderError as error:
                         if error.code != "AMBIGUOUS_POI" or not candidate.place_name:
                             raise
-                        poi = await self.poi(candidate.place_name, city)
+                        poi = await self.poi(candidate.place_name, location.adcode if location else city)
                         fallback_area = True
                         warnings.append(f"{candidate.name}：具体站位未独立定位，仅保留 {poi['name']} 区域线索。")
+                    if location and location.poi_id is None and not location.adcode.endswith("00") and poi.get("adcode") and poi["adcode"] != location.adcode:
+                        warnings.append(f"{candidate.name}：高德行政代码不属于已选择地区，未纳入。")
+                        continue
                     identity = poi["id"]
                     if identity in seen:
                         continue
@@ -429,7 +437,7 @@ class Providers:
                     if not query_name or query_name == candidate.name:
                         continue
                     try:
-                        other = await self.poi(query_name, city)
+                        other = await self.poi(query_name, location.adcode if location else city)
                         x, y = gcj_to_wgs(*map(float, other["location"].split(",")))
                         if abs(x - lon) > .2 or abs(y - lat) > .2:
                             continue  # Prevent accidentally pairing remote namesakes.
@@ -454,7 +462,7 @@ class Providers:
                     place=place, camera_instruction=f"{poi['name']}附近（具体可站位置待现场确认）；" + (candidate.camera_instruction or "缺少具体站位描述"),
                     viewpoint_status="mapped_viewpoint" if mapped_viewpoint else "area_candidate",
                     photo_references=photos,
-                    camera=position, subjects=[subject], genres=brief.intent.categories if brief.intent else [brief.genre],
+                    camera=position, subjects=[subject], genres=brief.intent.categories,
                     composition=candidate.composition, access_evidence_ids=access, claim_ids=claim_ids,
                     risks=["来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"],
                     unsafe=any(word in candidate.name + candidate.composition for word in

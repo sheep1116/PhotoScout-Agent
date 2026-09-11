@@ -99,11 +99,12 @@ async def refresh_proposal(plan, providers):
             task.status = "TENTATIVE"
             task.risks.append("天气发生材料变化，请重新检查曝光与现场条件。")
         # Scores depend on conditions; recompute, with refreshed evidence.
-        from .engine import score, solar_windows
+        from .engine import solar_windows
+        from .recommendations import candidate_score
         score_ledger = Ledger()
         local_day = task.start.astimezone(ZoneInfo(plan.brief.timezone)).date()
         solar = solar_windows(plan.brief.model_copy(update={"travel_date": local_day}), spot.camera, Ledger())
-        task.score = score(plan.brief, weather, task.start, solar, score_ledger, task.id + suffix)
+        task.score, task.alerts = candidate_score(plan.brief, spot, weather, task.start, solar, score_ledger, task.id + suffix)
         ledger.sources.extend(score_ledger.sources)
         ledger.evidence.extend(score_ledger.evidence)
     if not material:

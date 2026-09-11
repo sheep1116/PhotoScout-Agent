@@ -7,10 +7,11 @@ from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
 from backend.app.config import Settings
-from backend.app.engine import fresh_crowd, gate, notebook
+from backend.app.engine import Ledger, fresh_crowd, gate, notebook
 from backend.app.graph import run_graph
 from backend.app.models import CrowdSignal, Lens, ShotPlan, TripBrief
 from backend.app.proposals import propose
+from backend.app.recommendations import candidate_score
 
 
 async def evaluate():
@@ -21,14 +22,14 @@ async def evaluate():
     async def emit(*args):
         pass
     for genre in ["portrait", "cityscape"]:
-        for profile in ["phone", "enthusiast", "creator", "family"]:
+        for sensor in ["phone", "full_frame", "aps_c", "m43"]:
             for month in [1, 4, 7, 10]:
-                brief = TripBrief(destination="南京", genre=genre, profile=profile,
+                brief = TripBrief(destination="南京", intent={"categories":[genre], "light":"night" if genre=="cityscape" else "any"},
                     travel_date=f"2026-{month:02d}-03", start_local="13:00", end_local="22:00",
-                    sensor="phone" if profile == "phone" else "full_frame", tripod=genre == "cityscape",
-                    lenses=[] if profile == "phone" else [Lens(name="24–70mm F4", min_mm=24, max_mm=70, max_aperture=4)])
+                    sensor=sensor, tripod=genre == "cityscape",
+                    lenses=[] if sensor == "phone" else [Lens(name="24–70mm F4", min_mm=24, max_mm=70, max_aperture=4)])
                 start = time.perf_counter()
-                plan = await run_graph(f"eval-{genre}-{profile}-{month}", brief, settings, emit)
+                plan = await run_graph(f"eval-{genre}-{sensor}-{month}", brief, settings, emit)
                 latencies.append((time.perf_counter()-start)*1000)
                 plans.append(plan)
                 passed = bool(ShotPlan.model_validate(plan.model_dump())) and len(plan.tasks) >= 3
@@ -39,11 +40,11 @@ async def evaluate():
                            "weather_code":[95,96,99]}.items():
         for value in values:
             blocked = gate(plan.spots[0], task.weather.model_copy(update={field:value}), plan.brief, task.start, task.end)
-            outcomes.append({"id":f"gate-{field}-{value}","category":"safety","passed":bool(blocked)})
+            outcomes.append({"id":f"gate-{field}-{value}","category":"safety","passed":not blocked and bool(candidate_score(plan.brief,plan.spots[0],task.weather.model_copy(update={field:value}),task.start,plan.solar,Ledger(),0)[1])})
     for kind in ["unsafe", "closed", "conflict", "tripod"]:
         change = {"unsafe":True} if kind == "unsafe" else {"tripod_allowed":False} if kind == "tripod" else {"access":kind.upper()}
         blocked = gate(plan.spots[0].model_copy(update=change),task.weather,plan.brief,task.start,task.end)
-        outcomes.append({"id":"gate-"+kind,"category":"safety","passed":bool(blocked)})
+        outcomes.append({"id":"gate-"+kind,"category":"safety","passed":bool(blocked) == (kind == "closed")})
     for request in ["南京夜景", "周六南京夜景", "南京人像", "明年南京人像"]:
         outcomes.append({"id":"clarify-"+request,"category":"clarification",
                          "passed":"travel_date" in notebook(TripBrief(text=request)).missing_fields})

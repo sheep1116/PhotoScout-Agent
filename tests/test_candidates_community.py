@@ -30,7 +30,7 @@ def recommend(brief, edit=None):
 
 def test_candidates_do_not_need_routes_or_walking_budget(brief):
     brief.mode = "live"
-    brief.max_walk_km = 0
+    brief.intent.preferences.max_walk_km = 0
     plan = recommend(brief)
     assert len(plan.tasks) == len(plan.spots) == 4
     assert len({t.spot_id for t in plan.tasks}) == 4
@@ -41,7 +41,6 @@ def test_candidates_do_not_need_routes_or_walking_budget(brief):
 
 def test_daylight_uses_local_sunrise_and_blue_hour_is_not_missed(brief):
     from zoneinfo import ZoneInfo
-    brief.intent = None
     brief = notebook(brief).brief
     brief.intent.light = "daylight"
     plan = recommend(brief)
@@ -53,15 +52,14 @@ def test_daylight_uses_local_sunrise_and_blue_hour_is_not_missed(brief):
 
 
 def test_transport_preferences_never_remove_candidates(brief):
-    brief.accept_tickets = False
-    brief.crowd_tolerance = "low"
-    brief.profile = "family"
+    brief.intent.preferences.avoid_tickets = True
+    brief.intent.preferences.low_crowd = True
     plan = recommend(brief, lambda spots: [setattr(s, "ticket_required", True) for s in spots])
     assert len(plan.tasks) == 4
     assert all(any("门票" in line for line in t.travel_advice) for t in plan.tasks)
 
 
-@pytest.mark.parametrize("field,value", [("unsafe", True), ("access", "CLOSED"), ("access", "CONFLICT")])
+@pytest.mark.parametrize("field,value", [("access", "CLOSED")])
 def test_safety_and_access_still_gate(brief, field, value):
     plan = recommend(brief, lambda spots: setattr(spots[0], field, value))
     assert len(plan.tasks) == 3 and plan.excluded

@@ -40,11 +40,12 @@ async def test_material_weather_changes_only_affected(plan):
             values = []
             for i, task in enumerate(plan.tasks):
                 ids = ledger.add(str(i),"刷新模拟天气","FIXTURE","测试数值")
-                values.append(task.weather.model_copy(update={"at":task.start, "wind_kmh":60 if i==0 else 8,
+                values.append(task.weather.model_copy(update={"at":task.start, "wind_kmh":60 if position == plan.spots[0].camera else 8,
                                                             "evidence_ids":ids}))
             return values
     proposal = await refresh_proposal(plan, Provider())
-    assert proposal.proposed.tasks[0].status == "CANCELLED"
+    assert proposal.proposed.tasks[0].status == "TENTATIVE"
+    assert any("危险天气" in a for a in proposal.proposed.tasks[0].alerts)
     assert proposal.proposed.tasks[1:] == plan.tasks[1:]
 
 

@@ -80,7 +80,7 @@ class Repository:
             rows = conn.execute(select(self.plans.c.body).limit(100)).scalars().all()
         plans = [ShotPlan.model_validate_json(row) for row in rows]
         return [{"id": p.id, "version": p.version, "destination": p.brief.destination,
-                 "date": p.brief.travel_date.isoformat(), "genre": p.brief.genre} for p in reversed(plans)]
+                 "date": p.brief.travel_date.isoformat(), "categories": p.brief.intent.categories} for p in reversed(plans)]
 
     def add_proposal(self, proposal):
         with self.engine.begin() as conn:

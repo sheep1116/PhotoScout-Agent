@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T16:26:07.020609+00:00",
+  "generated_at": "2026-09-11T09:26:29.866655+00:00",
   "mode": "offline_fixture",
   "case_count": 63,
   "passed": 63,
@@ -7,7 +7,7 @@
   "evidence_binding_rate": 1.0,
   "hard_gate_violation_rate": 0.0,
   "minimal_change_rate": 1.0,
-  "seed_latency_median_ms": 197.36,
+  "seed_latency_median_ms": 202.05,
   "provider_calls": 0,
   "api_cost_cny": 0,
   "limits": "仅确定性/Fixture 回归；证据指标检查引用完整性，不衡量网页真实性。没有声称 Live 发现准确率。",
@@ -33,62 +33,62 @@
       "passed": true
     },
     {
-      "id": "eval-portrait-enthusiast-1",
+      "id": "eval-portrait-full_frame-1",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-enthusiast-4",
+      "id": "eval-portrait-full_frame-4",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-enthusiast-7",
+      "id": "eval-portrait-full_frame-7",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-enthusiast-10",
+      "id": "eval-portrait-full_frame-10",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-creator-1",
+      "id": "eval-portrait-aps_c-1",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-creator-4",
+      "id": "eval-portrait-aps_c-4",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-creator-7",
+      "id": "eval-portrait-aps_c-7",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-creator-10",
+      "id": "eval-portrait-aps_c-10",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-family-1",
+      "id": "eval-portrait-m43-1",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-family-4",
+      "id": "eval-portrait-m43-4",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-family-7",
+      "id": "eval-portrait-m43-7",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-portrait-family-10",
+      "id": "eval-portrait-m43-10",
       "category": "seed-schema-evidence",
       "passed": true
     },
@@ -113,62 +113,62 @@
       "passed": true
     },
     {
-      "id": "eval-cityscape-enthusiast-1",
+      "id": "eval-cityscape-full_frame-1",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-enthusiast-4",
+      "id": "eval-cityscape-full_frame-4",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-enthusiast-7",
+      "id": "eval-cityscape-full_frame-7",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-enthusiast-10",
+      "id": "eval-cityscape-full_frame-10",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-creator-1",
+      "id": "eval-cityscape-aps_c-1",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-creator-4",
+      "id": "eval-cityscape-aps_c-4",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-creator-7",
+      "id": "eval-cityscape-aps_c-7",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-creator-10",
+      "id": "eval-cityscape-aps_c-10",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-family-1",
+      "id": "eval-cityscape-m43-1",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-family-4",
+      "id": "eval-cityscape-m43-4",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-family-7",
+      "id": "eval-cityscape-m43-7",
       "category": "seed-schema-evidence",
       "passed": true
     },
     {
-      "id": "eval-cityscape-family-10",
+      "id": "eval-cityscape-m43-10",
       "category": "seed-schema-evidence",
       "passed": true
     },

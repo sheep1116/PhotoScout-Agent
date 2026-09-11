@@ -12,8 +12,10 @@ from pydantic import BaseModel, Field
 
 from .changes import position_proposal, refresh_proposal
 from .config import Settings
+from .destinations import resolve_notebook
 from .engine import notebook
 from .graph import run_graph
+from .intent_parser import parse_description
 from .location import Coordinates, locate
 from .models import TripBrief
 from .proposals import propose
@@ -117,8 +119,20 @@ def create_app(settings=None, repository=None):
         return {"status": "ok", **settings.public_status()}
 
     @app.post("/v1/notebook")
-    def parse_brief(brief: TripBrief):
-        return notebook(brief)
+    async def parse_brief(brief: TripBrief):
+        network = Providers(settings)
+        try:
+            return await resolve_notebook(await parse_description(brief, network), network)
+        finally:
+            await network.client.aclose()
+
+    @app.post("/v1/destinations/resolve")
+    async def resolve_destination(brief: TripBrief):
+        network = Providers(settings)
+        try:
+            return await resolve_notebook(notebook(brief), network)
+        finally:
+            await network.client.aclose()
 
     async def worker(job_id, brief):
         job = jobs[job_id]
@@ -143,13 +157,15 @@ def create_app(settings=None, repository=None):
 
     @app.post("/v1/photo-research", status_code=202)
     async def create_research(brief: TripBrief, idempotency_key: str | None = Header(default=None)):
-        book = notebook(brief)
-        if book.missing_fields:
+        network = Providers(settings)
+        try:
+            book = await resolve_notebook(notebook(brief), network)
+        finally:
+            await network.client.aclose()
+        if book.missing_fields or book.location_status in ("needs_choice", "unavailable"):
             return {"status": "needs_clarification", "notebook": book.model_dump(mode="json")}
         if book.brief.mode == "mock" and "南京" not in book.brief.destination:
             raise HTTPException(422, "离线演示仅包含南京；其他目的地请切换 Live 模式")
-        if book.brief.mode == "live" and book.brief.timezone != "Asia/Shanghai":
-            raise HTTPException(422, "当前 Live 地图支持国内地点，请使用 Asia/Shanghai 时区")
         if len([j for j in jobs.values() if j["status"] == "running"]) >= 3:
             raise HTTPException(429, "已有多个生成任务，请稍后重试")
         job_id = uuid4().hex

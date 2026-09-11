@@ -88,11 +88,12 @@ test('composable intent persists all conditions and supports every candidate', a
   const response = page.waitForResponse(r=>r.url().endsWith('/v1/notebook'));
   await generate(page);
   const notebook = await (await response).json();
-  expect(notebook.brief.intent.categories).toEqual(['landscape','architecture']);
+  expect(notebook.brief.intent.categories).toEqual(['architecture','landscape']);
   expect(notebook.brief.intent.styles).toEqual(['极简','倒影']);
   expect(notebook.brief.intent.subjects).toEqual(['湖面','古建筑']);
   expect(notebook.brief.intent.equipment.lenses).toHaveLength(2);
-  expect(notebook.brief.intent.constraints.max_walk_km).toBe(3);
+  expect(notebook.brief.intent.preferences.max_walk_km).toBe(2);
+  expect(notebook.brief.profile).toBeUndefined();
   await page.getByRole('button',{name:/候选机位/}).click();
   await expect(page.locator('.task-card')).toHaveCount(4);
   await expect(page.locator('.photo-empty').first()).toContainText('暂无真实参考图');

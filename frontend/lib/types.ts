@@ -1,18 +1,21 @@
-export type PhotographyIntent = {categories:string[]; subjects:string[]; styles:string[]; light:'any'|'daylight'|'sunrise'|'golden_hour'|'blue_hour'|'night'; mobility:'standard'|'step_free'};
+export type Preferences = {max_walk_km?:number|null;avoid_tickets?:boolean;low_crowd?:boolean;step_free?:boolean;strict?:string[]};
+export type PhotographyIntent = {categories:string[];subjects:string[];styles:string[];light:'any'|'daylight'|'sunrise'|'golden_hour'|'blue_hour'|'night';preferences:Preferences;other_requirements?:string[]};
+export type DestinationLocation = {id:string;poi_id:string|null;adcode:string;name:string;city:string;address:string;lat:number;lon:number;verification_token:string};
+export type Notebook = {brief:Brief;questions:string[];missing_fields:string[];assumptions:string[];recognized:string[];parsed_fields:string[];parser:string;location_choices:DestinationLocation[];location_status:string};
 export type PhotoReference = {id:string;provider:string;source_url:string;title:string;author:string;license:string;retrieved_at:string;captured_at:string|null;relation:'poi'|'nearby';latitude:number|null;longitude:number|null;exif:Record<string,string>;evidence_ids:string[]};
 export type Brief = {
+  auto_time_fields?:('start_local'|'end_local'|'end_date')[];
   end_date?:string|null; origin_lat?:number|null; origin_lon?:number|null; text: string; destination: string; travel_date: string; start_local: string; end_local: string;
-  timezone: string; genre: string; intent?:PhotographyIntent | null; profile: string;
+  timezone: string; intent:PhotographyIntent;location?:DestinationLocation|null;edited_fields?:string[];
   lenses: {name: string; min_mm: number; max_mm: number; max_aperture: number}[];
-  sensor: string; tripod: boolean; max_walk_km: number; accept_tickets: boolean;
-  crowd_tolerance: string; mode: 'mock' | 'live';
+  sensor: string; tripod: boolean; mode: 'mock' | 'live';
 };
 export type Position = {lat: number; lon: number; precision: string; evidence_ids: string[]};
 export type Spot = {id: string; place: {id:string;name:string;position:Position}; camera_instruction:string;viewpoint_status:string;photo_references:PhotoReference[]; name: string; camera: Position; entrance: Position | null; subjects: {name: string; position: Position | null}[]; access: string; composition: string; risks: string[]};
 export type Evidence = {id: string; source_id: string; label: string; statement: string; values: Record<string, unknown>; observed_at: string; valid_until: string | null};
 export type Source = {id: string; title: string; url: string | null; kind: string; platform?:string|null; publisher: string; retrieved_at: string; published_at: string | null; note: string};
 export type Task = {
-  reasons?:string[]; travel_advice?:string[]; distance_km?:number|null;recommended_light?:string;
+  alerts?:string[]; reasons?:string[]; travel_advice?:string[]; distance_km?:number|null;recommended_light?:string;
   id: string; spot_id: string; title: string; start: string; end: string; status: string; composition: string;
   camera: {lens: string; focal_mm: number; equivalent_mm: number; aperture: number; shutter_seconds: number; iso: number; adjustment: string; evidence_ids: string[]};
   weather: {temperature_c: number | null; wind_kmh: number | null; precipitation_mm: number | null; cloud_pct: number | null; visibility_m: number | null; aqi: number | null; label: string; evidence_ids: string[]};

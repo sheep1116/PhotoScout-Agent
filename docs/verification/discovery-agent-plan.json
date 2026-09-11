@@ -1,0 +1,4469 @@
+{
+  "presentation": "candidates",
+  "id": "fbaf1dc11eec4d64aeef15287a0d0102",
+  "version": 1,
+  "brief": {
+    "text": "明天想在鼓楼拍电影感的建筑、城市夜景和人文，不想走太远，不想买门票。傍晚16:00到19:00。",
+    "destination": "鼓楼",
+    "travel_date": "2026-09-12",
+    "end_date": "2026-09-12",
+    "origin_lat": null,
+    "origin_lon": null,
+    "start_local": "16:00:00",
+    "end_local": "19:00:00",
+    "timezone": "Asia/Shanghai",
+    "intent": {
+      "categories": [
+        "architecture",
+        "cityscape",
+        "humanities"
+      ],
+      "subjects": [],
+      "styles": [
+        "电影感"
+      ],
+      "light": "night",
+      "equipment": {
+        "lenses": [
+          {
+            "name": "35mm F1.8",
+            "min_mm": 35.0,
+            "max_mm": 35.0,
+            "max_aperture": 1.8
+          }
+        ],
+        "sensor": "full_frame",
+        "tripod": false
+      },
+      "preferences": {
+        "max_walk_km": 2.0,
+        "avoid_tickets": true,
+        "low_crowd": false,
+        "step_free": false,
+        "strict": []
+      },
+      "other_requirements": []
+    },
+    "location": {
+      "id": "geo-320106-江苏省南京市鼓楼区",
+      "poi_id": null,
+      "adcode": "320106",
+      "name": "江苏省南京市鼓楼区",
+      "city": "南京市",
+      "address": "",
+      "lat": 32.068857,
+      "lon": 118.76472,
+      "verification_token": "8724e9870d4d434c872efb651e608003"
+    },
+    "edited_fields": [],
+    "lenses": [
+      {
+        "name": "35mm F1.8",
+        "min_mm": 35.0,
+        "max_mm": 35.0,
+        "max_aperture": 1.8
+      }
+    ],
+    "sensor": "full_frame",
+    "tripod": false,
+    "mode": "live"
+  },
+  "created_at": "2026-09-11T09:36:21.816319Z",
+  "status": "DRAFT",
+  "spots": [
+    {
+      "id": "BZAPQF03LZ",
+      "place": {
+        "id": "BZAPQF03LZ",
+        "name": "颐和路",
+        "aliases": [
+          "颐和路天竺路牯岭路交叉口"
+        ],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.065644,
+          "lon": 118.761848,
+          "precision": "MAP_POINT",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-BZAPQF03LZ"
+          ]
+        }
+      },
+      "name": "颐和路天竺路牯岭路交叉口",
+      "camera": {
+        "lat": 32.065644,
+        "lon": 118.761848,
+        "precision": "MAP_POINT",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-BZAPQF03LZ"
+        ]
+      },
+      "viewpoint_status": "area_candidate",
+      "camera_instruction": "颐和路附近（具体可站位置待现场确认）；最佳拍摄点在天竺路、牯岭路交叉口，春夏梧桐蔽日，秋冬落叶满地。建议下午3-5点前来，斜阳为黄墙红瓦的老洋房镀上金边",
+      "photo_references": [
+        {
+          "id": "photo-31d7b015e2ba5fa6c2c2",
+          "provider": "amap",
+          "image_url": "https://aos-comment.amap.com/BZAPQF03LZ/comment/93D6952D_0541_4FF7_808C_944BA2CD1950_L0_001_1500_200_1760148847803_34654482.jpg",
+          "source_url": "https://www.amap.com/place/BZAPQF03LZ",
+          "source_id": "src-photo-31d7b015e2ba5fa6c2c2",
+          "title": "颐和路",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:06.765816Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-31d7b015e2ba5fa6c2c2"
+          ]
+        },
+        {
+          "id": "photo-9bdc0537ca563c3d19f1",
+          "provider": "amap",
+          "image_url": "https://aos-comment.amap.com/BZAPQF03LZ/comment/a774418014ba80032f873ec5a60f70ac_2048_2048_80.jpg",
+          "source_url": "https://www.amap.com/place/BZAPQF03LZ",
+          "source_id": "src-photo-9bdc0537ca563c3d19f1",
+          "title": "颐和路",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:06.765816Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-9bdc0537ca563c3d19f1"
+          ]
+        },
+        {
+          "id": "photo-6acba43222ebd56ca9fa",
+          "provider": "amap",
+          "image_url": "https://aos-comment.amap.com/BZAPQF03LZ/comment/1a0e9565652ceb44ce8d166da155bf91_2048_2048_80.jpg",
+          "source_url": "https://www.amap.com/place/BZAPQF03LZ",
+          "source_id": "src-photo-6acba43222ebd56ca9fa",
+          "title": "颐和路",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:06.765816Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-6acba43222ebd56ca9fa"
+          ]
+        }
+      ],
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "黄墙红瓦老洋房与梧桐树",
+          "position": null
+        }
+      ],
+      "genres": [
+        "architecture",
+        "cityscape",
+        "humanities"
+      ],
+      "composition": "利用斜射阳光勾勒建筑轮廓，拍摄道路延伸线与光影斑驳的街角",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-BZAPQF03LZ"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": null,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "step_free": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"
+      ],
+      "claim_ids": [
+        "claim-BZAPQF03LZ-web-4387213ff852",
+        "claim-BZAPQF03LZ-web-2c12cc5746a2",
+        "claim-BZAPQF03LZ-photo-31d7b015e2ba5fa6c2c2",
+        "claim-BZAPQF03LZ-photo-9bdc0537ca563c3d19f1",
+        "claim-BZAPQF03LZ-photo-6acba43222ebd56ca9fa"
+      ]
+    },
+    {
+      "id": "BZAPQF0338",
+      "place": {
+        "id": "BZAPQF0338",
+        "name": "天竺路",
+        "aliases": [
+          "天竺路与牯岭路交叉口"
+        ],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.063214,
+          "lon": 118.760397,
+          "precision": "MAP_POINT",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-BZAPQF0338"
+          ]
+        }
+      },
+      "name": "天竺路与牯岭路交叉口",
+      "camera": {
+        "lat": 32.063214,
+        "lon": 118.760397,
+        "precision": "MAP_POINT",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-BZAPQF0338"
+        ]
+      },
+      "viewpoint_status": "area_candidate",
+      "camera_instruction": "天竺路附近（具体可站位置待现场确认）；最佳拍摄点在天竺路、牯岭路交叉口，春夏梧桐蔽日，秋冬落叶满地。建议下午3-5点前来，斜阳为黄墙红瓦的老洋房镀上金边",
+      "photo_references": [
+        {
+          "id": "photo-e3d5303fc3ca8089b99f",
+          "provider": "amap",
+          "image_url": "https://store.is.autonavi.com/showpic/e6488c5dba9abf951ce9662fc0fb6eb9",
+          "source_url": "https://www.amap.com/place/BZAPQF0338",
+          "source_id": "src-photo-e3d5303fc3ca8089b99f",
+          "title": "天竺路",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:07.917155Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-e3d5303fc3ca8089b99f"
+          ]
+        },
+        {
+          "id": "photo-9ddbdfbec35fef444bbc",
+          "provider": "amap",
+          "image_url": "https://store.is.autonavi.com/showpic/d89d8f80fd1309ba4f03e139d68331cd",
+          "source_url": "https://www.amap.com/place/BZAPQF0338",
+          "source_id": "src-photo-9ddbdfbec35fef444bbc",
+          "title": "天竺路",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:07.917155Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-9ddbdfbec35fef444bbc"
+          ]
+        },
+        {
+          "id": "photo-6ebd9b38797f2eaf37d0",
+          "provider": "amap",
+          "image_url": "https://store.is.autonavi.com/showpic/5cffc0a9602922c4bd855d65a87a1001",
+          "source_url": "https://www.amap.com/place/BZAPQF0338",
+          "source_id": "src-photo-6ebd9b38797f2eaf37d0",
+          "title": "天竺路",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:07.917155Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-6ebd9b38797f2eaf37d0"
+          ]
+        }
+      ],
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "民国风格老洋房与梧桐树",
+          "position": null
+        }
+      ],
+      "genres": [
+        "architecture",
+        "cityscape",
+        "humanities"
+      ],
+      "composition": "拍摄道路的延伸线与黄墙灰瓦的老洋房，利用斜射阳光营造光影层次感",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-BZAPQF0338"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": null,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "step_free": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"
+      ],
+      "claim_ids": [
+        "claim-BZAPQF0338-web-4387213ff852",
+        "claim-BZAPQF0338-web-2c12cc5746a2",
+        "claim-BZAPQF0338-photo-e3d5303fc3ca8089b99f",
+        "claim-BZAPQF0338-photo-9ddbdfbec35fef444bbc",
+        "claim-BZAPQF0338-photo-6ebd9b38797f2eaf37d0"
+      ]
+    },
+    {
+      "id": "B001905178",
+      "place": {
+        "id": "B001905178",
+        "name": "鼓楼公园",
+        "aliases": [],
+        "timezone": "Asia/Shanghai",
+        "position": {
+          "lat": 32.060739,
+          "lon": 118.776816,
+          "precision": "MAP_POINT",
+          "crs": "WGS84",
+          "evidence_ids": [
+            "ev-B001905178-place"
+          ]
+        }
+      },
+      "name": "鼓楼公园制高点",
+      "camera": {
+        "lat": 32.060739,
+        "lon": 118.776816,
+        "precision": "AREA",
+        "crs": "WGS84",
+        "evidence_ids": [
+          "ev-B001905178"
+        ]
+      },
+      "viewpoint_status": "area_candidate",
+      "camera_instruction": "鼓楼公园附近（具体可站位置待现场确认）；曾是古代南京城的制高点之一...饱览沧桑的金陵风情...拍照真的超美、很出片",
+      "photo_references": [
+        {
+          "id": "photo-b673dd1b30bfb47429dc",
+          "provider": "amap",
+          "image_url": "https://store.is.autonavi.com/showpic/a7b9d629323732a227a936bb4ca0b610",
+          "source_url": "https://www.amap.com/place/B001905178",
+          "source_id": "src-photo-b673dd1b30bfb47429dc",
+          "title": "鼓楼公园",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:10.303191Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-b673dd1b30bfb47429dc"
+          ]
+        },
+        {
+          "id": "photo-86c4b92e38a8c60ffd1b",
+          "provider": "amap",
+          "image_url": "https://store.is.autonavi.com/showpic/2d97ae2359ca94b4d9e8c686ad25748b",
+          "source_url": "https://www.amap.com/place/B001905178",
+          "source_id": "src-photo-86c4b92e38a8c60ffd1b",
+          "title": "鼓楼公园",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:10.304192Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-86c4b92e38a8c60ffd1b"
+          ]
+        },
+        {
+          "id": "photo-bfec402b085eb6d245c8",
+          "provider": "amap",
+          "image_url": "https://aos-comment.amap.com/B001905178/comment/content_media_external_file_255737_ss__1765764308884_91442608.jpg",
+          "source_url": "https://www.amap.com/place/B001905178",
+          "source_id": "src-photo-bfec402b085eb6d245c8",
+          "title": "鼓楼公园",
+          "author": "未提供",
+          "license": "版权归原作者；仅供参考，转载需另行授权",
+          "retrieved_at": "2026-09-11T09:36:10.304192Z",
+          "captured_at": null,
+          "relation": "poi",
+          "latitude": null,
+          "longitude": null,
+          "exif": {},
+          "evidence_ids": [
+            "ev-photo-bfec402b085eb6d245c8"
+          ]
+        }
+      ],
+      "entrance": null,
+      "subjects": [
+        {
+          "name": "明代鼓楼建筑与城市远景",
+          "position": null
+        }
+      ],
+      "genres": [
+        "architecture",
+        "cityscape",
+        "humanities"
+      ],
+      "composition": "利用红墙黑瓦、檐角高翘的建筑细节作为前景或主体，结合傍晚光线拍摄古今交融的画面",
+      "access": "UNKNOWN",
+      "access_evidence_ids": [
+        "ev-access-B001905178"
+      ],
+      "open_from": null,
+      "open_until": null,
+      "ticket_required": null,
+      "unsafe": false,
+      "popularity": "UNVERIFIED",
+      "tripod_allowed": null,
+      "step_free": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。"
+      ],
+      "claim_ids": [
+        "claim-B001905178-web-9b93ff5060c7",
+        "claim-B001905178-web-a7426613c1e4",
+        "claim-B001905178-photo-b673dd1b30bfb47429dc",
+        "claim-B001905178-photo-86c4b92e38a8c60ffd1b",
+        "claim-B001905178-photo-bfec402b085eb6d245c8"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "alerts": [
+        "已记录低步行量偏好；缺少起点和可靠路线，暂不计算步行距离或据此过滤。"
+      ],
+      "id": "candidate-1",
+      "spot_id": "BZAPQF03LZ",
+      "title": "颐和路天竺路牯岭路交叉口",
+      "start": "2026-09-12T10:40:17.913252Z",
+      "end": "2026-09-12T11:00:00Z",
+      "status": "TENTATIVE",
+      "composition": "利用斜射阳光勾勒建筑轮廓，拍摄道路延伸线与光影斑驳的街角",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 1.8,
+        "shutter_seconds": 0.014285714285714285,
+        "iso": 1600,
+        "adjustment": "ISO 可从 800–6400 按需调整；短连拍检查清晰度，长焦时提高快门。",
+        "evidence_ids": [
+          "ev-camera-0"
+        ]
+      },
+      "weather": {
+        "at": "2026-09-12T11:00:00Z",
+        "temperature_c": 24.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 10.0,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 87.0,
+        "label": "REPORTED",
+        "evidence_ids": [
+          "ev-weather-35",
+          "ev-aqi-35"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "颐和路天竺路牯岭路交叉口",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-candidate-crowd-0"
+        ]
+      },
+      "score": {
+        "suitability": 70.6,
+        "confidence": 0.5,
+        "components": {
+          "光质": 0.65,
+          "能见度": 0.542,
+          "稳定性": 0.868,
+          "构图": 0.75,
+          "空气": 0.565,
+          "蓝调": 0.95,
+          "舒适度": 0.8959999999999999,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.13333333333333333,
+          "能见度": 0.15,
+          "稳定性": 0.16666666666666666,
+          "构图": 0.23333333333333334,
+          "空气": 0.06666666666666667,
+          "蓝调": 0.09999999999999999,
+          "舒适度": 0.06666666666666667,
+          "客流": 0.08333333333333333
+        },
+        "adjustments": {},
+        "evidence_ids": [
+          "ev-score-0"
+        ]
+      },
+      "solar_azimuth_deg": 278.7,
+      "target_bearing_deg": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。",
+        "已记录低步行量偏好；缺少起点和可靠路线，暂不计算步行距离或据此过滤。",
+        "开放、预约及管制未获有效官方确认，推荐暂定。"
+      ],
+      "alternative": "条件不合适时暂缓该机位，由你选择其他候选。",
+      "reasons": [
+        "匹配摄影意图：architecture / cityscape / humanities",
+        "来源线索已关联高德地标；站位精度与开放状态分别标注。",
+        "独立比较可用时段的天气和光线，不受其他机位的访问顺序约束。"
+      ],
+      "travel_advice": [
+        "停车、爬升、入口与实际步行时间暂无可靠数据，请出发前查看地图。",
+        "无台阶通行未核实，推车或轮椅出行请先确认入口。"
+      ],
+      "distance_km": null,
+      "recommended_light": "blue_hour",
+      "evidence_ids": [
+        "ev-BZAPQF03LZ",
+        "ev-access-BZAPQF03LZ",
+        "ev-candidate-geometry-0",
+        "ev-solar"
+      ]
+    },
+    {
+      "alerts": [
+        "已记录低步行量偏好；缺少起点和可靠路线，暂不计算步行距离或据此过滤。"
+      ],
+      "id": "candidate-2",
+      "spot_id": "BZAPQF0338",
+      "title": "天竺路与牯岭路交叉口",
+      "start": "2026-09-12T10:40:18.156236Z",
+      "end": "2026-09-12T11:00:00Z",
+      "status": "TENTATIVE",
+      "composition": "拍摄道路的延伸线与黄墙灰瓦的老洋房，利用斜射阳光营造光影层次感",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 1.8,
+        "shutter_seconds": 0.014285714285714285,
+        "iso": 1600,
+        "adjustment": "ISO 可从 800–6400 按需调整；短连拍检查清晰度，长焦时提高快门。",
+        "evidence_ids": [
+          "ev-camera-1"
+        ]
+      },
+      "weather": {
+        "at": "2026-09-12T11:00:00Z",
+        "temperature_c": 24.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 10.0,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 87.0,
+        "label": "REPORTED",
+        "evidence_ids": [
+          "ev-weather-35-110",
+          "ev-aqi-35-111"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "天竺路与牯岭路交叉口",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-candidate-crowd-1"
+        ]
+      },
+      "score": {
+        "suitability": 70.6,
+        "confidence": 0.5,
+        "components": {
+          "光质": 0.65,
+          "能见度": 0.542,
+          "稳定性": 0.868,
+          "构图": 0.75,
+          "空气": 0.565,
+          "蓝调": 0.95,
+          "舒适度": 0.8959999999999999,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.13333333333333333,
+          "能见度": 0.15,
+          "稳定性": 0.16666666666666666,
+          "构图": 0.23333333333333334,
+          "空气": 0.06666666666666667,
+          "蓝调": 0.09999999999999999,
+          "舒适度": 0.06666666666666667,
+          "客流": 0.08333333333333333
+        },
+        "adjustments": {},
+        "evidence_ids": [
+          "ev-score-1"
+        ]
+      },
+      "solar_azimuth_deg": 278.7,
+      "target_bearing_deg": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。",
+        "已记录低步行量偏好；缺少起点和可靠路线，暂不计算步行距离或据此过滤。",
+        "开放、预约及管制未获有效官方确认，推荐暂定。"
+      ],
+      "alternative": "条件不合适时暂缓该机位，由你选择其他候选。",
+      "reasons": [
+        "匹配摄影意图：architecture / cityscape / humanities",
+        "来源线索已关联高德地标；站位精度与开放状态分别标注。",
+        "独立比较可用时段的天气和光线，不受其他机位的访问顺序约束。"
+      ],
+      "travel_advice": [
+        "停车、爬升、入口与实际步行时间暂无可靠数据，请出发前查看地图。",
+        "无台阶通行未核实，推车或轮椅出行请先确认入口。"
+      ],
+      "distance_km": null,
+      "recommended_light": "blue_hour",
+      "evidence_ids": [
+        "ev-BZAPQF0338",
+        "ev-access-BZAPQF0338",
+        "ev-candidate-geometry-1",
+        "ev-solar-173"
+      ]
+    },
+    {
+      "alerts": [
+        "已记录低步行量偏好；缺少起点和可靠路线，暂不计算步行距离或据此过滤。"
+      ],
+      "id": "candidate-3",
+      "spot_id": "B001905178",
+      "title": "鼓楼公园制高点",
+      "start": "2026-09-12T10:40:14.112483Z",
+      "end": "2026-09-12T11:00:00Z",
+      "status": "TENTATIVE",
+      "composition": "利用红墙黑瓦、檐角高翘的建筑细节作为前景或主体，结合傍晚光线拍摄古今交融的画面",
+      "camera": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 1.8,
+        "shutter_seconds": 0.014285714285714285,
+        "iso": 1600,
+        "adjustment": "ISO 可从 800–6400 按需调整；短连拍检查清晰度，长焦时提高快门。",
+        "evidence_ids": [
+          "ev-camera-2"
+        ]
+      },
+      "weather": {
+        "at": "2026-09-12T11:00:00Z",
+        "temperature_c": 24.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 10.0,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 87.0,
+        "label": "REPORTED",
+        "evidence_ids": [
+          "ev-weather-35-158",
+          "ev-aqi-35-159"
+        ]
+      },
+      "crowd": {
+        "level": "UNKNOWN",
+        "source_type": "UNKNOWN",
+        "spatial_scope": "鼓楼公园制高点",
+        "observed_at": null,
+        "valid_until": null,
+        "label": "UNKNOWN",
+        "evidence_ids": [
+          "ev-candidate-crowd-2"
+        ]
+      },
+      "score": {
+        "suitability": 70.6,
+        "confidence": 0.5,
+        "components": {
+          "光质": 0.65,
+          "能见度": 0.542,
+          "稳定性": 0.868,
+          "构图": 0.75,
+          "空气": 0.565,
+          "蓝调": 0.95,
+          "舒适度": 0.8959999999999999,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.13333333333333333,
+          "能见度": 0.15,
+          "稳定性": 0.16666666666666666,
+          "构图": 0.23333333333333334,
+          "空气": 0.06666666666666667,
+          "蓝调": 0.09999999999999999,
+          "舒适度": 0.06666666666666667,
+          "客流": 0.08333333333333333
+        },
+        "adjustments": {},
+        "evidence_ids": [
+          "ev-score-2"
+        ]
+      },
+      "solar_azimuth_deg": 278.7,
+      "target_bearing_deg": null,
+      "risks": [
+        "来源是发现线索；开放、精确站位、主体遮挡和商业拍摄限制均待核验。",
+        "已记录低步行量偏好；缺少起点和可靠路线，暂不计算步行距离或据此过滤。",
+        "开放、预约及管制未获有效官方确认，推荐暂定。"
+      ],
+      "alternative": "条件不合适时暂缓该机位，由你选择其他候选。",
+      "reasons": [
+        "匹配摄影意图：architecture / cityscape / humanities",
+        "来源线索已关联高德地标；站位精度与开放状态分别标注。",
+        "独立比较可用时段的天气和光线，不受其他机位的访问顺序约束。"
+      ],
+      "travel_advice": [
+        "停车、爬升、入口与实际步行时间暂无可靠数据，请出发前查看地图。",
+        "无台阶通行未核实，推车或轮椅出行请先确认入口。"
+      ],
+      "distance_km": null,
+      "recommended_light": "blue_hour",
+      "evidence_ids": [
+        "ev-B001905178",
+        "ev-access-B001905178",
+        "ev-candidate-geometry-2",
+        "ev-solar-178"
+      ]
+    }
+  ],
+  "routes": [],
+  "solar": {
+    "sunrise": "2026-09-11T21:46:57.427916Z",
+    "sunset": "2026-09-12T10:15:16.606098Z",
+    "golden_start": "2026-09-12T09:43:51.446164Z",
+    "blue_start": "2026-09-12T10:30:54.288615Z",
+    "blue_end": "2026-09-12T10:40:17.913252Z",
+    "evidence_ids": [
+      "ev-solar"
+    ]
+  },
+  "sources": [
+    {
+      "id": "community-5d602c1ea19d4a22",
+      "url": "https://www.bilibili.com/video/BV16BY36QEUA",
+      "title": "高楼摄影 框架构图 异环摄影QQ群:657132734",
+      "publisher": "bilibili",
+      "kind": "community",
+      "platform": "bilibili",
+      "published_at": "2026-09-10T14:37:00Z",
+      "retrieved_at": "2026-09-11T09:36:05.933219Z",
+      "note": "公开标题与简介，不含视频转录；摄影经验是待核验线索，不证明开放或安全。"
+    },
+    {
+      "id": "community-12e3350971413189",
+      "url": "https://www.bilibili.com/video/BV1qWcyzBEPK",
+      "title": "发现广州塔新拍照机位！构图抽象超有趣，打卡党速冲",
+      "publisher": "bilibili",
+      "kind": "community",
+      "platform": "bilibili",
+      "published_at": "2026-03-12T13:37:44Z",
+      "retrieved_at": "2026-09-11T09:36:05.933219Z",
+      "note": "公开标题与简介，不含视频转录；摄影经验是待核验线索，不证明开放或安全。"
+    },
+    {
+      "id": "web-4387213ff852",
+      "url": "https://www.163.com/dy/article/KFTKNK980556HDGP.html",
+      "title": "南京摄影地图:15个出片神级机位与街区全攻略",
+      "publisher": "www.163.com",
+      "kind": "search",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:35:56.121468Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-2c12cc5746a2",
+      "url": "https://www.163.com/dy/article/KP0JKO120556AELP.html",
+      "title": "南京摄影地图:本地人私藏的10+出片机位与街区,随手一拍都是大",
+      "publisher": "www.163.com",
+      "kind": "search",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:35:56.121468Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "src-BZAPQF03LZ",
+      "url": "https://developer.amap.com/api/webservice/guide/api/search",
+      "title": "高德 POI",
+      "publisher": "高德 POI",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:06.091392Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-BZAPQF03LZ",
+      "url": null,
+      "title": "当日开放复核",
+      "publisher": "当日开放复核",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:06.091392Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-31d7b015e2ba5fa6c2c2",
+      "url": "https://www.amap.com/place/BZAPQF03LZ",
+      "title": "amap · 颐和路",
+      "publisher": "amap · 颐和路",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:06.765816Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-9bdc0537ca563c3d19f1",
+      "url": "https://www.amap.com/place/BZAPQF03LZ",
+      "title": "amap · 颐和路",
+      "publisher": "amap · 颐和路",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:06.765816Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-6acba43222ebd56ca9fa",
+      "url": "https://www.amap.com/place/BZAPQF03LZ",
+      "title": "amap · 颐和路",
+      "publisher": "amap · 颐和路",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:06.765816Z",
+      "note": ""
+    },
+    {
+      "id": "web-9b93ff5060c7",
+      "url": "https://mp.weixin.qq.com/s?__biz=MzAxMzg1MTc0MA==&mid=2653324335&idx=1&sn=b56fa0abe11f6c297283d2301fd7b53a&chksm=804e691cb739e00a6cf316e782ee3f4a86274a0807dfa27a36286bebc3da8732470904df0994&scene=27",
+      "title": "来吧!鼓楼~拍照打卡揽胜,我们不见不散! ",
+      "publisher": "mp.weixin.qq.com",
+      "kind": "search",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:05.830589Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "web-a7426613c1e4",
+      "url": "https://new.qq.com/rain/a/20251002A060JF00",
+      "title": "南京严重被低估的6个宝藏公园!",
+      "publisher": "new.qq.com",
+      "kind": "search",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:05.830589Z",
+      "note": "搜索返回的引用；发布时间未核实，不能证明当日开放。"
+    },
+    {
+      "id": "src-BZAPQF0338",
+      "url": "https://developer.amap.com/api/webservice/guide/api/search",
+      "title": "高德 POI",
+      "publisher": "高德 POI",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:07.259172Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-BZAPQF0338",
+      "url": null,
+      "title": "当日开放复核",
+      "publisher": "当日开放复核",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:07.259172Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-e3d5303fc3ca8089b99f",
+      "url": "https://www.amap.com/place/BZAPQF0338",
+      "title": "amap · 天竺路",
+      "publisher": "amap · 天竺路",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:07.917155Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-9ddbdfbec35fef444bbc",
+      "url": "https://www.amap.com/place/BZAPQF0338",
+      "title": "amap · 天竺路",
+      "publisher": "amap · 天竺路",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:07.917155Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-6ebd9b38797f2eaf37d0",
+      "url": "https://www.amap.com/place/BZAPQF0338",
+      "title": "amap · 天竺路",
+      "publisher": "amap · 天竺路",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:07.917155Z",
+      "note": ""
+    },
+    {
+      "id": "src-B001905178",
+      "url": "https://developer.amap.com/api/webservice/guide/api/search",
+      "title": "高德 POI",
+      "publisher": "高德 POI",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:09.082138Z",
+      "note": ""
+    },
+    {
+      "id": "src-access-B001905178",
+      "url": null,
+      "title": "当日开放复核",
+      "publisher": "当日开放复核",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:09.082138Z",
+      "note": ""
+    },
+    {
+      "id": "src-B001905178-place",
+      "url": "https://www.amap.com/place/B001905178",
+      "title": "高德地标关系",
+      "publisher": "高德地标关系",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:09.718332Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-b673dd1b30bfb47429dc",
+      "url": "https://www.amap.com/place/B001905178",
+      "title": "amap · 鼓楼公园",
+      "publisher": "amap · 鼓楼公园",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:10.303191Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-86c4b92e38a8c60ffd1b",
+      "url": "https://www.amap.com/place/B001905178",
+      "title": "amap · 鼓楼公园",
+      "publisher": "amap · 鼓楼公园",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:10.304192Z",
+      "note": ""
+    },
+    {
+      "id": "src-photo-bfec402b085eb6d245c8",
+      "url": "https://www.amap.com/place/B001905178",
+      "title": "amap · 鼓楼公园",
+      "publisher": "amap · 鼓楼公园",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:10.304192Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-16",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-16",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-17",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-17",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-18",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-18",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-19",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-19",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-20",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-20",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-21",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-21",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-22",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-22",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-23",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-23",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-24",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-24",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-25",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-25",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-26",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-26",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-27",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-27",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-28",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-28",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-29",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-29",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-30",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-30",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-31",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.818451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-31",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-32",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-32",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-33",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-33",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-34",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-34",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-35",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-35",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-36",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-36",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-37",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-37",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-38",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-38",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-weather-39",
+      "url": "https://open-meteo.com/en/docs",
+      "title": "Open-Meteo · 网格预报",
+      "publisher": "Open-Meteo · 网格预报",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-aqi-39",
+      "url": "https://open-meteo.com/en/docs/air-quality-api",
+      "title": "Open-Meteo · CAMS 空气质量",
+      "publisher": "Open-Meteo · CAMS 空气质量",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:20.819451Z",
+      "note": ""
+    },
+    {
+      "id": "src-solar",
+      "url": "https://astral.readthedocs.io/en/latest/",
+      "title": "Astral 3.2 · 太阳几何",
+      "publisher": "Astral 3.2 · 太阳几何",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.814320Z",
+      "note": ""
+    },
+    {
+      "id": "src-candidate-crowd-0",
+      "url": null,
+      "title": "客流信息",
+      "publisher": "客流信息",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.814320Z",
+      "note": ""
+    },
+    {
+      "id": "src-candidate-geometry-0",
+      "url": null,
+      "title": "机位方向与时间窗口",
+      "publisher": "机位方向与时间窗口",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.814320Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-0",
+      "url": null,
+      "title": "photo-rules/1.2",
+      "publisher": "photo-rules/1.2",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.814320Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-0",
+      "url": null,
+      "title": "photo-rules/1.2",
+      "publisher": "photo-rules/1.2",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.814320Z",
+      "note": ""
+    },
+    {
+      "id": "src-candidate-crowd-1",
+      "url": null,
+      "title": "客流信息",
+      "publisher": "客流信息",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.815321Z",
+      "note": ""
+    },
+    {
+      "id": "src-candidate-geometry-1",
+      "url": null,
+      "title": "机位方向与时间窗口",
+      "publisher": "机位方向与时间窗口",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.815321Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-1",
+      "url": null,
+      "title": "photo-rules/1.2",
+      "publisher": "photo-rules/1.2",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.815321Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-1",
+      "url": null,
+      "title": "photo-rules/1.2",
+      "publisher": "photo-rules/1.2",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.815321Z",
+      "note": ""
+    },
+    {
+      "id": "src-candidate-crowd-2",
+      "url": null,
+      "title": "客流信息",
+      "publisher": "客流信息",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.816319Z",
+      "note": ""
+    },
+    {
+      "id": "src-candidate-geometry-2",
+      "url": null,
+      "title": "机位方向与时间窗口",
+      "publisher": "机位方向与时间窗口",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.816319Z",
+      "note": ""
+    },
+    {
+      "id": "src-score-2",
+      "url": null,
+      "title": "photo-rules/1.2",
+      "publisher": "photo-rules/1.2",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.816319Z",
+      "note": ""
+    },
+    {
+      "id": "src-camera-2",
+      "url": null,
+      "title": "photo-rules/1.2",
+      "publisher": "photo-rules/1.2",
+      "kind": "tool",
+      "platform": null,
+      "published_at": null,
+      "retrieved_at": "2026-09-11T09:36:21.816319Z",
+      "note": ""
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim-BZAPQF03LZ-web-4387213ff852",
+      "source_id": "web-4387213ff852",
+      "subject_id": "BZAPQF03LZ",
+      "kind": "viewpoint",
+      "statement": "利用斜射阳光勾勒建筑轮廓，拍摄道路延伸线与光影斑驳的街角",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-BZAPQF03LZ-web-4387213ff852"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF03LZ-web-2c12cc5746a2",
+      "source_id": "web-2c12cc5746a2",
+      "subject_id": "BZAPQF03LZ",
+      "kind": "viewpoint",
+      "statement": "利用斜射阳光勾勒建筑轮廓，拍摄道路延伸线与光影斑驳的街角",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-BZAPQF03LZ-web-2c12cc5746a2"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF0338-web-4387213ff852",
+      "source_id": "web-4387213ff852",
+      "subject_id": "BZAPQF0338",
+      "kind": "viewpoint",
+      "statement": "拍摄道路的延伸线与黄墙灰瓦的老洋房，利用斜射阳光营造光影层次感",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-BZAPQF0338-web-4387213ff852"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF0338-web-2c12cc5746a2",
+      "source_id": "web-2c12cc5746a2",
+      "subject_id": "BZAPQF0338",
+      "kind": "viewpoint",
+      "statement": "拍摄道路的延伸线与黄墙灰瓦的老洋房，利用斜射阳光营造光影层次感",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-BZAPQF0338-web-2c12cc5746a2"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B001905178-web-9b93ff5060c7",
+      "source_id": "web-9b93ff5060c7",
+      "subject_id": "B001905178",
+      "kind": "viewpoint",
+      "statement": "利用红墙黑瓦、檐角高翘的建筑细节作为前景或主体，结合傍晚光线拍摄古今交融的画面",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B001905178-web-9b93ff5060c7"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B001905178-web-a7426613c1e4",
+      "source_id": "web-a7426613c1e4",
+      "subject_id": "B001905178",
+      "kind": "viewpoint",
+      "statement": "利用红墙黑瓦、檐角高翘的建筑细节作为前景或主体，结合傍晚光线拍摄古今交融的画面",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-claim-B001905178-web-a7426613c1e4"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF03LZ-photo-31d7b015e2ba5fa6c2c2",
+      "source_id": "src-photo-31d7b015e2ba5fa6c2c2",
+      "subject_id": "BZAPQF03LZ",
+      "kind": "photo",
+      "statement": "amap 图片记录：颐和路；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-31d7b015e2ba5fa6c2c2"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF03LZ-photo-9bdc0537ca563c3d19f1",
+      "source_id": "src-photo-9bdc0537ca563c3d19f1",
+      "subject_id": "BZAPQF03LZ",
+      "kind": "photo",
+      "statement": "amap 图片记录：颐和路；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-9bdc0537ca563c3d19f1"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF03LZ-photo-6acba43222ebd56ca9fa",
+      "source_id": "src-photo-6acba43222ebd56ca9fa",
+      "subject_id": "BZAPQF03LZ",
+      "kind": "photo",
+      "statement": "amap 图片记录：颐和路；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-6acba43222ebd56ca9fa"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF0338-photo-e3d5303fc3ca8089b99f",
+      "source_id": "src-photo-e3d5303fc3ca8089b99f",
+      "subject_id": "BZAPQF0338",
+      "kind": "photo",
+      "statement": "amap 图片记录：天竺路；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-e3d5303fc3ca8089b99f"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF0338-photo-9ddbdfbec35fef444bbc",
+      "source_id": "src-photo-9ddbdfbec35fef444bbc",
+      "subject_id": "BZAPQF0338",
+      "kind": "photo",
+      "statement": "amap 图片记录：天竺路；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-9ddbdfbec35fef444bbc"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-BZAPQF0338-photo-6ebd9b38797f2eaf37d0",
+      "source_id": "src-photo-6ebd9b38797f2eaf37d0",
+      "subject_id": "BZAPQF0338",
+      "kind": "photo",
+      "statement": "amap 图片记录：天竺路；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-6ebd9b38797f2eaf37d0"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B001905178-photo-b673dd1b30bfb47429dc",
+      "source_id": "src-photo-b673dd1b30bfb47429dc",
+      "subject_id": "B001905178",
+      "kind": "photo",
+      "statement": "amap 图片记录：鼓楼公园；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-b673dd1b30bfb47429dc"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B001905178-photo-86c4b92e38a8c60ffd1b",
+      "source_id": "src-photo-86c4b92e38a8c60ffd1b",
+      "subject_id": "B001905178",
+      "kind": "photo",
+      "statement": "amap 图片记录：鼓楼公园；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-86c4b92e38a8c60ffd1b"
+      ],
+      "valid_until": null
+    },
+    {
+      "id": "claim-B001905178-photo-bfec402b085eb6d245c8",
+      "source_id": "src-photo-bfec402b085eb6d245c8",
+      "subject_id": "B001905178",
+      "kind": "photo",
+      "statement": "amap 图片记录：鼓楼公园；关联=poi，不证明视线或开放。",
+      "label": "REPORTED",
+      "evidence_ids": [
+        "ev-photo-bfec402b085eb6d245c8"
+      ],
+      "valid_until": null
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-community-5d602c1ea19d4a22",
+      "source_id": "community-5d602c1ea19d4a22",
+      "label": "REPORTED",
+      "statement": "高楼摄影 框架构图 异环摄影QQ群:657132734：",
+      "observed_at": "2026-09-11T09:36:05.933219Z",
+      "valid_until": null,
+      "values": {
+        "platform": "bilibili",
+        "photographic_info": {
+          "focal_lengths": [],
+          "time_light": [],
+          "composition": [
+            "框架构图"
+          ]
+        },
+        "published_at": "2026-09-10T14:37:00+00:00",
+        "retrieval": "public_metadata"
+      }
+    },
+    {
+      "id": "ev-community-12e3350971413189",
+      "source_id": "community-12e3350971413189",
+      "label": "REPORTED",
+      "statement": "发现广州塔新拍照机位！构图抽象超有趣，打卡党速冲：-",
+      "observed_at": "2026-09-11T09:36:05.933219Z",
+      "valid_until": null,
+      "values": {
+        "platform": "bilibili",
+        "photographic_info": {
+          "focal_lengths": [],
+          "time_light": [],
+          "composition": []
+        },
+        "published_at": "2026-03-12T13:37:44+00:00",
+        "retrieval": "public_metadata"
+      }
+    },
+    {
+      "id": "ev-BZAPQF03LZ",
+      "source_id": "src-BZAPQF03LZ",
+      "label": "REPORTED",
+      "statement": "地图 POI 中心，未经核实的站位区域；GCJ-02 近似转换 WGS84，不能作实测点。",
+      "observed_at": "2026-09-11T09:36:06.091392Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.065644,
+        "lon": 118.761848,
+        "provider_id": "BZAPQF03LZ"
+      }
+    },
+    {
+      "id": "ev-access-BZAPQF03LZ",
+      "source_id": "src-access-BZAPQF03LZ",
+      "label": "UNKNOWN",
+      "statement": "搜索摘要不能证明当日开放；官方原文、预约和现场限制仍需人工复核。",
+      "observed_at": "2026-09-11T09:36:06.091392Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-BZAPQF03LZ-web-4387213ff852",
+      "source_id": "web-4387213ff852",
+      "label": "REPORTED",
+      "statement": "利用斜射阳光勾勒建筑轮廓，拍摄道路延伸线与光影斑驳的街角；最佳拍摄点在天竺路、牯岭路交叉口，春夏梧桐蔽日，秋冬落叶满地。建议下午3-5点前来，斜阳为黄墙红瓦的老洋房镀上金边；颐和路公馆区（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-11T09:36:06.091392Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-BZAPQF03LZ-web-2c12cc5746a2",
+      "source_id": "web-2c12cc5746a2",
+      "label": "REPORTED",
+      "statement": "利用斜射阳光勾勒建筑轮廓，拍摄道路延伸线与光影斑驳的街角；最佳拍摄点在天竺路、牯岭路交叉口，春夏梧桐蔽日，秋冬落叶满地。建议下午3-5点前来，斜阳为黄墙红瓦的老洋房镀上金边；颐和路公馆区（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-11T09:36:06.091392Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-photo-31d7b015e2ba5fa6c2c2",
+      "source_id": "src-photo-31d7b015e2ba5fa6c2c2",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:06.765816Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-photo-9bdc0537ca563c3d19f1",
+      "source_id": "src-photo-9bdc0537ca563c3d19f1",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:06.765816Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-photo-6acba43222ebd56ca9fa",
+      "source_id": "src-photo-6acba43222ebd56ca9fa",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:06.765816Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-BZAPQF0338",
+      "source_id": "src-BZAPQF0338",
+      "label": "REPORTED",
+      "statement": "地图 POI 中心，未经核实的站位区域；GCJ-02 近似转换 WGS84，不能作实测点。",
+      "observed_at": "2026-09-11T09:36:07.259172Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.063214,
+        "lon": 118.760397,
+        "provider_id": "BZAPQF0338"
+      }
+    },
+    {
+      "id": "ev-access-BZAPQF0338",
+      "source_id": "src-access-BZAPQF0338",
+      "label": "UNKNOWN",
+      "statement": "搜索摘要不能证明当日开放；官方原文、预约和现场限制仍需人工复核。",
+      "observed_at": "2026-09-11T09:36:07.259172Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-BZAPQF0338-web-4387213ff852",
+      "source_id": "web-4387213ff852",
+      "label": "REPORTED",
+      "statement": "拍摄道路的延伸线与黄墙灰瓦的老洋房，利用斜射阳光营造光影层次感；最佳拍摄点在天竺路、牯岭路交叉口，春夏梧桐蔽日，秋冬落叶满地。建议下午3-5点前来，斜阳为黄墙红瓦的老洋房镀上金边；颐和路公馆区（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-11T09:36:07.259172Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-BZAPQF0338-web-2c12cc5746a2",
+      "source_id": "web-2c12cc5746a2",
+      "label": "REPORTED",
+      "statement": "拍摄道路的延伸线与黄墙灰瓦的老洋房，利用斜射阳光营造光影层次感；最佳拍摄点在天竺路、牯岭路交叉口，春夏梧桐蔽日，秋冬落叶满地。建议下午3-5点前来，斜阳为黄墙红瓦的老洋房镀上金边；颐和路公馆区（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-11T09:36:07.259172Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-photo-e3d5303fc3ca8089b99f",
+      "source_id": "src-photo-e3d5303fc3ca8089b99f",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:07.917155Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-photo-9ddbdfbec35fef444bbc",
+      "source_id": "src-photo-9ddbdfbec35fef444bbc",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:07.917155Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-photo-6ebd9b38797f2eaf37d0",
+      "source_id": "src-photo-6ebd9b38797f2eaf37d0",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:07.917155Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-B001905178",
+      "source_id": "src-B001905178",
+      "label": "REPORTED",
+      "statement": "地图 POI 中心，未经核实的站位区域；GCJ-02 近似转换 WGS84，不能作实测点。",
+      "observed_at": "2026-09-11T09:36:09.082138Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.060739,
+        "lon": 118.776816,
+        "provider_id": "B001905178"
+      }
+    },
+    {
+      "id": "ev-access-B001905178",
+      "source_id": "src-access-B001905178",
+      "label": "UNKNOWN",
+      "statement": "搜索摘要不能证明当日开放；官方原文、预约和现场限制仍需人工复核。",
+      "observed_at": "2026-09-11T09:36:09.082138Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B001905178-web-9b93ff5060c7",
+      "source_id": "web-9b93ff5060c7",
+      "label": "REPORTED",
+      "statement": "利用红墙黑瓦、檐角高翘的建筑细节作为前景或主体，结合傍晚光线拍摄古今交融的画面；曾是古代南京城的制高点之一...饱览沧桑的金陵风情...拍照真的超美、很出片；鼓楼公园；鼓楼（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-11T09:36:09.082138Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-claim-B001905178-web-a7426613c1e4",
+      "source_id": "web-a7426613c1e4",
+      "label": "REPORTED",
+      "statement": "利用红墙黑瓦、檐角高翘的建筑细节作为前景或主体，结合傍晚光线拍摄古今交融的画面；曾是古代南京城的制高点之一...饱览沧桑的金陵风情...拍照真的超美、很出片；鼓楼公园；鼓楼（模型抽取线索，未逐句核验原文）",
+      "observed_at": "2026-09-11T09:36:09.082138Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-B001905178-place",
+      "source_id": "src-B001905178-place",
+      "label": "REPORTED",
+      "statement": "来源命名地标的地图坐标；不代表实测站位或视线无遮挡。",
+      "observed_at": "2026-09-11T09:36:09.718332Z",
+      "valid_until": null,
+      "values": {
+        "provider_id": "B001905178",
+        "lat": 32.060739,
+        "lon": 118.776816
+      }
+    },
+    {
+      "id": "ev-photo-b673dd1b30bfb47429dc",
+      "source_id": "src-photo-b673dd1b30bfb47429dc",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:10.303191Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-photo-86c4b92e38a8c60ffd1b",
+      "source_id": "src-photo-86c4b92e38a8c60ffd1b",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:10.304192Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-photo-bfec402b085eb6d245c8",
+      "source_id": "src-photo-bfec402b085eb6d245c8",
+      "label": "REPORTED",
+      "statement": "真实图片接口返回；图片可能较旧，不能证明当前季节、开放或精确摄影站位。",
+      "observed_at": "2026-09-11T09:36:10.304192Z",
+      "valid_until": null,
+      "values": {
+        "provider": "amap",
+        "relation": "poi"
+      }
+    },
+    {
+      "id": "ev-weather-16",
+      "source_id": "src-weather-16",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 22.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.6,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-aqi-16",
+      "source_id": "src-aqi-16",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-weather-17",
+      "source_id": "src-weather-17",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 21.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 79,
+        "visibility_m": 10860.0,
+        "weather_code": 2,
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-aqi-17",
+      "source_id": "src-aqi-17",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-weather-18",
+      "source_id": "src-weather-18",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.1,
+        "cloud_pct": 95,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-aqi-18",
+      "source_id": "src-aqi-18",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-weather-19",
+      "source_id": "src-weather-19",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 20.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-19",
+      "source_id": "src-aqi-19",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-20",
+      "source_id": "src-weather-20",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 21.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.8,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-20",
+      "source_id": "src-aqi-20",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-21",
+      "source_id": "src-weather-21",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 21.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.1,
+        "cloud_pct": 99,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-21",
+      "source_id": "src-aqi-21",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-22",
+      "source_id": "src-weather-22",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 21.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 95,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-22",
+      "source_id": "src-aqi-22",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-23",
+      "source_id": "src-weather-23",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.2,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-23",
+      "source_id": "src-aqi-23",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-24",
+      "source_id": "src-weather-24",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 22.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.8,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-24",
+      "source_id": "src-aqi-24",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-25",
+      "source_id": "src-weather-25",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 23.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.7,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-25",
+      "source_id": "src-aqi-25",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-26",
+      "source_id": "src-weather-26",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 24.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.8,
+        "cloud_pct": 99,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-26",
+      "source_id": "src-aqi-26",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-27",
+      "source_id": "src-weather-27",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 25.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.0,
+        "cloud_pct": 95,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-27",
+      "source_id": "src-aqi-27",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-28",
+      "source_id": "src-weather-28",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 26.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.9,
+        "cloud_pct": 100,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-aqi-28",
+      "source_id": "src-aqi-28",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-weather-29",
+      "source_id": "src-weather-29",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 26.2,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 99,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-aqi-29",
+      "source_id": "src-aqi-29",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-weather-30",
+      "source_id": "src-weather-30",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 26.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 68,
+        "visibility_m": 13420.0,
+        "weather_code": 2,
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-aqi-30",
+      "source_id": "src-aqi-30",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-weather-31",
+      "source_id": "src-weather-31",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.818451Z",
+      "valid_until": "2026-09-11T10:06:20.818451Z",
+      "values": {
+        "temperature_c": 27.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 65,
+        "visibility_m": 13420.0,
+        "weather_code": 2,
+        "aqi": 83
+      }
+    },
+    {
+      "id": "ev-aqi-31",
+      "source_id": "src-aqi-31",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 83
+      }
+    },
+    {
+      "id": "ev-weather-32",
+      "source_id": "src-weather-32",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 27.8,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 20,
+        "visibility_m": 13420.0,
+        "weather_code": 1,
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-aqi-32",
+      "source_id": "src-aqi-32",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-weather-33",
+      "source_id": "src-weather-33",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 27.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 15,
+        "visibility_m": 13420.0,
+        "weather_code": 0,
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-aqi-33",
+      "source_id": "src-aqi-33",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-weather-34",
+      "source_id": "src-weather-34",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 26.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 4.4,
+        "cloud_pct": 7,
+        "visibility_m": 12140.0,
+        "weather_code": 0,
+        "aqi": 86
+      }
+    },
+    {
+      "id": "ev-aqi-34",
+      "source_id": "src-aqi-34",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 86
+      }
+    },
+    {
+      "id": "ev-weather-35",
+      "source_id": "src-weather-35",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 24.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 10,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 87
+      }
+    },
+    {
+      "id": "ev-aqi-35",
+      "source_id": "src-aqi-35",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 87
+      }
+    },
+    {
+      "id": "ev-weather-36",
+      "source_id": "src-weather-36",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 23.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.7,
+        "cloud_pct": 2,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 89
+      }
+    },
+    {
+      "id": "ev-aqi-36",
+      "source_id": "src-aqi-36",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 89
+      }
+    },
+    {
+      "id": "ev-weather-37",
+      "source_id": "src-weather-37",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 23.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.0,
+        "cloud_pct": 3,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 91
+      }
+    },
+    {
+      "id": "ev-aqi-37",
+      "source_id": "src-aqi-37",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 91
+      }
+    },
+    {
+      "id": "ev-weather-38",
+      "source_id": "src-weather-38",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 23.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.5,
+        "cloud_pct": 1,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 93
+      }
+    },
+    {
+      "id": "ev-aqi-38",
+      "source_id": "src-aqi-38",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 93
+      }
+    },
+    {
+      "id": "ev-weather-39",
+      "source_id": "src-weather-39",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": "2026-09-11T10:06:20.819451Z",
+      "values": {
+        "temperature_c": 22.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 9,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 94
+      }
+    },
+    {
+      "id": "ev-aqi-39",
+      "source_id": "src-aqi-39",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:20.819451Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 94
+      }
+    },
+    {
+      "id": "ev-weather-16-72",
+      "source_id": "src-weather-16",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 22.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.6,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-aqi-16-73",
+      "source_id": "src-aqi-16",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-weather-17-74",
+      "source_id": "src-weather-17",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 21.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 79,
+        "visibility_m": 10860.0,
+        "weather_code": 2,
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-aqi-17-75",
+      "source_id": "src-aqi-17",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-weather-18-76",
+      "source_id": "src-weather-18",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.1,
+        "cloud_pct": 95,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-aqi-18-77",
+      "source_id": "src-aqi-18",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-weather-19-78",
+      "source_id": "src-weather-19",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 20.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-19-79",
+      "source_id": "src-aqi-19",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-20-80",
+      "source_id": "src-weather-20",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 21.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.8,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-20-81",
+      "source_id": "src-aqi-20",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-21-82",
+      "source_id": "src-weather-21",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 21.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.1,
+        "cloud_pct": 99,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-21-83",
+      "source_id": "src-aqi-21",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-22-84",
+      "source_id": "src-weather-22",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 21.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 95,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-22-85",
+      "source_id": "src-aqi-22",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-23-86",
+      "source_id": "src-weather-23",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.2,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-23-87",
+      "source_id": "src-aqi-23",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-24-88",
+      "source_id": "src-weather-24",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 22.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.8,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-24-89",
+      "source_id": "src-aqi-24",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-25-90",
+      "source_id": "src-weather-25",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 23.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.7,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-25-91",
+      "source_id": "src-aqi-25",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-26-92",
+      "source_id": "src-weather-26",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 24.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.8,
+        "cloud_pct": 99,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-26-93",
+      "source_id": "src-aqi-26",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-27-94",
+      "source_id": "src-weather-27",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 25.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.0,
+        "cloud_pct": 95,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-27-95",
+      "source_id": "src-aqi-27",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-28-96",
+      "source_id": "src-weather-28",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 26.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.9,
+        "cloud_pct": 100,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-aqi-28-97",
+      "source_id": "src-aqi-28",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-weather-29-98",
+      "source_id": "src-weather-29",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 26.2,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 99,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-aqi-29-99",
+      "source_id": "src-aqi-29",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-weather-30-100",
+      "source_id": "src-weather-30",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 26.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 68,
+        "visibility_m": 13420.0,
+        "weather_code": 2,
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-aqi-30-101",
+      "source_id": "src-aqi-30",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-weather-31-102",
+      "source_id": "src-weather-31",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 27.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 65,
+        "visibility_m": 13420.0,
+        "weather_code": 2,
+        "aqi": 83
+      }
+    },
+    {
+      "id": "ev-aqi-31-103",
+      "source_id": "src-aqi-31",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 83
+      }
+    },
+    {
+      "id": "ev-weather-32-104",
+      "source_id": "src-weather-32",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 27.8,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 20,
+        "visibility_m": 13420.0,
+        "weather_code": 1,
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-aqi-32-105",
+      "source_id": "src-aqi-32",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-weather-33-106",
+      "source_id": "src-weather-33",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 27.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 15,
+        "visibility_m": 13420.0,
+        "weather_code": 0,
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-aqi-33-107",
+      "source_id": "src-aqi-33",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-weather-34-108",
+      "source_id": "src-weather-34",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": "2026-09-11T10:06:21.315675Z",
+      "values": {
+        "temperature_c": 26.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 4.4,
+        "cloud_pct": 7,
+        "visibility_m": 12140.0,
+        "weather_code": 0,
+        "aqi": 86
+      }
+    },
+    {
+      "id": "ev-aqi-34-109",
+      "source_id": "src-aqi-34",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.315675Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 86
+      }
+    },
+    {
+      "id": "ev-weather-35-110",
+      "source_id": "src-weather-35",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": "2026-09-11T10:06:21.316674Z",
+      "values": {
+        "temperature_c": 24.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 10,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 87
+      }
+    },
+    {
+      "id": "ev-aqi-35-111",
+      "source_id": "src-aqi-35",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 87
+      }
+    },
+    {
+      "id": "ev-weather-36-112",
+      "source_id": "src-weather-36",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": "2026-09-11T10:06:21.316674Z",
+      "values": {
+        "temperature_c": 23.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.7,
+        "cloud_pct": 2,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 89
+      }
+    },
+    {
+      "id": "ev-aqi-36-113",
+      "source_id": "src-aqi-36",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 89
+      }
+    },
+    {
+      "id": "ev-weather-37-114",
+      "source_id": "src-weather-37",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": "2026-09-11T10:06:21.316674Z",
+      "values": {
+        "temperature_c": 23.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.0,
+        "cloud_pct": 3,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 91
+      }
+    },
+    {
+      "id": "ev-aqi-37-115",
+      "source_id": "src-aqi-37",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 91
+      }
+    },
+    {
+      "id": "ev-weather-38-116",
+      "source_id": "src-weather-38",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": "2026-09-11T10:06:21.316674Z",
+      "values": {
+        "temperature_c": 23.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.5,
+        "cloud_pct": 1,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 93
+      }
+    },
+    {
+      "id": "ev-aqi-38-117",
+      "source_id": "src-aqi-38",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 93
+      }
+    },
+    {
+      "id": "ev-weather-39-118",
+      "source_id": "src-weather-39",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": "2026-09-11T10:06:21.316674Z",
+      "values": {
+        "temperature_c": 22.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 9,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 94
+      }
+    },
+    {
+      "id": "ev-aqi-39-119",
+      "source_id": "src-aqi-39",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.316674Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 94
+      }
+    },
+    {
+      "id": "ev-weather-16-120",
+      "source_id": "src-weather-16",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 22.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.6,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-aqi-16-121",
+      "source_id": "src-aqi-16",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-weather-17-122",
+      "source_id": "src-weather-17",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 21.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 79,
+        "visibility_m": 10860.0,
+        "weather_code": 2,
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-aqi-17-123",
+      "source_id": "src-aqi-17",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-weather-18-124",
+      "source_id": "src-weather-18",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.1,
+        "cloud_pct": 95,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-aqi-18-125",
+      "source_id": "src-aqi-18",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-weather-19-126",
+      "source_id": "src-weather-19",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 20.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-19-127",
+      "source_id": "src-aqi-19",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-20-128",
+      "source_id": "src-weather-20",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 21.1,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.8,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-20-129",
+      "source_id": "src-aqi-20",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-21-130",
+      "source_id": "src-weather-21",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 21.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.1,
+        "cloud_pct": 99,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-21-131",
+      "source_id": "src-aqi-21",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-22-132",
+      "source_id": "src-weather-22",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 21.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 95,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-22-133",
+      "source_id": "src-aqi-22",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-23-134",
+      "source_id": "src-weather-23",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 21.3,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.2,
+        "cloud_pct": 100,
+        "visibility_m": 9480.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-23-135",
+      "source_id": "src-aqi-23",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-24-136",
+      "source_id": "src-weather-24",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 22.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.8,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-24-137",
+      "source_id": "src-aqi-24",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-25-138",
+      "source_id": "src-weather-25",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 23.7,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.7,
+        "cloud_pct": 100,
+        "visibility_m": 10860.0,
+        "weather_code": 3,
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-aqi-25-139",
+      "source_id": "src-aqi-25",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 78
+      }
+    },
+    {
+      "id": "ev-weather-26-140",
+      "source_id": "src-weather-26",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 24.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.8,
+        "cloud_pct": 99,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-26-141",
+      "source_id": "src-aqi-26",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-27-142",
+      "source_id": "src-weather-27",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 25.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.0,
+        "cloud_pct": 95,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-aqi-27-143",
+      "source_id": "src-aqi-27",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 79
+      }
+    },
+    {
+      "id": "ev-weather-28-144",
+      "source_id": "src-weather-28",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 26.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.9,
+        "cloud_pct": 100,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-aqi-28-145",
+      "source_id": "src-aqi-28",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 80
+      }
+    },
+    {
+      "id": "ev-weather-29-146",
+      "source_id": "src-weather-29",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 26.2,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 99,
+        "visibility_m": 12140.0,
+        "weather_code": 3,
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-aqi-29-147",
+      "source_id": "src-aqi-29",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 81
+      }
+    },
+    {
+      "id": "ev-weather-30-148",
+      "source_id": "src-weather-30",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.812322Z",
+      "valid_until": "2026-09-11T10:06:21.812322Z",
+      "values": {
+        "temperature_c": 26.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 68,
+        "visibility_m": 13420.0,
+        "weather_code": 2,
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-aqi-30-149",
+      "source_id": "src-aqi-30",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 82
+      }
+    },
+    {
+      "id": "ev-weather-31-150",
+      "source_id": "src-weather-31",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 27.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 65,
+        "visibility_m": 13420.0,
+        "weather_code": 2,
+        "aqi": 83
+      }
+    },
+    {
+      "id": "ev-aqi-31-151",
+      "source_id": "src-aqi-31",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 83
+      }
+    },
+    {
+      "id": "ev-weather-32-152",
+      "source_id": "src-weather-32",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 27.8,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 20,
+        "visibility_m": 13420.0,
+        "weather_code": 1,
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-aqi-32-153",
+      "source_id": "src-aqi-32",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-weather-33-154",
+      "source_id": "src-weather-33",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 27.4,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.6,
+        "cloud_pct": 15,
+        "visibility_m": 13420.0,
+        "weather_code": 0,
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-aqi-33-155",
+      "source_id": "src-aqi-33",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 84
+      }
+    },
+    {
+      "id": "ev-weather-34-156",
+      "source_id": "src-weather-34",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 26.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 4.4,
+        "cloud_pct": 7,
+        "visibility_m": 12140.0,
+        "weather_code": 0,
+        "aqi": 86
+      }
+    },
+    {
+      "id": "ev-aqi-34-157",
+      "source_id": "src-aqi-34",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 86
+      }
+    },
+    {
+      "id": "ev-weather-35-158",
+      "source_id": "src-weather-35",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 24.6,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 6.6,
+        "cloud_pct": 10,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 87
+      }
+    },
+    {
+      "id": "ev-aqi-35-159",
+      "source_id": "src-aqi-35",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 87
+      }
+    },
+    {
+      "id": "ev-weather-36-160",
+      "source_id": "src-weather-36",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 23.9,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.7,
+        "cloud_pct": 2,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 89
+      }
+    },
+    {
+      "id": "ev-aqi-36-161",
+      "source_id": "src-aqi-36",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 89
+      }
+    },
+    {
+      "id": "ev-weather-37-162",
+      "source_id": "src-weather-37",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 23.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 8.0,
+        "cloud_pct": 3,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 91
+      }
+    },
+    {
+      "id": "ev-aqi-37-163",
+      "source_id": "src-aqi-37",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 91
+      }
+    },
+    {
+      "id": "ev-weather-38-164",
+      "source_id": "src-weather-38",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 23.0,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 7.5,
+        "cloud_pct": 1,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 93
+      }
+    },
+    {
+      "id": "ev-aqi-38-165",
+      "source_id": "src-aqi-38",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 93
+      }
+    },
+    {
+      "id": "ev-weather-39-166",
+      "source_id": "src-weather-39",
+      "label": "REPORTED",
+      "statement": "逐小时气象模型预报，不是机位实测；AQI 使用 US AQI 标准。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": "2026-09-11T10:06:21.813320Z",
+      "values": {
+        "temperature_c": 22.5,
+        "precipitation_mm": 0.0,
+        "wind_kmh": 5.7,
+        "cloud_pct": 9,
+        "visibility_m": 10840.0,
+        "weather_code": 0,
+        "aqi": 94
+      }
+    },
+    {
+      "id": "ev-aqi-39-167",
+      "source_id": "src-aqi-39",
+      "label": "REPORTED",
+      "statement": "US AQI 模型网格预测，不是现场监测。",
+      "observed_at": "2026-09-11T09:36:21.813320Z",
+      "valid_until": null,
+      "values": {
+        "aqi": 94
+      }
+    },
+    {
+      "id": "ev-solar",
+      "source_id": "src-solar",
+      "label": "CALCULATED",
+      "statement": "根据日期与目的地区域坐标计算；蓝调定义为太阳高度 -4° 至 -6°。",
+      "observed_at": "2026-09-11T09:36:21.814320Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.065644,
+        "lon": 118.761848,
+        "sunrise": "2026-09-11T21:46:57.427916+00:00",
+        "sunset": "2026-09-12T10:15:16.606098+00:00",
+        "golden_start": "2026-09-12T09:43:51.446164+00:00",
+        "blue_start": "2026-09-12T10:30:54.288615+00:00",
+        "blue_end": "2026-09-12T10:40:17.913252+00:00"
+      }
+    },
+    {
+      "id": "ev-candidate-crowd-0",
+      "source_id": "src-candidate-crowd-0",
+      "label": "UNKNOWN",
+      "statement": "暂无游客客流数据；不以客流偏好排除候选。",
+      "observed_at": "2026-09-11T09:36:21.814320Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-candidate-geometry-0",
+      "source_id": "src-candidate-geometry-0",
+      "label": "CALCULATED",
+      "statement": "每个机位独立评估；窗口可重叠，不代表访问顺序。方位角不保证视线无遮挡。",
+      "observed_at": "2026-09-11T09:36:21.814320Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-09-12T10:40:17.913252+00:00",
+        "end": "2026-09-12T11:00:00+00:00",
+        "target_bearing_deg": null,
+        "solar_azimuth_deg": 278.7
+      }
+    },
+    {
+      "id": "ev-score-0",
+      "source_id": "src-score-0",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-11T09:36:21.814320Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 70.6,
+        "components": {
+          "光质": 0.65,
+          "能见度": 0.542,
+          "稳定性": 0.868,
+          "构图": 0.75,
+          "空气": 0.565,
+          "蓝调": 0.95,
+          "舒适度": 0.8959999999999999,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.13333333333333333,
+          "能见度": 0.15,
+          "稳定性": 0.16666666666666666,
+          "构图": 0.23333333333333334,
+          "空气": 0.06666666666666667,
+          "蓝调": 0.09999999999999999,
+          "舒适度": 0.06666666666666667,
+          "客流": 0.08333333333333333
+        },
+        "confidence": 0.5,
+        "adjustments": {}
+      }
+    },
+    {
+      "id": "ev-camera-0",
+      "source_id": "src-camera-0",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-11T09:36:21.814320Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 1.8,
+        "shutter_seconds": 0.014285714285714285,
+        "iso": 1600
+      }
+    },
+    {
+      "id": "ev-solar-173",
+      "source_id": "src-solar",
+      "label": "CALCULATED",
+      "statement": "根据日期与目的地区域坐标计算；蓝调定义为太阳高度 -4° 至 -6°。",
+      "observed_at": "2026-09-11T09:36:21.815321Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.063214,
+        "lon": 118.760397,
+        "sunrise": "2026-09-11T21:46:57.843269+00:00",
+        "sunset": "2026-09-12T10:15:16.889989+00:00",
+        "golden_start": "2026-09-12T09:43:51.780063+00:00",
+        "blue_start": "2026-09-12T10:30:54.547142+00:00",
+        "blue_end": "2026-09-12T10:40:18.156236+00:00"
+      }
+    },
+    {
+      "id": "ev-candidate-crowd-1",
+      "source_id": "src-candidate-crowd-1",
+      "label": "UNKNOWN",
+      "statement": "暂无游客客流数据；不以客流偏好排除候选。",
+      "observed_at": "2026-09-11T09:36:21.815321Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-candidate-geometry-1",
+      "source_id": "src-candidate-geometry-1",
+      "label": "CALCULATED",
+      "statement": "每个机位独立评估；窗口可重叠，不代表访问顺序。方位角不保证视线无遮挡。",
+      "observed_at": "2026-09-11T09:36:21.815321Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-09-12T10:40:18.156236+00:00",
+        "end": "2026-09-12T11:00:00+00:00",
+        "target_bearing_deg": null,
+        "solar_azimuth_deg": 278.7
+      }
+    },
+    {
+      "id": "ev-score-1",
+      "source_id": "src-score-1",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-11T09:36:21.815321Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 70.6,
+        "components": {
+          "光质": 0.65,
+          "能见度": 0.542,
+          "稳定性": 0.868,
+          "构图": 0.75,
+          "空气": 0.565,
+          "蓝调": 0.95,
+          "舒适度": 0.8959999999999999,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.13333333333333333,
+          "能见度": 0.15,
+          "稳定性": 0.16666666666666666,
+          "构图": 0.23333333333333334,
+          "空气": 0.06666666666666667,
+          "蓝调": 0.09999999999999999,
+          "舒适度": 0.06666666666666667,
+          "客流": 0.08333333333333333
+        },
+        "confidence": 0.5,
+        "adjustments": {}
+      }
+    },
+    {
+      "id": "ev-camera-1",
+      "source_id": "src-camera-1",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-11T09:36:21.815321Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 1.8,
+        "shutter_seconds": 0.014285714285714285,
+        "iso": 1600
+      }
+    },
+    {
+      "id": "ev-solar-178",
+      "source_id": "src-solar",
+      "label": "CALCULATED",
+      "statement": "根据日期与目的地区域坐标计算；蓝调定义为太阳高度 -4° 至 -6°。",
+      "observed_at": "2026-09-11T09:36:21.815321Z",
+      "valid_until": null,
+      "values": {
+        "lat": 32.060739,
+        "lon": 118.776816,
+        "sunrise": "2026-09-11T21:46:53.969237+00:00",
+        "sunset": "2026-09-12T10:15:12.887824+00:00",
+        "golden_start": "2026-09-12T09:43:47.828782+00:00",
+        "blue_start": "2026-09-12T10:30:50.519187+00:00",
+        "blue_end": "2026-09-12T10:40:14.112483+00:00"
+      }
+    },
+    {
+      "id": "ev-candidate-crowd-2",
+      "source_id": "src-candidate-crowd-2",
+      "label": "UNKNOWN",
+      "statement": "暂无游客客流数据；不以客流偏好排除候选。",
+      "observed_at": "2026-09-11T09:36:21.816319Z",
+      "valid_until": null,
+      "values": {}
+    },
+    {
+      "id": "ev-candidate-geometry-2",
+      "source_id": "src-candidate-geometry-2",
+      "label": "CALCULATED",
+      "statement": "每个机位独立评估；窗口可重叠，不代表访问顺序。方位角不保证视线无遮挡。",
+      "observed_at": "2026-09-11T09:36:21.816319Z",
+      "valid_until": null,
+      "values": {
+        "start": "2026-09-12T10:40:14.112483+00:00",
+        "end": "2026-09-12T11:00:00+00:00",
+        "target_bearing_deg": null,
+        "solar_azimuth_deg": 278.7
+      }
+    },
+    {
+      "id": "ev-score-2",
+      "source_id": "src-score-2",
+      "label": "INFERRED",
+      "statement": "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。",
+      "observed_at": "2026-09-11T09:36:21.816319Z",
+      "valid_until": null,
+      "values": {
+        "suitability": 70.6,
+        "components": {
+          "光质": 0.65,
+          "能见度": 0.542,
+          "稳定性": 0.868,
+          "构图": 0.75,
+          "空气": 0.565,
+          "蓝调": 0.95,
+          "舒适度": 0.8959999999999999,
+          "客流": 0.5
+        },
+        "weights": {
+          "光质": 0.13333333333333333,
+          "能见度": 0.15,
+          "稳定性": 0.16666666666666666,
+          "构图": 0.23333333333333334,
+          "空气": 0.06666666666666667,
+          "蓝调": 0.09999999999999999,
+          "舒适度": 0.06666666666666667,
+          "客流": 0.08333333333333333
+        },
+        "confidence": 0.5,
+        "adjustments": {}
+      }
+    },
+    {
+      "id": "ev-camera-2",
+      "source_id": "src-camera-2",
+      "label": "INFERRED",
+      "statement": "规则产生的曝光建议起点；没有现场测光，不保证曝光。",
+      "observed_at": "2026-09-11T09:36:21.816319Z",
+      "valid_until": null,
+      "values": {
+        "lens": "35mm F1.8",
+        "focal_mm": 35.0,
+        "equivalent_mm": 35.0,
+        "aperture": 1.8,
+        "shutter_seconds": 0.014285714285714285,
+        "iso": 1600
+      }
+    }
+  ],
+  "warnings": [
+    "社区 bilibili：public_metadata_ok；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 xiaohongshu：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 douyin：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "西桥路口：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "南艺后街广场：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "映虹桥玻璃栈道：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "颐和路天竺路牯岭路交叉口：颐和路公馆区 未能独立定位，保留为待确认线索。",
+    "西桥路口：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "天竺路与牯岭路交叉口：颐和路公馆区 未能独立定位，保留为待确认线索。",
+    "鼓楼公园制高点：具体站位未独立定位，仅保留 鼓楼公园 区域线索。",
+    "鼓楼公园制高点：鼓楼 未能独立定位，保留为待确认线索。",
+    "南艺后街涂鸦墙：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "wikimedia：图片服务不可用或响应无效，已保留其他来源。",
+    "Flickr：未配置 API Key，本次跳过；可在服务端配置 FLICKR_API_KEY。",
+    "候选排名不代表出行顺序；推荐窗口可以重叠，由你决定去哪里、去几个、怎么去。"
+  ],
+  "excluded": [],
+  "metrics": {
+    "elapsed_ms": 34813,
+    "provider_calls": 20,
+    "search_calls": 2,
+    "search_cache_hits": 0,
+    "reported_tokens": 13171,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.1",
+    "photo_references": 9,
+    "mapped_viewpoints": 0,
+    "community": {
+      "bilibili": "public_metadata_ok",
+      "xiaohongshu": "index_only",
+      "douyin": "index_only"
+    },
+    "photo_providers": [
+      "amap"
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "backend_tests": 152,
+  "browser_tests": 14,
+  "offline_evaluations": 63,
+  "live_checks": 14,
+  "live_plan_id": "fbaf1dc11eec4d64aeef15287a0d0102",
+  "production_build": "passed",
+  "typescript": "passed",
+  "ruff": "passed",
+  "limits": "Live 样本为区域级候选；不代表所有城市和精确站位验证。浏览器 14 项包含读取该保存 Live 结果，不重复付费生成。原始 Live 报告 metrics 的旧版本标签已在后续代码修复，报告保持原样。"
+}

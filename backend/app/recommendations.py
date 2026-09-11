@@ -17,13 +17,7 @@ def window(brief):
 
 
 def candidate_gate(spot, weather, brief, start, end):
-    # Transport preferences are advice, not eligibility constraints.
-    relaxed = brief.model_copy(deep=True)
-    relaxed.accept_tickets = True
-    relaxed.profile = "enthusiast"
-    if relaxed.intent:
-        relaxed.intent.mobility = "standard"
-    return gate(spot, weather, relaxed, start, end)
+    return gate(spot, weather, brief, start, end)
 
 
 def distance_km(a, b, c, d):
@@ -52,7 +46,15 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             if anchor and begin <= anchor < finish:
                 samples.add(anchor)
         reason = None
+        if spot.open_from and begin <= spot.open_from < finish:
+            samples.add(spot.open_from)
         for cursor in sorted(samples):
+            if spot.open_from and cursor < spot.open_from:
+                reason = "尚未到已知开放时间"
+                continue
+            if spot.open_until and cursor >= spot.open_until:
+                reason = "已超出已知开放时间"
+                continue
             local_date = cursor.astimezone(ZoneInfo(brief.timezone)).date()
             if local_date not in solars:
                 solar_brief = brief.model_copy(update={"travel_date": local_date})
@@ -61,7 +63,7 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             primary_solar = primary_solar or solar
             conditions = weather_by_spot[spot.id]
             weather = min(conditions, key=lambda w: abs((w.at-cursor).total_seconds()))
-            end = min(finish, cursor + timedelta(minutes=30))
+            end = min(finish, cursor + timedelta(minutes=30), spot.open_until or finish)
             preference = brief.intent.light if brief.intent else "any"
             if preference == "blue_hour" and solar.blue_start and solar.blue_end and solar.blue_start <= cursor < solar.blue_end:
                 end = min(end, solar.blue_end)
@@ -70,29 +72,16 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             reason = candidate_gate(spot, weather, brief, cursor, end)
             anchors = {"sunrise": solar.sunrise, "golden_hour": solar.golden_start,
                        "blue_hour": solar.blue_start, "night": solar.blue_end}
-            if preference == "daylight" and solar.sunrise and solar.sunset and not solar.sunrise <= cursor < solar.sunset:
-                reason = reason or "所选时段没有日间光线"
-            if preference == "night" and solar.sunrise and solar.blue_end and solar.sunrise <= cursor < solar.blue_end:
-                reason = reason or "所选时段尚未入夜"
             if not reason:
                 anchor = anchors.get(preference)
-                quality = score(brief, weather, cursor, solar, Ledger(), index).suitability
+                quality = candidate_score(brief, spot, weather, cursor, solar, Ledger(), index)[0].suitability
                 if anchor:
                     quality -= abs((cursor-anchor).total_seconds()) / 1800
                 possible.append((quality, cursor, end, weather, solar))
         if not possible:
             excluded.append({"spot": spot.name, "reason": reason or "没有符合条件的拍摄窗口"})
             continue
-        def preferred(item):
-            _, at, _, _, sun = item
-            if preference == "blue_hour":
-                return bool(sun.blue_start and sun.blue_end and sun.blue_start <= at <= sun.blue_end)
-            if preference == "golden_hour":
-                return bool(sun.golden_start and sun.sunset and sun.golden_start <= at <= sun.sunset)
-            if preference == "sunrise":
-                return bool(sun.sunrise and abs((at-sun.sunrise).total_seconds()) <= 900)
-            return True
-        _, start, end, weather, solar = max(possible, key=lambda item: (preferred(item), item[0]))
+        _, start, end, weather, solar = max(possible, key=lambda item: item[0])
         actual_light = "daylight"
         if solar.sunrise and solar.sunset and not solar.sunrise <= start <= solar.sunset:
             actual_light = "night"
@@ -103,8 +92,6 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
         advice_brief = brief.model_copy(deep=True)
         if advice_brief.intent:
             advice_brief.intent.light = actual_light
-        if actual_light == "daylight" and advice_brief.genre == "cityscape":
-            advice_brief.genre = "architecture"
         crowd_ids = ledger.add(f"candidate-crowd-{index}", "客流信息", TruthLabel.UNKNOWN,
                                "暂无游客客流数据；不以客流偏好排除候选。")
         target = spot.subjects[0].position if spot.subjects else None
@@ -124,9 +111,8 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             travel.append("可能需要门票或预约，请查看官方渠道。")
         if spot.step_free is not True:
             travel.append("无台阶通行未核实，推车或轮椅出行请先确认入口。")
-        risks = list(spot.risks)
-        if not any(preferred(item) for item in possible):
-            risks.append("可用时间内未匹配偏好的光线，已提供其他可用时段；请核对实际光线。")
+        ranking, alerts = candidate_score(brief, spot, weather, start, solar, ledger, index)
+        risks = list(spot.risks) + alerts
         if spot.access != "OPEN":
             risks.append("开放、预约及管制未获有效官方确认，推荐暂定。")
         if weather.label == "UNKNOWN":
@@ -136,9 +122,9 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
         tasks.append(ShotTask(id=f"candidate-{index+1}", spot_id=spot.id, title=spot.name, start=start, end=end,
             status="TENTATIVE", composition=spot.composition, camera=camera_advice(advice_brief, index, ledger),
             weather=weather, crowd=CrowdSignal(spatial_scope=spot.name, evidence_ids=crowd_ids),
-            score=score(brief, weather, start, solar, ledger, index), solar_azimuth_deg=solar_angle,
+            score=ranking, alerts=alerts, solar_azimuth_deg=solar_angle,
             target_bearing_deg=direction, risks=risks, alternative="条件不合适时暂缓该机位，由你选择其他候选。",
-            reasons=["匹配摄影意图：" + " / ".join(brief.intent.categories if brief.intent else [brief.genre]),
+            reasons=["匹配摄影意图：" + " / ".join(brief.intent.categories),
                      "来源线索已关联高德地标；站位精度与开放状态分别标注。" if brief.mode == "live" else "离线示例地标与构图；尚未经过真实来源核验。",
                      "独立比较可用时段的天气和光线，不受其他机位的访问顺序约束。"],
             recommended_light=actual_light, distance_km=distance,
@@ -152,3 +138,66 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
     return ShotPlan(id=plan_id, presentation="candidates", brief=brief, spots=spots, tasks=tasks, routes=[],
         solar=primary_solar, sources=ledger.sources, claims=claims, evidence=ledger.evidence,
         warnings=warnings, excluded=excluded)
+
+
+def candidate_score(brief, spot, weather, start, solar, ledger, index):
+    ranking = score(brief, weather, start, solar, ledger, index)
+    adjustments, alerts = {}, []
+    preference = brief.intent.light
+    matched = True
+    if solar.sunrise and solar.sunset:
+        matched = {"daylight": solar.sunrise <= start < solar.sunset,
+                   "night": not solar.sunrise <= start < (solar.blue_end or solar.sunset),
+                   "golden_hour": bool(solar.golden_start and solar.golden_start <= start <= solar.sunset),
+                   "blue_hour": bool(solar.blue_start and solar.blue_end and solar.blue_start <= start <= solar.blue_end),
+                   "sunrise": abs((start-solar.sunrise).total_seconds()) <= 900}.get(preference, True)
+    if not matched:
+        adjustments["光线偏好不匹配"] = -18
+        alerts.append("当前时间条件不理想：推荐时段未匹配偏好光线，保留机位供选择。")
+    if (weather.precipitation_mm or 0) > 0:
+        adjustments["预计降雨"] = -min(30, 8 + weather.precipitation_mm*3)
+        alerts.append(f"预计降雨 {weather.precipitation_mm:g} mm；保留机位，出发前复核预报。")
+    if brief.intent.light in ("golden_hour", "sunrise") and ((weather.cloud_pct or 0) >= 80 or (weather.precipitation_mm or 0) > 0):
+        alerts.append("夕阳/日出可见机会较低：依据降雨或云量的定性提示，不是概率预测。")
+        adjustments["直射光机会低"] = -12
+    if weather.weather_code in (95, 96, 99) or (weather.wind_kmh or 0) >= 40 or (weather.precipitation_mm or 0) >= 7.5:
+        adjustments["危险天气"] = -35
+        alerts.append("危险天气：不建议在该时段前往户外；机位仅作之后条件改善时的参考。")
+    if spot.unsafe:
+        adjustments["站位风险待核验"] = -35
+        alerts.append("来源含危险或非公开站位线索，不建议按该线索行动；仅在确认公开安全位置后考虑。")
+    if spot.access == "CONFLICT":
+        adjustments["开放冲突"] = -20
+        alerts.append("开放信息冲突，暂勿前往，需官方确认。")
+    if brief.tripod and spot.tripod_allowed is False:
+        adjustments["脚架不匹配"] = -10
+        alerts.append("该地点不允许三脚架，请改用手持方案或选择其他机位。")
+    p = brief.intent.preferences
+    if p.avoid_tickets and spot.ticket_required:
+        adjustments["门票偏好"] = -12
+        alerts.append("此地点可能收费，与不买门票偏好不匹配；未按默认偏好排除。")
+    if p.max_walk_km is not None:
+        if brief.origin_lat is not None:
+            distance = distance_km(brief.origin_lat, brief.origin_lon, spot.camera.lat, spot.camera.lon)
+            if distance > p.max_walk_km:
+                adjustments["距离偏好"] = -min(20, (distance-p.max_walk_km)*2+5)
+                alerts.append(f"距起点直线约 {distance} km，超过低步行量参考值；实际步行与交通方式未核实。")
+        else:
+            alerts.append("已记录低步行量偏好；缺少起点和可靠路线，暂不计算步行距离或据此过滤。")
+    if p.step_free and spot.step_free is not True:
+        adjustments["无台阶待核实"] = -8
+        alerts.append("无台阶通行尚未证实，请核实入口后决定。")
+    if p.low_crowd:
+        alerts.append("已记录人少偏好；没有可靠游客客流数据，不用道路交通或热度替代。")
+    if p.strict:
+        alerts.append("已记录明确要求；未知信息不视作已满足，请复核后选择。")
+    # Categories have equal shares; absent spot classifications remain unknown.
+    if spot.genres and not set(brief.intent.categories) & set(spot.genres):
+        adjustments["题材匹配不足"] = -12
+        alerts.append("该地点的已有题材信息与需求不完全匹配，仍保留构图探索机会。")
+    ranking.suitability = round(max(0, ranking.suitability + sum(adjustments.values())), 1)
+    ranking.adjustments = adjustments
+    for evidence in ledger.evidence:
+        if evidence.id in ranking.evidence_ids:
+            evidence.values.update(suitability=ranking.suitability, adjustments=adjustments)
+    return ranking, alerts

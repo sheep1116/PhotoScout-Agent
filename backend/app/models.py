@@ -36,13 +36,6 @@ class TruthLabel(StrEnum):
     USER_CONFIRMED = "USER_CONFIRMED"
 
 
-class UserProfile(StrEnum):
-    PHONE = "phone"
-    ENTHUSIAST = "enthusiast"
-    CREATOR = "creator"
-    FAMILY = "family"
-
-
 class LocationPrecision(StrEnum):
     EXACT_VERIFIED = "EXACT_VERIFIED"
     MAP_POINT = "MAP_POINT"
@@ -73,12 +66,24 @@ class EquipmentIntent(Model):
     tripod: bool = False
 
 
-class TravelConstraints(Model):
-    max_walk_km: float = Field(default=3, ge=0, le=20)
-    accept_tickets: bool = False
-    crowd_tolerance: Literal["low", "medium", "high"] = "low"
-    start_local: time | None = None
-    end_local: time | None = None
+class RecommendationPreferences(Model):
+    max_walk_km: float | None = Field(default=None, ge=0, le=100)
+    avoid_tickets: bool = False
+    low_crowd: bool = False
+    step_free: bool = False
+    strict: list[Literal["free", "step_free", "low_crowd", "walking"]] = Field(default_factory=list)
+
+
+class DestinationLocation(Model):
+    id: str
+    poi_id: str | None = None
+    adcode: str
+    name: str
+    city: str
+    address: str = ""
+    lat: float = Field(ge=-90, le=90)
+    lon: float = Field(ge=-180, le=180)
+    verification_token: str = ""
 
 
 class PhotographyIntent(Model):
@@ -87,8 +92,25 @@ class PhotographyIntent(Model):
     styles: list[str] = Field(default_factory=list, max_length=8)
     light: Literal["any", "daylight", "sunrise", "golden_hour", "blue_hour", "night"] = "any"
     equipment: EquipmentIntent | None = None
-    constraints: TravelConstraints | None = None
-    mobility: Literal["standard", "step_free"] = "standard"
+    preferences: RecommendationPreferences = Field(default_factory=RecommendationPreferences)
+    other_requirements: list[str] = Field(default_factory=list, max_length=8)
+
+    @model_validator(mode="before")
+    @classmethod
+    def migrate_old_intent(cls, value):
+        if not isinstance(value, dict):
+            return value
+        value = dict(value)
+        value.pop("constraints", None)
+        mobility = value.pop("mobility", None)
+        if mobility == "step_free" and "preferences" not in value:
+            value["preferences"] = {"step_free": True}
+        return value
+
+    @field_validator("categories")
+    @classmethod
+    def equal_categories(cls, values):
+        return sorted(set(values))
 
     @field_validator("subjects", "styles")
     @classmethod
@@ -108,33 +130,35 @@ class TripBrief(Model):
     start_local: time | None = None
     end_local: time | None = None
     timezone: str = "Asia/Shanghai"
-    genre: Category | None = None
-    intent: PhotographyIntent | None = None
-    profile: UserProfile = UserProfile.ENTHUSIAST
+    intent: PhotographyIntent = Field(default_factory=PhotographyIntent)
+    location: DestinationLocation | None = None
+    edited_fields: list[str] = Field(default_factory=list, max_length=20)
+    auto_time_fields: list[Literal["start_local", "end_local", "end_date"]] = Field(default_factory=list)
     lenses: list[Lens] = Field(default_factory=list, max_length=8)
     sensor: Literal["full_frame", "aps_c", "m43", "phone"] = "full_frame"
     tripod: bool = False
-    max_walk_km: float = Field(default=3, ge=0, le=20)
-    accept_tickets: bool = False
-    crowd_tolerance: Literal["low", "medium", "high"] = "low"
     mode: Literal["mock", "live"] = "mock"
 
     @model_validator(mode="before")
     @classmethod
-    def accept_structured_equipment_and_constraints(cls, value):
+    def migrate_legacy_fields(cls, value):
         if not isinstance(value, dict):
             return value
         data = dict(value)
+        # Read historical JSON without keeping obsolete fields in the active API.
+        old_genre = data.pop("genre", None)
+        for key in ("profile", "max_walk_km", "accept_tickets", "crowd_tolerance"):
+            data.pop(key, None)
         intent = data.get("intent")
         if isinstance(intent, PhotographyIntent):
             intent = intent.model_dump()
-        if isinstance(intent, dict):
-            for group in ("equipment", "constraints"):
-                nested = intent.get(group)
-                if isinstance(nested, dict):
-                    for key, item in nested.items():
-                        # Explicit legacy form fields take priority during migration.
-                        data.setdefault(key, item)
+        if not intent:
+            intent = {"categories": [old_genre]} if old_genre else {}
+        equipment = intent.get("equipment")
+        if isinstance(equipment, dict):
+            for key, item in equipment.items():
+                data.setdefault(key, item)
+        data["intent"] = intent
         return data
 
     @field_validator("timezone")
@@ -148,8 +172,6 @@ class TripBrief(Model):
 
     @model_validator(mode="after")
     def window(self):
-        if self.intent:
-            self.genre = self.intent.categories[0]
         if self.end_date and self.travel_date and not 0 <= (self.end_date-self.travel_date).days <= 1:
             raise ValueError("结束日期须为当天或次日")
         if (self.origin_lat is None) != (self.origin_lon is None):
@@ -173,6 +195,11 @@ class TripNotebook(Model):
     missing_fields: list[str] = Field(default_factory=list)
     questions: list[str] = Field(default_factory=list)
     assumptions: list[str] = Field(default_factory=list)
+    recognized: list[str] = Field(default_factory=list)
+    parsed_fields: list[str] = Field(default_factory=list)
+    parser: str = "defaults"
+    location_choices: list[DestinationLocation] = Field(default_factory=list)
+    location_status: str = "not_requested"
 
 
 class WebSource(Model):
@@ -264,7 +291,7 @@ class PhotoSpot(Model):
     access_evidence_ids: list[str]
     open_from: datetime | None = None
     open_until: datetime | None = None
-    ticket_required: bool = False
+    ticket_required: bool | None = None
     unsafe: bool = False
     popularity: str = "UNVERIFIED"
     tripod_allowed: bool | None = None
@@ -321,6 +348,7 @@ class ScoreBreakdown(Model):
     confidence: float = Field(ge=0, le=1)
     components: dict[str, float]
     weights: dict[str, float]
+    adjustments: dict[str, float] = Field(default_factory=dict)
     evidence_ids: list[str]
 
 
@@ -336,6 +364,7 @@ class CameraAdvice(Model):
 
 
 class ShotTask(Model):
+    alerts: list[str] = Field(default_factory=list)
     id: str
     spot_id: str
     title: str
