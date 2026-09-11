@@ -1,15 +1,19 @@
 import {test, expect, Page} from '@playwright/test';
 
+test.beforeEach(async({page})=>{
+  await page.route('**/v1/location/**',route=>route.fulfill({json:{city:'南京市',note:'测试定位默认值'}}));
+});
+
 async function generate(page:Page) {
-  await page.getByRole('button',{name:'生成我的拍摄计划',exact:true}).click();
+  await page.getByRole('button',{name:'发现值得拍的机位',exact:true}).click();
   await expect(page.getByRole('dialog')).toContainText('让我们对齐这次出发');
   await page.getByRole('button',{name:'确认需求，开始侦察'}).click();
-  await expect(page.getByRole('heading',{name:'你的拍摄计划',exact:true})).toBeVisible();
+  await expect(page.getByRole('heading',{name:'值得拍的候选机位',exact:true})).toBeVisible();
   await expect(page.locator('.task-card')).toHaveCount(4);
 }
 
 test('portrait: generate, inspect evidence, reject, approve and undo', async({page})=>{
-  await page.goto('/');
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click();
   await generate(page);
   await page.getByRole('button',{name:'规则依据 ↗'}).first().click();
   await expect(page.getByRole('dialog')).toContainText('曝光建议起点');
@@ -30,25 +34,25 @@ test('portrait: generate, inspect evidence, reject, approve and undo', async({pa
 });
 
 test('cityscape seed: tripod advice and offline sources', async({page})=>{
-  await page.goto('/');
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click();
   await page.getByRole('button',{name:'蓝调时刻的南京 南京 · 城市夜景'}).click();
   await generate(page);
   await expect(page.locator('.camera-strip').first()).toContainText('100');
-  await expect(page.locator('.plan-summary')).toContainText('蓝调');
+  await expect(page.locator('.task-card').first()).toContainText('蓝调');
   await page.locator('.result-tabs').getByRole('button',{name:/证据与来源/}).click();
   await expect(page.locator('.source-card').first()).toContainText('离线示例');
 });
 
 test('missing date asks before generation', async({page})=>{
-  await page.goto('/');
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click();
   await page.getByLabel('拍摄日期',{exact:true}).fill('');
-  await page.getByRole('button',{name:'生成我的拍摄计划',exact:true}).click();
+  await page.getByRole('button',{name:'发现值得拍的机位',exact:true}).click();
   await expect(page.getByRole('alert').first()).toContainText('请确认具体拍摄日期');
   await expect(page.getByRole('dialog')).toHaveCount(0);
 });
 
 test('coordinate edits require approval and preserve other tasks', async({page})=>{
-  await page.goto('/'); await generate(page);
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click(); await generate(page);
   await page.getByRole('button',{name:'记录站位 / 入口 ↗'}).click();
   await page.getByLabel('确认纬度',{exact:true}).fill('32.0525');
   await page.getByRole('button',{name:'生成位置修改提案'}).click();
@@ -59,7 +63,7 @@ test('coordinate edits require approval and preserve other tasks', async({page})
 });
 
 test('mobile 390px: no horizontal overflow and full generation',async({page})=>{
-  await page.setViewportSize({width:390,height:844}); await page.goto('/');
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click(); await page.setViewportSize({width:390,height:844});
   await generate(page);
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth)).toBeTruthy();
   await page.getByRole('button',{name:'天气变差',exact:true}).first().click();
@@ -68,16 +72,16 @@ test('mobile 390px: no horizontal overflow and full generation',async({page})=>{
 
 test('mock generates with all third party requests blocked',async({page})=>{
   await page.route('**/*', route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort());
-  await page.goto('/'); await generate(page);
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click(); await generate(page);
   await expect(page.locator('.task-card').first()).toContainText('演示数据');
 });
 
 test('composable intent persists all conditions and supports every candidate', async({page})=>{
-  await page.goto('/');
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click();
   await page.getByRole('button',{name:'风光',exact:true}).click();
   await page.getByRole('button',{name:'人像',exact:true}).click();
   await page.getByRole('button',{name:'建筑',exact:true}).click();
-  await page.getByText('组合你的画面与出行条件',{exact:true}).click();
+  await page.getByText('组合你的画面与光线',{exact:true}).click();
   await page.getByLabel('拍摄主体',{exact:true}).fill('湖面，古建筑');
   await page.getByLabel('画面风格',{exact:true}).fill('极简，倒影');
   await page.getByLabel('偏好光线',{exact:true}).selectOption('daylight');
@@ -90,7 +94,7 @@ test('composable intent persists all conditions and supports every candidate', a
   expect(notebook.brief.intent.equipment.lenses).toHaveLength(2);
   expect(notebook.brief.intent.constraints.max_walk_km).toBe(3);
   await page.getByRole('button',{name:/候选机位/}).click();
-  await expect(page.locator('.spot-preview')).toHaveCount(4);
+  await expect(page.locator('.task-card')).toHaveCount(4);
   await expect(page.locator('.photo-empty').first()).toContainText('暂无真实参考图');
 });
 
@@ -111,7 +115,7 @@ test('reference gallery attribution, switching and broken-image fallback', async
     if(route.request().url().endsWith('-2'))return route.fulfill({status:502,body:'unavailable'});
     await route.fulfill({contentType:'image/png',body:Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jRZkAAAAASUVORK5CYII=','base64')});
   });
-  await page.goto('/'); await generate(page);
+  await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click(); await generate(page);
   const gallery=page.locator('.photo-gallery').first();
   await expect(gallery.getByRole('img')).toBeVisible();
   await expect(gallery).toContainText('附近参考 · 非精确站位样片');

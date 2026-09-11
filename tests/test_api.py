@@ -21,7 +21,7 @@ def test_full_api(settings, brief):
         assert client.post("/v1/photo-research", json=brief.model_dump(mode="json"), headers={"Idempotency-Key":"demo"}).json()["research_id"] == job
         events = client.get(f"/v1/photo-research/{job}/events")
         assert "event: done" in events.text
-        proposal = client.post(f"/v1/plans/{job}/proposals", json={"task_id":"shot-1","reason":"模拟降雨","version":1}).json()
+        proposal = client.post(f"/v1/plans/{job}/proposals", json={"task_id":plan["tasks"][0]["id"],"reason":"模拟降雨","version":1}).json()
         assert client.get(f"/v1/plans/{job}").json()["version"] == 1
         approved = client.post(f"/v1/proposals/{proposal['id']}/decision", json={"approve":True,"version":1})
         assert approved.json()["version"] == 2

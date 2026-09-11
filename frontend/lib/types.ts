@@ -1,7 +1,7 @@
 export type PhotographyIntent = {categories:string[]; subjects:string[]; styles:string[]; light:'any'|'daylight'|'sunrise'|'golden_hour'|'blue_hour'|'night'; mobility:'standard'|'step_free'};
 export type PhotoReference = {id:string;provider:string;source_url:string;title:string;author:string;license:string;retrieved_at:string;captured_at:string|null;relation:'poi'|'nearby';latitude:number|null;longitude:number|null;exif:Record<string,string>;evidence_ids:string[]};
 export type Brief = {
-  text: string; destination: string; travel_date: string; start_local: string; end_local: string;
+  end_date?:string|null; origin_lat?:number|null; origin_lon?:number|null; text: string; destination: string; travel_date: string; start_local: string; end_local: string;
   timezone: string; genre: string; intent?:PhotographyIntent | null; profile: string;
   lenses: {name: string; min_mm: number; max_mm: number; max_aperture: number}[];
   sensor: string; tripod: boolean; max_walk_km: number; accept_tickets: boolean;
@@ -12,6 +12,7 @@ export type Spot = {id: string; place: {id:string;name:string;position:Position}
 export type Evidence = {id: string; source_id: string; label: string; statement: string; values: Record<string, unknown>; observed_at: string; valid_until: string | null};
 export type Source = {id: string; title: string; url: string | null; kind: string; platform?:string|null; publisher: string; retrieved_at: string; published_at: string | null; note: string};
 export type Task = {
+  reasons?:string[]; travel_advice?:string[]; distance_km?:number|null;recommended_light?:string;
   id: string; spot_id: string; title: string; start: string; end: string; status: string; composition: string;
   camera: {lens: string; focal_mm: number; equivalent_mm: number; aperture: number; shutter_seconds: number; iso: number; adjustment: string; evidence_ids: string[]};
   weather: {temperature_c: number | null; wind_kmh: number | null; precipitation_mm: number | null; cloud_pct: number | null; visibility_m: number | null; aqi: number | null; label: string; evidence_ids: string[]};
@@ -19,8 +20,8 @@ export type Task = {
   crowd: {level: string; label: string; source_type: string; evidence_ids: string[]};
   risks: string[]; alternative: string; solar_azimuth_deg: number; target_bearing_deg: number | null; evidence_ids: string[];
 };
-export type Plan = {id: string; version: number; brief: Brief; spots: Spot[]; tasks: Task[]; sources: Source[]; evidence: Evidence[];
-  claims: {id: string; statement: string; source_id: string; label: string}[];
+export type Plan = {presentation?:string; id: string; version: number; brief: Brief; spots: Spot[]; tasks: Task[]; sources: Source[]; evidence: Evidence[];
+  claims: {id: string; statement: string; source_id: string; subject_id:string; kind:string; evidence_ids:string[]; label: string}[];
   solar: {sunrise: string | null; sunset: string | null; golden_start: string | null; blue_start: string | null; blue_end: string | null; evidence_ids: string[]};
   routes: {from_id: string; to_id: string; distance_m: number | null; duration_min: number | null; geometry: number[][]; label: string; note: string}[];
   warnings: string[]; excluded: {spot: string; reason: string}[]; metrics: Record<string, unknown>;

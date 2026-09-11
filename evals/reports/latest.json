@@ -1,13 +1,13 @@
 {
-  "generated_at": "2026-09-10T07:37:27.364132+00:00",
+  "generated_at": "2026-09-10T16:26:07.020609+00:00",
   "mode": "offline_fixture",
-  "case_count": 62,
-  "passed": 62,
+  "case_count": 63,
+  "passed": 63,
   "schema_valid_rate": 1.0,
   "evidence_binding_rate": 1.0,
   "hard_gate_violation_rate": 0.0,
   "minimal_change_rate": 1.0,
-  "seed_latency_median_ms": 191.61,
+  "seed_latency_median_ms": 197.36,
   "provider_calls": 0,
   "api_cost_cny": 0,
   "limits": "仅确定性/Fixture 回归；证据指标检查引用完整性，不衡量网页真实性。没有声称 Live 发现准确率。",
@@ -299,6 +299,11 @@
     },
     {
       "id": "minimal-change-2",
+      "category": "minimal-change",
+      "passed": true
+    },
+    {
+      "id": "minimal-change-3",
       "category": "minimal-change",
       "passed": true
     },

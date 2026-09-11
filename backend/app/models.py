@@ -102,6 +102,9 @@ class TripBrief(Model):
     text: str = Field(default="", max_length=1500)
     destination: str = Field(default="", max_length=100)
     travel_date: date | None = None
+    end_date: date | None = None
+    origin_lat: float | None = Field(default=None, ge=-90, le=90)
+    origin_lon: float | None = Field(default=None, ge=-180, le=180)
     start_local: time | None = None
     end_local: time | None = None
     timezone: str = "Asia/Shanghai"
@@ -147,8 +150,21 @@ class TripBrief(Model):
     def window(self):
         if self.intent:
             self.genre = self.intent.categories[0]
-        if self.start_local and self.end_local and self.end_local <= self.start_local:
-            raise ValueError("结束时间必须晚于开始时间；MVP 仅支持当地同日行程")
+        if self.end_date and self.travel_date and not 0 <= (self.end_date-self.travel_date).days <= 1:
+            raise ValueError("结束日期须为当天或次日")
+        if (self.origin_lat is None) != (self.origin_lon is None):
+            raise ValueError("起点经纬度须同时提供")
+        if self.start_local and self.end_local and self.end_local <= self.start_local and (not self.end_date or self.end_date == self.travel_date):
+            raise ValueError("结束时间必须晚于开始时间；跨天请填写次日结束日期")
+        for day, clock in ((self.travel_date, self.start_local), (self.end_date or self.travel_date, self.end_local)):
+            if day and clock:
+                local = datetime.combine(day, clock)
+                zone = ZoneInfo(self.timezone)
+                first = local.replace(tzinfo=zone, fold=0)
+                if first.astimezone(UTC).astimezone(zone).replace(tzinfo=None) != local:
+                    raise ValueError("所选时间因夏令时跳时不存在，请选择其他时间")
+                if first.utcoffset() != local.replace(tzinfo=zone, fold=1).utcoffset():
+                    raise ValueError("所选时间因夏令时回拨有歧义，请选择回拨时段之外的时间")
         return self
 
 
@@ -335,10 +351,15 @@ class ShotTask(Model):
     target_bearing_deg: float | None = None
     risks: list[str]
     alternative: str
+    reasons: list[str] = Field(default_factory=list)
+    travel_advice: list[str] = Field(default_factory=list)
+    distance_km: float | None = None
+    recommended_light: str = "any"
     evidence_ids: list[str]
 
 
 class ShotPlan(Model):
+    presentation: Literal["itinerary", "candidates"] = "itinerary"
     id: str
     version: int = 1
     brief: TripBrief
@@ -389,13 +410,24 @@ class ShotPlan(Model):
                 for item in value:
                     walk(item)
         walk(self.model_dump())
+        if self.presentation == "candidates":
+            if len({t.spot_id for t in self.tasks}) != len(self.tasks):
+                raise ValueError("每个机位只能有一张候选卡片")
+            if self.routes:
+                raise ValueError("候选结果不应包含行程路线")
+            if self.brief.travel_date and self.brief.start_local and self.brief.end_local:
+                zone = ZoneInfo(self.brief.timezone)
+                start = datetime.combine(self.brief.travel_date, self.brief.start_local, zone)
+                end = datetime.combine(self.brief.end_date or self.brief.travel_date, self.brief.end_local, zone)
+                if any(t.start < start or t.end > end for t in self.tasks):
+                    raise ValueError("候选窗口超出用户可用时间")
         previous = None
         for task in self.tasks:
             if task.spot_id not in spot_ids:
                 raise ValueError("机位缺失")
             if task.start.tzinfo is None or task.end.tzinfo is None or task.start >= task.end:
                 raise ValueError("任务时间无效")
-            if previous and task.start < previous:
+            if self.presentation == "itinerary" and previous and task.start < previous:
                 raise ValueError("任务时间重叠")
             previous = task.end
         return self

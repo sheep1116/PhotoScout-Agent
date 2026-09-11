@@ -34,7 +34,8 @@ async def test_live_full_graph_source_bound_and_injection_is_data(settings, brie
     async def emit(*args):
         pass
     plan = await run_graph("contract",brief,settings,emit)
-    assert len(plan.tasks) == 3
+    assert len(plan.tasks) == 1  # one recommendation per viewpoint, not repeated itinerary tasks
+    assert plan.presentation == "candidates"
     assert len(plan.spots) == 1  # aliases/duplicate discovery resolve by provider ID
     assert {s.kind for s in plan.sources} >= {"official","community"}
     assert all(str(s.url) != "https://example.com/unrelated" for s in plan.sources)

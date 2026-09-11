@@ -155,13 +155,19 @@ class FlickrPhotos:
 
 class CommunityDiscovery:
     """Search-index discovery only: no login bypass, scraping or invented community APIs."""
-    purposes = ["摄影机位 拍摄位置 朝向 主体 小红书 抖音 Bilibili 微博 构图经验",
-                "官方 景区公告 开放 预约 临时关闭 摄影地点"]
+    purposes = ["site:bilibili.com 摄影机位 拍摄位置 焦段 朝向 光线 构图经验",
+                "摄影机位 拍摄位置 构图 攻略 景区官方介绍"]
 
     async def discover(self, brief, network, warnings):
         from .providers import ProviderError
         batches = []
         for purpose in self.purposes[:network.settings.max_search_calls]:
+            # A restricted platform must not consume the useful discovery path.
+            # Keep the same two-call ceiling, but broaden the search index when
+            # anonymous Bilibili metadata is unavailable.
+            status = getattr(getattr(network, "community", None), "status", {}).get("bilibili", "")
+            if purpose.startswith("site:bilibili.com") and not status.startswith(("ok", "public_metadata_ok")):
+                purpose = "摄影机位 拍摄位置 朝向 光线 构图经验"
             try:
                 batches.append(await network.search(brief, purpose))
             except ProviderError as error:

@@ -14,6 +14,7 @@ from .changes import position_proposal, refresh_proposal
 from .config import Settings
 from .engine import notebook
 from .graph import run_graph
+from .location import Coordinates, locate
 from .models import TripBrief
 from .proposals import propose
 from .providers import ProviderError, Providers
@@ -102,6 +103,14 @@ def create_app(settings=None, repository=None):
                 "Content-Security-Policy": "default-src 'none'; sandbox", "X-Content-Type-Options": "nosniff"})
         except Exception:
             raise HTTPException(502, "参考图暂时不可用，请查看原始来源") from None
+
+    @app.get("/v1/location/ip")
+    async def location_ip():
+        return await locate(settings)
+
+    @app.post("/v1/location/reverse")
+    async def location_reverse(body: Coordinates):
+        return await locate(settings, body)
 
     @app.get("/v1/health")
     def health():

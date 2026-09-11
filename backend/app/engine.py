@@ -65,7 +65,7 @@ def notebook(brief: TripBrief) -> TripNotebook:
     missing = [f for f in fields if not getattr(result, f)]
     assumptions = ["开放、预约和精确站位需要出发前及现场复核。", "未提供的偏好使用表单中展示的默认值。"]
     if not result.lenses:
-        assumptions.append("未填写镜头：使用手机主摄 24mm 等效；光圈由设备决定。")
+        assumptions.append("未填写镜头：仅提供通用参数起点，实际拍摄请按设备能力调整。")
     return TripNotebook(brief=result, missing_fields=missing,
                         questions=[fields[f] for f in missing], assumptions=assumptions)
 
@@ -92,11 +92,14 @@ def solar_windows(brief, position, ledger):
     observer = Observer(position.lat, position.lon)
     result = {}
     try:
-        times = sun(observer, date=brief.travel_date, tzinfo=UTC)
-        gs, _ = golden_hour(observer, date=brief.travel_date, direction=SunDirection.SETTING, tzinfo=UTC)
-        bs, be = blue_hour(observer, date=brief.travel_date, direction=SunDirection.SETTING, tzinfo=UTC)
-        result = {"sunrise": times["sunrise"], "sunset": times["sunset"], "golden_start": gs,
-                  "blue_start": bs, "blue_end": be}
+        # Astral interprets date in tzinfo: using UTC moved China's sunrise to
+        # the following local day. Calculate the requested local calendar first.
+        zone = ZoneInfo(brief.timezone)
+        times = sun(observer, date=brief.travel_date, tzinfo=zone)
+        gs, _ = golden_hour(observer, date=brief.travel_date, direction=SunDirection.SETTING, tzinfo=zone)
+        bs, be = blue_hour(observer, date=brief.travel_date, direction=SunDirection.SETTING, tzinfo=zone)
+        result = {k: v.astimezone(UTC) for k, v in {"sunrise": times["sunrise"],
+                  "sunset": times["sunset"], "golden_start": gs, "blue_start": bs, "blue_end": be}.items()}
     except ValueError:
         pass  # Polar day/night: no fabricated solar window.
     ids = ledger.add("solar", "Astral 3.2 · 太阳几何", TruthLabel.CALCULATED,
@@ -144,8 +147,8 @@ def fresh_crowd(signal: CrowdSignal, at: datetime) -> CrowdSignal:
 
 
 def camera_advice(brief, index, ledger):
-    is_phone = brief.sensor == "phone" or not brief.lenses
-    lenses = brief.lenses or [Lens(name="手机主摄", min_mm=24, max_mm=24, max_aperture=1.8)]
+    is_phone = brief.sensor == "phone"
+    lenses = brief.lenses or [Lens(name="手机摄像头" if is_phone else "未指定器材（通用起点）", min_mm=24, max_mm=24, max_aperture=1.8 if is_phone else 4)]
     lens = lenses[index % len(lenses)]
     crop = {"full_frame": 1, "aps_c": 1.5, "m43": 2, "phone": 1}[brief.sensor]
     if is_phone:

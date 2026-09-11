@@ -1,0 +1,17 @@
+{
+  "backend_tests": 140,
+  "offline_browser_tests": 11,
+  "saved_live_browser_tests": 1,
+  "offline_rule_evaluations": 63,
+  "live_checks": 18,
+  "typecheck": "passed",
+  "production_build": "passed",
+  "ruff": "passed",
+  "secret_check": "passed",
+  "live_plan_id": "24e162a688f946a6bb25cf85ef175c32",
+  "limits": [
+    "Bilibili direct metadata unavailable; real fallback verified, success metadata flow contract-tested",
+    "Xiaohongshu and Douyin index-only",
+    "One retained live viewpoint, not measured camera coordinates"
+  ]
+}

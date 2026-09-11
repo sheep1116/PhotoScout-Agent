@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     amap_base_url: str = "https://restapi.amap.com"
     database_url: str = f"sqlite:///{ROOT / 'photoscout.db'}"
     redis_url: str = ""
+    enable_community: bool = True
     flickr_api_key: SecretStr = SecretStr("")
     enable_external_photos: bool = True
     discovery_photo_timeout: float = Field(default=8, ge=1, le=20)
@@ -34,4 +35,5 @@ class Settings(BaseSettings):
                 "amap_configured": configured(self.amap_web_service_key),
                 "flickr_configured": configured(self.flickr_api_key),
                 "external_photos_enabled": self.enable_external_photos,
+                "community_enabled": self.enable_community,
                 "model": self.qwen_model, "default_mode": "mock"}

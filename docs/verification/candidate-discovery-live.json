@@ -1,0 +1,103 @@
+{
+  "checked_at": "2026-09-11T00:29:49.561582+08:00",
+  "plan_id": "24e162a688f946a6bb25cf85ef175c32",
+  "passed": true,
+  "checks": {
+    "schema_evidence_integrity": true,
+    "live_no_fixtures": true,
+    "structured_intent": true,
+    "nonempty_tasks": true,
+    "real_reference_metadata": true,
+    "real_image_proxy": true,
+    "candidate_presentation": true,
+    "independent_candidates": true,
+    "no_itinerary_routes": true,
+    "community_isolated": true,
+    "source_claims": true,
+    "photo_claims": true,
+    "mapped_viewpoint": true,
+    "subject_direction": true,
+    "weather": true,
+    "solar": true,
+    "no_false_access": true,
+    "missing_photo_404": true
+  },
+  "metrics": {
+    "elapsed_ms": 24953,
+    "provider_calls": 13,
+    "search_calls": 2,
+    "search_cache_hits": 0,
+    "reported_tokens": 5077,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.1",
+    "photo_references": 3,
+    "mapped_viewpoints": 1,
+    "community": {
+      "bilibili": "restricted_or_unavailable",
+      "xiaohongshu": "index_only",
+      "douyin": "index_only"
+    },
+    "photo_providers": [
+      "amap"
+    ]
+  },
+  "images": [
+    {
+      "id": "photo-80d4c19d1b3f3474d0de",
+      "provider": "amap",
+      "status": 200,
+      "mime": "image/jpeg",
+      "bytes": 23205
+    },
+    {
+      "id": "photo-d6dae88eb897a58363c2",
+      "provider": "amap",
+      "status": 200,
+      "mime": "image/jpeg",
+      "bytes": 495280
+    },
+    {
+      "id": "photo-d13d53c33ab8305f8c36",
+      "provider": "amap",
+      "status": 200,
+      "mime": "image/jpeg",
+      "bytes": 1082703
+    }
+  ],
+  "capabilities": {
+    "dashscope_configured": true,
+    "amap_configured": true,
+    "flickr_configured": false,
+    "external_photos_enabled": true,
+    "community_enabled": true,
+    "model": "qwen3.7-plus",
+    "default_mode": "mock"
+  },
+  "warnings": [
+    "社区 bilibili：restricted_or_unavailable；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 xiaohongshu：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 douyin：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "玄武门：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "宁海中学北门：未能关联用户指定的 玄武湖 范围，未纳入本次行程。",
+    "西桥：未能关联用户指定的 玄武湖 范围，未纳入本次行程。",
+    "文德桥：未能关联用户指定的 玄武湖 范围，未纳入本次行程。",
+    "荷花栈道：玄武湖公园 未能独立定位，保留为待确认线索。",
+    "十里长堤：地图存在歧义或无法定位，未生成精确站位。",
+    "西桥三岔路口：未能关联用户指定的 玄武湖 范围，未纳入本次行程。",
+    "wikimedia：图片服务不可用或响应无效，已保留其他来源。",
+    "Flickr：未配置 API Key，本次跳过；可在服务端配置 FLICKR_API_KEY。",
+    "候选排名不代表出行顺序；推荐窗口可以重叠，由你决定去哪里、去几个、怎么去。"
+  ],
+  "spots": [
+    {
+      "name": "荷花栈道",
+      "place": "玄武湖",
+      "status": "mapped_viewpoint",
+      "subject": [
+        "紫峰大厦"
+      ],
+      "photos": 3
+    }
+  ]
+}

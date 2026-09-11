@@ -3,10 +3,11 @@ from typing import Any, TypedDict
 
 from langgraph.graph import END, START, StateGraph
 
-from .engine import Ledger, build_plan, notebook
-from .fixtures import seed_conditions, seed_routes, seed_spots
+from .engine import Ledger, notebook
+from .fixtures import seed_conditions, seed_spots
 from .models import ShotPlan
 from .providers import ProviderError, Providers
+from .recommendations import build_recommendations
 from .verification import popularity, resolve_access
 
 
@@ -16,7 +17,7 @@ class State(TypedDict, total=False):
     ledger: Any
     spots: list
     claims: list
-    conditions: list
+    conditions: dict
     routes: list
     warnings: list
     plan: Any
@@ -52,17 +53,18 @@ async def run_graph(plan_id, brief, settings, emit, provider=None):
         return {"spots": spots, "claims": claims, "warnings": warnings}
 
     async def conditions(state):
-        await emit("conditions", "正在整合天气、空气质量与路线")
-        if brief.mode == "mock":
-            weather, routes = seed_conditions(brief, ledger), seed_routes(state["spots"], ledger)
-        else:
-            weather = await providers.weather(brief, state["spots"][0].camera, ledger)
-            routes = []
-            for a, b in zip(state["spots"], state["spots"][1:]):
-                route = await providers.walking(a, b, ledger)
-                if route:
-                    routes.append(route)
-        return {"conditions": weather, "routes": routes}
+        await emit("conditions", "正在逐机位整合天气与光线；不安排访问顺序")
+        by_spot = {}
+        dates = [brief.travel_date]
+        if brief.end_date and brief.end_date != brief.travel_date:
+            dates.append(brief.end_date)
+        for spot in state["spots"]:
+            by_spot[spot.id] = []
+            for day in dates:
+                dated = brief.model_copy(update={"travel_date": day})
+                weather = seed_conditions(dated, ledger) if brief.mode == "mock" else await providers.weather(dated, spot.camera, ledger)
+                by_spot[spot.id].extend(weather)
+        return {"conditions": by_spot, "routes": []}
 
     async def verify(state):
         from datetime import UTC, datetime
@@ -75,9 +77,9 @@ async def run_graph(plan_id, brief, settings, emit, provider=None):
         return {"spots": state["spots"]}
 
     async def schedule(state):
-        await emit("schedule", "正在计算太阳窗口、执行门控、匹配镜头与排程")
-        plan = build_plan(plan_id, brief, state["spots"], state["claims"], state["conditions"],
-                          state["routes"], ledger, state["warnings"])
+        await emit("schedule", "正在独立评估每个机位的窗口、镜头与推荐理由")
+        plan = build_recommendations(plan_id, brief, state["spots"], state["claims"], state["conditions"],
+                          ledger, state["warnings"])
         return {"plan": plan}
 
     async def validate(state):
@@ -88,8 +90,9 @@ async def run_graph(plan_id, brief, settings, emit, provider=None):
                         "cost_note": "未取得计费账单；不估算虚假费用", "rule_version": "photo-rules/1.1",
                         "photo_references": sum(len(s.photo_references) for s in plan.spots),
                         "mapped_viewpoints": sum(s.viewpoint_status == "mapped_viewpoint" for s in plan.spots),
+                        "community": getattr(getattr(providers, "community", None), "status", {}),
                         "photo_providers": sorted({p.provider for s in plan.spots for p in s.photo_references})}
-        await emit("validate", "Schema、证据引用和时间冲突校验通过")
+        await emit("validate", "Schema、证据引用和独立候选窗口校验通过")
         return {"plan": plan}
 
     graph = StateGraph(State)
