@@ -6,6 +6,8 @@ import BriefConfirmation from '@/components/BriefConfirmation';
 import PhotoGallery from '@/components/PhotoGallery';
 import {defaultWindow, updateBrief} from '@/lib/defaults';
 import FieldHint from '@/components/FieldHint';
+import ReversePhotoPlanner from '@/components/ReversePhotoPlanner';
+import RecreationResult from '@/components/RecreationResult';
 import ScoutMap from '@/components/ScoutMap';
 import {api, Brief, Notebook, Evidence, localTime, Plan, Proposal, Task} from '@/lib/types';
 
@@ -99,7 +101,7 @@ export default function Home() {
         {error&&<div role="alert" className="error-banner"><Info size={18}/><span>{error}</span><button aria-label="关闭错误" onClick={()=>setError('')}><X size={17}/></button></div>}
         {notice&&<div role="status" className="notice">{notice}</div>}
 
-        <div className="workbench">
+        <details className="reference-entry"><summary><Camera size={18}/>参考照片复刻 <small>上传一张照片，寻找机位与拍法</small></summary><ReversePhotoPlanner brief={brief} onPlan={p=>{setPlan(p);setSelected(p.tasks[0]?.spot_id||'');setTab('spots');setTimeout(()=>resultRef.current?.scrollIntoView({behavior:'smooth'}),80);}}/></details><div className="workbench">
           <section className="brief-panel">
             <div className="panel-title"><span><SlidersHorizontal size={17}/>这次，想拍什么？</span><span className="step-label">01 / BRIEF</span></div>
             <div className="field-heading"><label className="input-label" htmlFor="intent">说说你的拍摄想法</label><FieldHint label="拍摄描述说明">灰色为自动建议，手动修改优先。</FieldHint></div>
@@ -137,7 +139,7 @@ export default function Home() {
           <div className="result-heading"><div><span className="eyebrow muted">YOUR FIELD GUIDE</span><h2>{plan?'值得拍的候选机位':'下一帧，正在等你'}</h2>{plan&&<p>{plan.brief.destination} · {plan.brief.travel_date} · {plan.brief.timezone} <span className="version">V{plan.version}</span></p>}</div>{plan&&<div className="result-actions"><button className="secondary" onClick={refresh} disabled={working}><CloudSun size={15}/>刷新天气</button><button className="secondary" onClick={undo} disabled={plan.version<=1||working}><RotateCcw size={15}/>撤销修改</button><button className="secondary" onClick={exportPlan}><ArrowDownToLine size={15}/>导出发现</button></div>}</div>
           <div className="result-tabs"><div><button className={tab==='spots'?'active':''} onClick={()=>setTab('spots')}>候选机位 {plan&&<span>{new Set(active.map(t=>t.spot_id)).size}</span>}</button><button className={tab==='sources'?'active':''} onClick={()=>setTab('sources')}>证据与来源 {plan&&<span>{plan.sources.length}</span>}</button><button className={tab==='notes'?'active':''} onClick={()=>setTab('notes')}>发现说明</button></div><span className="draft-pill"><i/>{plan?.brief.mode==='live'?'联网草案 · 待现场确认':'离线 Demo · 数据明确标注'}</span></div>
           {!plan?<div className="empty-state"><div className="empty-icon"><Compass size={31} strokeWidth={1.2}/></div><h3>你负责想象，我们负责侦察。</h3><p>选择左侧的南京灵感场景，或写下自己的拍摄想法。<br/>确认后，机位、光线、器材和依据会在这里汇合。</p><button onClick={()=>seed('cityscape')}>试试「蓝调时刻的南京」<ArrowUpRight size={15}/></button></div>:
-          tab==='spots'?<><div className="task-list">{Array.from(new Map(plan.tasks.map(t=>[t.spot_id,t])).values()).map((task,i)=><TaskCard key={task.id} task={task} number={i+1} plan={plan} selected={selected===task.spot_id} onSelect={()=>setSelected(task.spot_id)} cite={cite} change={change} working={working}/>)}</div>{!plan.tasks.length&&<div className="notice">没有符合拍摄时间、光线或安全条件的候选，请查看发现说明。</div>}</>:
+          tab==='spots'?<><RecreationResult key={plan.id} plan={plan}/><div className="task-list">{Array.from(new Map(plan.tasks.map(t=>[t.spot_id,t])).values()).map((task,i)=><TaskCard key={task.id} task={task} number={i+1} plan={plan} selected={selected===task.spot_id} onSelect={()=>setSelected(task.spot_id)} cite={cite} change={change} working={working}/>)}</div>{!plan.tasks.length&&<div className="notice">没有符合拍摄时间、光线或安全条件的候选，请查看发现说明。</div>}</>:
           tab==='sources'?<div className="sources-grid">{plan.sources.map(source=><article key={source.id} className="source-card"><span className={`tag ${source.kind==='official'?'green':''}`}>{source.platform || kinds[source.kind]}</span><h3>{source.title}</h3><p>{source.note||'记录本次规划的数据来源与规则依据。'}</p><small>获取：{new Date(source.retrieved_at).toLocaleString('zh-CN')}<br/>发布：{source.published_at?new Date(source.published_at).toLocaleDateString('zh-CN'):'未提供 / 不适用'}</small><div><button onClick={()=>setDrawer(plan.evidence.filter(e=>e.source_id===source.id))}>查看关联证据 ↗</button>{source.url&&<a href={source.url} target="_blank" rel="noreferrer">原始来源 <ExternalLink size={12}/></a>}</div></article>)}</div>:
           <div className="notes"><h3><Info size={18}/>出发前，再确认一次</h3>{plan.warnings.map((w,i)=><p key={i}>{w}</p>)}{plan.excluded.length>0&&<><h3>未纳入当前候选</h3>{plan.excluded.map((e,i)=><p key={i}><b>{e.spot}</b>：{e.reason}</p>)}</>}<h3>本次运行记录</h3><p>耗时 {String(plan.metrics.elapsed_ms)} ms · Provider 调用 {String(plan.metrics.provider_calls)} 次 · {String(plan.metrics.cost_note)}</p><p>Live 接口状态：百炼 {health?.dashscope_configured?'已配置':'未配置'} / 高德 {health?.amap_configured?'已配置':'未配置'}。配置存在不等于账户或接口已通过联网验证。</p></div>}
         </section>

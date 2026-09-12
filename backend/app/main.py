@@ -63,6 +63,9 @@ def create_app(settings=None, repository=None):
 
     app = FastAPI(title="PhotoScout Agent", version="0.2.0", lifespan=lifespan)
     app.state.repo = repo
+    from .reference_routes import register_reference_routes
+    from .reverse_planning import recreate
+    references = register_reference_routes(app, settings, repo, jobs, workers)
 
     @app.exception_handler(Conflict)
     async def conflict_handler(request, exc):
@@ -141,7 +144,7 @@ def create_app(settings=None, repository=None):
             job["events"].append({"stage": stage, "message": message})
         try:
             async with asyncio.timeout(180):
-                plan = await run_graph(job_id, brief, settings, emit)
+                plan = await recreate(job_id, brief, references, settings, emit) if brief.reverse_context else await run_graph(job_id, brief, settings, emit)
                 repo.save(plan)
                 job["status"] = "complete"
                 await emit("complete", "拍摄草案已保存")
@@ -157,6 +160,10 @@ def create_app(settings=None, repository=None):
 
     @app.post("/v1/photo-research", status_code=202)
     async def create_research(brief: TripBrief, idempotency_key: str | None = Header(default=None)):
+        if brief.reverse_context:
+            saved = references.analysis(brief.reverse_context.analysis_id)
+            if not any(s['id'] == brief.reverse_context.spot_id for s in saved['spots']):
+                raise HTTPException(422, "请选择分析中返回的候选机位")
         network = Providers(settings)
         try:
             book = await resolve_notebook(notebook(brief), network)
@@ -183,7 +190,9 @@ def create_app(settings=None, repository=None):
                     del jobs[key]
                     break
         jobs[job_id] = {"status": "running", "events": []}
-        task = asyncio.create_task(worker(job_id, book.brief))
+        if brief.reverse_context:
+            jobs[job_id]['photo_id'] = saved['photo_id']
+        task = asyncio.create_task(worker(job_id, book.brief), name=job_id)
         workers.add(task)
         task.add_done_callback(workers.discard)
         return response

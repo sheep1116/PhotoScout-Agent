@@ -8,6 +8,7 @@ version = "0.2.0"
 description = "Evidence-first photography planning agent"
 requires-python = ">=3.12"
 dependencies = [
+  "Pillow>=12.3,<13",
   "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic-settings>=2.7,<3",
   "httpx>=0.28,<1", "astral==3.2", "langgraph>=1.0,<2", "tzdata>=2025.1",
   "sqlalchemy>=2.0,<3", "psycopg[binary]>=3.2,<4", "redis>=5,<8"

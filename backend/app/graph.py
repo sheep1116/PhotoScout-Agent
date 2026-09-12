@@ -23,10 +23,10 @@ class State(TypedDict, total=False):
     plan: Any
 
 
-async def run_graph(plan_id, brief, settings, emit, provider=None):
+async def run_graph(plan_id, brief, settings, emit, provider=None, prepared=None):
     brief = notebook(brief).brief
     started = time.monotonic()
-    ledger = Ledger()
+    ledger = prepared["ledger"] if prepared else Ledger()
     providers = provider or Providers(settings)
 
     async def parse(state):
@@ -39,6 +39,8 @@ async def run_graph(plan_id, brief, settings, emit, provider=None):
     async def discover(state):
         await emit("discover", "正在发现候选与来源" if brief.mode == "live" else "正在读取离线机位 Fixture")
         warnings = []
+        if prepared:
+            return {"spots": prepared["spots"], "claims": prepared["claims"], "warnings": list(prepared["warnings"])}
         if brief.mode == "mock":
             if "南京" not in brief.destination:
                 raise ValueError("离线 Demo 仅包含南京；其他目的地请使用 Live 模式")
@@ -79,7 +81,7 @@ async def run_graph(plan_id, brief, settings, emit, provider=None):
     async def schedule(state):
         await emit("schedule", "正在独立评估每个机位的窗口、镜头与推荐理由")
         plan = build_recommendations(plan_id, brief, state["spots"], state["claims"], state["conditions"],
-                          ledger, state["warnings"])
+                          ledger, state["warnings"], reference=prepared.get('reference') if prepared else None)
         return {"plan": plan}
 
     async def validate(state):

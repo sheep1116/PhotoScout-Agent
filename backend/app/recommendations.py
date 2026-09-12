@@ -26,7 +26,22 @@ def distance_km(a, b, c, d):
     return round(6371 * 2 * math.asin(min(1, math.sqrt(value))), 2)
 
 
-def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger, warnings):
+def reference_weather_penalty(weather, reference):
+    target = (reference or {}).get('weather', 'unknown')
+    if target == 'overcast' and weather.cloud_pct is not None:
+        return -max(0, 70-weather.cloud_pct)/3
+    if target == 'clear' and weather.cloud_pct is not None:
+        return -max(0, weather.cloud_pct-30)/3
+    if target == 'rain' and weather.precipitation_mm == 0:
+        return -18
+    if target == 'fog' and weather.visibility_m is not None and weather.visibility_m > 2000:
+        return -18
+    if target == 'snow' and weather.weather_code is not None and weather.weather_code not in (71,73,75,77,85,86):
+        return -18
+    return 0
+
+
+def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger, warnings, reference=None):
     begin, finish = window(brief)
     tasks, excluded = [], []
     primary_solar = None
@@ -75,6 +90,7 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             if not reason:
                 anchor = anchors.get(preference)
                 quality = candidate_score(brief, spot, weather, cursor, solar, Ledger(), index)[0].suitability
+                quality += reference_weather_penalty(weather, reference)
                 if anchor:
                     quality -= abs((cursor-anchor).total_seconds()) / 1800
                 possible.append((quality, cursor, end, weather, solar))
@@ -112,6 +128,14 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
         if spot.step_free is not True:
             travel.append("无台阶通行未核实，推车或轮椅出行请先确认入口。")
         ranking, alerts = candidate_score(brief, spot, weather, start, solar, ledger, index)
+        if reference:
+            adjustment = round(reference_weather_penalty(weather, reference), 1)
+            ranking.suitability = round(max(0, ranking.suitability+adjustment), 1)
+            ranking.adjustments['参考天气匹配'] = adjustment
+            ranking.evidence_ids += ledger.add(f'reference-weather-{index}', '参考天气匹配规则', TruthLabel.INFERRED,
+                '参考天气是视觉推断；按预报比较相似性，不保证还原画面。', {'reference':reference,'adjustment':adjustment,'suitability':ranking.suitability})
+            if adjustment < 0:
+                alerts.append('天气预报与参考照片推断的条件不同，复刻效果可能有差异。')
         risks = list(spot.risks) + alerts
         if spot.access != "OPEN":
             risks.append("开放、预约及管制未获有效官方确认，推荐暂定。")

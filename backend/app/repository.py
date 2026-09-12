@@ -2,13 +2,16 @@
 import json
 
 from sqlalchemy import (
+    JSON,
     Column,
     Integer,
     MetaData,
     String,
     Table,
     Text,
+    cast,
     create_engine,
+    func,
     insert,
     select,
     text,
@@ -77,10 +80,11 @@ class Repository:
 
     def list(self):
         with self.engine.connect() as conn:
-            rows = conn.execute(select(self.plans.c.body).limit(100)).scalars().all()
+            created = cast(self.plans.c.body, JSON)['created_at'].as_string() if self.spatial else func.json_extract(self.plans.c.body, '$.created_at')
+            rows = conn.execute(select(self.plans.c.body).order_by(created.desc(), self.plans.c.id.desc()).limit(100)).scalars().all()
         plans = [ShotPlan.model_validate_json(row) for row in rows]
         return [{"id": p.id, "version": p.version, "destination": p.brief.destination,
-                 "date": p.brief.travel_date.isoformat(), "categories": p.brief.intent.categories} for p in reversed(plans)]
+                 "date": p.brief.travel_date.isoformat(), "categories": p.brief.intent.categories} for p in plans]
 
     def add_proposal(self, proposal):
         with self.engine.begin() as conn:

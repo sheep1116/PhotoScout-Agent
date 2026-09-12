@@ -1,0 +1,118 @@
+{
+  "passed": true,
+  "checks": {
+    "vision_real": true,
+    "has_candidates": true,
+    "multi_day": true,
+    "real_forecast": true,
+    "same_selected_spot": true,
+    "no_second_search": true,
+    "no_itinerary": true,
+    "lens_constrained": true,
+    "uncertainty_visible": true,
+    "no_fixture": true,
+    "schema_valid": true,
+    "reference_weather_in_window_score": true,
+    "localized_comparison": true
+  },
+  "photo_id": "608ec2114a814450aea6f5f6856adf40",
+  "analysis_id": "bd8af90c01e841fc9030b67a7d0dc708",
+  "plan_id": "45318f5080f7494684de945cf38504af",
+  "image_source": "https://www.amap.com/place/BZAPQF03LZ",
+  "visual": {
+    "categories": [
+      "cityscape",
+      "humanities",
+      "architecture"
+    ],
+    "summary": "这是一张城市街道的纪实摄影照片。画面主体是一条幽静的林荫道，右侧矗立着高大的雪松或柏树，枝叶繁茂覆盖了大部分天空。路边竖立着一块清晰的蓝色交通指示牌，上书“颐和路”及双向箭头，表明了具体路段。道路右侧是一道具有年代感的黄色围墙，采用灰色矩形装饰，墙内可见老式砖瓦建筑的屋顶和装有防盗网的窗户，透露出浓厚的历史街区氛围。路面铺设沥青，绘有清晰的白色导向箭头和斑马线，远处有行人和车辆，左侧可见绿色的交通信号灯。整体色调自然写实，展现了典型的中国近代历史风貌区街景。",
+    "subjects": [
+      "颐和路路牌",
+      "高大树木",
+      "黄色围墙",
+      "老式建筑",
+      "街道",
+      "交通标线",
+      "行人"
+    ],
+    "styles": [
+      "纪实摄影",
+      "街头摄影",
+      "日常记录"
+    ],
+    "composition": "采用垂直构图（竖幅），利用高大的树木作为前景框架引导视线向上，路牌位于画面中下部视觉重心位置。道路透视线条向左侧远方延伸，增加了画面的纵深感。",
+    "direction": "绝对朝向未知。光线较为均匀柔和，无强烈直射阳光产生的硬阴影，推测为漫射光环境。",
+    "light": "daylight",
+    "weather": "overcast",
+    "season": "未知",
+    "focal_tendency": "normal",
+    "long_exposure": null,
+    "filters": [],
+    "difficulties": [
+      "高光比控制（树荫与天空）",
+      "复杂背景下的主体突出"
+    ],
+    "hypotheses": [
+      {
+        "name": "中国江苏省南京市鼓楼区颐和路",
+        "reason": "画面中蓝色交通指示牌清晰显示中文‘颐和路’字样。结合右侧典型的民国时期风格黄色围墙、灰色砖瓦建筑以及高大的法桐或雪松植被，高度符合南京颐和路公馆区的历史风貌特征。",
+        "confidence": "high"
+      }
+    ],
+    "confidence": "high"
+  },
+  "candidate_count": 3,
+  "windows": 3,
+  "metrics": {
+    "elapsed_ms": 3859,
+    "provider_calls": 6,
+    "search_calls": 0,
+    "search_cache_hits": 0,
+    "reported_tokens": 0,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.2",
+    "photo_references": 3,
+    "mapped_viewpoints": 1,
+    "community": {},
+    "photo_providers": [
+      "amap"
+    ],
+    "evaluated_days": 3,
+    "reference_analysis_usage": {
+      "input_tokens_details": {
+        "image_tokens": 1902,
+        "text_tokens": 817
+      },
+      "prompt_tokens_details": {
+        "cached_tokens": 0
+      },
+      "total_tokens": 3240,
+      "output_tokens": 521,
+      "input_tokens": 2719,
+      "output_tokens_details": {
+        "text_tokens": 521
+      },
+      "image_tokens": 1902
+    },
+    "reference_discovery_metrics": {
+      "search_calls": 2,
+      "provider_calls": 19,
+      "location_confidence": "low",
+      "note": "地图核验仅确认地标存在，不证明是原照片机位。"
+    }
+  },
+  "warnings": [
+    "社区 bilibili：restricted_or_unavailable；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 xiaohongshu：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "社区 douyin：index_only；仅作摄影线索，平台不可用不阻断其他来源。",
+    "天竺路与牯岭路交叉口：颐和路公馆区 未能独立定位，保留为待确认线索。",
+    "西桥支路紫峰大厦机位：地图存在歧义或无法定位，未生成精确站位。",
+    "宁海中学后门/西桥路口：地图存在歧义或无法定位，未生成精确站位。",
+    "琅琊路与莫干路交叉口歪脖子树：引用标题未体现目的地或地点，未采用通用资料推测机位。",
+    "西桥支路紫峰大厦机位：具体站位未独立定位，仅保留 颐和路历史文化街区 区域线索。",
+    "wikimedia：图片服务不可用或响应无效，已保留其他来源。",
+    "Flickr：未配置 API Key，本次跳过；可在服务端配置 FLICKR_API_KEY。",
+    "EXIF GPS 与候选的直线距离仅用于核对，GPS 可能被修改，不能据此确认原机位。"
+  ]
+}

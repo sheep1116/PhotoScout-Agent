@@ -1,0 +1,24 @@
+import {test,expect} from '@playwright/test';
+const png=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=','base64');
+test('reference photo upload, candidate confirmation, multi-day result and deletion',async({page})=>{
+  await page.route('**/v1/location/**',route=>route.fulfill({json:{city:'南京市',note:'测试城市'}}));
+  await page.goto('/');
+  await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click();
+  await page.locator('.reference-entry>summary').click();
+  await page.getByLabel('上传参考照片',{exact:true}).setInputFiles({name:'reference.png',mimeType:'image/png',buffer:png});
+  await expect(page.getByAltText('你上传的参考照片')).toBeVisible();
+  await page.getByRole('button',{name:'分析画面并寻找机位',exact:true}).click();
+  await expect(page.locator('.reference-choice')).toHaveCount(3);
+  await expect(page.locator('.reference-observations')).toContainText('离线示例');
+  await page.getByLabel('比较未来天数').selectOption('3');
+  await page.locator('.reference-choice').first().click();
+  await page.getByRole('button',{name:'确认候选，生成同款拍摄建议'}).click();
+  await expect(page.getByRole('heading',{name:'如何拍出同款',exact:true})).toBeVisible({timeout:30000});
+  await expect(page.locator('.recreation-windows article')).toHaveCount(3);
+  await expect(page.locator('.task-card')).toHaveCount(1);
+  await page.setViewportSize({width:390,height:844});
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(390);
+  await page.screenshot({path:'test-results/reverse-mobile.png',fullPage:true});
+  await page.getByRole('button',{name:'删除参考图',exact:true}).click();
+  await expect(page.getByAltText('你上传的参考照片')).toHaveCount(0);
+});

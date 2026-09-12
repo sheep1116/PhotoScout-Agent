@@ -120,7 +120,14 @@ class PhotographyIntent(Model):
         return list(dict.fromkeys(v.strip() for v in values))
 
 
+class ReverseContext(Model):
+    analysis_id: str = Field(pattern=r"^[a-f0-9]{32}$")
+    spot_id: str = Field(min_length=1, max_length=150)
+    days: int = Field(default=7, ge=1, le=7)
+
+
 class TripBrief(Model):
+    reverse_context: ReverseContext | None = None
     text: str = Field(default="", max_length=1500)
     destination: str = Field(default="", max_length=100)
     travel_date: date | None = None
@@ -388,6 +395,7 @@ class ShotTask(Model):
 
 
 class ShotPlan(Model):
+    recreation: dict[str, Any] | None = None
     presentation: Literal["itinerary", "candidates"] = "itinerary"
     id: str
     version: int = 1

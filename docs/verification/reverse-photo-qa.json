@@ -1,0 +1,11 @@
+{
+  "backend_tests": 166,
+  "browser_tests": 18,
+  "live_checks": 13,
+  "build": "passed",
+  "typescript": "passed",
+  "ruff": "passed",
+  "secret_scan": "passed",
+  "plan_id": "45318f5080f7494684de945cf38504af",
+  "scope": "单张公开高德参考图的真实多模态分析、三个候选与三天窗口；不代表通用地理定位准确率。"
+}
