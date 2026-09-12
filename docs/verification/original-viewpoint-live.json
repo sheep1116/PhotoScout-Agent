@@ -1,0 +1,170 @@
+{
+  "passed": true,
+  "checks": {
+    "vision_real": true,
+    "has_candidates": true,
+    "one_confirmed_date": true,
+    "identification_without_weather": true,
+    "graded_candidates": true,
+    "real_forecast": true,
+    "same_selected_spot": true,
+    "no_second_search": true,
+    "no_itinerary": true,
+    "lens_constrained": true,
+    "uncertainty_visible": true,
+    "no_fixture": true,
+    "schema_valid": true
+  },
+  "photo_id": "4e8d074da78340039debedcf6ef20495",
+  "analysis_id": "47522bdcfa9c46a1a1c1346dcaa183b5",
+  "plan_id": "93d9b66b495a48aa8280421517f2bdd3",
+  "image_source": "https://www.amap.com/place/BZAPQF03LZ",
+  "visual": {
+    "categories": [
+      "cityscape",
+      "humanities"
+    ],
+    "summary": "这是一张拍摄于北京颐和园附近街道的街景照片。画面主体是一条幽静的林荫道，右侧矗立着具有历史感的黄色围墙和老式建筑，路旁高大的雪松枝繁叶茂。最显著的线索是路边竖立的蓝色交通指示牌，明确标注了“颐和路”及其双向通行规则。路面标线清晰，远处有行人和车辆，整体氛围宁静，展现了北京西郊特有的人文与自然景观结合的风貌。",
+    "subjects": [
+      "颐和路路牌",
+      "黄色围墙",
+      "高大雪松",
+      "林荫道",
+      "老式建筑",
+      "交通信号灯",
+      "路面标线"
+    ],
+    "styles": [
+      "纪实摄影",
+      "街头摄影",
+      "自然光"
+    ],
+    "composition": "采用垂直构图，利用高大的树木作为前景框架，引导视线向街道深处延伸。路牌位于画面中右侧黄金分割点附近，作为视觉锚点。右侧的黄色围墙形成强烈的线条引导，增加了画面的纵深感。",
+    "direction": "绝对朝向未知，根据路牌朝向推断相机大致面向道路延伸方向，光线为漫射光，无明显阴影方向。",
+    "light": "any",
+    "weather": "overcast",
+    "season": "夏季",
+    "focal_tendency": "normal",
+    "long_exposure": null,
+    "filters": [],
+    "difficulties": [
+      "高光比下的树叶细节保留",
+      "复杂背景下的主体突出",
+      "部分视觉属性无法归类，保留未知：light"
+    ],
+    "hypotheses": [
+      {
+        "name": "北京市海淀区颐和路与圆明园西路交叉口南侧路边",
+        "reason": "图中蓝色路牌明确写有“颐和路”及双向箭头，表明拍摄者位于该路段。右侧典型的黄色围墙和老式砖瓦建筑符合颐和园周边或相关机构（如党校、干休所）的建筑特征。左侧远处的红绿灯和路口暗示此处靠近一个交叉路口。结合北京地理信息，颐和路位于颐和园东侧，连接圆明园西路，此机位极有可能是站在颐和路路北或路南的人行道上，靠近路口处拍摄。",
+        "confidence": "high",
+        "city": "北京市",
+        "anchor_poi": "颐和路",
+        "place_name": "海淀区颐和园周边",
+        "camera_instruction": "站在颐和路的人行道上，背靠或侧对路口，镜头朝向街道延伸方向，确保路牌和右侧黄色围墙在画面右侧三分之一处，利用树木作为顶部框架。",
+        "landmarks": [
+          "颐和路路牌",
+          "黄色围墙",
+          "雪松"
+        ],
+        "relations": [
+          {
+            "first": "颐和路路牌",
+            "second": "黄色围墙",
+            "relation": "left_of"
+          },
+          {
+            "first": "雪松",
+            "second": "颐和路路牌",
+            "relation": "overlaps"
+          }
+        ]
+      }
+    ],
+    "confidence": "high"
+  },
+  "candidate_count": 2,
+  "mapped_count": 1,
+  "candidates": [
+    {
+      "id": "original-1",
+      "name": "南京市鼓楼区颐和路11号院门前路段",
+      "city": "南京市",
+      "camera_instruction": "站在颐和路人行道上，面向道路延伸方向。需捕捉右侧标志性的鹅黄色拉毛围墙（公馆外墙）及上方高大的梧桐或雪松树冠。画面需包含蓝底白字的“颐和路”交通指示牌，通常位于路口或路段显著位置。注意避开商拍人群，利用漫射光或夜间路灯氛围拍摄。",
+      "reason": "垂直构图，右侧黄色围墙形成强烈引导线，路牌作为视觉锚点位于中右部，树冠覆盖上方形成框架。用户假设中的“雪松”在南京颐和路实际多为法国梧桐，但视觉形态相似，需以现场植被为准。",
+      "status": "high_inference",
+      "score": 65,
+      "spot_id": "original-1",
+      "support": [
+        "Agent 找到相关网页线索（来源关联仍属模型判断）",
+        "高德匹配到 颐和路；精确站位仍待确认",
+        "距文件 GPS 约 0.18 km（记录未经鉴真）"
+      ],
+      "missing": [],
+      "conflicts": [],
+      "geometry": [],
+      "evidence_ids": [
+        "ev-original-1-hypothesis",
+        "ev-ref-web-a4f2d6684a1aaf7f",
+        "ev-ref-web-445adc66221c5d83",
+        "ev-ref-web-04699fffd4b2ea51",
+        "ev-ref-map-26edd23fad0116b4",
+        "ev-original-1-gps"
+      ],
+      "source_ids": [
+        "src-ref-web-a4f2d6684a1aaf7f",
+        "src-ref-web-445adc66221c5d83",
+        "src-ref-web-04699fffd4b2ea51"
+      ],
+      "verification_scope": "原片身份尚未独立确认；评分为证据排序分，不是概率。"
+    },
+    {
+      "id": "original-0",
+      "name": "北京市海淀区颐和路与圆明园西路交叉口南侧路边",
+      "city": "北京市",
+      "camera_instruction": "站在颐和路的人行道上，背靠或侧对路口，镜头朝向街道延伸方向，确保路牌和右侧黄色围墙在画面右侧三分之一处，利用树木作为顶部框架。",
+      "reason": "图中蓝色路牌明确写有“颐和路”及双向箭头，表明拍摄者位于该路段。右侧典型的黄色围墙和老式砖瓦建筑符合颐和园周边或相关机构（如党校、干休所）的建筑特征。左侧远处的红绿灯和路口暗示此处靠近一个交叉路口。结合北京地理信息，颐和路位于颐和园东侧，连接圆明园西路，此机位极有可能是站在颐和路路北或路南的人行道上，靠近路口处拍摄。",
+      "status": "possible",
+      "score": 45,
+      "spot_id": null,
+      "support": [],
+      "missing": [
+        "尚缺独立网页证据",
+        "地图尚未唯一匹配；保留机位推断，不提供猜测坐标"
+      ],
+      "conflicts": [],
+      "geometry": [],
+      "evidence_ids": [
+        "ev-original-0-hypothesis"
+      ],
+      "source_ids": [],
+      "verification_scope": "原片身份尚未独立确认；评分为证据排序分，不是概率。"
+    }
+  ],
+  "windows": 1,
+  "metrics": {
+    "elapsed_ms": 2250,
+    "provider_calls": 2,
+    "search_calls": 0,
+    "search_cache_hits": 0,
+    "reported_tokens": 0,
+    "cost_cny": null,
+    "cost_note": "未取得计费账单；不估算虚假费用",
+    "rule_version": "photo-rules/1.2",
+    "photo_references": 3,
+    "mapped_viewpoints": 0,
+    "community": {},
+    "photo_providers": [
+      "amap"
+    ],
+    "reference_analysis_usage": {
+      "cache_hit": true
+    },
+    "reference_discovery_metrics": {
+      "search_calls": 1,
+      "provider_calls": 5,
+      "weather_calls": 0,
+      "note": "证据评分用于排序；地图匹配不等于原片机位鉴定。"
+    }
+  },
+  "warnings": []
+}

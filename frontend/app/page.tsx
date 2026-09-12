@@ -101,7 +101,7 @@ export default function Home() {
         {error&&<div role="alert" className="error-banner"><Info size={18}/><span>{error}</span><button aria-label="关闭错误" onClick={()=>setError('')}><X size={17}/></button></div>}
         {notice&&<div role="status" className="notice">{notice}</div>}
 
-        <details className="reference-entry"><summary><Camera size={18}/>参考照片复刻 <small>上传一张照片，寻找机位与拍法</small></summary><ReversePhotoPlanner brief={brief} onPlan={p=>{setPlan(p);setSelected(p.tasks[0]?.spot_id||'');setTab('spots');setTimeout(()=>resultRef.current?.scrollIntoView({behavior:'smooth'}),80);}}/></details><div className="workbench">
+        <details className="reference-entry"><summary><Camera size={18}/>参考照片寻找原机位 <small>上传照片，推断并核验拍摄位置</small></summary><ReversePhotoPlanner brief={brief} onPlan={p=>{setPlan(p);setSelected(p.tasks[0]?.spot_id||'');setTab('spots');setTimeout(()=>resultRef.current?.scrollIntoView({behavior:'smooth'}),80);}}/></details><div className="workbench">
           <section className="brief-panel">
             <div className="panel-title"><span><SlidersHorizontal size={17}/>这次，想拍什么？</span><span className="step-label">01 / BRIEF</span></div>
             <div className="field-heading"><label className="input-label" htmlFor="intent">说说你的拍摄想法</label><FieldHint label="拍摄描述说明">灰色为自动建议，手动修改优先。</FieldHint></div>

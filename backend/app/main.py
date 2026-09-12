@@ -162,13 +162,21 @@ def create_app(settings=None, repository=None):
     async def create_research(brief: TripBrief, idempotency_key: str | None = Header(default=None)):
         if brief.reverse_context:
             saved = references.analysis(brief.reverse_context.analysis_id)
-            if not any(s['id'] == brief.reverse_context.spot_id for s in saved['spots']):
-                raise HTTPException(422, "请选择分析中返回的候选机位")
-        network = Providers(settings)
-        try:
-            book = await resolve_notebook(notebook(brief), network)
-        finally:
-            await network.client.aclose()
+            chosen = next((s for s in saved['spots'] if s['id'] == brief.reverse_context.spot_id),None)
+            if chosen is None or saved.get('vision_version') != 2:
+                raise HTTPException(422, "请选择新版分析中已匹配地图的候选机位")
+            if saved['data_mode'] != brief.mode:
+                raise HTTPException(422, "图片分析与规划的数据模式不一致")
+            candidate = next(c for c in saved['candidates'] if c['spot_id'] == chosen['id'])
+            brief.destination = candidate['city'] or chosen['place']['name']
+            brief.location = None
+            book = notebook(brief)  # Coordinates come from the selected server-side spot.
+        else:
+            network = Providers(settings)
+            try:
+                book = await resolve_notebook(notebook(brief), network)
+            finally:
+                await network.client.aclose()
         if book.missing_fields or book.location_status in ("needs_choice", "unavailable"):
             return {"status": "needs_clarification", "notebook": book.model_dump(mode="json")}
         if book.brief.mode == "mock" and "南京" not in book.brief.destination:

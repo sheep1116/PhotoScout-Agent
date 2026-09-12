@@ -7,7 +7,7 @@ from fastapi.testclient import TestClient
 from PIL import Image
 
 from backend.app.main import create_app
-from backend.app.models import ReverseContext, ShotPlan
+from backend.app.models import ReferenceSearch, ReverseContext, ShotPlan
 from backend.app.reference_photos import ReferenceStore, decode_photo
 from backend.app.repository import Repository
 from backend.app.reverse_planning import analyze_reference, field_of_view, nd_exposure, recreate
@@ -51,7 +51,7 @@ def test_reference_api_private_preview_delete_and_bad_upload(settings):
         assert client.get(f'/v1/reference-photos/{identifier}').status_code==404
 
 
-async def test_reverse_reuses_candidates_and_evidence_across_dates(settings,brief,monkeypatch):
+async def test_reverse_reuses_confirmed_candidate_for_one_date(settings,brief,monkeypatch):
     repo=Repository(settings.database_url)
     store=ReferenceStore(repo.engine)
     photo=store.upload(picture())
@@ -60,7 +60,7 @@ async def test_reverse_reuses_candidates_and_evidence_across_dates(settings,brie
     identifier='a'*32
     async def emit(*args):
         pass
-    body=await analyze_reference(identifier,photo['id'],brief,'similar',store,settings,emit)
+    body=await analyze_reference(identifier,photo['id'],ReferenceSearch(data_mode='mock'),store,settings,emit)
     assert len(body['spots'])==3
     assert body['visual']['summary'].startswith('离线示例')
     # Persisted data survives a new store instance; no second candidate search is allowed.
@@ -68,14 +68,13 @@ async def test_reverse_reuses_candidates_and_evidence_across_dates(settings,brie
     async def no_discovery(*args):
         raise AssertionError('repeated discovery')
     monkeypatch.setattr('backend.app.providers.Providers.discover',no_discovery)
-    brief.reverse_context=ReverseContext(analysis_id=identifier,spot_id=body['spots'][0]['id'],days=3)
+    brief.reverse_context=ReverseContext(analysis_id=identifier,spot_id=body['spots'][0]['id'])
     plan=await recreate('reverse-test',brief,store,settings,emit)
     ShotPlan.model_validate(plan.model_dump())
-    assert plan.recreation['evaluated_days']==3
-    assert len(plan.recreation['windows'])==3
+    assert len(plan.recreation['windows'])==1
     assert not plan.routes and len(plan.tasks)==1
     assert plan.tasks[0].camera.focal_mm==35  # user's fixed lens constrains EXIF 85 mm target
-    assert plan.recreation['location_confidence']=='low'
+    assert plan.recreation['location_confidence']=='possible'
     all_ids={e.id for e in plan.evidence}
     assert all(set(w['evidence_ids'])<=all_ids for w in plan.recreation['windows'])
     assert any(e.label=='USER_CONFIRMED' for e in plan.evidence)
@@ -84,16 +83,16 @@ async def test_reverse_reuses_candidates_and_evidence_across_dates(settings,brie
         await recreate('deleted',brief,store,settings,emit)
 
 
-async def test_no_region_returns_analysis_without_guessing(settings,brief):
+async def test_analysis_has_no_date_or_weather_dependency(settings,brief,monkeypatch):
     repo=Repository(settings.database_url)
     store=ReferenceStore(repo.engine)
     photo=store.upload(picture())
     brief.destination=''
     async def emit(*args):
         pass
-    body=await analyze_reference('b'*32,photo['id'],brief,'original',store,settings,emit)
-    assert body['visual'] and not body['spots']
-    assert body['warnings']
+    body=await analyze_reference('b'*32,photo['id'],ReferenceSearch(data_mode='mock'),store,settings,emit)
+    assert body['visual'] and body['candidates']
+    assert 'brief' not in body and body['metrics']['weather_calls']==0
 
 
 def test_optics_and_vision_schema_boundaries():
@@ -108,7 +107,7 @@ def test_optics_and_vision_schema_boundaries():
 def test_reference_jobs_complete_on_shared_status_endpoint(settings,brief):
     with TestClient(create_app(settings)) as client:
         identifier=client.post('/v1/reference-photos',content=picture(),headers={'Content-Type':'image/jpeg'}).json()['id']
-        started=client.post(f'/v1/reference-photos/{identifier}/analysis',json={'brief':brief.model_dump(mode='json'),'mode':'original'})
+        started=client.post(f'/v1/reference-photos/{identifier}/analysis',json={'data_mode':'mock'})
         assert started.status_code==202
         job_id=started.json()['research_id']
         for _ in range(30):
@@ -168,8 +167,8 @@ async def test_visual_cache_and_explicit_preferences_are_preserved(settings,brie
     brief.destination=''
     async def emit(*args):
         pass
-    first=await analyze_reference('c'*32,photo['id'],brief,'original',store,settings,emit)
-    second=await analyze_reference('d'*32,photo['id'],brief,'similar',store,settings,emit)
+    first=await analyze_reference('c'*32,photo['id'],ReferenceSearch(data_mode='mock'),store,settings,emit)
+    second=await analyze_reference('d'*32,photo['id'],ReferenceSearch(data_mode='mock'),store,settings,emit)
     assert first['visual']==second['visual']
     assert second['usage']['cache_hit']
 

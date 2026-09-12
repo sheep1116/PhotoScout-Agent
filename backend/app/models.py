@@ -123,7 +123,12 @@ class PhotographyIntent(Model):
 class ReverseContext(Model):
     analysis_id: str = Field(pattern=r"^[a-f0-9]{32}$")
     spot_id: str = Field(min_length=1, max_length=150)
-    days: int = Field(default=7, ge=1, le=7)
+
+
+class ReferenceSearch(Model):
+    region_hint: str = Field(default='',max_length=150)
+    notes: str = Field(default='',max_length=1500)
+    data_mode: Literal['live','mock'] = 'live'
 
 
 class TripBrief(Model):
@@ -412,6 +417,19 @@ class ShotPlan(Model):
     warnings: list[str]
     excluded: list[dict[str, str]] = Field(default_factory=list)
     metrics: dict[str, Any] = Field(default_factory=dict)
+
+    @model_validator(mode="before")
+    @classmethod
+    def read_legacy_reference_plan(cls, value):
+        if isinstance(value, dict) and isinstance(value.get('brief'), dict):
+            value = dict(value)
+            brief = dict(value['brief'])
+            if isinstance(brief.get('reverse_context'), dict):
+                context = dict(brief['reverse_context'])
+                context.pop('days', None)
+                brief['reverse_context'] = context
+            value['brief'] = brief
+        return value
 
     @model_validator(mode="after")
     def integrity(self):

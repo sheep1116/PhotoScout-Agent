@@ -58,7 +58,7 @@
 .reference-entry>summary {display:flex;align-items:center;gap:10px;cursor:pointer;font-size:13px;color:#415833;}
 .reference-entry>summary small {margin-left:auto;color:#89947e;font-size:10px;}
 .reverse-planner {padding-top:20px;font-size:12px;line-height:1.7;}
-.reverse-controls {display:grid;grid-template-columns:1.3fr 1fr 1.4fr .8fr;gap:14px;}
+.reverse-controls {display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:14px;}
 .reverse-controls label {display:grid;gap:6px;}
 .reverse-controls input,.reverse-controls select {min-width:0;width:100%;padding:9px;border:1px solid #dfe5d7;border-radius:6px;background:#f8f9f4;}
 .reference-preview,.recreation-reference {display:flex;gap:20px;align-items:center;margin:18px 0;}

@@ -4,19 +4,10 @@ from uuid import uuid4
 
 from fastapi import HTTPException, Request
 from fastapi.responses import Response
-from pydantic import Field
 
-from .destinations import resolve_notebook
-from .engine import notebook
-from .models import Model, TripBrief
-from .providers import Providers
+from .models import ReferenceSearch
 from .reference_photos import MAX_BYTES, ReferenceStore
 from .reverse_planning import analyze_reference
-
-
-class AnalysisRequest(Model):
-    brief: TripBrief
-    mode: str = Field(default='original',pattern='^(original|similar)$')
 
 
 def register_reference_routes(app,settings,repo,jobs,workers):
@@ -81,17 +72,10 @@ def register_reference_routes(app,settings,repo,jobs,workers):
             raise HTTPException(502,'候选参考图暂不可用') from None
 
     @app.post('/v1/reference-photos/{photo_id}/analysis',status_code=202)
-    async def start_analysis(photo_id:str,body:AnalysisRequest):
+    async def start_analysis(photo_id:str,body:ReferenceSearch):
         store.photo(photo_id)
         if len([j for j in jobs.values() if j['status']=='running'])>=3:
             raise HTTPException(429,'已有多个生成任务，请稍后重试')
-        network=Providers(settings)
-        try:
-            book=await resolve_notebook(notebook(body.brief),network)
-        finally:
-            await network.client.aclose()
-        if any(field!='destination' for field in book.missing_fields) or book.location_status in ('needs_choice','unavailable'):
-            return {'status':'needs_clarification','notebook':book.model_dump(mode='json')}
         if len(jobs)>=100:
             for identifier in list(jobs):
                 if jobs[identifier]['status']!='running':
@@ -106,7 +90,7 @@ def register_reference_routes(app,settings,repo,jobs,workers):
         async def run():
             try:
                 async with asyncio.timeout(180):
-                    await analyze_reference(identifier,photo_id,book.brief,body.mode,store,settings,emit)
+                    await analyze_reference(identifier,photo_id,body,store,settings,emit)
                 jobs[identifier].update(status='complete',analysis_id=identifier)
             except asyncio.CancelledError:
                 jobs[identifier].update(status='failed',error='分析已取消或服务重启')

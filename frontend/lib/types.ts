@@ -4,7 +4,7 @@ export type DestinationLocation = {id:string;poi_id:string|null;adcode:string;na
 export type Notebook = {brief:Brief;questions:string[];missing_fields:string[];assumptions:string[];recognized:string[];parsed_fields:string[];parser:string;location_choices:DestinationLocation[];location_status:string};
 export type PhotoReference = {id:string;provider:string;source_url:string;title:string;author:string;license:string;retrieved_at:string;captured_at:string|null;relation:'poi'|'nearby';latitude:number|null;longitude:number|null;exif:Record<string,string>;evidence_ids:string[]};
 export type Brief = {
-  reverse_context?:{analysis_id:string;spot_id:string;days:number};
+  reverse_context?:{analysis_id:string;spot_id:string};
   auto_time_fields?:('start_local'|'end_local'|'end_date')[];
   end_date?:string|null; origin_lat?:number|null; origin_lon?:number|null; text: string; destination: string; travel_date: string; start_local: string; end_local: string;
   timezone: string; intent:PhotographyIntent;location?:DestinationLocation|null;edited_fields?:string[];
@@ -24,7 +24,7 @@ export type Task = {
   crowd: {level: string; label: string; source_type: string; evidence_ids: string[]};
   risks: string[]; alternative: string; solar_azimuth_deg: number; target_bearing_deg: number | null; evidence_ids: string[];
 };
-export type Plan = {recreation?:{generated_version?:number;photo_id:string;mode:string;visual:{summary:string};location_note:string;difficulties:string[];windows:{date:string;start:string;end:string;match:number;direction_deg:number|null;camera:Task["camera"];differences:string[];equipment:string[]}[]}|null;presentation?:string; id: string; version: number; brief: Brief; spots: Spot[]; tasks: Task[]; sources: Source[]; evidence: Evidence[];
+export type Plan = {recreation?:{generated_version?:number;photo_id:string;visual:{summary:string};location_note:string;difficulties:string[];windows:{date:string;start:string;end:string;match:number;direction_deg:number|null;camera:Task["camera"];differences:string[];equipment:string[]}[]}|null;presentation?:string; id: string; version: number; brief: Brief; spots: Spot[]; tasks: Task[]; sources: Source[]; evidence: Evidence[];
   claims: {id: string; statement: string; source_id: string; subject_id:string; kind:string; evidence_ids:string[]; label: string}[];
   solar: {sunrise: string | null; sunset: string | null; golden_start: string | null; blue_start: string | null; blue_end: string | null; evidence_ids: string[]};
   routes: {from_id: string; to_id: string; distance_m: number | null; duration_min: number | null; geometry: number[][]; label: string; note: string}[];

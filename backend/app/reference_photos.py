@@ -98,7 +98,7 @@ class ReferenceStore:
             rows=conn.execute(select(self.analyses.c.body).where(self.analyses.c.photo_id==photo_id)).scalars().all()
         for raw in reversed(rows):
             body=json.loads(raw)
-            if body.get('visual') and body.get('model')==model and body['brief']['mode']==mode:
+            if body.get('visual') and body.get('model')==model and body.get('data_mode')==mode and body.get('vision_version')==2:
                 return body['visual']
         return None
 
