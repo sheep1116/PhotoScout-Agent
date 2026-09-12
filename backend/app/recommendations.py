@@ -7,7 +7,7 @@ from astral import Observer
 from astral.sun import azimuth
 
 from .engine import Ledger, bearing, camera_advice, gate, score, solar_windows
-from .models import CrowdSignal, ShotPlan, ShotTask, TruthLabel
+from .models import AgentAnswer, CrowdSignal, ShotPlan, ShotTask, SolarWindow, TruthLabel
 
 
 def window(brief):
@@ -26,6 +26,15 @@ def distance_km(a, b, c, d):
     return round(6371 * 2 * math.asin(min(1, math.sqrt(value))), 2)
 
 
+def circular_span(values):
+    """Smallest compass arc containing all bearings."""
+    values = sorted(value % 360 for value in values)
+    if len(values) < 2:
+        return None
+    gaps = [values[i + 1] - values[i] for i in range(len(values) - 1)] + [values[0] + 360 - values[-1]]
+    return round(360 - max(gaps), 1)
+
+
 def reference_weather_penalty(weather, reference):
     target = (reference or {}).get('weather', 'unknown')
     if target == 'overcast' and weather.cloud_pct is not None:
@@ -41,7 +50,8 @@ def reference_weather_penalty(weather, reference):
     return 0
 
 
-def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger, warnings, reference=None):
+def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger, warnings, reference=None,
+                          agent_answer=None):
     begin, finish = window(brief)
     tasks, excluded = [], []
     primary_solar = None
@@ -110,13 +120,24 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             advice_brief.intent.light = actual_light
         crowd_ids = ledger.add(f"candidate-crowd-{index}", "客流信息", TruthLabel.UNKNOWN,
                                "暂无游客客流数据；不以客流偏好排除候选。")
-        target = spot.subjects[0].position if spot.subjects else None
-        direction = bearing(spot.camera, target) if target else None
+        subject_bearings = {subject.name: bearing(spot.camera, subject.position)
+                            for subject in spot.subjects if subject.position}
+        direction = next(iter(subject_bearings.values()), None)
+        subject_span = circular_span(list(subject_bearings.values()))
+        camera = camera_advice(advice_brief, index, ledger)
+        field_of_view = round(math.degrees(2 * math.atan(36 / (2 * camera.equivalent_mm))), 1) if camera.equivalent_mm else None
+        if subject_span is None:
+            framing_assessment = "缺少至少两个可定位主体，暂不能核验同框范围。"
+        elif field_of_view and subject_span <= field_of_view:
+            framing_assessment = f"两主体方位跨度约 {subject_span}°，小于当前焦段约 {field_of_view}° 的水平视角；平面几何上可同框，遮挡仍待现场确认。"
+        else:
+            framing_assessment = f"两主体方位跨度约 {subject_span}°，大于当前焦段约 {field_of_view}° 的水平视角；建议缩短焦段或调整站位。"
         solar_angle = round(azimuth(Observer(spot.camera.lat, spot.camera.lon), start), 1)
         geometry = ledger.add(f"candidate-geometry-{index}", "机位方向与时间窗口", TruthLabel.CALCULATED,
             "每个机位独立评估；窗口可重叠，不代表访问顺序。方位角不保证视线无遮挡。",
             {"start": start.isoformat(), "end": end.isoformat(), "target_bearing_deg": direction,
-             "solar_azimuth_deg": solar_angle})
+             "subject_bearings_deg": subject_bearings, "subject_separation_deg": subject_span,
+             "field_of_view_deg": field_of_view, "solar_azimuth_deg": solar_angle})
         distance = None
         travel = ["停车、爬升、入口与实际步行时间暂无可靠数据，请出发前查看地图。"]
         if brief.origin_lat is not None:
@@ -144,10 +165,12 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
         if weather.at < start-timedelta(minutes=90) or weather.at > end+timedelta(minutes=90):
             risks.append("天气快照与推荐窗口距离较远，请刷新后确认。")
         tasks.append(ShotTask(id=f"candidate-{index+1}", spot_id=spot.id, title=spot.name, start=start, end=end,
-            status="TENTATIVE", composition=spot.composition, camera=camera_advice(advice_brief, index, ledger),
+            status="TENTATIVE", composition=spot.composition, camera=camera,
             weather=weather, crowd=CrowdSignal(spatial_scope=spot.name, evidence_ids=crowd_ids),
             score=ranking, alerts=alerts, solar_azimuth_deg=solar_angle,
-            target_bearing_deg=direction, risks=risks, alternative="条件不合适时暂缓该机位，由你选择其他候选。",
+            target_bearing_deg=direction, subject_bearings_deg=subject_bearings,
+            subject_separation_deg=subject_span, field_of_view_deg=field_of_view,
+            framing_assessment=framing_assessment, risks=risks, alternative="条件不合适时暂缓该机位，由你选择其他候选。",
             reasons=["匹配摄影意图：" + " / ".join(brief.intent.categories),
                      "来源线索已关联高德地标；站位精度与开放状态分别标注。" if brief.mode == "live" else "离线示例地标与构图；尚未经过真实来源核验。",
                      "独立比较可用时段的天气和光线，不受其他机位的访问顺序约束。"],
@@ -155,11 +178,14 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             travel_advice=travel, evidence_ids=spot.camera.evidence_ids + spot.access_evidence_ids + geometry + solar.evidence_ids))
     tasks.sort(key=lambda t: (t.score.suitability, t.score.confidence), reverse=True)
     if primary_solar is None:
-        primary_solar = solar_windows(brief, spots[0].camera, ledger)
+        ids = ledger.add("solar-unavailable", "太阳几何待定位", TruthLabel.UNKNOWN,
+                         "没有可定位的相机候选，不能计算该机位的太阳与拍摄方向。")
+        primary_solar = SolarWindow(evidence_ids=ids)
     if brief.mode == "mock":
         warnings.insert(0, "离线演示：地点、天气与经验为 Fixture，不代表现场情况。")
     warnings.append("候选排名不代表出行顺序；推荐窗口可以重叠，由你决定去哪里、去几个、怎么去。")
-    return ShotPlan(id=plan_id, presentation="candidates", brief=brief, spots=spots, tasks=tasks, routes=[],
+    return ShotPlan(id=plan_id, presentation="candidates", brief=brief,
+        agent_answer=agent_answer or AgentAnswer(), spots=spots, tasks=tasks, routes=[],
         solar=primary_solar, sources=ledger.sources, claims=claims, evidence=ledger.evidence,
         warnings=warnings, excluded=excluded)
 

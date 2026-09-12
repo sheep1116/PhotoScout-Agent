@@ -9,7 +9,7 @@ from backend.app.engine import Ledger, camera_advice, notebook, score, solar_win
 from backend.app.fixtures import seed_conditions, seed_spots
 from backend.app.intent_parser import parse_description
 from backend.app.main import create_app
-from backend.app.models import PhotographyIntent
+from backend.app.models import PhotographyIntent, Subject
 from backend.app.providers import Providers
 from backend.app.recommendations import build_recommendations
 
@@ -21,6 +21,18 @@ def candidates(brief, weather_changes=None, edit=None):
         edit(spots)
     weather = [w.model_copy(update=weather_changes or {}) for w in seed_conditions(brief, ledger)]
     return build_recommendations('soft', brief, spots, claims, {s.id: weather for s in spots}, ledger, [])
+
+
+def test_two_mapped_subjects_produce_bearings_and_framing_assessment(brief):
+    def add_second_subject(spots):
+        first = spots[0]
+        first.subjects = [Subject(name=first.subjects[0].name, position=spots[1].camera),
+                          Subject(name="第二主体", position=first.place.position)]
+    plan = candidates(brief, edit=add_second_subject)
+    task = next(task for task in plan.tasks if task.spot_id == plan.spots[0].id)
+    assert len(task.subject_bearings_deg) == 2
+    assert task.subject_separation_deg is not None and task.field_of_view_deg is not None
+    assert "方位跨度" in task.framing_assessment
 
 
 @pytest.mark.parametrize('changes', [{'precipitation_mm': 3, 'cloud_pct': 95}, {'wind_kmh': 65}, {'weather_code': 95}])

@@ -5,7 +5,7 @@ from langgraph.graph import END, START, StateGraph
 
 from .engine import RULE_VERSION, Ledger, notebook
 from .fixtures import seed_conditions, seed_spots
-from .models import ShotPlan
+from .models import AgentAnswer, ShotPlan
 from .providers import ProviderError, Providers
 from .recommendations import build_recommendations
 from .verification import popularity, resolve_access
@@ -21,6 +21,7 @@ class State(TypedDict, total=False):
     routes: list
     warnings: list
     plan: Any
+    agent_answer: Any
 
 
 async def run_graph(plan_id, brief, settings, emit, provider=None, prepared=None):
@@ -40,19 +41,23 @@ async def run_graph(plan_id, brief, settings, emit, provider=None, prepared=None
         await emit("discover", "正在发现候选与来源" if brief.mode == "live" else "正在读取离线机位 Fixture")
         warnings = []
         if prepared:
-            return {"spots": prepared["spots"], "claims": prepared["claims"], "warnings": list(prepared["warnings"])}
+            return {"spots": prepared["spots"], "claims": prepared["claims"], "warnings": list(prepared["warnings"]),
+                    "agent_answer": AgentAnswer()}
         if brief.mode == "mock":
             if "南京" not in brief.destination:
                 raise ValueError("离线 Demo 仅包含南京；其他目的地请使用 Live 模式")
             spots, claims = seed_spots(brief, ledger)
+            agent_answer = AgentAnswer(summaries=["离线演示使用内置南京样例，不代表联网 Agent 的真实搜索结果。"])
         else:
-            spots, claims = await providers.discover(brief, ledger, warnings)
-            if not spots:
+            spots, claims, agent_answer = await providers.discover(brief, ledger, warnings)
+            if not spots and not agent_answer.summaries and not agent_answer.candidates:
                 for warning in warnings:
                     await emit("warning", warning)
-                raise ProviderError("Discovery", "NO_VERIFIABLE_CANDIDATES")
-        await emit("evidence", f"已保留 {len(spots)} 个候选、{len(claims)} 条来源线索；开放仍需复核")
-        return {"spots": spots, "claims": claims, "warnings": warnings}
+                raise ProviderError("Discovery", "NO_AGENT_RESULTS")
+            if not spots:
+                warnings.append("Agent 已返回建议，但没有候选通过地图定位；仍保留完整回答和来源，不生成猜测坐标。")
+        await emit("evidence", f"已保留 {len(agent_answer.candidates)} 条 Agent 建议、{len(spots)} 个地图候选、{len(claims)} 条来源线索")
+        return {"spots": spots, "claims": claims, "warnings": warnings, "agent_answer": agent_answer}
 
     async def conditions(state):
         await emit("conditions", "正在逐机位整合天气与光线；不安排访问顺序")
@@ -81,7 +86,8 @@ async def run_graph(plan_id, brief, settings, emit, provider=None, prepared=None
     async def schedule(state):
         await emit("schedule", "正在独立评估每个机位的窗口、镜头与推荐理由")
         plan = build_recommendations(plan_id, brief, state["spots"], state["claims"], state["conditions"],
-                          ledger, state["warnings"], reference=prepared.get('reference') if prepared else None)
+                          ledger, state["warnings"], reference=prepared.get('reference') if prepared else None,
+                          agent_answer=state.get("agent_answer"))
         return {"plan": plan}
 
     async def validate(state):
@@ -92,6 +98,7 @@ async def run_graph(plan_id, brief, settings, emit, provider=None, prepared=None
                         "cost_note": "未取得计费账单；不估算虚假费用", "rule_version": RULE_VERSION,
                         "photo_references": sum(len(s.photo_references) for s in plan.spots),
                         "mapped_viewpoints": sum(s.viewpoint_status == "mapped_viewpoint" for s in plan.spots),
+                        "agent_candidates": len(plan.agent_answer.candidates),
                         "community": getattr(getattr(providers, "community", None), "status", {}),
                         "photo_providers": sorted({p.provider for s in plan.spots for p in s.photo_references})}
         await emit("validate", "Schema、证据引用和独立候选窗口校验通过")

@@ -8,6 +8,8 @@
 
 > **自然语言与发现优先升级**：新增可编辑需求确认、高德歧义地点选择与稳定地点记录；移除四种拍摄方式及默认出行硬筛选；雨天、光线不匹配等保留候选并提醒。实现、验收与边界见 [本轮升级说明](docs/discovery-agent-upgrade.md)。
 
+> **2026-09-12 Agent 优先升级**：完整时间、器材和摄影意图进入千问联网任务；千问的回答、候选与引用先保留，再叠加高德、天气、太阳和多主体方向核验。无法定位不再等同于没有结果。详见 [Agent 优先发现与地图增强](docs/agent-first-discovery.md)。
+
 已经实现 **Next.js + FastAPI + 单 LangGraph 工作流**，不是静态页面。提供完全离线的 Seed Demo、DashScope/高德/Open-Meteo 服务端适配器、SQLite/PostgreSQL 持久化、可审查 Proposal/Diff、并发审批与 Undo。
 
 > **2026-09-10 产品升级**：真实高德照片、多源发现适配层、风光/人像/人文/建筑等组合意图、Place/PhotoSpot/Subject 分离已接入。119 项后端测试、8 项浏览器 E2E、62 条离线评测通过；真实图像代理、搜索、天气、机位方向等 14 项 Live 检查通过。Wikimedia 当前网络超时，Flickr 未配置 Key，二者已验证模拟契约与降级。详见 [本次升级说明与阅读指南](docs/product-upgrade.md) 和 [验收原始报告](docs/verification/product-upgrade-live.json)。当前仍是单用户本地工作台，公网商业运营条件见 [已知限制](docs/limitations.md)。

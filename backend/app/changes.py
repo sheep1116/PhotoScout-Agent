@@ -32,14 +32,26 @@ def position_proposal(plan, spot_id, lat, lon, role):
         from astral.sun import azimuth
 
         from .engine import bearing
+        from .recommendations import circular_span
         for task in changed.tasks:
             if task.spot_id != spot_id:
                 continue
-            task.target_bearing_deg = bearing(point, spot.subjects[0].position) if spot.subjects[0].position else None
+            task.subject_bearings_deg = {subject.name: bearing(point, subject.position)
+                                         for subject in spot.subjects if subject.position}
+            task.target_bearing_deg = next(iter(task.subject_bearings_deg.values()), None)
+            task.subject_separation_deg = circular_span(list(task.subject_bearings_deg.values()))
+            if task.subject_separation_deg is None:
+                task.framing_assessment = "缺少至少两个可定位主体，暂不能核验同框范围。"
+            elif task.field_of_view_deg and task.subject_separation_deg <= task.field_of_view_deg:
+                task.framing_assessment = f"两主体方位跨度约 {task.subject_separation_deg}°，平面几何上可纳入当前焦段视角；遮挡仍待现场确认。"
+            else:
+                task.framing_assessment = f"两主体方位跨度约 {task.subject_separation_deg}°，建议缩短焦段或调整站位。"
             task.solar_azimuth_deg = round(azimuth(Observer(lat, lon), task.start), 1)
             task.evidence_ids.append(eid)
             changed.evidence[-1].values[task.id] = {"solar_azimuth_deg": task.solar_azimuth_deg,
-                                                   "target_bearing_deg": task.target_bearing_deg}
+                                                   "target_bearing_deg": task.target_bearing_deg,
+                                                   "subject_bearings_deg": task.subject_bearings_deg,
+                                                   "subject_separation_deg": task.subject_separation_deg}
     reason = "确认相机站位" if role == "camera" else "确认公开入口"
     return PlanChangeProposal(id=uuid4().hex, plan_id=plan.id, base_version=plan.version, reason=reason,
         proposed=ShotPlan.model_validate(changed.model_dump()),

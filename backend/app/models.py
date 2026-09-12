@@ -247,6 +247,34 @@ class SourceClaim(Model):
     valid_until: datetime | None = None
 
 
+class AgentCandidate(Model):
+    """A discovery lead is preserved even when it cannot yet become a map spot."""
+    id: str
+    name: str = Field(max_length=100)
+    camera_poi: str = Field(default="", max_length=100)
+    place_name: str = Field(default="", max_length=100)
+    camera_instruction: str = Field(default="", max_length=400)
+    subjects: list[str] = Field(default_factory=list, max_length=8)
+    shooting_direction: str = Field(default="", max_length=200)
+    composition: str = Field(default="", max_length=500)
+    recommended_time: str = Field(default="", max_length=300)
+    time_judgment: str = Field(default="", max_length=500)
+    equipment_advice: str = Field(default="", max_length=500)
+    settings_advice: dict[str, str] = Field(default_factory=dict)
+    source_ids: list[str] = Field(default_factory=list, max_length=12)
+    confidence: Literal["low", "medium", "high"] = "low"
+    verification_status: Literal["mapped", "area", "map_only", "unlocated", "rejected"] = "unlocated"
+    verification_note: str = Field(default="尚未完成地图与来源核验。", max_length=500)
+    mapped_spot_id: str | None = None
+
+
+class AgentAnswer(Model):
+    """The user-facing Agent answer, kept separately from verified spatial entities."""
+    summaries: list[str] = Field(default_factory=list, max_length=4)
+    candidates: list[AgentCandidate] = Field(default_factory=list, max_length=12)
+    source_ids: list[str] = Field(default_factory=list, max_length=24)
+
+
 class Position(Model):
     lat: float = Field(ge=-90, le=90)
     lon: float = Field(ge=-180, le=180)
@@ -390,6 +418,10 @@ class ShotTask(Model):
     score: ScoreBreakdown
     solar_azimuth_deg: float
     target_bearing_deg: float | None = None
+    subject_bearings_deg: dict[str, float] = Field(default_factory=dict)
+    subject_separation_deg: float | None = None
+    field_of_view_deg: float | None = None
+    framing_assessment: str = ""
     risks: list[str]
     alternative: str
     reasons: list[str] = Field(default_factory=list)
@@ -407,6 +439,7 @@ class ShotPlan(Model):
     brief: TripBrief
     created_at: datetime = Field(default_factory=now)
     status: Literal["DRAFT", "READY"] = "DRAFT"
+    agent_answer: AgentAnswer = Field(default_factory=AgentAnswer)
     spots: list[PhotoSpot]
     tasks: list[ShotTask]
     routes: list[RouteLeg]

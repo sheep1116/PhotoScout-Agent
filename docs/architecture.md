@@ -2,9 +2,11 @@
 
 ## 工作流
 
-`自然语言提取 → 可编辑 Notebook → 高德地点确认 → parse → discover → verify → conditions → schedule → validate → Repository`
+`自然语言提取 → 可编辑 Notebook → 高德地点确认 → 完整 AgentBrief → 千问回答与候选 → 地图/来源核验 → conditions → schedule → validate → Repository`
 
-单个 LangGraph 有向无环图，递归上限 8；整个生成请求超时 180 秒，同时最多 3 个生成任务。确认前有一次最长 30 秒的非搜索模型提取；候选发现搜索最大两次，同时传入全部平等题材、主体、风格和原始自然语言。模型不接收密钥或任意执行工具。搜索原文和模型输出没有 shell、环境变量、数据库写权限。
+联网发现采用双层结果。`AgentAnswer/AgentCandidate` 保存千问的完整回答、候选与明确引用，即使候选无法唯一映射高德也不会丢失；`PhotoSpot` 只保存能够形成地图点的空间实体。来源标题、POI 或主体定位失败会改变候选核验状态，不再把“未核验”误写成“Agent 没找到”。详情见 [Agent 优先发现与地图增强](agent-first-discovery.md)。
+
+单个 LangGraph 有向无环图，递归上限 8；整个生成请求超时 180 秒，同时最多 3 个生成任务。确认前有一次最长 30 秒的非搜索模型提取；候选发现搜索最大两次，同时传入原始自然语言、确认地点与时间、全部平等题材、主体、风格、光线、偏好，以及用户画幅、镜头和三脚架。模型不接收密钥或任意执行工具。搜索原文和模型输出没有 shell、环境变量、数据库写权限。
 
 `TripBrief` 与其余 Pydantic 模型在 `models.py`。模型之外的第三方 JSON 在 `providers.py` 与 `discovery.py` 消化。统一错误不输出 HTTP 请求对象、带 Key 的 URL 或原始异常。
 

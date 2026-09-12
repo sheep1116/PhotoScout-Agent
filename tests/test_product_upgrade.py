@@ -12,7 +12,7 @@ from backend.app.engine import Ledger, build_plan, camera_advice, notebook
 from backend.app.fixtures import seed_conditions, seed_routes, seed_spots
 from backend.app.main import create_app
 from backend.app.media import fetch_image
-from backend.app.models import PhotographyIntent, ShotPlan
+from backend.app.models import AgentAnswer, AgentCandidate, PhotographyIntent, ShotPlan, WebSource
 from backend.app.providers import DiscoveredSpot, Providers, source_kind
 from backend.app.repository import Repository
 
@@ -193,7 +193,7 @@ async def test_camera_parent_subject_resolved_independently(settings, brief, res
     monkeypatch.setattr(provider, "poi", poi)
     ledger = Ledger()
     try:
-        spots, claims = await provider.discover(brief, ledger, [])
+        spots, claims, answer = await provider.discover(brief, ledger, [])
     finally:
         await provider.client.aclose()
     assert len(spots) == 1
@@ -201,6 +201,34 @@ async def test_camera_parent_subject_resolved_independently(settings, brief, res
     assert spots[0].subjects[0].position != spots[0].camera
     assert spots[0].viewpoint_status == "mapped_viewpoint"
     assert spots[0].access == "UNKNOWN"
+    assert answer.candidates[0].mapped_spot_id == spots[0].id
+
+
+async def test_title_only_relevance_failure_keeps_agent_candidate_and_map_match(settings, brief, monkeypatch):
+    settings.enable_external_photos = False
+    brief.destination = "南京"
+    provider = Providers(settings)
+    monkeypatch.setattr(provider, "geocode", AsyncMock(return_value={"city": "南京市"}))
+    monkeypatch.setattr(provider, "search", AsyncMock(return_value={"retrieved_at": "2026-09-10T00:00:00Z",
+        "answer_summary": "建议从公开城墙区域寻找同框角度。", "source_indices": [1],
+        "sources": [{"index": 1, "title": "一次建筑取景记录", "url": "https://example.com/viewpoint"}],
+        "candidates": [{"name": "解放门候选位", "camera_poi": "解放门", "place_name": "南京城墙",
+            "subjects": ["鸡鸣寺", "紫峰大厦"], "subject_pois": ["鸡鸣寺", "紫峰大厦"],
+            "composition": "长焦压缩两座建筑", "source_indices": [1]}]}))
+    async def poi(name, _city):
+        locations = {"解放门": ("gate", "118.80,32.06"), "南京城墙": ("wall", "118.801,32.06"),
+                     "鸡鸣寺": ("temple", "118.802,32.061"), "紫峰大厦": ("tower", "118.78,32.07")}
+        identity, location = locations[name]
+        return {"id": identity, "name": name, "location": location}
+    monkeypatch.setattr(provider, "poi", poi)
+    warnings = []
+    try:
+        spots, _, answer = await provider.discover(brief, Ledger(), warnings)
+    finally:
+        await provider.client.aclose()
+    assert len(spots) == 1 and len(spots[0].subjects) == 2
+    assert answer.candidates[0].verification_status == "map_only"
+    assert answer.candidates[0].source_ids and any("来源标题未体现" in warning for warning in warnings)
 
 
 def test_nested_intent_constraints_and_equipment_are_honored():
@@ -255,10 +283,41 @@ async def test_locality_rejects_same_city_outside_requested_park(settings, brief
     lookup = AsyncMock()
     monkeypatch.setattr(provider, "poi", lookup)
     try:
-        spots, _ = await provider.discover(brief, Ledger(), [])
+        spots, _, answer = await provider.discover(brief, Ledger(), [])
     finally:
         await provider.client.aclose()
     assert spots == [] and lookup.call_count == 0
+    assert answer.candidates[0].verification_status == "rejected"
+
+
+async def test_unmappable_agent_answer_and_links_survive_full_graph(settings, brief, monkeypatch):
+    from backend.app.graph import run_graph
+    settings.enable_external_photos = False
+    brief.mode = "live"
+    brief.destination = "南京"
+    provider = Providers(settings)
+    answer = AgentAnswer(summaries=["可从公开城墙区域寻找两座建筑同框，建议先核对入口。"],
+        candidates=[AgentCandidate(id="agent-one", name="城墙候选段", camera_poi="待确认城墙段",
+            subjects=["鸡鸣寺", "紫峰大厦"], composition="尝试长焦压缩",
+            source_ids=["web-guide"], verification_status="unlocated",
+            verification_note="高德无法唯一定位，保留原始建议。")], source_ids=["web-guide"])
+    async def discover(_brief, ledger, _warnings):
+        ledger.sources.append(WebSource(id="web-guide", title="摄影地点参考", publisher="example.com",
+            kind="search", url="https://example.com/guide"))
+        return [], [], answer
+    monkeypatch.setattr(provider, "discover", discover)
+    async def emit(*_args):
+        pass
+    try:
+        plan = await run_graph("agent-only", brief, settings, emit, provider=provider)
+    finally:
+        await provider.client.aclose()
+    assert plan.agent_answer.summaries == answer.summaries
+    assert plan.sources[0].id == "web-guide"
+    assert plan.agent_answer.candidates[0].verification_status == "unlocated"
+    assert plan.spots == [] and plan.tasks == []
+    assert plan.solar.sunrise is None
+    assert any("没有候选通过地图定位" in warning for warning in plan.warnings)
 
 
 def test_legacy_saved_plan_still_reads():

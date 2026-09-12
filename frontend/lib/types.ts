@@ -15,6 +15,8 @@ export type Position = {lat: number; lon: number; precision: string; evidence_id
 export type Spot = {id: string; place: {id:string;name:string;position:Position}; camera_instruction:string;viewpoint_status:string;photo_references:PhotoReference[]; name: string; camera: Position; entrance: Position | null; subjects: {name: string; position: Position | null}[]; access: string; composition: string; risks: string[]};
 export type Evidence = {id: string; source_id: string; label: string; statement: string; values: Record<string, unknown>; observed_at: string; valid_until: string | null};
 export type Source = {id: string; title: string; url: string | null; kind: string; platform?:string|null; publisher: string; retrieved_at: string; published_at: string | null; note: string};
+export type AgentCandidate = {id:string;name:string;camera_poi:string;place_name:string;camera_instruction:string;subjects:string[];shooting_direction:string;composition:string;recommended_time:string;time_judgment:string;equipment_advice:string;settings_advice:Record<string,string>;source_ids:string[];confidence:'low'|'medium'|'high';verification_status:'mapped'|'area'|'map_only'|'unlocated'|'rejected';verification_note:string;mapped_spot_id:string|null};
+export type AgentAnswer = {summaries:string[];candidates:AgentCandidate[];source_ids:string[]};
 export type Task = {
   alerts?:string[]; reasons?:string[]; travel_advice?:string[]; distance_km?:number|null;recommended_light?:string;
   id: string; spot_id: string; title: string; start: string; end: string; status: string; composition: string;
@@ -23,8 +25,9 @@ export type Task = {
   score: {suitability: number; confidence: number; components: Record<string, number>; weights: Record<string, number>; evidence_ids: string[]};
   crowd: {level: string; label: string; source_type: string; evidence_ids: string[]};
   risks: string[]; alternative: string; solar_azimuth_deg: number; target_bearing_deg: number | null; evidence_ids: string[];
+  subject_bearings_deg?:Record<string,number>;subject_separation_deg?:number|null;field_of_view_deg?:number|null;framing_assessment?:string;
 };
-export type Plan = {recreation?:{generated_version?:number;photo_id:string;visual:{summary:string};location_note:string;difficulties:string[];windows:{date:string;start:string;end:string;match:number;direction_deg:number|null;camera:Task["camera"];differences:string[];equipment:string[]}[]}|null;presentation?:string; id: string; version: number; brief: Brief; spots: Spot[]; tasks: Task[]; sources: Source[]; evidence: Evidence[];
+export type Plan = {recreation?:{generated_version?:number;photo_id:string;visual:{summary:string};location_note:string;difficulties:string[];windows:{date:string;start:string;end:string;match:number;direction_deg:number|null;camera:Task["camera"];differences:string[];equipment:string[]}[]}|null;presentation?:string; id: string; version: number; brief: Brief; agent_answer?:AgentAnswer; spots: Spot[]; tasks: Task[]; sources: Source[]; evidence: Evidence[];
   claims: {id: string; statement: string; source_id: string; subject_id:string; kind:string; evidence_ids:string[]; label: string}[];
   solar: {sunrise: string | null; sunset: string | null; golden_start: string | null; blue_start: string | null; blue_end: string | null; evidence_ids: string[]};
   routes: {from_id: string; to_id: string; distance_m: number | null; duration_min: number | null; geometry: number[][]; label: string; note: string}[];

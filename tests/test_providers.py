@@ -37,22 +37,23 @@ async def test_forecast_horizon_unknown(settings, brief):
     await provider.client.aclose()
 
 
-async def test_no_citations_no_search_claims(settings, brief, respx_mock):
+async def test_no_citations_preserves_agent_answer_without_claiming_sources(settings, brief, respx_mock):
     brief.text = '独特的雨后湖面倒影，带宠物拍照，不想走太远'
     brief.intent.categories = ['architecture', 'humanities', 'cityscape']
     settings.dashscope_api_key = "fake-test-key"
     # Assignment is not validated; instantiate SecretStr explicitly.
     from pydantic import SecretStr
     settings.dashscope_api_key = SecretStr("fake-test-key")
-    content = {"output": {"choices": [{"message": {"content": [{"text": '{"candidates":[]}' }]}}]}}
+    content = {"output": {"choices": [{"message": {"content": [{"text": '{"answer_summary":"可先寻找能同时看到两个主体的公开区域，具体站位待地图核验。","candidates":[]}' }]}}]}}
     route = respx_mock.post(settings.dashscope_native_base_url + "/services/aigc/multimodal-generation/generation").mock(
         return_value=httpx.Response(200, text="data: " + json.dumps(content) + "\n\n"))
     provider = Providers(settings)
-    with pytest.raises(ProviderError, match="NO_SOURCES"):
-        await provider.search(brief, "test")
+    result = await provider.search(brief, "test")
+    assert result["answer_summary"].startswith("可先寻找") and result["sources"] == []
     query = json.loads(route.calls[0].request.content)['input']['messages'][1]['content'][0]['text']
     assert brief.text in query
     assert all(label in query for label in ['建筑', '人文街拍', '城市夜景'])
+    assert '35mm F1.8' in query and 'local_time_window' in query and brief.text in query
     await provider.client.aclose()
 
 
