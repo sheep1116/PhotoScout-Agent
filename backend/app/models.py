@@ -6,7 +6,7 @@ from enum import StrEnum
 from typing import Any, Literal
 from zoneinfo import ZoneInfo
 
-from pydantic import BaseModel, ConfigDict, Field, HttpUrl, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, HttpUrl, ValidationError, field_validator, model_validator
 
 
 def now() -> datetime:
@@ -252,9 +252,59 @@ class SourceClaim(Model):
     valid_until: datetime | None = None
 
 
+class CoordinateHint(Model):
+    model_config = ConfigDict(extra="ignore", allow_inf_nan=False)
+    lat: float = Field(ge=-90, le=90)
+    lon: float = Field(ge=-180, le=180)
+    crs: Literal["WGS84", "GCJ02"]
+    basis: Literal["source", "inference"] = "inference"
+    source_index: int | None = Field(default=None, ge=0)
+    note: str = Field(default="", max_length=300)
+
+    @model_validator(mode="after")
+    def useful_coordinate(self):
+        if abs(self.lat) < .000001 and abs(self.lon) < .000001:
+            raise ValueError("坐标不能是空岛坐标")
+        return self
+
+
 class LocationAnchor(Model):
+    model_config = ConfigDict(extra="ignore", allow_inf_nan=False)
     display_name: str = Field(max_length=120)
     map_anchor: str = Field(max_length=120)
+    coordinate: CoordinateHint | None = None
+
+    @model_validator(mode="before")
+    @classmethod
+    def migrate_name_variants(cls, value):
+        if not isinstance(value, dict):
+            return value
+        data = dict(value)
+        display_name = data.get("display_name") or data.get("name") or data.get("poi")
+        map_anchor = data.get("map_anchor") or data.get("poi") or data.get("name")
+        if display_name:
+            data["display_name"] = display_name
+        if map_anchor:
+            data["map_anchor"] = map_anchor
+        return data
+
+    @field_validator("coordinate", mode="before")
+    @classmethod
+    def tolerant_coordinate(cls, value):
+        if value is None or isinstance(value, CoordinateHint):
+            return value
+        if not isinstance(value, dict):
+            return None
+        data = dict(value)
+        crs = str(data.get("crs", "WGS84")).upper().replace("-", "").replace("_", "")
+        data["crs"] = "GCJ02" if crs in {"GCJ02", "GCJ2"} else "WGS84" if crs == "WGS84" else crs
+        if data.get("basis") not in {"source", "inference"}:
+            data["basis"] = "inference"
+        try:
+            return CoordinateHint.model_validate(data)
+        except ValidationError:
+            # A malformed optional hint must not discard the named candidate.
+            return None
 
 
 class AgentCandidate(Model):
@@ -273,7 +323,7 @@ class AgentCandidate(Model):
     settings_advice: dict[str, str] = Field(default_factory=dict)
     source_ids: list[str] = Field(default_factory=list, max_length=12)
     confidence: Literal["low", "medium", "high"] = "low"
-    verification_status: Literal["mapped", "area", "map_only", "unlocated", "rejected"] = "unlocated"
+    verification_status: Literal["mapped", "area", "map_only", "estimated", "unlocated", "rejected"] = "unlocated"
     verification_note: str = Field(default="尚未完成地图与来源核验。", max_length=500)
     mapped_spot_id: str | None = None
     camera_location: LocationAnchor | None = None

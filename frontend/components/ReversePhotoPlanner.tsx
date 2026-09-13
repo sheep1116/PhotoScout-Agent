@@ -5,7 +5,7 @@ import {api,Brief,Notebook,Plan,Spot} from '@/lib/types';
 
 const term:Record<string,string>={any:'未知',daylight:'日间',sunrise:'日出',golden_hour:'黄金时刻',blue_hour:'蓝调',night:'夜间',clear:'晴朗',overcast:'阴天',rain:'雨天',fog:'雾天',snow:'雪天',unknown:'未知',wide:'广角',normal:'标准焦段',tele:'长焦',high:'高',medium:'中',low:'低'};
 type Visual={summary:string;subjects:string[];styles:string[];composition:string;direction:string;light:string;weather:string;season:string;focal_tendency:string;long_exposure:boolean|null;filters:string[];difficulties:string[];hypotheses:{name:string;reason:string;confidence:string}[]};
-type Candidate={id:string;name:string;city:string;spot_id:string|null;status:'verified'|'high_inference'|'possible';score:number;camera_instruction:string;reason:string;support:string[];missing:string[];conflicts:string[];verification_scope:string;source_ids:string[];geometry:{first:string;second:string;separation_deg:number;note:string}[]};
+type Candidate={id:string;name:string;city:string;spot_id:string|null;status:'verified'|'high_inference'|'possible';location_status?:'mapped'|'area'|'estimated'|'unlocated';camera_position?:{lat:number;lon:number;precision:string}|null;score:number;camera_instruction:string;reason:string;support:string[];missing:string[];conflicts:string[];verification_scope:string;source_ids:string[];geometry:{first:string;second:string;separation_deg:number;note:string}[]};
 type Analysis={id:string;photo_id:string;data_mode:Brief['mode'];candidates:Candidate[];visual:Visual;exif:Record<string,unknown>;spots:Spot[];warnings:string[];sources?:{id:string;title:string;url:string|null}[]};
 
 export default function ReversePhotoPlanner({brief,onPlan}:{brief:Brief;onPlan:(p:Plan)=>void}) {
@@ -74,16 +74,20 @@ export default function ReversePhotoPlanner({brief,onPlan}:{brief:Brief;onPlan:(
     <div className="reference-candidates">{analysis.candidates.map(candidate=>{
       const spot=analysis.spots.find(s=>s.id===candidate.spot_id);
       return <article className={`reference-choice ${selected===candidate.id?'selected':''}`} key={candidate.id}>
-        <b>{candidate.name}</b><div className="intent-chips"><span className="tag">{{verified:'已核验',high_inference:'高置信推断',possible:'可能机位'}[candidate.status]}</span><small>证据排序分 {candidate.score} / 100</small></div>
+        <b>{candidate.name}</b><div className="intent-chips"><span className="tag">{{verified:'已核验',high_inference:'高置信推断',possible:'可能机位'}[candidate.status]}</span><span className="tag">{{mapped:'地图已定位',area:'区域已定位',estimated:'推测位置',unlocated:'位置待确认'}[candidate.location_status||'unlocated']}</span><small>证据排序分 {candidate.score} / 100</small></div>
         {spot?.photo_references[0]&&<img className="reference-candidate-image" src={`/v1/reference-analyses/${analysis.id}/photos/${spot.photo_references[0].id}`} alt={`${candidate.name} 的地标参考图，非原图机位证明`} onError={e=>{e.currentTarget.style.display='none';}}/>}
         <p>{candidate.camera_instruction||candidate.reason}</p>
         {!!candidate.conflicts.length&&<p className="error-banner">{candidate.conflicts.join('；')}</p>}
-        <details><summary>推断依据与待核实信息</summary><p>{candidate.reason}</p><small>{candidate.verification_scope}</small>{[...candidate.support,...candidate.missing].map((text,i)=><p key={i}>{text}</p>)}{candidate.geometry.map((g,i)=><p key={i}>{g.first} / {g.second}：方位间隔 {g.separation_deg}°。{g.note}</p>)}{analysis.sources?.filter(s=>candidate.source_ids.includes(s.id)&&s.url).map(s=><p key={s.id}><a href={s.url!} target="_blank" rel="noreferrer">{s.title}</a></p>)}</details>
+        <details><summary>推断依据与待核实信息</summary><p>{candidate.reason}</p><small>{candidate.verification_scope}</small>{candidate.camera_position&&<p>{candidate.location_status==='estimated'?'推测坐标':'地图坐标'}：{candidate.camera_position.lat.toFixed(6)}, {candidate.camera_position.lon.toFixed(6)}（WGS84）</p>}{[...candidate.support,...candidate.missing].map((text,i)=><p key={i}>{text}</p>)}{candidate.geometry.map((g,i)=><p key={i}>{g.first} / {g.second}：方位间隔 {g.separation_deg}°。{g.note}</p>)}{analysis.sources?.filter(s=>candidate.source_ids.includes(s.id)&&s.url).map(s=><p key={s.id}><a href={s.url!} target="_blank" rel="noreferrer">{s.title}</a></p>)}</details>
         <button className="secondary" disabled={busy} aria-pressed={selected===candidate.id} onClick={()=>setSelected(candidate.id)}>{selected===candidate.id?'已选择原机位':'确认这是原机位'}</button>
       </article>;
     })}</div>
     {!!analysis.warnings.length&&<details><summary>待核实信息</summary>{analysis.warnings.map((w,i)=><p key={i}>{w}</p>)}</details>}
-    {!analysis.candidates.length&&<p>暂缺定位线索。请补充可识别地标或照片出处后重试。</p>}
+    {!analysis.candidates.length&&(analysis.visual.hypotheses.length
+      ? <p>{error
+          ? `已识别出 ${analysis.visual.hypotheses.length} 个可能地点，但联网搜索或地图核验未完成，请稍后重试。`
+          : `已识别出 ${analysis.visual.hypotheses.length} 个可能地点，但尚未匹配到唯一地图坐标；可补充更具体的地标或照片出处后重试。`}</p>
+      : <p>暂未识别出可用地点线索。请补充可识别地标或照片出处后重试。</p>)}
     {confirmed&&<div className="reference-observations"><b>已选择原机位：{confirmed.name}</b><p>如需复刻建议，请在下方确认拍摄日期、时段与器材。</p>{!confirmed.spot_id&&<p>此机位尚未匹配唯一地图坐标，请补充地点线索后重新核验，才能计算天气和光线。</p>}<button className="primary" disabled={!confirmed.spot_id||busy} onClick={generate}>生成该机位的复刻建议</button></div>}</>}
   </section>;
 }

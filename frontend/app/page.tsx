@@ -170,7 +170,7 @@ function TaskCard({task,candidate,number,plan,selected,onSelect,cite,change,work
   const shutter=task.camera.shutter_seconds>=1?`${task.camera.shutter_seconds}s`:`1/${Math.round(1/task.camera.shutter_seconds)}s`;
   const sourceLinks=plan.sources.filter(source=>candidate?.source_ids.includes(source.id)&&source.url);
   const directions=Object.entries(task.subject_bearings_deg||{});
-  const mapLabel=spot.camera.precision==='EXACT_VERIFIED'?'位置已确认':spot.viewpoint_status==='mapped_viewpoint'?'地图已定位':'区域已定位';
+  const mapLabel=spot.camera.precision==='EXACT_VERIFIED'?'位置已确认':spot.camera.precision==='APPROXIMATE'?'推测位置':spot.viewpoint_status==='mapped_viewpoint'?'地图已定位':'区域已定位';
   return <article className={`task-card ${selected?'selected':''} ${task.status==='CANCELLED'?'cancelled':''}`}>
     <div className="task-number"><span>#{candidate?.rank||number}</span></div><div className="task-main"><div className="task-topline"><div className="candidate-status"><span className="tag green">{mapLabel}</span><span className={`tag ${directions.length?'green':'amber'}`}>{directions.length?'方向已核验':'方向待确认'}</span>{task.status==='CANCELLED'&&<span className="tag red">当前暂缓</span>}</div><button className="task-location" onClick={onSelect}><MapPin size={13}/>在图上查看</button></div><h3>{candidate?.name||spot.name}</h3><p className="candidate-subtitle">{candidate?.selection_reason||task.reasons?.[0]||'根据拍摄目标、时间和器材综合推荐'}</p><PhotoGallery spot={spot} planId={plan.id}/>
     <div className="advice-grid">
@@ -189,7 +189,7 @@ function TaskCard({task,candidate,number,plan,selected,onSelect,cite,change,work
 
 function CandidateLeadCard({candidate,number,plan}:{candidate:AgentCandidate;number:number;plan:Plan}) {
   const sources=plan.sources.filter(source=>candidate.source_ids.includes(source.id)&&source.url);
-  const status:Record<string,string>={area:'区域已定位',map_only:'地图已定位',unlocated:'位置待确认',rejected:'暂不采用',mapped:'地图已定位'};
+  const status:Record<string,string>={area:'区域已定位',map_only:'地图已定位',estimated:'推测位置',unlocated:'位置待确认',rejected:'暂不采用',mapped:'地图已定位'};
   return <article className="task-card lead-card"><div className="task-number"><span>#{candidate.rank||number}</span></div><div className="task-main">
     <div className="task-topline"><div className="candidate-status"><span className={`tag ${candidate.verification_status==='rejected'?'red':'amber'}`}>{status[candidate.verification_status]}</span><span className="tag amber">方向待确认</span></div></div>
     <h3>{candidate.name}</h3><p className="candidate-subtitle">{candidate.selection_reason||'值得继续核对的拍摄位置'}</p>

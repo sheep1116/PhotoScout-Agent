@@ -6,7 +6,13 @@ import pytest
 
 from backend.app.engine import Ledger
 from backend.app.models import Position
-from backend.app.providers import Cache, ProviderError, Providers, source_mentions_location
+from backend.app.providers import (
+    Cache,
+    ProviderError,
+    Providers,
+    ReferenceDiscoveredSpot,
+    source_mentions_location,
+)
 
 
 async def test_missing_key_is_safe(settings, brief):
@@ -15,6 +21,30 @@ async def test_missing_key_is_safe(settings, brief):
         await provider.search(brief, "test")
     assert provider.calls == 0
     await provider.client.aclose()
+
+
+def test_reference_coordinate_variants_degrade_without_losing_candidate():
+    sibling = ReferenceDiscoveredSpot.model_validate({"name": "台城段", "camera_poi": "台城景区",
+        "camera_coordinate": {"lat": "32.0682", "lon": "118.7965", "crs": "GCJ-02",
+                              "basis": "estimated", "unexpected": "ignored"},
+        "composition": "长焦同框"})
+    assert sibling.camera_location.coordinate.crs == "GCJ02"
+    assert sibling.camera_location.coordinate.basis == "inference"
+    malformed = ReferenceDiscoveredSpot.model_validate({"name": "台城段", "camera_poi": "台城景区",
+        "camera_coordinate": {"lat": 999, "lon": 118.8}, "composition": "长焦同框"})
+    assert malformed.name == "台城段" and malformed.camera_location.coordinate is None
+    nested = ReferenceDiscoveredSpot.model_validate({"display_name": "台城段", "camera_location": {
+        "display_name": "台城段", "map_anchor": "南京城墙台城景区",
+        "coordinate": {"lat": 32.0682, "lon": 118.7965, "crs": "WGS84"},
+        "place_name": "南京城墙", "camera_instruction": "站在公开步道",
+        "subject_locations": [{"display_name": "鸡鸣寺", "map_anchor": "鸡鸣寺"}],
+        "composition": "长焦同框", "source_indices": [1]}})
+    assert nested.composition == "长焦同框" and nested.place_name == "南京城墙"
+    assert nested.camera_location.coordinate.lat == 32.0682 and nested.source_indices == [1]
+    aliases = ReferenceDiscoveredSpot.model_validate({"name": "台城段", "camera_poi": "台城景区",
+        "subject_locations": [{"name": "鸡鸣寺", "poi": "古鸡鸣寺"}], "composition": "长焦同框"})
+    assert aliases.subject_locations[0].display_name == "鸡鸣寺"
+    assert aliases.subject_locations[0].map_anchor == "古鸡鸣寺"
 
 
 async def test_retry_timeout_redacts_key(settings, respx_mock):

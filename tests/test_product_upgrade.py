@@ -241,6 +241,33 @@ async def test_title_only_relevance_failure_keeps_agent_candidate_and_map_match(
     assert answer.candidates[0].source_ids and any("来源标题未体现" in warning for warning in warnings)
 
 
+async def test_general_discovery_uses_clearly_labeled_coordinate_fallback(settings, brief, monkeypatch):
+    settings.enable_external_photos = False
+    brief.destination = "南京"
+    provider = Providers(settings)
+    monkeypatch.setattr(provider, "geocode", AsyncMock(return_value={"city": "南京市"}))
+    monkeypatch.setattr(provider, "search", AsyncMock(return_value={"retrieved_at": "2026-09-10T00:00:00Z",
+        "sources": [], "candidates": [{"display_name": "台城段候选机位",
+            "camera_location": {"display_name": "台城段候选机位", "map_anchor": "描述性台城路段",
+                "coordinate": {"lat": 32.0682, "lon": 118.7965, "crs": "WGS84",
+                    "basis": "inference", "source_index": None, "note": "地点近似中心"}},
+            "subject_locations": [{"display_name": "鸡鸣寺", "map_anchor": "鸡鸣寺"}],
+            "composition": "长焦压缩古今建筑", "source_indices": []}]}))
+    async def poi(_name, _city):
+        raise ValueError("ambiguous")
+    monkeypatch.setattr(provider, "poi", poi)
+    warnings = []
+    try:
+        spots, _, answer = await provider.discover(brief, Ledger(), warnings)
+    finally:
+        await provider.client.aclose()
+    assert len(spots) == 1 and spots[0].camera.precision == "APPROXIMATE"
+    assert spots[0].camera.lat == 32.0682 and spots[0].camera.lon == 118.7965
+    assert answer.candidates[0].verification_status == "estimated"
+    assert answer.candidates[0].mapped_spot_id == spots[0].id
+    assert any("推测坐标" in warning for warning in warnings)
+
+
 def test_nested_intent_constraints_and_equipment_are_honored():
     from backend.app.models import TripBrief
     brief = TripBrief(destination="南京", intent={"categories": ["landscape", "architecture"],
