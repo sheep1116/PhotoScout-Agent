@@ -277,7 +277,7 @@ def test_nested_intent_constraints_and_equipment_are_honored():
     assert brief.intent.categories == ["architecture", "landscape"]
 
 
-async def test_unique_amap_sublandmark_suffix(settings, respx_mock):
+async def test_amap_result_order_is_authoritative(settings, respx_mock):
     provider = Providers(settings)
     route = respx_mock.get(settings.amap_base_url + "/v3/place/text")
     route.respond(200, json={"status": "1", "pois": [{"id": "bridge", "name": "玄武湖景区-芳桥"},
@@ -286,9 +286,7 @@ async def test_unique_amap_sublandmark_suffix(settings, respx_mock):
         assert (await provider.poi("芳桥", "南京市"))["id"] == "bridge"
         route.respond(200, json={"status": "1", "pois": [{"id": "a", "name": "公园甲-芳桥"},
             {"id": "b", "name": "公园乙-芳桥"}]})
-        from backend.app.providers import ProviderError
-        with pytest.raises(ProviderError, match="AMBIGUOUS_POI"):
-            await provider.poi("芳桥", "南京市")
+        assert (await provider.poi("芳桥", "南京市"))["id"] == "a"
     finally:
         await provider.client.aclose()
 

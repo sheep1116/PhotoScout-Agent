@@ -86,8 +86,8 @@ export default function ReversePhotoPlanner({brief,onPlan}:{brief:Brief;onPlan:(
     {!analysis.candidates.length&&(analysis.visual.hypotheses.length
       ? <p>{error
           ? `已识别出 ${analysis.visual.hypotheses.length} 个可能地点，但联网搜索或地图核验未完成，请稍后重试。`
-          : `已识别出 ${analysis.visual.hypotheses.length} 个可能地点，但尚未匹配到唯一地图坐标；可补充更具体的地标或照片出处后重试。`}</p>
+          : `已识别出 ${analysis.visual.hypotheses.length} 个可能地点，但高德没有返回可用地点；可补充更具体的地标或照片出处后重试。`}</p>
       : <p>暂未识别出可用地点线索。请补充可识别地标或照片出处后重试。</p>)}
-    {confirmed&&<div className="reference-observations"><b>已选择原机位：{confirmed.name}</b><p>如需复刻建议，请在下方确认拍摄日期、时段与器材。</p>{!confirmed.spot_id&&<p>此机位尚未匹配唯一地图坐标，请补充地点线索后重新核验，才能计算天气和光线。</p>}<button className="primary" disabled={!confirmed.spot_id||busy} onClick={generate}>生成该机位的复刻建议</button></div>}</>}
+    {confirmed&&<div className="reference-observations"><b>已选择原机位：{confirmed.name}</b><p>如需复刻建议，请在下方确认拍摄日期、时段与器材。</p>{!confirmed.spot_id&&<p>高德没有返回此机位的可用地点，请补充地点线索后重新核验，才能计算天气和光线。</p>}<button className="primary" disabled={!confirmed.spot_id||busy} onClick={generate}>生成该机位的复刻建议</button></div>}</>}
   </section>;
 }

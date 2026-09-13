@@ -219,7 +219,7 @@ async def locate_original(visual, request, network, ledger, exif, warnings):
             identity='agent-coordinate-'+hashlib.sha256(
                 f"{row['name']}|{lat}|{lon}".encode()).hexdigest()[:16]
             ids=ledger.add(identity,'原机位坐标推测',TruthLabel.INFERRED,
-                '高德未唯一匹配时的地图展示回退；不是高德 POI、实测 GPS 或精确相机站位。',
+                '高德没有返回可用地点时的地图展示回退；不是高德 POI、实测 GPS 或精确相机站位。',
                 {'lat':lat,'lon':lon,'crs':'WGS84','input_crs':coordinate['crs'],
                  'basis':coordinate['basis'],'note':coordinate.get('note','')})
             position=Position(lat=lat,lon=lon,precision='APPROXIMATE',evidence_ids=ids)
@@ -237,7 +237,7 @@ async def locate_original(visual, request, network, ledger, exif, warnings):
             candidate.score+=3 if estimated else 5 if area else 15
             candidate.evidence_ids+=position.evidence_ids
             if estimated:
-                candidate.support.append('高德未唯一匹配；采用推测坐标绘图，精确站位待确认')
+                candidate.support.append('高德没有返回可用地点；采用推测坐标绘图，精确站位待确认')
                 candidate.missing.append('坐标未经高德或实测 GPS 核验，只能作为搜索范围起点')
             else:
                 candidate.support.append('高德使用锚点 '+mapped_anchor+' 匹配到 '+poi['name']+'；精确站位仍待确认')
@@ -253,7 +253,7 @@ async def locate_original(visual, request, network, ledger, exif, warnings):
                     continue
                 checked.add(key)
                 if relation.first not in landmarks or relation.second not in landmarks:
-                    candidate.missing.append('多地标关系缺少唯一地图匹配：'+relation.first+' / '+relation.second)
+                    candidate.missing.append('多地标关系缺少地图定位：'+relation.first+' / '+relation.second)
                     continue
                 check=relation_check(position,landmarks[relation.first],landmarks[relation.second],relation.relation)
                 check.update(first=relation.first,second=relation.second,relation=relation.relation)
@@ -296,7 +296,7 @@ async def locate_original(visual, request, network, ledger, exif, warnings):
                 candidate.status='verified'
                 candidate.verification_scope='已核验地图、文件 GPS 邻近及多地标平面方位；仍未鉴定原片出处与精确站位。'
         else:
-            candidate.missing.append('高德未唯一匹配，也没有可用推测坐标；保留文字机位推断')
+            candidate.missing.append('高德没有返回可用地点，也没有可用推测坐标；保留文字机位推断')
         candidate.score=max(0,min(95,candidate.score))
         candidate.evidence_ids=list(dict.fromkeys(candidate.evidence_ids))
         candidates.append(candidate)

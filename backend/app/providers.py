@@ -12,7 +12,7 @@ from urllib.parse import urlsplit, urlunsplit
 from zoneinfo import ZoneInfo
 
 import httpx
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, model_validator
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
 
 from .discovery import AMapPhotos, CommunityDiscovery, DiscoveryHub, community_platform
 from .models import (
@@ -123,6 +123,16 @@ class DiscoveredSpot(BaseModel):
     is_primary: bool = False
     selection_reason: str = Field(default="", max_length=500)
     source_indices: list[int] = Field(default_factory=list, max_length=10)
+
+    @field_validator("subject_locations", mode="before")
+    @classmethod
+    def accept_named_subject_locations(cls, value):
+        if not isinstance(value, list):
+            return value
+        return [
+            {"display_name": item, "map_anchor": item} if isinstance(item, str) else item
+            for item in value
+        ]
 
     @model_validator(mode="after")
     def readable_and_mappable_names(self):
@@ -399,30 +409,11 @@ class Providers:
         if data.get("status") != "1":
             raise ProviderError("AMap", "POI_FAILED")
         pois = data.get("pois", [])
-        # Ambiguous results are not silently resolved by selecting result zero.
-        exact = [p for p in pois if p.get("name") == name]
-        if len(exact) == 1:
-            return exact[0]
-        # Match narrowly normalized aliases, never a first-result or arbitrary singleton fallback.
-        # Preserve sub-area/directional names so distinct places remain ambiguous.
-        def normalized(value):
-            value = re.sub(r"\s+", "", unicodedata.normalize("NFKC", value))
-            for prefix in (city, city.removesuffix("市")):
-                if prefix and value.startswith(prefix):
-                    value = value[len(prefix):]
-                    break
-            value = value.replace("总店)", "店)")
-            return re.sub(r"(历史文化街区|历史街区|街区|景区)$", "", value)
-        alias = [p for p in pois if normalized(p.get("name", "")) == normalized(name)]
-        if len(alias) == 1:
-            return alias[0]
-        # AMap encodes sub-landmarks as "parent-place - landmark". Only a unique full
-        # suffix is accepted, never a substring, approximate spelling or numbered gate.
-        sublandmarks = [p for p in pois if "-" in p.get("name", "") and
-                       normalized(p["name"].rsplit("-", 1)[-1]) == normalized(name)]
-        if len(sublandmarks) == 1:
-            return sublandmarks[0]
-        raise ProviderError("AMap", "AMBIGUOUS_POI")
+        if not pois:
+            raise ProviderError("AMap", "POI_NOT_FOUND")
+        # AMap already ranks text-search results by relevance. Use its first result
+        # directly instead of applying a second, stricter local name-matching gate.
+        return pois[0]
 
     async def weather(self, brief, position, ledger):
         today = datetime.now(ZoneInfo(brief.timezone)).date()
@@ -567,17 +558,9 @@ class Providers:
                     warnings.append(f"{display_name}：来源标题未体现目的地或地点；保留建议并继续地图核验，不把链接视为已证实。")
                 if display_name in seen or len(spots) >= 6:
                     continue
-                fallback_area = False
                 estimated = False
                 try:
-                    try:
-                        poi = await self.poi(camera_anchor, location.adcode if location else city)
-                    except ProviderError as error:
-                        if error.code != "AMBIGUOUS_POI" or not candidate.place_name:
-                            raise
-                        poi = await self.poi(candidate.place_name, location.adcode if location else city)
-                        fallback_area = True
-                        warnings.append(f"{display_name}：地图锚点 {camera_anchor} 未独立定位，仅保留 {poi['name']} 区域线索。")
+                    poi = await self.poi(camera_anchor, location.adcode if location else city)
                     if location and location.poi_id is None and not location.adcode.endswith("00") and poi.get("adcode") and poi["adcode"] != location.adcode:
                         warnings.append(f"{candidate.name}：高德行政代码不属于已选择地区，未纳入。")
                         continue
@@ -591,10 +574,10 @@ class Providers:
                 except (ProviderError, KeyError, TypeError, ValueError) as error:
                     hint = candidate.camera_location.coordinate
                     if hint is None:
-                        warnings.append(f"{display_name}：地图锚点 {camera_anchor} 存在歧义或无法定位；拍摄建议与链接仍保留。")
+                        warnings.append(f"{display_name}：地图锚点 {camera_anchor} 无法定位；拍摄建议与链接仍保留。")
                         draft.verification_status = "unlocated"
-                        draft.verification_note = "高德暂时无法唯一定位，也没有可用推测坐标；请根据拍摄说明和来源人工确认。"
-                        if isinstance(error, ProviderError) and error.code != "AMBIGUOUS_POI":
+                        draft.verification_note = "高德暂时没有返回可用地点，也没有可用推测坐标；请根据拍摄说明和来源人工确认。"
+                        if isinstance(error, ProviderError):
                             warnings.append(str(error))
                         continue
                     lon, lat = hint.lon, hint.lat
@@ -603,13 +586,13 @@ class Providers:
                     identity = "agent-coordinate-" + hashlib.sha256(
                         f"{display_name}|{lat}|{lon}".encode()).hexdigest()[:16]
                     ids = ledger.add(identity, "候选位置推测", TruthLabel.INFERRED,
-                        "高德未唯一匹配时的地图展示回退；不是高德 POI、实测 GPS 或精确相机站位。",
+                        "高德没有返回可用地点时的地图展示回退；不是高德 POI、实测 GPS 或精确相机站位。",
                         {"lat": lat, "lon": lon, "crs": "WGS84", "input_crs": hint.crs,
                          "basis": hint.basis, "note": hint.note})
                     position = Position(lat=lat, lon=lon, precision="APPROXIMATE", evidence_ids=ids)
                     poi = {"id": identity, "name": display_name, "photos": []}
                     estimated = True
-                    warnings.append(f"{display_name}：高德未唯一匹配，地图暂按推测坐标展示；请现场确认。")
+                    warnings.append(f"{display_name}：高德没有返回可用地点，地图暂按推测坐标展示；请现场确认。")
                 seen.update([display_name, identity])
                 if not estimated:
                     ids = ledger.add(identity, "高德 POI", TruthLabel.REPORTED,
@@ -662,16 +645,11 @@ class Providers:
                             mapped_viewpoint = True
                     except (ProviderError, KeyError, TypeError, ValueError):
                         warnings.append(f"{display_name}：主体锚点 {query_name} 未能独立定位，保留为待确认线索。")
-                mapped_viewpoint = mapped_viewpoint and not fallback_area and not estimated
-                if fallback_area:
-                    position.precision = "AREA"
+                mapped_viewpoint = mapped_viewpoint and not estimated
                 draft.mapped_spot_id = identity
                 if estimated:
                     draft.verification_status = "estimated"
-                    draft.verification_note = "高德未唯一匹配，暂按推测坐标绘图；该点不是地图核验结果或精确站位。"
-                elif fallback_area:
-                    draft.verification_status = "area"
-                    draft.verification_note = "仅匹配到所属区域；具体相机站位仍需现场确认。"
+                    draft.verification_note = "高德没有返回可用地点，暂按推测坐标绘图；该点不是地图核验结果或精确站位。"
                 elif source_ids:
                     draft.verification_status = "mapped"
                     draft.verification_note = "已匹配高德地点并关联到标题相关来源；视线、开放和精确站位仍待确认。"

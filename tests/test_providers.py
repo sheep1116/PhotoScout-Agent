@@ -45,6 +45,9 @@ def test_reference_coordinate_variants_degrade_without_losing_candidate():
         "subject_locations": [{"name": "鸡鸣寺", "poi": "古鸡鸣寺"}], "composition": "长焦同框"})
     assert aliases.subject_locations[0].display_name == "鸡鸣寺"
     assert aliases.subject_locations[0].map_anchor == "古鸡鸣寺"
+    named = ReferenceDiscoveredSpot.model_validate({"name": "台城段", "camera_poi": "台城景区",
+        "subject_locations": ["鸡鸣寺", "紫峰大厦"], "composition": "长焦同框"})
+    assert [item.map_anchor for item in named.subject_locations] == ["鸡鸣寺", "紫峰大厦"]
 
 
 async def test_retry_timeout_redacts_key(settings, respx_mock):
@@ -119,15 +122,28 @@ async def test_cache_expiry():
     assert await cache.get("b") is None
 
 
-async def test_poi_ambiguity_is_not_first_hit(settings, respx_mock):
+async def test_poi_uses_amap_first_hit(settings, respx_mock):
     from pydantic import SecretStr
     settings.amap_web_service_key = SecretStr("fake-test-key")
     respx_mock.get(settings.amap_base_url + "/v3/place/text").mock(return_value=httpx.Response(200,
         json={"status":"1", "pois":[{"name":"人民公园东区"},{"name":"人民公园西区"}]}))
     provider = Providers(settings)
-    with pytest.raises(ProviderError, match="AMBIGUOUS_POI"):
-        await provider.poi("人民公园", "南京")
+    assert (await provider.poi("人民公园", "南京"))["name"] == "人民公园东区"
     await provider.client.aclose()
+
+
+async def test_poi_uses_first_ranked_taicheng_result(settings, respx_mock):
+    respx_mock.get(settings.amap_base_url + "/v3/place/text").mock(return_value=httpx.Response(200,
+        json={"status": "1", "pois": [
+            {"id": "scenic", "name": "南京城墙台城景区"},
+            {"id": "entrance", "name": "明城墙台城景区(出入口)"},
+        ]}))
+    provider = Providers(settings)
+    try:
+        result = await provider.poi("明城墙台城景区", "南京")
+        assert result["id"] == "scenic"
+    finally:
+        await provider.client.aclose()
 
 
 async def test_search_repeated_frames_dedup_and_usage_sums(settings, brief, respx_mock):
@@ -156,24 +172,20 @@ async def test_search_repeated_frames_dedup_and_usage_sums(settings, brief, resp
         await provider.client.aclose()
 
 
-@pytest.mark.parametrize("query,names,expected", [
-    ("鱼嘴湿地公园", ["南京鱼嘴湿地公园1号停车场", "南京鱼嘴湿地公园"], "南京鱼嘴湿地公园"),
-    ("中山陵", ["中山陵南广场", "中山陵景区"], "中山陵景区"),
-    ("先锋书店（五台山店）", ["先锋书店(五台山总店)", "先锋书店(五台山总店)-文字墙"], "先锋书店(五台山总店)"),
-    ("老门东街区", ["老门东-步行街", "老门东"], "老门东"),
-    ("人民公园", ["人民公园东区"], None),
-    ("人民公园", ["人民公园", "人民公园"], None),
+@pytest.mark.parametrize("query,names", [
+    ("鱼嘴湿地公园", ["南京鱼嘴湿地公园1号停车场", "南京鱼嘴湿地公园"]),
+    ("中山陵", ["中山陵南广场", "中山陵景区"]),
+    ("先锋书店（五台山店）", ["先锋书店(五台山总店)", "先锋书店(五台山总店)-文字墙"]),
+    ("老门东街区", ["老门东-步行街", "老门东"]),
+    ("人民公园", ["人民公园东区"]),
+    ("人民公园", ["人民公园", "人民公园"]),
 ])
-async def test_poi_aliases_keep_distinct_places_ambiguous(settings, respx_mock, query, names, expected):
+async def test_poi_preserves_amap_ranking(settings, respx_mock, query, names):
     respx_mock.get(settings.amap_base_url + "/v3/place/text").mock(return_value=httpx.Response(200,
         json={"status": "1", "pois": [{"name": n} for n in names]}))
     provider = Providers(settings)
     try:
-        if expected:
-            assert (await provider.poi(query, "南京市"))["name"] == expected
-        else:
-            with pytest.raises(ProviderError, match="AMBIGUOUS_POI"):
-                await provider.poi(query, "南京市")
+        assert (await provider.poi(query, "南京市"))["name"] == names[0]
     finally:
         await provider.client.aclose()
 
