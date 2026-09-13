@@ -12,6 +12,11 @@ export default function IntentBuilder({brief, onChange}: {brief:Brief; onChange:
     if(items.length) update({categories:items});
   };
   return <div className="intent-builder">
+    <div className="field-label">推荐模式 <small>作为拍摄需求参与机位比较</small></div>
+    <div className="recommendation-mode" role="group" aria-label="推荐模式">
+      <button aria-pressed={intent.recommendation_mode!=='multiple'} onClick={()=>update({recommendation_mode:'best'})}><b>最佳机位</b><small>综合比较后给出一个主推荐</small></button>
+      <button aria-pressed={intent.recommendation_mode==='multiple'} onClick={()=>update({recommendation_mode:'multiple'})}><b>多个候选</b><small>按推荐程度展示多个机位</small></button>
+    </div>
     <div className="field-label">摄影方向 <small>可多选 · 各方向同等参与</small></div>
     <div className="intent-chips">{Object.entries(categoryLabels).map(([key,label])=><button key={key} aria-pressed={intent.categories.includes(key)} onClick={()=>toggle(key)}>{label}</button>)}</div>
     <details className="gear-details"><summary>组合你的画面与光线</summary><div className="gear-content">

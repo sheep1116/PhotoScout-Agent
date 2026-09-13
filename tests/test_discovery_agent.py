@@ -31,6 +31,7 @@ def test_two_mapped_subjects_produce_bearings_and_framing_assessment(brief):
     plan = candidates(brief, edit=add_second_subject)
     task = next(task for task in plan.tasks if task.spot_id == plan.spots[0].id)
     assert len(task.subject_bearings_deg) == 2
+    assert len(task.subject_distances_km) == 2 and all(value >= 0 for value in task.subject_distances_km.values())
     assert task.subject_separation_deg is not None and task.field_of_view_deg is not None
     assert "方位跨度" in task.framing_assessment
 
@@ -162,6 +163,20 @@ async def test_malformed_model_fields_preserve_other_valid_requests(brief,settin
     assert '复古街头感' in book.brief.intent.styles
     assert any('travel_date' in note for note in book.assumptions)
     assert any('max_walk_km' in note for note in book.assumptions)
+
+
+async def test_recommendation_mode_is_parsed_but_manual_choice_wins(brief, settings):
+    network = Providers(settings)
+    try:
+        brief.text = '请给我多个候选机位'
+        parsed = await parse_description(brief, network)
+        assert parsed.brief.intent.recommendation_mode == 'multiple'
+        brief.intent.recommendation_mode = 'best'
+        brief.edited_fields = ['recommendation_mode']
+        manual = await parse_description(brief, network)
+        assert manual.brief.intent.recommendation_mode == 'best'
+    finally:
+        await network.client.aclose()
 
 
 async def test_preference_negation_is_not_an_implicit_filter(brief,settings):

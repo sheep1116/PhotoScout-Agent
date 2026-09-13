@@ -164,7 +164,8 @@ async def test_bilibili_metadata_to_mapped_candidate_pipeline(settings, brief, r
     brief.mode = "live"
     brief.destination = "南京玄武湖"
     brief.travel_date = (datetime.now(UTC)+timedelta(days=40)).date()
-    metadata = {"bvid": "BV1234567890", "title": "南京玄武湖玄武门机位", "desc": "85mm 日落 倒影", "pubdate": 1700000000}
+    metadata = {"bvid": "BV1234567890", "title": "南京玄武湖玄武门机位", "desc": "85mm 日落 倒影",
+                "pic": "http://i0.hdslb.com/bfs/archive/sample.jpg", "owner": {"name": "摄影作者"}, "pubdate": 1700000000}
     respx_mock.get("https://api.bilibili.com/x/web-interface/search/type").respond(200, json={"code": 0, "data": {"result": [metadata]}})
     respx_mock.get("https://api.bilibili.com/x/web-interface/view").respond(200, json={"code": 0, "data": metadata})
     respx_mock.get(settings.amap_base_url+"/v3/geocode/geo").respond(200, json={"status": "1", "geocodes": [{"city": "南京市", "location": "118.8,32.06"}]})
@@ -186,6 +187,9 @@ async def test_bilibili_metadata_to_mapped_candidate_pipeline(settings, brief, r
     record = next(e for e in plan.evidence if e.id in metadata_claim.evidence_ids)
     assert record.values["photographic_info"]["focal_lengths"] == ["85mm"]
     assert record.values["published_at"] is not None
+    sample = plan.spots[0].photo_references[0]
+    assert sample.provider == "community" and sample.relation == "source"
+    assert sample.author == "摄影作者" and str(sample.image_url).startswith("https://i0.hdslb.com/")
 
 
 def test_location_failure_is_nonfatal_and_never_creates_research(settings):

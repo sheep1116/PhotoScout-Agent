@@ -4,6 +4,21 @@ test.beforeEach(async({page})=>{
   await page.route('**/v1/location/**',route=>route.fulfill({json:{city:'苏州市',note:'测试默认城市'}}));
 });
 
+test('recommendation mode defaults to best and is submitted as an edited requirement',async({page})=>{
+  await page.goto('/');
+  const best=page.getByRole('button',{name:/最佳机位/});
+  const multiple=page.getByRole('button',{name:/多个候选/});
+  await expect(best).toHaveAttribute('aria-pressed','true');
+  await multiple.click();
+  await expect(multiple).toHaveAttribute('aria-pressed','true');
+  const requestPromise=page.waitForRequest(request=>request.url().endsWith('/v1/notebook'));
+  await page.getByRole('button',{name:'发现值得拍的机位',exact:true}).click();
+  const request=await requestPromise;
+  const payload=request.postDataJSON();
+  expect(payload.intent.recommendation_mode).toBe('multiple');
+  expect(payload.edited_fields).toContain('recommendation_mode');
+});
+
 test('description drives editable confirmation and preserves unmentioned times',async({page})=>{
   await page.goto('/');
   await expect(page.getByLabel('目的地',{exact:true})).toHaveValue('苏州市');
@@ -20,7 +35,8 @@ test('description drives editable confirmation and preserves unmentioned times',
   await dialog.getByLabel('确认结束时间').fill('19:00');
   await dialog.getByRole('button',{name:'确认需求，开始侦察'}).click();
   await expect(page.locator('.task-card')).toHaveCount(4);
-  await expect(page.locator('.candidate-alerts').first()).toContainText('缺少起点');
+  await page.locator('.task-details summary').first().click();
+  await expect(page.locator('.task-details').first()).toContainText('缺少起点');
   await expect(page.getByText('你的拍摄方式',{exact:true})).toHaveCount(0);
   await expect(page.getByRole('button',{name:'摄影爱好者',exact:true})).toHaveCount(0);
 });

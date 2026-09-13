@@ -4,9 +4,9 @@
 
 `自然语言提取 → 可编辑 Notebook → 高德地点确认 → 完整 AgentBrief → 千问回答与候选 → 地图/来源核验 → conditions → schedule → validate → Repository`
 
-联网发现采用双层结果。`AgentAnswer/AgentCandidate` 保存千问的完整回答、候选与明确引用，即使候选无法唯一映射高德也不会丢失；`PhotoSpot` 只保存能够形成地图点的空间实体。来源标题、POI 或主体定位失败会改变候选核验状态，不再把“未核验”误写成“Agent 没找到”。详情见 [Agent 优先发现与地图增强](agent-first-discovery.md)。
+联网发现采用内容与核验分层。`AgentAnswer/AgentCandidate` 保存结构化建议、候选与明确引用，即使候选无法唯一映射高德也不会丢失；`PhotoSpot` 只保存能够形成地图点的空间实体。结果页只呈现产品化机位卡片，不直接输出模型长文。详情见 [结构化拍摄建议与地图核验](agent-first-discovery.md)。
 
-单个 LangGraph 有向无环图，递归上限 8；整个生成请求超时 180 秒，同时最多 3 个生成任务。确认前有一次最长 30 秒的非搜索模型提取；候选发现搜索最大两次，同时传入原始自然语言、确认地点与时间、全部平等题材、主体、风格、光线、偏好，以及用户画幅、镜头和三脚架。模型不接收密钥或任意执行工具。搜索原文和模型输出没有 shell、环境变量、数据库写权限。
+单个 LangGraph 有向无环图，递归上限 8；整个生成请求超时 180 秒，同时最多 3 个生成任务。确认前有一次最长 30 秒的非搜索模型提取；候选发现使用一次带搜索的结构化响应完成全局比较与排序，同时传入原始自然语言、确认地点与时间、推荐模式、全部平等题材、主体、风格、光线、偏好，以及用户画幅、镜头和三脚架。模型不接收密钥或任意执行工具。搜索原文和模型输出没有 shell、环境变量、数据库写权限。
 
 `TripBrief` 与其余 Pydantic 模型在 `models.py`。模型之外的第三方 JSON 在 `providers.py` 与 `discovery.py` 消化。统一错误不输出 HTTP 请求对象、带 Key 的 URL 或原始异常。
 
@@ -53,7 +53,7 @@
 
 ## 0.2 真实图与多源发现
 
-`PhotographyIntent` 统一平等类别、主体、风格、光线、器材和推荐偏好。旧 JSON 仅在读取边界迁移，活动 Schema 不再暴露 profile、genre 或旧限制字段。类别作为评分权重数据，不复制 LangGraph 流程。`CommunityDiscovery` 负责两次有界联网检索；`DiscoveryHub` 注册 `PhotoProvider` 接口的 Wikimedia/Flickr 适配器。高德 POI 原生图片优先。
+`PhotographyIntent` 统一平等类别、主体、风格、光线、器材、推荐模式和推荐偏好。旧 JSON 仅在读取边界迁移，活动 Schema 不再暴露 profile、genre 或旧限制字段。类别作为评分权重数据，不复制 LangGraph 流程。`CommunityDiscovery` 负责一次有界联网检索与全局候选排序；`DiscoveryHub` 注册 `PhotoProvider` 接口的 Wikimedia/Flickr 适配器。与候选来源直接关联的公开社区预览图优先标为参考样片，高德 POI 图与附近图片作为降级参考。
 
 模型只提取有来源索引的展示名、地图地标名、所属地点、主体名和站位/构图线索。高德分别定位相机与主体；Place 和 PhotoSpot 不再要求同一 POI。若只能找到父级地点，标记 `area_candidate`；缺主体坐标则不产生方位角。限定景区的请求检查景区相关性，避免只因同城就加入其他景区。
 

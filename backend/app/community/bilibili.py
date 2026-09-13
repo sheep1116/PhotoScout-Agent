@@ -29,8 +29,14 @@ class BilibiliAdapter:
         stamp = data.get("pubdate")
         if isinstance(stamp, (float, int)) and 0 < stamp < 4102444800:
             published = datetime.fromtimestamp(stamp, UTC)
+        owner = data.get("owner") if isinstance(data.get("owner"), dict) else {}
+        author = clean(owner.get("name") or data.get("author"), 250)
+        cover = str(data.get("pic") or "")
+        if cover.startswith("//"):
+            cover = "https:" + cover
         return CommunityPost(platform=self.name, url=f"https://www.bilibili.com/video/{bvid}",
-            title=title, description=description, published_at=published,
+            title=title, description=description, cover_image_url=cover, author=author,
+            published_at=published,
             photographic_info=photographic_info(title + " " + description))
 
     async def discover(self, query, client):

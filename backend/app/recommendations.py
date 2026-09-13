@@ -122,6 +122,9 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
                                "暂无游客客流数据；不以客流偏好排除候选。")
         subject_bearings = {subject.name: bearing(spot.camera, subject.position)
                             for subject in spot.subjects if subject.position}
+        subject_distances = {subject.name: distance_km(
+            spot.camera.lat, spot.camera.lon, subject.position.lat, subject.position.lon)
+            for subject in spot.subjects if subject.position}
         direction = next(iter(subject_bearings.values()), None)
         subject_span = circular_span(list(subject_bearings.values()))
         camera = camera_advice(advice_brief, index, ledger)
@@ -136,7 +139,8 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
         geometry = ledger.add(f"candidate-geometry-{index}", "机位方向与时间窗口", TruthLabel.CALCULATED,
             "每个机位独立评估；窗口可重叠，不代表访问顺序。方位角不保证视线无遮挡。",
             {"start": start.isoformat(), "end": end.isoformat(), "target_bearing_deg": direction,
-             "subject_bearings_deg": subject_bearings, "subject_separation_deg": subject_span,
+             "subject_bearings_deg": subject_bearings, "subject_distances_km": subject_distances,
+             "subject_separation_deg": subject_span,
              "field_of_view_deg": field_of_view, "solar_azimuth_deg": solar_angle})
         distance = None
         travel = ["停车、爬升、入口与实际步行时间暂无可靠数据，请出发前查看地图。"]
@@ -169,6 +173,7 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             weather=weather, crowd=CrowdSignal(spatial_scope=spot.name, evidence_ids=crowd_ids),
             score=ranking, alerts=alerts, solar_azimuth_deg=solar_angle,
             target_bearing_deg=direction, subject_bearings_deg=subject_bearings,
+            subject_distances_km=subject_distances,
             subject_separation_deg=subject_span, field_of_view_deg=field_of_view,
             framing_assessment=framing_assessment, risks=risks, alternative="条件不合适时暂缓该机位，由你选择其他候选。",
             reasons=["匹配摄影意图：" + " / ".join(brief.intent.categories),

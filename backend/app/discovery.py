@@ -26,7 +26,8 @@ def image_url(value):
     try:
         parsed = urlsplit(str(value))
         host = parsed.hostname or ""
-        allowed = host in {"store.is.autonavi.com", "aos-cdn-image.amap.com", "aos-comment.amap.com", "upload.wikimedia.org", "live.staticflickr.com"}
+        allowed = host in {"store.is.autonavi.com", "aos-cdn-image.amap.com", "aos-comment.amap.com", "upload.wikimedia.org", "live.staticflickr.com",
+                           "i0.hdslb.com", "i1.hdslb.com", "i2.hdslb.com"}
         allowed = allowed or bool(re.fullmatch(r"farm\d+\.staticflickr\.com", host))
         if not allowed or parsed.scheme not in ("http", "https") or parsed.username or parsed.password or parsed.port not in (None, 443):
             return None
@@ -161,7 +162,11 @@ class CommunityDiscovery:
     async def discover(self, brief, network, warnings):
         from .providers import ProviderError
         batches = []
-        for purpose in self.purposes[:network.settings.max_search_calls]:
+        # One coherent model response owns the comparison and ranking. Its built-in
+        # web search may inspect many sources; multiple independent responses would
+        # create conflicting rank=1 candidates rather than a global ordering.
+        budget = 1
+        for purpose in self.purposes[:budget]:
             # A restricted platform must not consume the useful discovery path.
             # Keep the same two-call ceiling, but broaden the search index when
             # anonymous Bilibili metadata is unavailable.
@@ -196,6 +201,7 @@ class DiscoveryHub:
                         photos = await provider.discover(spot, ledger, network)
                         known = {p.id for p in spot.photo_references}
                         spot.photo_references.extend(p for p in photos if p.id not in known)
+                        spot.photo_references[:] = spot.photo_references[:12]
                         count += len(photos)
                 warnings.append(f"{provider.name}：本次发现 {count} 张附近参考图；不等于精确机位样片。")
             except Exception:

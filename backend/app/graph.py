@@ -47,7 +47,7 @@ async def run_graph(plan_id, brief, settings, emit, provider=None, prepared=None
             if "南京" not in brief.destination:
                 raise ValueError("离线 Demo 仅包含南京；其他目的地请使用 Live 模式")
             spots, claims = seed_spots(brief, ledger)
-            agent_answer = AgentAnswer(summaries=["离线演示使用内置南京样例，不代表联网 Agent 的真实搜索结果。"])
+            agent_answer = AgentAnswer(summaries=["离线演示使用内置南京样例，不代表联网搜索结果。"])
         else:
             spots, claims, agent_answer = await providers.discover(brief, ledger, warnings)
             if not spots and not agent_answer.summaries and not agent_answer.candidates:
@@ -55,8 +55,8 @@ async def run_graph(plan_id, brief, settings, emit, provider=None, prepared=None
                     await emit("warning", warning)
                 raise ProviderError("Discovery", "NO_AGENT_RESULTS")
             if not spots:
-                warnings.append("Agent 已返回建议，但没有候选通过地图定位；仍保留完整回答和来源，不生成猜测坐标。")
-        await emit("evidence", f"已保留 {len(agent_answer.candidates)} 条 Agent 建议、{len(spots)} 个地图候选、{len(claims)} 条来源线索")
+                warnings.append("拍摄建议已生成，但没有候选通过地图定位；仍保留结构化建议和来源，不生成猜测坐标。")
+        await emit("evidence", f"已整理 {len(agent_answer.candidates)} 条拍摄建议、{len(spots)} 个地图候选、{len(claims)} 条来源线索")
         return {"spots": spots, "claims": claims, "warnings": warnings, "agent_answer": agent_answer}
 
     async def conditions(state):

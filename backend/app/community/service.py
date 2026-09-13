@@ -1,7 +1,9 @@
 import asyncio
 import hashlib
+from urllib.parse import urlsplit, urlunsplit
 
-from ..models import Evidence, TruthLabel, WebSource
+from ..discovery import image_url
+from ..models import Evidence, PhotoReference, TruthLabel, WebSource
 from .bilibili import BilibiliAdapter
 from .indexed import IndexedAdapter
 
@@ -75,6 +77,45 @@ class CommunityService:
                         "retrieval": post.retrieval}))
         for platform, status in self.status.items():
             warnings.append(f"社区 {platform}：{status}；仅作摄影线索，平台不可用不阻断其他来源。")
+
+    def photo_references(self, urls, ledger):
+        """Turn trusted public post covers into attributed reference samples.
+
+        Only posts already linked to the retained camera candidate are eligible;
+        the image remains a source preview, never proof of an exact viewpoint.
+        """
+        normalized = {self._normalized_url(url) for url in urls}
+        result = []
+        for post in self.posts.values():
+            if self._normalized_url(post.url) not in normalized:
+                continue
+            safe_image = image_url(post.cover_image_url)
+            if not safe_image:
+                continue
+            source = next((source for source in ledger.sources
+                           if source.url and self._normalized_url(str(source.url)) == self._normalized_url(post.url)), None)
+            if not source:
+                continue
+            identity = "photo-community-" + hashlib.sha256((post.url + safe_image).encode()).hexdigest()[:16]
+            evidence_id = "ev-" + identity
+            if not any(evidence.id == evidence_id for evidence in ledger.evidence):
+                ledger.evidence.append(Evidence(id=evidence_id, source_id=source.id, label=TruthLabel.REPORTED,
+                    statement="来源页面的公开封面/预览图；可作为构图参考，但不证明精确站位、拍摄参数或当前现场条件。",
+                    values={"platform": post.platform, "relation": "source", "author": post.author or None}))
+            result.append(PhotoReference(id=identity, provider="community", image_url=safe_image,
+                source_url=post.url, source_id=source.id, title=post.title,
+                author=post.author or "未提供",
+                license="来源平台公开预览图；版权归原作者，使用与转载请查看原文",
+                captured_at=post.published_at.isoformat() if post.published_at else None,
+                relation="source", evidence_ids=[evidence_id]))
+            if len(result) >= 3:
+                break
+        return result
+
+    @staticmethod
+    def _normalized_url(value):
+        parsed = urlsplit(str(value))
+        return urlunsplit(("https", (parsed.hostname or "").lower(), parsed.path.rstrip("/"), "", ""))
 
     def sources(self):
         return [{"index": 1001+i, "url": post.url, "title": post.title,

@@ -13,6 +13,8 @@ class CommunityPost(Model):
     url: str
     title: str
     description: str = ""
+    cover_image_url: str = ""
+    author: str = ""
     published_at: datetime | None = None
     photographic_info: dict[str, list[str]] = Field(default_factory=dict)
     retrieval: str = "public_metadata"

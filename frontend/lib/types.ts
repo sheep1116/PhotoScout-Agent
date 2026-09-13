@@ -1,8 +1,8 @@
 export type Preferences = {max_walk_km?:number|null;avoid_tickets?:boolean;low_crowd?:boolean;step_free?:boolean;strict?:string[]};
-export type PhotographyIntent = {categories:string[];subjects:string[];styles:string[];light:'any'|'daylight'|'sunrise'|'golden_hour'|'blue_hour'|'night';preferences:Preferences;other_requirements?:string[]};
+export type PhotographyIntent = {categories:string[];recommendation_mode:'best'|'multiple';subjects:string[];styles:string[];light:'any'|'daylight'|'sunrise'|'golden_hour'|'blue_hour'|'night';preferences:Preferences;other_requirements?:string[]};
 export type DestinationLocation = {id:string;poi_id:string|null;adcode:string;name:string;city:string;address:string;lat:number;lon:number;verification_token:string};
 export type Notebook = {brief:Brief;questions:string[];missing_fields:string[];assumptions:string[];recognized:string[];parsed_fields:string[];parser:string;location_choices:DestinationLocation[];location_status:string};
-export type PhotoReference = {id:string;provider:string;source_url:string;title:string;author:string;license:string;retrieved_at:string;captured_at:string|null;relation:'poi'|'nearby';latitude:number|null;longitude:number|null;exif:Record<string,string>;evidence_ids:string[]};
+export type PhotoReference = {id:string;provider:string;source_url:string;title:string;author:string;license:string;retrieved_at:string;captured_at:string|null;relation:'poi'|'nearby'|'source';latitude:number|null;longitude:number|null;exif:Record<string,string>;evidence_ids:string[]};
 export type Brief = {
   reverse_context?:{analysis_id:string;spot_id:string};
   auto_time_fields?:('start_local'|'end_local'|'end_date')[];
@@ -15,7 +15,8 @@ export type Position = {lat: number; lon: number; precision: string; evidence_id
 export type Spot = {id: string; place: {id:string;name:string;position:Position}; camera_instruction:string;viewpoint_status:string;photo_references:PhotoReference[]; name: string; camera: Position; entrance: Position | null; subjects: {name: string; position: Position | null}[]; access: string; composition: string; risks: string[]};
 export type Evidence = {id: string; source_id: string; label: string; statement: string; values: Record<string, unknown>; observed_at: string; valid_until: string | null};
 export type Source = {id: string; title: string; url: string | null; kind: string; platform?:string|null; publisher: string; retrieved_at: string; published_at: string | null; note: string};
-export type AgentCandidate = {id:string;name:string;camera_poi:string;place_name:string;camera_instruction:string;subjects:string[];shooting_direction:string;composition:string;recommended_time:string;time_judgment:string;equipment_advice:string;settings_advice:Record<string,string>;source_ids:string[];confidence:'low'|'medium'|'high';verification_status:'mapped'|'area'|'map_only'|'unlocated'|'rejected';verification_note:string;mapped_spot_id:string|null};
+export type LocationAnchor = {display_name:string;map_anchor:string};
+export type AgentCandidate = {id:string;name:string;camera_poi:string;place_name:string;camera_instruction:string;subjects:string[];shooting_direction:string;composition:string;recommended_time:string;time_judgment:string;equipment_advice:string;settings_advice:Record<string,string>;source_ids:string[];confidence:'low'|'medium'|'high';verification_status:'mapped'|'area'|'map_only'|'unlocated'|'rejected';verification_note:string;mapped_spot_id:string|null;camera_location?:LocationAnchor|null;subject_locations?:LocationAnchor[];rank?:number;selection_reason?:string};
 export type AgentAnswer = {summaries:string[];candidates:AgentCandidate[];source_ids:string[]};
 export type Task = {
   alerts?:string[]; reasons?:string[]; travel_advice?:string[]; distance_km?:number|null;recommended_light?:string;
@@ -25,7 +26,7 @@ export type Task = {
   score: {suitability: number; confidence: number; components: Record<string, number>; weights: Record<string, number>; evidence_ids: string[]};
   crowd: {level: string; label: string; source_type: string; evidence_ids: string[]};
   risks: string[]; alternative: string; solar_azimuth_deg: number; target_bearing_deg: number | null; evidence_ids: string[];
-  subject_bearings_deg?:Record<string,number>;subject_separation_deg?:number|null;field_of_view_deg?:number|null;framing_assessment?:string;
+  subject_bearings_deg?:Record<string,number>;subject_distances_km?:Record<string,number>;subject_separation_deg?:number|null;field_of_view_deg?:number|null;framing_assessment?:string;
 };
 export type Plan = {recreation?:{generated_version?:number;photo_id:string;visual:{summary:string};location_note:string;difficulties:string[];windows:{date:string;start:string;end:string;match:number;direction_deg:number|null;camera:Task["camera"];differences:string[];equipment:string[]}[]}|null;presentation?:string; id: string; version: number; brief: Brief; agent_answer?:AgentAnswer; spots: Spot[]; tasks: Task[]; sources: Source[]; evidence: Evidence[];
   claims: {id: string; statement: string; source_id: string; subject_id:string; kind:string; evidence_ids:string[]; label: string}[];

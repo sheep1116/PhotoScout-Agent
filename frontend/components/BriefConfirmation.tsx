@@ -6,7 +6,7 @@ export default function BriefConfirmation({brief,book,working,onChange,onClose,o
   return <div className="overlay" onClick={onClose}><section className="modal brief-confirmation" role="dialog" aria-modal="true" aria-labelledby="confirm-title" onClick={e=>e.stopPropagation()}>
     <button className="close" aria-label="关闭确认" onClick={onClose}>×</button>
     <div className="eyebrow muted">YOUR PHOTOGRAPHY BRIEF</div><h2 id="confirm-title">让我们对齐这次出发。</h2>
-    <p>{book.parser==='model'?'模型已解析你的描述':'已整理明确词句与默认值'}；以下条件都可以修改。</p>
+    <p>{book.parser==='model'?'已理解并整理你的描述':'已整理明确词句与默认值'}；以下条件都可以修改。</p>
     <div className="recognized">已从描述中识别：{book.recognized.join(' / ')||'未识别到明确标签，沿用默认建议'}</div>
     <blockquote>{brief.text||'未填写描述，使用下面的条件发现机位。'}</blockquote>
     <label>目的地<input aria-label="确认目的地" value={brief.destination} onChange={e=>onChange({destination:e.target.value})}/></label>

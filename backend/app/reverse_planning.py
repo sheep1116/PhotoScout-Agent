@@ -66,7 +66,7 @@ async def analyze_reference(identifier,photo_id,request,store,settings,emit):
             store.save(identifier,photo_id,body)
         body['claims']=[]
         save()
-        await emit('discover','Agent 收集原机位证据；地图与方位计算独立校验')
+        await emit('discover','正在收集原机位证据；地图与方位计算独立校验')
         if request.data_mode=='mock':
             work=TripBrief(destination='南京市',mode='mock',intent=visual.intent())
             spots,claims=seed_spots(work,ledger)

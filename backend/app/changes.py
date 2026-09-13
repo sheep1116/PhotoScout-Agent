@@ -32,12 +32,15 @@ def position_proposal(plan, spot_id, lat, lon, role):
         from astral.sun import azimuth
 
         from .engine import bearing
-        from .recommendations import circular_span
+        from .recommendations import circular_span, distance_km
         for task in changed.tasks:
             if task.spot_id != spot_id:
                 continue
             task.subject_bearings_deg = {subject.name: bearing(point, subject.position)
                                          for subject in spot.subjects if subject.position}
+            task.subject_distances_km = {subject.name: distance_km(
+                point.lat, point.lon, subject.position.lat, subject.position.lon)
+                for subject in spot.subjects if subject.position}
             task.target_bearing_deg = next(iter(task.subject_bearings_deg.values()), None)
             task.subject_separation_deg = circular_span(list(task.subject_bearings_deg.values()))
             if task.subject_separation_deg is None:
@@ -51,6 +54,7 @@ def position_proposal(plan, spot_id, lat, lon, role):
             changed.evidence[-1].values[task.id] = {"solar_azimuth_deg": task.solar_azimuth_deg,
                                                    "target_bearing_deg": task.target_bearing_deg,
                                                    "subject_bearings_deg": task.subject_bearings_deg,
+                                                   "subject_distances_km": task.subject_distances_km,
                                                    "subject_separation_deg": task.subject_separation_deg}
     reason = "确认相机站位" if role == "camera" else "确认公开入口"
     return PlanChangeProposal(id=uuid4().hex, plan_id=plan.id, base_version=plan.version, reason=reason,

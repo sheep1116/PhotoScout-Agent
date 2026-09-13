@@ -8,14 +8,14 @@ async function generate(page:Page) {
   await page.getByRole('button',{name:'发现值得拍的机位',exact:true}).click();
   await expect(page.getByRole('dialog')).toContainText('让我们对齐这次出发');
   await page.getByRole('button',{name:'确认需求，开始侦察'}).click();
-  await expect(page.getByRole('heading',{name:'值得拍的候选机位',exact:true})).toBeVisible();
+  await expect(page.getByRole('heading',{name:/拍摄建议 · (推荐机位|最佳机位)/})).toBeVisible();
   await expect(page.locator('.task-card')).toHaveCount(4);
 }
 
 test('portrait: generate, inspect evidence, reject, approve and undo', async({page})=>{
   await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click();
   await generate(page);
-  await page.getByRole('button',{name:'规则依据 ↗'}).first().click();
+  await page.getByRole('button',{name:'计算依据 ↗'}).first().click();
   await expect(page.getByRole('dialog')).toContainText('曝光建议起点');
   await page.getByRole('button',{name:'关闭证据'}).click();
   const original = await page.locator('.task-card').nth(1).innerText();
@@ -26,11 +26,11 @@ test('portrait: generate, inspect evidence, reject, approve and undo', async({pa
   await page.getByRole('button',{name:'天气变差',exact:true}).first().click();
   await page.getByRole('button',{name:'批准并保存'}).click();
   await expect(page.locator('.version')).toHaveText('V2');
-  await expect(page.locator('.task-card').first()).toContainText('已取消');
+  await expect(page.locator('.task-card').first()).toContainText('当前暂缓');
   expect(await page.locator('.task-card').nth(1).innerText()).toBe(original);
   await page.getByRole('button',{name:'撤销修改'}).click();
   await expect(page.locator('.version')).toHaveText('V3');
-  await expect(page.locator('.task-card').first()).not.toContainText('已取消');
+  await expect(page.locator('.task-card').first()).not.toContainText('当前暂缓');
 });
 
 test('cityscape seed: tripod advice and offline sources', async({page})=>{
@@ -94,7 +94,7 @@ test('composable intent persists all conditions and supports every candidate', a
   expect(notebook.brief.intent.equipment.lenses).toHaveLength(2);
   expect(notebook.brief.intent.preferences.max_walk_km).toBe(2);
   expect(notebook.brief.profile).toBeUndefined();
-  await page.getByRole('button',{name:/候选机位/}).click();
+  await page.getByRole('button',{name:/推荐机位/}).click();
   await expect(page.locator('.task-card')).toHaveCount(4);
   await expect(page.locator('.photo-empty').first()).toContainText('暂无真实参考图');
 });
@@ -125,7 +125,7 @@ test('reference gallery attribution, switching and broken-image fallback', async
   await gallery.getByText('作者、授权与拍摄信息',{exact:true}).click();
   await expect(gallery).toContainText('UI 测试夹具');
   await expect(gallery.getByRole('link',{name:'查看原始来源 ↗'})).toHaveAttribute('href',/commons.wikimedia.org/);
-  await gallery.getByRole('button',{name:'2 · wikimedia',exact:true}).click();
+  await gallery.getByRole('button',{name:'2 · Wikimedia',exact:true}).click();
   await expect(gallery).toContainText('图片暂时无法加载');
   await expect(page.locator('.task-card')).toHaveCount(4);
   await page.setViewportSize({width:390,height:844});

@@ -58,6 +58,10 @@ def test_proxy_url_allowlist(url):
     assert image_url(url) is None
 
 
+def test_trusted_community_preview_cdn_is_allowed():
+    assert image_url("http://i0.hdslb.com/bfs/archive/sample.jpg") == "https://i0.hdslb.com/bfs/archive/sample.jpg"
+
+
 def test_real_api_photos_only_and_missing_photo_fallback():
     ledger = Ledger()
     poi = {"id": "B1", "name": "测试景点", "photos": [
@@ -212,11 +216,14 @@ async def test_title_only_relevance_failure_keeps_agent_candidate_and_map_match(
     monkeypatch.setattr(provider, "search", AsyncMock(return_value={"retrieved_at": "2026-09-10T00:00:00Z",
         "answer_summary": "建议从公开城墙区域寻找同框角度。", "source_indices": [1],
         "sources": [{"index": 1, "title": "一次建筑取景记录", "url": "https://example.com/viewpoint"}],
-        "candidates": [{"name": "解放门候选位", "camera_poi": "解放门", "place_name": "南京城墙",
-            "subjects": ["鸡鸣寺", "紫峰大厦"], "subject_pois": ["鸡鸣寺", "紫峰大厦"],
+        "candidates": [{"display_name": "明城墙台城段（鸡鸣寺旁）", "map_anchor": "南京城墙景区（解放门）",
+            "camera_location": {"display_name": "明城墙台城段（鸡鸣寺旁）", "map_anchor": "南京城墙景区（解放门）"},
+            "place_name": "南京城墙", "subject_locations": [
+                {"display_name": "鸡鸣寺", "map_anchor": "鸡鸣寺"},
+                {"display_name": "紫峰大厦", "map_anchor": "紫峰大厦"}],
             "composition": "长焦压缩两座建筑", "source_indices": [1]}]}))
     async def poi(name, _city):
-        locations = {"解放门": ("gate", "118.80,32.06"), "南京城墙": ("wall", "118.801,32.06"),
+        locations = {"南京城墙景区（解放门）": ("gate", "118.80,32.06"), "南京城墙": ("wall", "118.801,32.06"),
                      "鸡鸣寺": ("temple", "118.802,32.061"), "紫峰大厦": ("tower", "118.78,32.07")}
         identity, location = locations[name]
         return {"id": identity, "name": name, "location": location}
@@ -227,6 +234,9 @@ async def test_title_only_relevance_failure_keeps_agent_candidate_and_map_match(
     finally:
         await provider.client.aclose()
     assert len(spots) == 1 and len(spots[0].subjects) == 2
+    assert answer.candidates[0].name == "明城墙台城段（鸡鸣寺旁）"
+    assert answer.candidates[0].camera_location.map_anchor == "南京城墙景区（解放门）"
+    assert [item.map_anchor for item in answer.candidates[0].subject_locations] == ["鸡鸣寺", "紫峰大厦"]
     assert answer.candidates[0].verification_status == "map_only"
     assert answer.candidates[0].source_ids and any("来源标题未体现" in warning for warning in warnings)
 

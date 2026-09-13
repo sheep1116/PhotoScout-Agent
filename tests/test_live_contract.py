@@ -24,6 +24,7 @@ async def test_live_full_graph_source_bound_and_injection_is_data(settings, brie
     settings.dashscope_api_key = SecretStr("contract-secret-never-reveal")
     settings.amap_web_service_key = SecretStr("contract-map-secret")
     brief.mode = "live"
+    brief.intent.recommendation_mode = "multiple"
     brief.destination = "南京"
     brief.travel_date = (datetime.now(UTC)+timedelta(days=40)).date()
     search = mock_search(respx_mock,settings)
@@ -44,7 +45,7 @@ async def test_live_full_graph_source_bound_and_injection_is_data(settings, brie
     assert plan.spots[0].entrance is None
     assert "contract-secret" not in plan.model_dump_json()
     assert "contract-map-secret" not in plan.model_dump_json()
-    assert search.call_count == 2
+    assert search.call_count == 1
     # No tools in the LLM request, no internet calls determined by the injected text.
     payload = json.loads(search.calls[0].request.content)
     assert "tools" not in payload

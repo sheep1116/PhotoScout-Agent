@@ -54,7 +54,31 @@ async def test_no_citations_preserves_agent_answer_without_claiming_sources(sett
     assert brief.text in query
     assert all(label in query for label in ['建筑', '人文街拍', '城市夜景'])
     assert '35mm F1.8' in query and 'local_time_window' in query and brief.text in query
+    assert '"recommendation_mode": "best"' in query
     await provider.client.aclose()
+
+
+async def test_best_mode_uses_explicit_model_selection_not_first_candidate(settings, brief, respx_mock):
+    from pydantic import SecretStr
+    settings.dashscope_api_key = SecretStr("best-selection-test")
+    candidates = [
+        {"display_name": "先返回但非最佳", "map_anchor": "入口甲", "composition": "普通构图",
+         "subject_locations": [{"display_name": "主体", "map_anchor": "主体"}], "rank": 2, "is_primary": False},
+        {"display_name": "比较后的主推荐", "map_anchor": "平台乙", "composition": "最符合目标",
+         "subject_locations": [{"display_name": "主体", "map_anchor": "主体"}], "rank": 1, "is_primary": True,
+         "selection_reason": "结合焦段与时间后更合适"},
+    ]
+    frame = {"output": {"choices": [{"message": {"content": [{"text": json.dumps({"candidates": candidates}, ensure_ascii=False)}]}}]}}
+    route = respx_mock.post(settings.dashscope_native_base_url + "/services/aigc/multimodal-generation/generation").respond(
+        200, text="data: " + json.dumps(frame, ensure_ascii=False) + "\n\n")
+    provider = Providers(settings)
+    provider.cache.items.clear()
+    try:
+        result = await provider.search(brief, "最佳机位比较")
+    finally:
+        await provider.client.aclose()
+    assert [candidate["display_name"] for candidate in result["candidates"]] == ["比较后的主推荐"]
+    assert route.call_count == 1
 
 
 async def test_cache_expiry():

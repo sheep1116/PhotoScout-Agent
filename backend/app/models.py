@@ -88,6 +88,7 @@ class DestinationLocation(Model):
 
 class PhotographyIntent(Model):
     categories: list[Category] = Field(default_factory=lambda: ["landscape"], min_length=1, max_length=6)
+    recommendation_mode: Literal["best", "multiple"] = "best"
     subjects: list[str] = Field(default_factory=list, max_length=8)
     styles: list[str] = Field(default_factory=list, max_length=8)
     light: Literal["any", "daylight", "sunrise", "golden_hour", "blue_hour", "night"] = "any"
@@ -247,6 +248,11 @@ class SourceClaim(Model):
     valid_until: datetime | None = None
 
 
+class LocationAnchor(Model):
+    display_name: str = Field(max_length=120)
+    map_anchor: str = Field(max_length=120)
+
+
 class AgentCandidate(Model):
     """A discovery lead is preserved even when it cannot yet become a map spot."""
     id: str
@@ -266,6 +272,19 @@ class AgentCandidate(Model):
     verification_status: Literal["mapped", "area", "map_only", "unlocated", "rejected"] = "unlocated"
     verification_note: str = Field(default="尚未完成地图与来源核验。", max_length=500)
     mapped_spot_id: str | None = None
+    camera_location: LocationAnchor | None = None
+    subject_locations: list[LocationAnchor] = Field(default_factory=list, max_length=8)
+    rank: int = Field(default=1, ge=1, le=12)
+    selection_reason: str = Field(default="", max_length=500)
+
+    @model_validator(mode="after")
+    def location_protocol(self):
+        if self.camera_location is None:
+            self.camera_location = LocationAnchor(display_name=self.name,
+                map_anchor=self.camera_poi or self.name)
+        if not self.subject_locations:
+            self.subject_locations = [LocationAnchor(display_name=name, map_anchor=name) for name in self.subjects]
+        return self
 
 
 class AgentAnswer(Model):
@@ -298,7 +317,7 @@ class Subject(Model):
 
 class PhotoReference(Model):
     id: str
-    provider: Literal["amap", "wikimedia", "flickr"]
+    provider: Literal["amap", "wikimedia", "flickr", "community"]
     image_url: HttpUrl
     source_url: HttpUrl
     source_id: str
@@ -307,7 +326,7 @@ class PhotoReference(Model):
     license: str = Field(default="版权归原作者；仅供参考，转载需另行授权", max_length=300)
     retrieved_at: datetime = Field(default_factory=now)
     captured_at: str | None = None
-    relation: Literal["poi", "nearby"] = "poi"
+    relation: Literal["poi", "nearby", "source"] = "poi"
     # API geotags are not verified camera positions.
     latitude: float | None = Field(default=None, ge=-90, le=90)
     longitude: float | None = Field(default=None, ge=-180, le=180)
@@ -419,6 +438,7 @@ class ShotTask(Model):
     solar_azimuth_deg: float
     target_bearing_deg: float | None = None
     subject_bearings_deg: dict[str, float] = Field(default_factory=dict)
+    subject_distances_km: dict[str, float] = Field(default_factory=dict)
     subject_separation_deg: float | None = None
     field_of_view_deg: float | None = None
     framing_assessment: str = ""
