@@ -1,149 +1,232 @@
-# PhotoScout
+<div align="center">
+  <img src="docs/images/logo.svg" width="88" alt="PhotoScout Logo" />
+  <h1>PhotoScout</h1>
+  <p><strong>去光发生的地方。</strong></p>
+  <p>把一张参考照片或一句拍摄想法，变成有坐标、有光线判断、有证据来源的机位建议。</p>
 
-**去光发生的地方。** 一个支持真实参考图、组合式摄影意图、机位关系与人工审批的摄影工作台。
+  <p>
+    <img src="https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white" alt="Python 3.12" />
+    <img src="https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white" alt="Next.js 16" />
+    <img src="https://img.shields.io/badge/FastAPI-0.115%2B-009688?logo=fastapi&logoColor=white" alt="FastAPI" />
+    <img src="https://img.shields.io/badge/LangGraph-1.x-1C3C3C" alt="LangGraph" />
+    <img src="https://img.shields.io/badge/MapLibre-5.x-396CB2?logo=maplibre&logoColor=white" alt="MapLibre" />
+    <img src="https://img.shields.io/badge/Docker-Compose-2496ED?logo=docker&logoColor=white" alt="Docker Compose" />
+  </p>
 
-> **参考照片寻找原机位**：上传照片，推断具体道路、城墙段或观景点，收集真实网页证据并用地图、距离和方位关系核验。缺少证据的候选仍保留并分级展示。识别阶段不填写日期；确认原机位后可生成所选日期的复刻建议。详见 [使用说明与验收](docs/reverse-photo-planning.md)。
+  <p>
+    <a href="#核心能力">核心能力</a> ·
+    <a href="#quick-start">Quick Start</a> ·
+    <a href="#系统架构">系统架构</a> ·
+    <a href="#文档">文档</a>
+  </p>
+</div>
 
-用一句话描述想拍的画面，确认 PhotoScout 整理出的目的地、日期、题材、推荐模式和偏好，再发现值得拍的机位。天气和出行偏好通常影响排序与提醒；每个机位用独立卡片展示站位区域、主体、时间、拍法和折叠来源。南京人像与城市夜景保留为快捷模板，所有摄影方向平等参与同一条工作流。
+<img src="docs/images/1.png" width="100%" alt="PhotoScout 产品首页：自然语言摄影需求与机位关系地图" />
 
-> **自然语言与发现优先升级**：新增可编辑需求确认、高德歧义地点选择与稳定地点记录；移除四种拍摄方式及默认出行硬筛选；雨天、光线不匹配等保留候选并提醒。实现、验收与边界见 [本轮升级说明](docs/discovery-agent-upgrade.md)。
+## PhotoScout 是什么
 
-> **2026-09-12 结构化拍摄建议升级**：完整时间、器材、推荐模式和摄影意图进入联网任务；返回的候选与引用先结构化，再叠加高德、天气、太阳及多主体距离/方向核验。结果页展示产品化机位卡、时间轴和参考样片，不直接显示模型长文。详见 [结构化拍摄建议与地图核验](docs/agent-first-discovery.md)。
+PhotoScout 是一个本地优先的 AI 摄影机位工作台。它不只回答“去哪拍”，还会把候选机位、被摄主体、地图坐标、天气、太阳位置、拍摄方向和来源证据组织成一份可核验、可执行的拍摄建议。
 
-已经实现 **Next.js + FastAPI + 单 LangGraph 工作流**，不是静态页面。提供完全离线的 Seed Demo、DashScope/高德/Open-Meteo 服务端适配器、SQLite/PostgreSQL 持久化、可审查 Proposal/Diff、并发审批与 Undo。
-
-> **2026-09-10 产品升级**：真实高德照片、多源发现适配层、风光/人像/人文/建筑等组合意图、Place/PhotoSpot/Subject 分离已接入。119 项后端测试、8 项浏览器 E2E、62 条离线评测通过；真实图像代理、搜索、天气、机位方向等 14 项 Live 检查通过。Wikimedia 当前网络超时，Flickr 未配置 Key，二者已验证模拟契约与降级。详见 [本次升级说明与阅读指南](docs/product-upgrade.md) 和 [验收原始报告](docs/verification/product-upgrade-live.json)。当前仍是单用户本地工作台，公网商业运营条件见 [已知限制](docs/limitations.md)。
-
-> **2026-09-11 候选发现升级**：新增隔离的 Bilibili 公共元数据适配器与搜索降级；每个机位独立推荐，不安排访问顺序；定位、本地时间与跨天默认值自动填写，器材表单移除默认出行硬筛选。140 项后端测试、12 项页面 E2E（11 项离线 + 1 项保存的真实结果）、63 条离线评测通过；最终 18 项 Live 检查通过。Bilibili 直接访问本机受限，真实验收验证了降级路径。详见 [本轮升级说明](docs/candidate-discovery.md)。
-
-## 30 秒 Demo（依赖已安装）
-
-在项目目录的 PowerShell 中运行：
-
-```powershell
-.\start.ps1
+```mermaid
+flowchart LR
+  A[上传参考照片] --> C[理解画面与地标]
+  B[描述想拍的画面] --> D[结构化摄影需求]
+  C --> E[搜索候选机位]
+  D --> E
+  E --> F[地图与来源核验]
+  F --> G[天气 · 太阳 · 方向分析]
+  G --> H[结构化拍摄建议]
 ```
 
-打开 [PhotoScout 本地页面](http://127.0.0.1:3800)。点击左侧“紫金山的光与影”或“蓝调时刻的南京”，保留“离线演示”，点“发现值得拍的机位”并确认需求。随后查看候选卡“规则依据”，点击“天气变差”生成提案，批准，再撤销。
+## 核心能力
 
-停止服务：` .\stop.ps1 `。数据保存在本地 `photoscout.db`，停止服务不删除数据。
+| 能力 | PhotoScout 会做什么 |
+|---|---|
+| **参考照片定位** | 从画面中的建筑、山体、道路和构图关系推断原机位，保留多个候选及各自依据。 |
+| **自然语言找机位** | 理解目的地、题材、主体、时间、光线、器材和偏好，把一句想法整理成可确认的摄影需求。 |
+| **地图与坐标核验** | 使用高德 POI 定位机位与主体，转换并标注坐标系，区分地图点、区域候选和推测位置。 |
+| **环境与方向分析** | 结合 Open-Meteo、Astral 和地标方位，计算天气、日出日落、黄金时刻及取景方向。 |
+| **结构化拍摄建议** | 输出站位、时段、焦段、参数、构图、到达提示、风险和来源，而不是一段不可操作的模型长文。 |
 
-默认使用 **3800** 端口：本机 Windows 将 2853–3352 等范围保留给系统，原 3000 端口不可用。服务仅绑定回环地址，不对公网开放。
+## 两种方式，找到下一张照片
 
-## 首次安装
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <img src="docs/images/2.png" width="100%" alt="上传参考照片并寻找原机位" />
+      <h3>从参考照片出发</h3>
+      <p>上传 JPEG、PNG 或 WebP。PhotoScout 分析画面与构图，结合地点线索、网页来源和地图结果生成原机位候选；候选中的不确定性会被明确标注。</p>
+    </td>
+    <td width="50%" valign="top">
+      <img src="docs/images/3.png" width="100%" alt="自然语言寻找摄影机位与地图关系核验" />
+      <h3>从拍摄想法出发</h3>
+      <p>描述想拍的地点、画面、日期或器材。PhotoScout 将需求结构化，在地图上呈现机位、主体和方向关系，并按证据与拍摄条件组织候选。</p>
+    </td>
+  </tr>
+</table>
 
-需要 Python 3.12、Node.js 24、npm；安装过程需联网。现有 `.env` 保留不变，没有密钥也能运行两个离线 Demo。
+## 从“地点”到“怎么拍”
+
+每个候选机位都有独立的拍摄卡片：参考画面、推荐时段、取景方向、焦段与器材、站位说明、参数起点、天气条件、证据来源和待核实风险集中在同一处。
+
+<img src="docs/images/4.png" width="100%" alt="PhotoScout 机位详情与结构化拍摄建议" />
+
+> PhotoScout 提供的是有依据的拍摄决策起点，不是自动导航或现场安全保证。POI 中心、推测坐标与精确相机站位会被区别标注。
+
+## Quick Start
+
+### Windows
+
+需要 Python 3.12、Node.js 24 和 npm。首次运行会创建虚拟环境并安装锁定依赖：
 
 ```powershell
-# 同时创建虚拟环境、安装锁定依赖，并启动前后端
-.\start.ps1 -Install
+git clone https://github.com/sheep1116/PhotoScout-Agent.git
+cd PhotoScout-Agent
+./start.ps1 -Install
 ```
 
-冷启动时下载依赖的时间取决于网络，不保证 3 分钟完成。安装完成后 Demo 不依赖第三方服务。启动器使用隐藏窗口，运行日志在 `.run/`。
-
-也可以在两个终端中分别运行：
+随后打开 [http://127.0.0.1:3800](http://127.0.0.1:3800)。以后启动只需：
 
 ```powershell
-# 终端一：项目根目录
-py -3.12 -m venv .venv
-.venv\Scripts\python -m pip install -r requirements.lock
-.venv\Scripts\python -m pip install --no-deps -e .
-.venv\Scripts\python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+./start.ps1
 ```
 
+停止服务：
+
 ```powershell
-# 终端二
+./stop.ps1
+```
+
+默认数据保存在本地 `photoscout.db`。没有 API Key 也可以使用内置 Seed Demo。
+
+### macOS / Linux
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.lock
+python -m pip install --no-deps -e .
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+```
+
+在另一个终端启动前端：
+
+```bash
 cd frontend
 npm ci
 npm run dev
 ```
 
-macOS/Linux 用 `python3.12 -m venv .venv` 与 `.venv/bin/python` 替换上面的 Python 路径；前端命令相同。
+### 启用 Live 模式
 
-## 如何用 Live 模式
-
-根目录 `.env` 支持原方案中全部变量：
-
-| 变量 | 用途 |
-|---|---|
-| `DASHSCOPE_API_KEY` | 百炼密钥，仅后端读取 |
-| `DASHSCOPE_NATIVE_BASE_URL` | 原生多模态流式搜索端点根路径 |
-| `DASHSCOPE_BASE_URL` | 保留的兼容接口配置，当前搜索使用原生通道 |
-| `QWEN_MODEL` | 默认 `qwen3.7-plus` |
-| `AMAP_WEB_SERVICE_KEY` | 高德 Web 服务密钥，仅后端使用 |
-| `AMAP_BASE_URL` | 默认 `https://restapi.amap.com` |
-| `FLICKR_API_KEY` | 可选 Flickr Key，未配置则跳过 |
-| `ENABLE_COMMUNITY` | 默认 true，启用少量匿名社区元数据；受限时降级公开搜索 |
-| `ENABLE_EXTERNAL_PHOTOS` | 默认 true，控制 Wikimedia/Flickr 图片发现 |
-| `DISCOVERY_PHOTO_TIMEOUT` | 每个外部图片 Provider 总预算，默认 8 秒 |
-| `DATABASE_URL` | 默认 SQLite；可切 PostgreSQL + psycopg |
-| `REDIS_URL` | 可选 Redis；未配置时用有界进程内缓存 |
-| `AMAP_MIN_INTERVAL` | 高德请求最小间隔秒数，默认 0.6；处理业务限流时有限重试 |
-
-确认账户端点、余额与可接受费用后，在表单切换“Live · 联网发现”。每次计划最多 2 次搜索、6 个入选地点，搜索输出最多 2000 tokens/次；读接口至多重试一次，收费搜索不自动重试。服务启动不调用付费 API；页面打开后可调用高德定位，但不会自动发起付费搜索。自动测试使用模拟数据。费用以 Provider 账单为准，页面不捏造金额。
-
-Live 地点依赖高德国内覆盖；时间按浏览器本地 IANA 时区提交，结果按该时区显示。有歧义的目的地/POI 会要求补充或跳过，不直接取第一个结果。缺失搜索来源不生成无依据的候选。具体站位无法定位时，可以退回来源所述的所属地点，并标为区域候选；整个发现没有可靠候选才明确失败，不偷偷替换目的地。
-
-天气日期在可用预报范围外，返回未知天气的天文草案。每个机位独立评估天气与光线，不以换点路线或默认步行预算排除候选；不把 POI 中心当入口。开放与临时管控需要官方原文/现场核验；当前不会自动宣布任意景区可进入。
-
-在线底图由用户点击后加载；离线图一直可用，且不伪装成导航地图。高德 GCJ-02 在后端近似转换为 WGS84；用户坐标确认输入为 WGS84。
-
-已完成一次预报范围内的南京人像真实端到端验收；可复用探针与结果检查脚本见 [验收报告](docs/live-acceptance.md)。搜索引用增加地点相关性筛选，仅保留实际采用的来源；相关标题仍不能代替全文和现场核验。
-
-## 验证
+复制配置模板并填写服务端密钥：
 
 ```powershell
-.venv\Scripts\python -m pytest -q
-.venv\Scripts\python -m ruff check backend tests evals scripts
-.venv\Scripts\python -m evals.run
-.venv\Scripts\python scripts/check_secrets.py
+Copy-Item .env.example .env
+```
+
+最小 Live 配置：
+
+```dotenv
+DASHSCOPE_API_KEY=your_key
+AMAP_WEB_SERVICE_KEY=your_key
+```
+
+DashScope 用于多模态理解和联网候选发现，高德用于地点与坐标，Open-Meteo 与 Astral 提供天气和太阳条件。Flickr、Redis、PostgreSQL/PostGIS 均为可选能力；完整变量见 [.env.example](.env.example)。密钥只由后端读取。
+
+## Docker Compose
+
+```bash
+docker compose up --build
+```
+
+访问 [http://127.0.0.1:3800](http://127.0.0.1:3800)。Compose 会启动：
+
+- Next.js 前端
+- FastAPI 后端
+- PostgreSQL 17 + PostGIS
+- Redis
+
+```bash
+docker compose down
+```
+
+数据库卷默认保留。只有明确要删除本地数据时才使用 `docker compose down -v`。
+
+## 系统架构
+
+```mermaid
+flowchart LR
+  UI[Next.js 16<br/>MapLibre] -->|REST / SSE| API[FastAPI]
+  API --> GRAPH[LangGraph<br/>单工作流编排]
+  GRAPH --> AI[DashScope<br/>视觉理解与候选发现]
+  GRAPH --> GEO[高德<br/>POI 与坐标]
+  GRAPH --> ENV[Open-Meteo + Astral<br/>天气与太阳]
+  GRAPH --> RULES[确定性规则<br/>方向 · 时间 · 风险]
+  RULES --> STORE[(SQLite<br/>或 PostgreSQL + PostGIS)]
+  API --> CHANGE[Proposal · Approval · Undo]
+  CHANGE --> STORE
+```
+
+工作流将生成式能力与确定性核验分开：模型负责理解画面和提出候选，地图、坐标、太阳、天气、Schema 与证据规则负责验证和组织结果。计划修改通过 Proposal / Diff / Approval / Undo 流程持久化。
+
+### 技术栈
+
+| 层级 | 技术 |
+|---|---|
+| Web | Next.js 16、React 19、TypeScript、MapLibre GL |
+| API | FastAPI、Pydantic、SSE |
+| Agent | LangGraph、DashScope / Qwen |
+| 地理与环境 | 高德 Web Service、Open-Meteo、Astral |
+| 数据 | SQLite、SQLAlchemy；可选 PostgreSQL/PostGIS 与 Redis |
+| 质量 | Pytest、Ruff、Playwright、离线 Evals |
+
+### 目录
+
+```text
+backend/app/       FastAPI、工作流、Provider 与领域模型
+frontend/          Next.js 产品界面
+tests/             后端与契约测试
+evals/             离线评测
+docs/              架构、能力边界与验收资料
+infra/             容器与 PostGIS 初始化
+```
+
+本地开发模式可访问 [FastAPI OpenAPI](http://127.0.0.1:8000/docs)。更完整的工作流、数据模型和 API 说明见 [架构文档](docs/architecture.md)。
+
+<details>
+<summary><strong>开发与验证命令</strong></summary>
+
+```powershell
+.venv/Scripts/python -m pytest -q
+.venv/Scripts/python -m ruff check backend tests evals scripts
+.venv/Scripts/python -m evals.run
+.venv/Scripts/python scripts/check_secrets.py
 cd frontend
 npm run typecheck
 npm run build
 npx playwright install chromium
-# 保持后端及前端运行
 npm test
 ```
 
-`evals/reports/latest.json` 保存每条离线评测与真实耗时。E2E 报告为 `frontend/test-results/report.json`，CI 上传报告。测试不读取真实密钥，接口测试通过 `respx` 模拟。
+自动测试使用模拟 Provider，不读取真实密钥。Live 验收边界和原始结果单独保存在 `docs/verification/`。
 
-## Docker Compose
+</details>
 
-启动 Docker Desktop 后：
+## 文档
 
-```powershell
-docker compose up --build
-```
+| 文档 | 内容 |
+|---|---|
+| [参考照片寻找原机位](docs/reverse-photo-planning.md) | 参考图流程、候选分级、地图核验与使用边界 |
+| [Agent-first 发现流程](docs/agent-first-discovery.md) | 结构化候选、来源和地图关系设计 |
+| [架构与实现取舍](docs/architecture.md) | 工作流、数据模型、存储、并发与 API |
+| [证据与安全](docs/evidence-and-security.md) | 来源等级、Prompt Injection 边界和密钥处理 |
+| [已知限制](docs/limitations.md) | 当前产品边界与生产化缺口 |
+| [演示脚本](docs/demo-script.md) | Seed Demo 与产品演示路径 |
+| [Changelog](CHANGELOG.md) | 版本能力、历史验收和测试记录 |
 
-同样访问 [本地页面](http://127.0.0.1:3800)。Compose 包含前端、后端、PostgreSQL 17 + PostGIS、Redis；数据库/Redis 不暴露宿主机端口。后端是唯一读 `.env` 的容器，密钥不进入镜像构建上下文。
+## 当前边界
 
-`docker compose down` 停止容器，数据库卷保留。不要使用 `-v`，除非你明确要删除本地计划。
+PhotoScout 当前定位为单用户、本地优先的摄影工作台，不应直接作为无认证的公网 SaaS 部署。地图点不等于精确站位，开放、票务、临时管控和现场安全需要再次核实；评分与参数是可解释的建议起点，不保证出片。
 
-2026-09-09 已实际执行 `docker compose up -d --build --wait`，数据库/Redis/后端健康，容器版 6 项 E2E 通过，并查询验证 PostGIS 相机/主体几何已入库，SRID 为 4326。
-
-**当前交付预览由 Docker Compose 运行。** 此时无需再运行 `start.ps1`；若要切回本地 SQLite 开发模式，先 `docker compose down`，再 `start.ps1`。两种模式使用独立数据库，原有数据都会保留。
-
-## 架构与目录
-
-```mermaid
-flowchart LR
-  UI[Next.js / MapLibre / 离线关系图] --> API[FastAPI / SSE]
-  API --> G[单 LangGraph Orchestrator]
-  G --> S[DashScope 搜索 + Claim]
-  G --> T[高德 / Open-Meteo / Astral]
-  G --> R[安全门控 / 排程 / 摄影规则]
-  R --> V[Schema + 证据引用校验]
-  API --> P[Proposal / Diff / Approval / Undo]
-  P --> DB[(SQLite 或 PostgreSQL + PostGIS)]
-```
-
-领域代码在 `backend/app/`；使用 `start.ps1` 启动本地开发模式后，可打开 [本地 OpenAPI](http://127.0.0.1:8000/docs)。Docker 模式不向宿主机暴露后端端口。前端在 `frontend/`，自动化测试在 `tests/` 与 `frontend/tests/`。设计取舍和限制见 [架构](docs/architecture.md)、[证据与安全](docs/evidence-and-security.md)、[演示脚本](docs/demo-script.md)、[开发记录](docs/progress.md)。
-
-## 本版刻意保留的边界
-
-- 单用户本地应用，无登录和多租户隔离，不能直接作为公开 SaaS 部署。
-- 来源验证采用保守策略：社区发现是一等线索，但不能授予开放、安全或商业拍摄许可。
-- 实时客流默认 UNKNOWN；没有声称拥有景区实时人数 API。
-- 天气恶化默认提议取消受影响的户外段，不杜撰“安全可达”的室内替代点。
-- 参数是规则起点，不是现场测光结果；不保证出片。
-- 详细说明见 [已知限制](docs/limitations.md)。
+第三方服务与素材使用需遵守各自条款，参见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。完整边界见 [docs/limitations.md](docs/limitations.md)。
