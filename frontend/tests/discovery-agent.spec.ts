@@ -19,6 +19,48 @@ test('recommendation mode defaults to best and is submitted as an edited require
   expect(payload.edited_fields).toContain('recommendation_mode');
 });
 
+test('photography topics start empty, stay collapsed, and refresh with each description',async({page})=>{
+  await page.goto('/');
+  const topics=page.locator('details.category-details').first();
+  await expect(topics).not.toHaveAttribute('open','');
+  await topics.locator('summary').click();
+  await expect(topics.getByRole('button',{name:'风光',exact:true})).toHaveAttribute('aria-pressed','false');
+  await page.getByLabel('数据模式').selectOption('mock');
+  await page.getByLabel('说说你的拍摄想法').fill('拍老街居民和小店，想要复古和蓝调。');
+  await page.getByRole('button',{name:'发现值得拍的机位',exact:true}).click();
+  let dialog=page.getByRole('dialog');
+  await expect(dialog.getByText(/已从描述中识别/)).toContainText('人文');
+  await expect(dialog.getByText(/已从描述中识别/)).toContainText('复古');
+  await dialog.getByRole('button',{name:'关闭确认'}).click();
+
+  await page.getByLabel('说说你的拍摄想法').fill('拍建筑线条');
+  await page.getByRole('button',{name:'发现值得拍的机位',exact:true}).click();
+  dialog=page.getByRole('dialog');
+  const recognized=dialog.getByText(/已从描述中识别/);
+  await expect(recognized).toContainText('建筑');
+  await expect(recognized).not.toContainText('人文');
+  await expect(recognized).not.toContainText('复古');
+  const confirmTopics=dialog.locator('details.category-details');
+  await confirmTopics.locator('summary').click();
+  await expect(confirmTopics.getByRole('button',{name:'建筑',exact:true})).toHaveAttribute('aria-pressed','true');
+  await expect(confirmTopics.getByRole('button',{name:'人文',exact:true})).toHaveAttribute('aria-pressed','false');
+  await expect(dialog.getByLabel('确认结束日期')).toHaveCount(0);
+});
+
+test('an earlier end time is submitted as next-day without an end-date field',async({page})=>{
+  await page.goto('/');
+  await expect(page.getByLabel('拍摄日期',{exact:true})).toHaveValue(/^\d{4}-\d{2}-\d{2}$/);
+  const date=await page.getByLabel('拍摄日期',{exact:true}).inputValue();
+  await page.getByLabel('开始时间',{exact:true}).fill('22:00');
+  await page.getByLabel('结束时间',{exact:true}).fill('01:00');
+  const requestPromise=page.waitForRequest(request=>request.url().endsWith('/v1/notebook'));
+  await page.getByRole('button',{name:'发现值得拍的机位',exact:true}).click();
+  const payload=(await requestPromise).postDataJSON();
+  const expected=new Date(`${date}T00:00:00Z`);expected.setUTCDate(expected.getUTCDate()+1);
+  expect(payload.end_date).toBe(expected.toISOString().slice(0,10));
+  await expect(page.getByLabel('结束日期',{exact:true})).toHaveCount(0);
+});
+
 test('description drives editable confirmation and preserves unmentioned times',async({page})=>{
   await page.goto('/');
   await expect(page.getByLabel('目的地',{exact:true})).toHaveValue('苏州市');

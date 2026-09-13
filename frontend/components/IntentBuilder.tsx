@@ -9,16 +9,17 @@ export default function IntentBuilder({brief, onChange}: {brief:Brief; onChange:
   };
   const toggle = (category:string) => {
     const items = intent.categories.includes(category) ? intent.categories.filter(c=>c!==category) : [...intent.categories,category];
-    if(items.length) update({categories:items});
+    update({categories:items});
   };
   return <div className="intent-builder">
-    <div className="field-label">推荐模式 <small>作为拍摄需求参与机位比较</small></div>
+    <div className="field-label">推荐模式</div>
     <div className="recommendation-mode" role="group" aria-label="推荐模式">
       <button aria-pressed={intent.recommendation_mode!=='multiple'} onClick={()=>update({recommendation_mode:'best'})}><b>最佳机位</b><small>综合比较后给出一个主推荐</small></button>
       <button aria-pressed={intent.recommendation_mode==='multiple'} onClick={()=>update({recommendation_mode:'multiple'})}><b>多个候选</b><small>按推荐程度展示多个机位</small></button>
     </div>
-    <div className="field-label">摄影方向 <small>可多选 · 各方向同等参与</small></div>
-    <div className="intent-chips">{Object.entries(categoryLabels).map(([key,label])=><button key={key} aria-pressed={intent.categories.includes(key)} onClick={()=>toggle(key)}>{label}</button>)}</div>
+    <details className="category-details"><summary><span>摄影题材</span><small>{intent.categories.length?intent.categories.map(key=>categoryLabels[key]||key).join('、'):'未选择'}</small></summary>
+      <div className="intent-chips">{Object.entries(categoryLabels).map(([key,label])=><button key={key} aria-pressed={intent.categories.includes(key)} onClick={()=>toggle(key)}>{label}</button>)}</div>
+    </details>
     <details className="gear-details"><summary>组合你的画面与光线</summary><div className="gear-content">
       <label>拍摄主体 <input aria-label="拍摄主体" placeholder="如：湖面、古建筑、人物（逗号分隔）" defaultValue={intent.subjects.join('，')} key={`subjects-${intent.subjects.join()}`} onBlur={e=>update({subjects:e.target.value.split(/[,，]/).map(s=>s.trim()).filter(Boolean).slice(0,8)})}/></label>
       <label>画面风格 <input aria-label="画面风格" placeholder="如：电影感、极简、倒影（逗号分隔）" defaultValue={intent.styles.join('，')} key={`styles-${intent.styles.join()}`} onBlur={e=>update({styles:e.target.value.split(/[,，]/).map(s=>s.trim()).filter(Boolean).slice(0,8)})}/></label>

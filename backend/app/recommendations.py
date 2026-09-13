@@ -12,8 +12,9 @@ from .models import AgentAnswer, CrowdSignal, ShotPlan, ShotTask, SolarWindow, T
 
 def window(brief):
     zone = ZoneInfo(brief.timezone)
+    end_date = brief.travel_date + timedelta(days=1 if brief.end_local < brief.start_local else 0)
     return (datetime.combine(brief.travel_date, brief.start_local, zone).astimezone(UTC),
-            datetime.combine(brief.end_date or brief.travel_date, brief.end_local, zone).astimezone(UTC))
+            datetime.combine(end_date, brief.end_local, zone).astimezone(UTC))
 
 
 def candidate_gate(spot, weather, brief, start, end):
@@ -176,7 +177,7 @@ def build_recommendations(plan_id, brief, spots, claims, weather_by_spot, ledger
             subject_distances_km=subject_distances,
             subject_separation_deg=subject_span, field_of_view_deg=field_of_view,
             framing_assessment=framing_assessment, risks=risks, alternative="条件不合适时暂缓该机位，由你选择其他候选。",
-            reasons=["匹配摄影意图：" + " / ".join(brief.intent.categories),
+            reasons=[("匹配摄影题材：" + " / ".join(brief.intent.categories)) if brief.intent.categories else "未限定摄影题材，按完整需求综合判断。",
                      "来源线索已关联高德地标；站位精度与开放状态分别标注。" if brief.mode == "live" else "离线示例地标与构图；尚未经过真实来源核验。",
                      "独立比较可用时段的天气和光线，不受其他机位的访问顺序约束。"],
             recommended_light=actual_light, distance_km=distance,
@@ -247,7 +248,7 @@ def candidate_score(brief, spot, weather, start, solar, ledger, index):
     if p.strict:
         alerts.append("已记录明确要求；未知信息不视作已满足，请复核后选择。")
     # Categories have equal shares; absent spot classifications remain unknown.
-    if spot.genres and not set(brief.intent.categories) & set(spot.genres):
+    if brief.intent.categories and spot.genres and not set(brief.intent.categories) & set(spot.genres):
         adjustments["题材匹配不足"] = -12
         alerts.append("该地点的已有题材信息与需求不完全匹配，仍保留构图探索机会。")
     ranking.suitability = round(max(0, ranking.suitability + sum(adjustments.values())), 1)

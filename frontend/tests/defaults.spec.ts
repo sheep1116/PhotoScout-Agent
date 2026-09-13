@@ -13,7 +13,7 @@ test('today uses current minute through end of day without automatic research',a
   await expect(page.getByLabel('拍摄日期',{exact:true})).toHaveValue('2026-09-11');
   await expect(page.getByLabel('开始时间',{exact:true})).toHaveValue('23:40');
   await expect(page.getByLabel('结束时间',{exact:true})).toHaveValue('23:59');
-  await expect(page.getByLabel('结束日期',{exact:true})).toHaveValue('2026-09-11');
+  await expect(page.getByLabel('结束日期',{exact:true})).toHaveCount(0);
   await expect(page.getByText('手机主摄',{exact:true})).toHaveCount(0);
   expect(searches).toBe(0);
 });
@@ -42,7 +42,7 @@ test('browser location takes priority and defaults end on the selected day',asyn
   await expect(page.getByLabel('开始时间',{exact:true})).toHaveValue('22:10');
   await expect(page.getByLabel('结束时间',{exact:true})).toHaveValue('23:59');
   await expect(page.getByLabel('拍摄日期',{exact:true})).toHaveValue('2026-09-11');
-  await expect(page.getByLabel('结束日期',{exact:true})).toHaveValue('2026-09-11');
+  await expect(page.getByLabel('结束日期',{exact:true})).toHaveCount(0);
   expect(fallback).toBe(0);
 });
 
@@ -64,21 +64,21 @@ test('automatic dates follow the selected day and explicit times survive date ch
   await expect(start).toHaveValue('16:00');
   await expect(end).toHaveValue('22:00');
   await expect(page.locator('.auto-badge')).toHaveCount(0);
-  await page.getByLabel('结束日期',{exact:true}).fill('2026-09-15');
   await end.fill('02:00');
   await date.fill('2026-09-13');
-  await expect(page.getByLabel('结束日期',{exact:true})).toHaveValue('2026-09-15');
   await expect(end).toHaveValue('02:00');
 });
 
 test('default calculation uses the planning timezone, including DST',async()=>{
-  const {defaultWindow,updateBrief}=await import('../lib/defaults');
+  const {defaultWindow,deriveEndDate,updateBrief}=await import('../lib/defaults');
   expect(defaultWindow(new Date('2026-09-11T07:32:50Z'),undefined,'Asia/Shanghai')).toMatchObject({travel_date:'2026-09-11',start_local:'15:32',end_local:'23:59'});
   expect(defaultWindow(new Date('2026-09-11T00:32:50Z'),undefined,'America/Los_Angeles')).toMatchObject({travel_date:'2026-09-10',start_local:'17:32'});
   expect(defaultWindow(new Date('2026-03-08T10:15:00Z'),undefined,'America/Los_Angeles').start_local).toBe('03:15');
   expect(defaultWindow(new Date('2026-09-11T15:59:55Z'),undefined,'Asia/Shanghai')).toMatchObject({start_local:'23:59',end_local:'23:59'});
   // A matching explicit value must not regain automatic ownership.
-  const brief={...defaultWindow(new Date('2026-09-11T07:32:00Z'),undefined,'Asia/Shanghai'),auto_time_fields:['start_local','end_local','end_date']} as import('../lib/types').Brief;
+  expect(deriveEndDate('2026-09-14','22:00','01:00')).toBe('2026-09-15');
+  expect(deriveEndDate('2026-09-14','18:00','21:00')).toBe('2026-09-14');
+  const brief={...defaultWindow(new Date('2026-09-11T07:32:00Z'),undefined,'Asia/Shanghai'),auto_time_fields:['start_local','end_local']} as import('../lib/types').Brief;
   const edited=updateBrief(brief,{end_local:'23:59'});
   expect(edited.auto_time_fields).not.toContain('end_local');
 });

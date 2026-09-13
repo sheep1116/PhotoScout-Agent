@@ -80,7 +80,6 @@ def test_distinct_candidate_windows_and_origin_distance(brief):
 async def test_cross_midnight_graph(brief, settings):
     brief.start_local = datetime.strptime("23:30", "%H:%M").time()
     brief.end_local = datetime.strptime("02:00", "%H:%M").time()
-    brief.end_date = brief.travel_date + timedelta(days=1)
     events = []
     async def emit(stage, message):
         events.append(stage)
@@ -91,13 +90,14 @@ async def test_cross_midnight_graph(brief, settings):
     assert all(t.recommended_light == "night" for t in plan.tasks)
 
 
-def test_cross_midnight_requires_explicit_end_date(brief):
+def test_cross_midnight_derives_end_date(brief):
     data = brief.model_dump()
     data.update(start_local="23:30", end_local="02:00")
-    with pytest.raises(ValidationError):
-        TripBrief.model_validate(data)
-    data.update(end_date=brief.travel_date+timedelta(days=1))
-    assert TripBrief.model_validate(data)
+    cross_midnight = TripBrief.model_validate(data)
+    assert cross_midnight.end_date == brief.travel_date + timedelta(days=1)
+    data.update(start_local="18:00", end_local="21:00", end_date=brief.travel_date+timedelta(days=1))
+    same_day = TripBrief.model_validate(data)
+    assert same_day.end_date == brief.travel_date
 
 
 @pytest.mark.parametrize("day,start", [("2026-03-08", "02:30"), ("2026-11-01", "01:30")])

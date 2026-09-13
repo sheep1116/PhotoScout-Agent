@@ -1,7 +1,7 @@
 """Public domain contracts. No provider response objects cross this boundary."""
 from __future__ import annotations
 
-from datetime import UTC, date, datetime, time
+from datetime import UTC, date, datetime, time, timedelta
 from enum import StrEnum
 from typing import Any, Literal
 from zoneinfo import ZoneInfo
@@ -87,7 +87,7 @@ class DestinationLocation(Model):
 
 
 class PhotographyIntent(Model):
-    categories: list[Category] = Field(default_factory=lambda: ["landscape"], min_length=1, max_length=6)
+    categories: list[Category] = Field(default_factory=list, max_length=6)
     recommendation_mode: Literal["best", "multiple"] = "best"
     subjects: list[str] = Field(default_factory=list, max_length=8)
     styles: list[str] = Field(default_factory=list, max_length=8)
@@ -185,12 +185,16 @@ class TripBrief(Model):
 
     @model_validator(mode="after")
     def window(self):
-        if self.end_date and self.travel_date and not 0 <= (self.end_date-self.travel_date).days <= 1:
-            raise ValueError("结束日期须为当天或次日")
+        # The UI only asks for one date and a time range. An earlier end time
+        # means the following day; callers cannot leave a stale end date behind.
+        if self.travel_date:
+            self.end_date = self.travel_date + timedelta(
+                days=1 if self.start_local and self.end_local and self.end_local < self.start_local else 0
+            )
+        else:
+            self.end_date = None
         if (self.origin_lat is None) != (self.origin_lon is None):
             raise ValueError("起点经纬度须同时提供")
-        if self.start_local and self.end_local and self.end_local <= self.start_local and (not self.end_date or self.end_date == self.travel_date):
-            raise ValueError("结束时间必须晚于开始时间；跨天请填写次日结束日期")
         for day, clock in ((self.travel_date, self.start_local), (self.end_date or self.travel_date, self.end_local)):
             if day and clock:
                 local = datetime.combine(day, clock)

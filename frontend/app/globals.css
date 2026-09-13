@@ -45,6 +45,10 @@
 .preferences,.location-choices {border:1px solid #dfe5d7;border-radius:9px;padding:12px;margin:12px 0;}
 .preferences label {display:flex;align-items:center;gap:8px;}
 .preferences input[type=checkbox] {width:auto;min-height:0;}
+.category-details {margin:10px 0 14px;border:1px solid #dfe5d7;border-radius:9px;background:#fbfcf8;}
+.category-details>summary {display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px;cursor:pointer;color:#4d5e45;font-size:11px;}
+.category-details>summary small {color:#89947e;font-size:9px;font-weight:400;text-align:right;}
+.category-details .intent-chips {padding:0 12px 12px;}
 /* Contextual help stays out of the form flow. */
 .field-heading {display:flex;align-items:center;gap:5px;min-height:22px;margin-bottom:5px;}
 .field-heading .input-label {margin:0;}

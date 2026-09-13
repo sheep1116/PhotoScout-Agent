@@ -4,7 +4,7 @@ import {Aperture, ArrowDownToLine, ArrowRight, ArrowUpRight, BookOpen, Camera, C
 import IntentBuilder, {categoryLabels} from '@/components/IntentBuilder';
 import BriefConfirmation from '@/components/BriefConfirmation';
 import PhotoGallery from '@/components/PhotoGallery';
-import {defaultWindow, updateBrief} from '@/lib/defaults';
+import {defaultWindow, deriveEndDate, updateBrief} from '@/lib/defaults';
 import FieldHint from '@/components/FieldHint';
 import ReversePhotoPlanner from '@/components/ReversePhotoPlanner';
 import RecreationResult from '@/components/RecreationResult';
@@ -13,7 +13,7 @@ import ShootingTimeline from '@/components/ShootingTimeline';
 import {api, AgentCandidate, Brief, Notebook, Evidence, localTime, Plan, Proposal, Task} from '@/lib/types';
 
 const demo: Brief = {text:'南京紫金山，想拍一组自然、电影感的人像，不想走太远。',destination:'南京紫金山',travel_date:'2026-10-03',start_local:'14:00',end_local:'19:00',timezone:'Asia/Shanghai',intent:{categories:['portrait'],recommendation_mode:'multiple',subjects:[],styles:[],light:'golden_hour',preferences:{}},lenses:[{name:'35mm F1.8',min_mm:35,max_mm:35,max_aperture:1.8},{name:'85mm F1.8',min_mm:85,max_mm:85,max_aperture:1.8}],sensor:'full_frame',tripod:false,mode:'mock'};
-const initial:Brief = {...demo,text:'',destination:'',travel_date:'',start_local:'',end_local:'',intent:{categories:['landscape'],recommendation_mode:'best',subjects:[],styles:[],light:'any',preferences:{}},lenses:[],mode:'live'};
+const initial:Brief = {...demo,text:'',destination:'',travel_date:'',start_local:'',end_local:'',intent:{categories:[],recommendation_mode:'best',subjects:[],styles:[],light:'any',preferences:{}},lenses:[],mode:'live'};
 const labels:Record<string,string> = {FIXTURE:'演示数据',UNKNOWN:'未知',REPORTED:'来源报告',INFERRED:'规则推断',CALCULATED:'工具计算',VERIFIED:'已核验',STALE:'已过期',CONFLICT:'来源冲突',USER_CONFIRMED:'用户记录'};
 const kinds:Record<string,string> = {official:'官方',community:'社区',media:'媒体',search:'搜索线索',fixture:'离线示例',tool:'确定性工具',user:'用户记录'};
 
@@ -34,7 +34,7 @@ export default function Home() {
   const [locationNote,setLocationNote] = useState('正在建议当前位置…');
   useEffect(()=>{
     let alive=true;
-    setBrief(b=>({...b,...defaultWindow(),auto_time_fields:['start_local','end_local','end_date']}));
+    setBrief(b=>({...b,...defaultWindow(),auto_time_fields:['start_local','end_local']}));
     api<typeof health>('/health').then(setHealth).catch(()=>{});
     const applyLocation = (result:{city:string|null;note:string},origin?:{origin_lat:number;origin_lon:number})=>{
       if(!alive || destinationEdited.current)return;
@@ -57,7 +57,7 @@ export default function Home() {
   const seed = (genre:'portrait'|'cityscape')=>{setError('');destinationEdited.current=true;setLocationNote('已选择演示模板');setBrief({...demo,end_date:demo.travel_date,edited_fields:[],intent:{categories:[genre],recommendation_mode:'multiple',subjects:[],styles:[],light:genre==='cityscape'?'blue_hour':'golden_hour',preferences:{}},
     ...(genre==='cityscape'?{text:'南京拍城市夜景，想拍古城与现代天际线同框。',destination:'南京',start_local:'16:30',end_local:'21:00',tripod:true,
       lenses:[{name:'16–35mm F2.8',min_mm:16,max_mm:35,max_aperture:2.8},{name:'70–200mm F4',min_mm:70,max_mm:200,max_aperture:4}]}:{})});};
-  const payload = (b:Brief)=>({...b,travel_date:b.travel_date||null,end_date:b.end_date||null,start_local:b.start_local||null,end_local:b.end_local||null});
+  const payload = (b:Brief)=>({...b,travel_date:b.travel_date||null,end_date:deriveEndDate(b.travel_date,b.start_local,b.end_local),start_local:b.start_local||null,end_local:b.end_local||null});
   const review = async()=>{setError('');setWorking(true);try{const book=await api<Notebook>('/notebook',payload(brief));if(book.missing_fields.length){setError(book.questions.join(' '));return;}destinationEdited.current=true;setBrief(book.brief);setReviewBook(book);setConfirm(true);}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
   const resolveLocation = async()=>{setWorking(true);try{const book=await api<Notebook>('/destinations/resolve',payload(brief));setBrief(book.brief);setReviewBook(old=>({...book,recognized:old?.recognized||[],parser:old?.parser||'defaults',parsed_fields:old?.parsed_fields||[],assumptions:old?.assumptions||book.assumptions}));return book;}catch(e){setError((e as Error).message);}finally{setWorking(false);}};
   const approveBrief = async()=>{const book=await resolveLocation();if(book&&!book.missing_fields.length&&!['needs_choice','unavailable'].includes(book.location_status))await generate(book.brief);};
@@ -116,9 +116,7 @@ export default function Home() {
             <div className="intent-box"><textarea id="intent" value={brief.text} onChange={e=>patch({text:e.target.value})} placeholder="明天想在南京拍电影感的湖面倒影，不想走太远。"/><Sparkles size={17}/></div>
 
             <div className="field-row"><label><span className="field-heading">目的地<FieldHint label="城市定位说明">{locationNote.startsWith('使用')?'使用你填写的地点。':locationNote.includes('不可用')?'定位不可用，请填写目的地。':'城市由网络或设备定位建议，请核对。'}</FieldHint></span><div className="icon-input destination-input">{brief.destination&&!destinationEdited.current&&<span className="auto-location">自动定位</span>}<MapPin size={15}/><input aria-label="目的地" className={(brief.edited_fields?.includes("destination")||reviewBook?.parsed_fields.includes("destination"))?"":"suggested-default"} value={brief.destination} onChange={e=>patch({destination:e.target.value})}/></div></label><label><span className="field-heading">拍摄日期</span><input aria-label="拍摄日期" className={(brief.edited_fields?.includes("travel_date")||reviewBook?.parsed_fields.includes("travel_date"))?"":"suggested-default"} type="date" value={brief.travel_date} onChange={e=>patch({travel_date:e.target.value})}/></label></div>
-            <div className="field-row"><label><span className="field-heading">开始时间<FieldHint label="拍摄时间说明">按 {brief.timezone} 当地时间，可跨午夜。</FieldHint>{brief.auto_time_fields?.includes('start_local')&&<span className="auto-badge">自动</span>}</span><input type="time" aria-label="开始时间" className={brief.auto_time_fields?.includes("start_local")?"suggested-default":""} value={brief.start_local} onChange={e=>patch({start_local:e.target.value})}/></label><label><span className="field-heading">结束时间{brief.auto_time_fields?.includes('end_local')&&<span className="auto-badge">自动</span>}</span><input type="time" aria-label="结束时间" className={brief.auto_time_fields?.includes("end_local")?"suggested-default":""} value={brief.end_local} onChange={e=>patch({end_local:e.target.value})}/></label></div>
-
-            <label><span className="field-heading">结束日期</span><input type="date" aria-label="结束日期" className={brief.auto_time_fields?.includes("end_date")?"suggested-default":""} value={brief.end_date || brief.travel_date} onChange={e=>patch({end_date:e.target.value})}/></label>
+            <div className="field-row"><label><span className="field-heading">开始时间<FieldHint label="拍摄时间说明">按 {brief.timezone} 当地时间；结束时间早于开始时间时自动按跨午夜、次日结束计算。</FieldHint>{brief.auto_time_fields?.includes('start_local')&&<span className="auto-badge">自动</span>}</span><input type="time" aria-label="开始时间" className={brief.auto_time_fields?.includes("start_local")?"suggested-default":""} value={brief.start_local} onChange={e=>patch({start_local:e.target.value})}/></label><label><span className="field-heading">结束时间{brief.auto_time_fields?.includes('end_local')&&<span className="auto-badge">自动</span>}</span><input type="time" aria-label="结束时间" className={brief.auto_time_fields?.includes("end_local")?"suggested-default":""} value={brief.end_local} onChange={e=>patch({end_local:e.target.value})}/></label></div>
 
             <IntentBuilder brief={brief} onChange={patch}/>
             <details className="gear-details"><summary><span><Camera size={16}/>摄影器材</span><ChevronDown size={15}/></summary><div className="gear-content">
@@ -163,7 +161,7 @@ export default function Home() {
 
     {positionEdit&&<div className="overlay"><section className="modal" role="dialog" aria-modal="true" aria-labelledby="position-title"><button className="close" aria-label="关闭坐标确认" onClick={()=>setPositionEdit(null)}><X size={20}/></button><div className="eyebrow muted">ON-SITE NOTE</div><h2 id="position-title">记录公开区域的位置</h2><p>{positionEdit.name} · 先在地图与现场核对，坐标记录不会解除开放或安全门控。</p><label>空间角色<select aria-label="空间角色" value={positionEdit.role} onChange={e=>setPositionEdit({...positionEdit,role:e.target.value})}><option value="camera">相机站位</option><option value="entrance">公开入口</option></select></label><div className="field-row"><label>纬度 · WGS84<input type="number" step="0.000001" aria-label="确认纬度" value={positionEdit.lat} onChange={e=>setPositionEdit({...positionEdit,lat:Number(e.target.value)})}/></label><label>经度 · WGS84<input type="number" step="0.000001" aria-label="确认经度" value={positionEdit.lon} onChange={e=>setPositionEdit({...positionEdit,lon:Number(e.target.value)})}/></label></div><div className="notice">预填坐标为近似区域中心，不代表精确拍摄位置。请填写你核对过的 WGS84 坐标；高德原始 GCJ-02 坐标不能直接粘贴。</div><button className="primary" disabled={working} onClick={confirmPosition}>生成位置修改提案 <ArrowRight size={16}/></button></section></div>}
 
-    {showHistory&&<div className="overlay" onClick={()=>setShowHistory(false)}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="history-title" onClick={e=>e.stopPropagation()}><button className="close" aria-label="关闭历史" onClick={()=>setShowHistory(false)}><X size={20}/></button><div className="eyebrow muted">YOUR COLLECTION</div><h2 id="history-title">我的发现</h2>{history.length?history.map(h=><button className="history-row" key={h.id} onClick={async()=>{try{const p=await api<Plan>(`/plans/${h.id}`);setPlan(p);setSelected(p.tasks[0]?.spot_id||'');setProposal(null);setShowHistory(false);}catch(e){setError((e as Error).message);}}}><MapPin size={18}/><span>{h.destination}<small>{h.date} · {h.categories.map(c=>categoryLabels[c]||c).join(' / ')} · V{h.version}</small></span><ArrowRight size={17}/></button>):<p>还没有已保存计划，先生成一次南京 Demo 吧。</p>}</section></div>}
+          {showHistory&&<div className="overlay" onClick={()=>setShowHistory(false)}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="history-title" onClick={e=>e.stopPropagation()}><button className="close" aria-label="关闭历史" onClick={()=>setShowHistory(false)}><X size={20}/></button><div className="eyebrow muted">YOUR COLLECTION</div><h2 id="history-title">我的发现</h2>{history.length?history.map(h=><button className="history-row" key={h.id} onClick={async()=>{try{const p=await api<Plan>(`/plans/${h.id}`);setPlan(p);setSelected(p.tasks[0]?.spot_id||'');setProposal(null);setShowHistory(false);}catch(e){setError((e as Error).message);}}}><MapPin size={18}/><span>{h.destination}<small>{h.date} · {h.categories.length?h.categories.map(c=>categoryLabels[c]||c).join(' / '):'未限定题材'} · V{h.version}</small></span><ArrowRight size={17}/></button>):<p>还没有已保存计划，先生成一次南京 Demo 吧。</p>}</section></div>}
   </div>;
 }
 

@@ -260,6 +260,7 @@ class Providers:
                   '"settings_advice":{"focal_length":"焦段范围","aperture":"光圈范围","shutter":"快门起点","iso":"ISO 起点","adjustment":"现场调整方法"},'
                   '"rank":1,"is_primary":true,"selection_reason":"比较后的推荐理由","confidence":"low|medium|high","source_indices":[1]}]}。最多四个候选。'
                   + selection_rule +
+                  "photography_categories 为空表示用户没有限定摄影题材，不得据此缩小候选；应结合 original_request 和完整需求自行判断。"
                   "source_indices 只能引用本次真实搜索结果 index；没有合适引用时允许为空，但必须降低 confidence 并明确未核验。"
                   "每个候选必须有一个 camera_location 和至少一个 subject_location；多主体同框时逐个返回主体位置。"
                   "display_name 用于用户阅读，map_anchor 专用于地图检索，两者不要求一致。相机站位和被摄主体不得共用一个含糊锚点。"

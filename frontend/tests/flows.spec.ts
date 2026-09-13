@@ -78,6 +78,7 @@ test('mock generates with all third party requests blocked',async({page})=>{
 
 test('composable intent persists all conditions and supports every candidate', async({page})=>{
   await page.goto('/'); await page.getByRole('button',{name:'紫金山的光与影 南京 · 旅行人像'}).click();
+  await page.getByText('摄影题材',{exact:true}).click();
   await page.getByRole('button',{name:'风光',exact:true}).click();
   await page.getByRole('button',{name:'人像',exact:true}).click();
   await page.getByRole('button',{name:'建筑',exact:true}).click();

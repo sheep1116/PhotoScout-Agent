@@ -165,6 +165,56 @@ async def test_malformed_model_fields_preserve_other_valid_requests(brief,settin
     assert any('max_walk_km' in note for note in book.assumptions)
 
 
+async def test_each_description_replaces_only_previous_automatic_intent(brief, settings):
+    network = Providers(settings)
+    try:
+        brief.text = '拍老街居民和小店，想要复古和蓝调。'
+        first = await parse_description(brief, network)
+        assert first.brief.intent.categories == ['humanities']
+        assert first.brief.intent.subjects == ['居民', '小店']
+        assert first.brief.intent.styles == ['复古'] and first.brief.intent.light == 'blue_hour'
+
+        first.brief.text = '拍建筑线条'
+        second = await parse_description(first.brief, network)
+        assert second.brief.intent.categories == ['architecture']
+        assert second.brief.intent.styles == [] and second.brief.intent.subjects == []
+        assert second.brief.intent.light == 'any'
+        assert second.recognized == ['建筑']
+
+        second.brief.text = '随手拍点照片'
+        third = await parse_description(second.brief, network)
+        assert third.brief.intent.categories == []
+        assert third.recognized == []
+    finally:
+        await network.client.aclose()
+
+
+async def test_manual_intent_survives_new_description_but_is_not_reported_as_recognized(brief, settings):
+    brief.intent.styles = ['手动风格']
+    brief.intent.categories = ['portrait']
+    brief.edited_fields = ['styles', 'categories']
+    brief.text = '拍建筑线条'
+    network = Providers(settings)
+    try:
+        book = await parse_description(brief, network)
+    finally:
+        await network.client.aclose()
+    assert book.brief.intent.styles == ['手动风格']
+    assert book.brief.intent.categories == ['portrait']
+    assert '手动风格' not in book.recognized and '建筑' not in book.recognized
+
+
+async def test_multiple_photography_topics_are_recognized_together(brief, settings):
+    brief.text = '拍老街居民和小店，也拍建筑线条'
+    network = Providers(settings)
+    try:
+        book = await parse_description(brief, network)
+    finally:
+        await network.client.aclose()
+    assert book.brief.intent.categories == ['architecture', 'humanities']
+    assert {'建筑', '人文'} <= set(book.recognized)
+
+
 async def test_recommendation_mode_is_parsed_but_manual_choice_wins(brief, settings):
     network = Providers(settings)
     try:
@@ -237,7 +287,7 @@ async def test_description_date_updates_only_automatic_times(brief,settings,monk
     brief.end_date=brief.travel_date
     brief.start_local=time(10)
     brief.end_local=time(23,59)
-    brief.auto_time_fields=['start_local','end_local','end_date']
+    brief.auto_time_fields=['start_local','end_local']
     brief.text=description
     network=Providers(settings)
     try:
@@ -256,7 +306,7 @@ async def test_model_explicit_times_take_ownership_from_defaults(brief,settings,
     from datetime import time
     settings.dashscope_api_key=SecretStr('explicit-time-test')
     brief.mode='live'
-    brief.auto_time_fields=['start_local','end_local','end_date']
+    brief.auto_time_fields=['start_local','end_local']
     brief.text='明天想拍建筑，16:00到19:00。'
     raw={'fields':{'start_local':'16:00','end_local':'19:00'},'evidence':{'start_local':'16:00','end_local':'19:00'}}
     respx_mock.post(settings.dashscope_native_base_url+'/services/aigc/multimodal-generation/generation').respond(200,json={'output':{'choices':[{'message':{'content':[{'text':json.dumps(raw)}]}}]}})
@@ -267,12 +317,12 @@ async def test_model_explicit_times_take_ownership_from_defaults(brief,settings,
     finally:
         await network.client.aclose()
     assert book.brief.start_local==time(16) and book.brief.end_local==time(19)
-    assert book.brief.auto_time_fields==['end_date']
+    assert book.brief.auto_time_fields==[]
 
 
 async def test_manual_times_are_preserved_when_description_changes_date(brief,settings):
     original_start,original_end=brief.start_local,brief.end_local
-    brief.auto_time_fields=['end_date']
+    brief.auto_time_fields=[]
     brief.edited_fields=['start_local','end_local']
     brief.text='明天在南京拍建筑'
     network=Providers(settings)

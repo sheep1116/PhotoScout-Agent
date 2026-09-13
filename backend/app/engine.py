@@ -157,7 +157,7 @@ def score(brief, weather, start, solar, ledger, index):
                 "能见度": min(1, (weather.visibility_m or 5000) / 20000),
                 "空气": max(.1, 1 - (weather.aqi or 75) / 200)}
     categories = brief.intent.categories
-    weights = {}
+    weights = {"光质": .25, "舒适度": .15, "稳定性": .15, "构图": .25, "能见度": .20} if not categories else {}
     for category in categories:
         for feature, weight in WEIGHTS[category].items():
             weights[feature] = weights.get(feature, 0) + weight / len(categories)
@@ -165,8 +165,9 @@ def score(brief, weather, start, solar, ledger, index):
     suitability = round(100 * math.exp(sum(weights[k] * math.log(v) for k, v in components.items())), 1)
     values = {"suitability": suitability, "components": components, "weights": weights,
               "confidence": round(.35 * known / 5 + .15, 2)}
+    statement = ("未限定摄影题材，使用通用摄影质量权重；" if not categories else "题材加权几何平均；")
     ids = ledger.add(f"score-{index}", RULE_VERSION, TruthLabel.INFERRED,
-                     "题材加权几何平均；未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。", values)
+                     statement + "未知维度使用中性起点。置信度独立，区域与开放未核验会降低置信度。", values)
     return ScoreBreakdown(**values, evidence_ids=ids)
 
 

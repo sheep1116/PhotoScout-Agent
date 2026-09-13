@@ -147,9 +147,9 @@ def test_invalid_timezone():
         TripBrief(timezone="Invalid/Zone")
 
 
-def test_inverted_time_window():
-    with pytest.raises(ValidationError):
-        TripBrief(start_local="20:00", end_local="18:00")
+def test_inverted_time_window_needs_a_date_before_it_can_derive_midnight():
+    incomplete = TripBrief(start_local="20:00", end_local="18:00")
+    assert incomplete.end_date is None
 
 
 def test_inverted_lens():
